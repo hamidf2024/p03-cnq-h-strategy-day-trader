@@ -11,7 +11,7 @@
 | **Data** | CNQ 5-minute regular-session bars, 2026-05-20 → 2026-08-14 |
 | **Best result (V7.1, Jul 1 – Aug 14)** | 75 trades · 72.9% win rate · profit factor 3.81 · gross +2.69 $/share (+0.42/week); **+1.19 after 2¢/share costs** |
 | **Targets** | Win rate > 60% ✅ · net > 1.0 $/share per week ❌ (best legitimate: 0.42) |
-| **Public report** | https://hamidf2024.github.io/projects/project-03.html |
+| **Public report** | https://hamidf2024.github.io/ai-trading/project-03.html |
 
 ## Project goal (owner's priorities)
 
