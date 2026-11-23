@@ -64,5 +64,27 @@
   ],
   "blind_look_number": 6,
   "result_sha256": "79d2cf900152a44ccb7b1edae81361ec520afa598cb589def537737efe756b16"
+ },
+ "R7_one_a_month_stop5": {
+  "frozen_artefact": "stage13_frozen_R7.pkl",
+  "frozen_sha256": "8912ad3d06413695cdaea738f0736d895b171e3ed7703d3e133f6d62819fe80e",
+  "ran_on": "2026-11-23 17:49:56.250254",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 7,
+  "result_sha256": "65ebbbc7a98b5c3838258eb6e90e55f4e4e72752a0ac26c1467f703f7a2d3b80"
+ },
+ "R8_peer_fusion_stop5": {
+  "frozen_artefact": "stage13_frozen_R8.pkl",
+  "frozen_sha256": "5ea4e41fa24c9a12ffbb3883a10e8c36cf381fe853428960387cf519a304ea6e",
+  "ran_on": "2026-11-23 17:50:38.160318",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 8,
+  "result_sha256": "167fbcf8e687a02247d685bccbfb53862c73a484da646f9dd38500056617e30f"
  }
 }
