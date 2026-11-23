@@ -344,6 +344,23 @@ per-stage section at the end.)*
   every day with the same exit. That comparison was available on the
   training years before the run and should be part of the gate: a timing
   rule must beat "any day, same exit" in every training year.
+- **(Stage 13) Shift the entry by a few hours before believing a result.**
+  Model O bought on model M's signals a few hours later, with M's exit. M
+  had 4 stops in 35 trades and an 88.6% win rate; O had 13 stops in 70 and
+  78.6%. In three months M won on an overnight jump straight after its entry
+  and both of O's buys, made after the jump, were stopped. A result that
+  changes this much when the entry moves by half a day rests on a few entry
+  prices. Re-run every candidate with the entry shifted (next open, next
+  10:00, next close) on the training years and report the spread.
+- **(Stage 13) Record when a run is made without passing the gate.** The
+  owner's instruction was to test each trained model, so O was run although
+  the gate had stopped it. The frozen artefact and the run log carry
+  `gate_passed: false`, and the page says so. A gate that is overridden must
+  leave a trace, or later readers will take the run for a validated one.
+- **(Stage 13) Trend direction does not rescue a monthly campaign.** Selling
+  short when the trend is down did worse than always buying in 17 of 24
+  training settings: at one to three months a single stock tends to bounce,
+  so the short is opened just before the rebound.
 
 ## 4. Evaluation and metrics lessons
 
@@ -753,3 +770,6 @@ of test runs. Lessons are filed above, each marked "(Stage 13)":*
 - Section 3, added after model P: a gate built from one regime cannot test
   for another; work out the break-even win rate; compare with the no-skill
   line on the training years before the test run.
+- Section 3, added after model O's run and model Q: shift the entry by a few
+  hours before believing a result; record a run made without passing the
+  gate; trend direction does not rescue a monthly campaign.

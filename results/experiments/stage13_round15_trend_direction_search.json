@@ -1,0 +1,1334 @@
+{
+ "cutoff": "2023-12-29",
+ "n_settings": 24,
+ "passers": [],
+ "gate": "; P's gate plus the two checks added after P)\n A. CNQ, each of 2021, 2022, 2023: S >= need + 1 and GM >= need + 1; G >= 1.25% and win rate >= 55% overall.\n B. Same rule on the six stocks: level 1 on both month goals in at least 15 of 18 stock-years, and >= 1.0% per trade.\n C. September to December 2020: CNQ at least 3 of 4 months on S and GM; six stocks at least 16 of 24 stock-months.\n D. At least half of the neighbouring settings (next shorter and longer lookback, the other target) reach level 1\n    in every CNQ year.\n E. The direction rule must not do worse than \"always long, same exit\" in any CNQ training year, and must do\n    better over the three years together.\n F. (reported, not pass/fail) break-even win rate of the exit against the training win rate.\n If nothing passes A to E, nothing is frozen and no run on 2024-2026 is made.",
+ "settings": {
+  "{\"source\": \"own\", \"look\": 20, \"target\": 3.0}": {
+   "n": 68,
+   "shorts": 28,
+   "G": 0.541,
+   "WR": 86.8,
+   "stops": 9,
+   "S": [
+    10,
+    10,
+    9
+   ],
+   "GM": [
+    10,
+    10,
+    9
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.6,
+    -0.07,
+    1.2
+   ],
+   "excess_vs_always_long_by_year": [
+    -0.1,
+    -1.39,
+    -0.91
+   ],
+   "excess_overall": -0.794,
+   "margin": 2,
+   "level1": true,
+   "cross_passed": 17,
+   "cross_G": 0.888,
+   "stress2020": {
+    "S": 2,
+    "GM": 2,
+    "six": 14
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"own\", \"look\": 20, \"target\": 4.0}": {
+   "n": 68,
+   "shorts": 28,
+   "G": 0.839,
+   "WR": 83.8,
+   "stops": 11,
+   "S": [
+    10,
+    9,
+    9
+   ],
+   "GM": [
+    10,
+    9,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.76,
+    -0.11,
+    2.07
+   ],
+   "excess_vs_always_long_by_year": [
+    -0.01,
+    -1.1,
+    0.06
+   ],
+   "excess_overall": -0.372,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 16,
+   "cross_G": 0.719,
+   "stress2020": {
+    "S": 2,
+    "GM": 2,
+    "six": 13
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"own\", \"look\": 40, \"target\": 3.0}": {
+   "n": 68,
+   "shorts": 18,
+   "G": -0.285,
+   "WR": 80.9,
+   "stops": 12,
+   "S": [
+    9,
+    9,
+    8
+   ],
+   "GM": [
+    9,
+    9,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    -0.8,
+    -0.26,
+    0.3
+   ],
+   "excess_vs_always_long_by_year": [
+    -1.5,
+    -1.58,
+    -1.81
+   ],
+   "excess_overall": -1.621,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 16,
+   "cross_G": 0.232,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 8
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"own\", \"look\": 40, \"target\": 4.0}": {
+   "n": 68,
+   "shorts": 18,
+   "G": -0.487,
+   "WR": 75.0,
+   "stops": 15,
+   "S": [
+    9,
+    8,
+    8
+   ],
+   "GM": [
+    9,
+    8,
+    7
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    -0.79,
+    -0.63,
+    0.05
+   ],
+   "excess_vs_always_long_by_year": [
+    -1.55,
+    -1.63,
+    -1.96
+   ],
+   "excess_overall": -1.698,
+   "margin": 0,
+   "level1": true,
+   "cross_passed": 15,
+   "cross_G": 0.196,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 8
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"own\", \"look\": 60, \"target\": 3.0}": {
+   "n": 68,
+   "shorts": 20,
+   "G": 1.106,
+   "WR": 88.2,
+   "stops": 7,
+   "S": [
+    10,
+    10,
+    9
+   ],
+   "GM": [
+    10,
+    10,
+    9
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.8,
+    1.34,
+    1.2
+   ],
+   "excess_vs_always_long_by_year": [
+    0.1,
+    0.01,
+    -0.91
+   ],
+   "excess_overall": -0.229,
+   "margin": 2,
+   "level1": true,
+   "cross_passed": 16,
+   "cross_G": 0.727,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 5
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"own\", \"look\": 60, \"target\": 4.0}": {
+   "n": 68,
+   "shorts": 20,
+   "G": 1.579,
+   "WR": 85.3,
+   "stops": 8,
+   "S": [
+    10,
+    10,
+    9
+   ],
+   "GM": [
+    10,
+    10,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.89,
+    1.87,
+    2.06
+   ],
+   "excess_vs_always_long_by_year": [
+    0.13,
+    0.87,
+    0.05
+   ],
+   "excess_overall": 0.368,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 14,
+   "cross_G": 0.858,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 5
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": true,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": true,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"own\", \"look\": 120, \"target\": 3.0}": {
+   "n": 66,
+   "shorts": 10,
+   "G": 0.854,
+   "WR": 87.9,
+   "stops": 8,
+   "S": [
+    9,
+    10,
+    9
+   ],
+   "GM": [
+    9,
+    10,
+    9
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.49,
+    0.15,
+    2.1
+   ],
+   "excess_vs_always_long_by_year": [
+    -0.21,
+    -1.18,
+    -0.01
+   ],
+   "excess_overall": -0.482,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 15,
+   "cross_G": 0.305,
+   "stress2020": {
+    "S": 0,
+    "GM": 0,
+    "six": 0
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"own\", \"look\": 120, \"target\": 4.0}": {
+   "n": 66,
+   "shorts": 10,
+   "G": 1.073,
+   "WR": 84.8,
+   "stops": 10,
+   "S": [
+    9,
+    10,
+    9
+   ],
+   "GM": [
+    9,
+    10,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.47,
+    0.85,
+    2.01
+   ],
+   "excess_vs_always_long_by_year": [
+    -0.3,
+    -0.14,
+    0.0
+   ],
+   "excess_overall": -0.138,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 11,
+   "cross_G": 0.094,
+   "stress2020": {
+    "S": 0,
+    "GM": 0,
+    "six": 0
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"xle\", \"look\": 20, \"target\": 3.0}": {
+   "n": 68,
+   "shorts": 28,
+   "G": 1.056,
+   "WR": 88.2,
+   "stops": 7,
+   "S": [
+    11,
+    9,
+    9
+   ],
+   "GM": [
+    11,
+    9,
+    9
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    2.3,
+    -0.3,
+    1.2
+   ],
+   "excess_vs_always_long_by_year": [
+    1.6,
+    -1.63,
+    -0.91
+   ],
+   "excess_overall": -0.28,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 17,
+   "cross_G": 1.074,
+   "stress2020": {
+    "S": 2,
+    "GM": 2,
+    "six": 14
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": true,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"xle\", \"look\": 20, \"target\": 4.0}": {
+   "n": 68,
+   "shorts": 28,
+   "G": 1.268,
+   "WR": 83.8,
+   "stops": 9,
+   "S": [
+    11,
+    8,
+    9
+   ],
+   "GM": [
+    11,
+    8,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    2.51,
+    -0.64,
+    2.07
+   ],
+   "excess_vs_always_long_by_year": [
+    1.74,
+    -1.63,
+    0.06
+   ],
+   "excess_overall": 0.056,
+   "margin": 0,
+   "level1": true,
+   "cross_passed": 16,
+   "cross_G": 0.98,
+   "stress2020": {
+    "S": 2,
+    "GM": 2,
+    "six": 14
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"xle\", \"look\": 40, \"target\": 3.0}": {
+   "n": 68,
+   "shorts": 24,
+   "G": 0.015,
+   "WR": 82.4,
+   "stops": 11,
+   "S": [
+    9,
+    9,
+    9
+   ],
+   "GM": [
+    9,
+    9,
+    9
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    -0.71,
+    -0.25,
+    1.2
+   ],
+   "excess_vs_always_long_by_year": [
+    -1.41,
+    -1.58,
+    -0.91
+   ],
+   "excess_overall": -1.321,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 16,
+   "cross_G": 0.153,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 8
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"xle\", \"look\": 40, \"target\": 4.0}": {
+   "n": 68,
+   "shorts": 24,
+   "G": 0.139,
+   "WR": 77.9,
+   "stops": 13,
+   "S": [
+    9,
+    8,
+    9
+   ],
+   "GM": [
+    9,
+    8,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    -0.69,
+    -0.63,
+    2.06
+   ],
+   "excess_vs_always_long_by_year": [
+    -1.46,
+    -1.62,
+    0.05
+   ],
+   "excess_overall": -1.072,
+   "margin": 0,
+   "level1": true,
+   "cross_passed": 15,
+   "cross_G": 0.021,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 8
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"xle\", \"look\": 60, \"target\": 3.0}": {
+   "n": 68,
+   "shorts": 20,
+   "G": 1.636,
+   "WR": 91.2,
+   "stops": 5,
+   "S": [
+    10,
+    10,
+    10
+   ],
+   "GM": [
+    10,
+    10,
+    10
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.8,
+    1.34,
+    3.0
+   ],
+   "excess_vs_always_long_by_year": [
+    0.1,
+    0.01,
+    0.89
+   ],
+   "excess_overall": 0.3,
+   "margin": 2,
+   "level1": true,
+   "cross_passed": 17,
+   "cross_G": 1.314,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 6
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": true,
+   "gate_B": true,
+   "gate_C": false,
+   "gate_E": true,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"xle\", \"look\": 60, \"target\": 4.0}": {
+   "n": 68,
+   "shorts": 20,
+   "G": 2.155,
+   "WR": 88.2,
+   "stops": 6,
+   "S": [
+    10,
+    10,
+    10
+   ],
+   "GM": [
+    10,
+    10,
+    9
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.89,
+    1.87,
+    4.02
+   ],
+   "excess_vs_always_long_by_year": [
+    0.13,
+    0.87,
+    2.01
+   ],
+   "excess_overall": 0.944,
+   "margin": 2,
+   "level1": true,
+   "cross_passed": 17,
+   "cross_G": 1.497,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 6
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": true,
+   "gate_B": true,
+   "gate_C": false,
+   "gate_E": true,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"xle\", \"look\": 120, \"target\": 3.0}": {
+   "n": 66,
+   "shorts": 14,
+   "G": 0.454,
+   "WR": 83.3,
+   "stops": 8,
+   "S": [
+    9,
+    9,
+    8
+   ],
+   "GM": [
+    9,
+    9,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.59,
+    -0.18,
+    1.06
+   ],
+   "excess_vs_always_long_by_year": [
+    -0.11,
+    -1.51,
+    -1.05
+   ],
+   "excess_overall": -0.881,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 14,
+   "cross_G": 0.059,
+   "stress2020": {
+    "S": 0,
+    "GM": 0,
+    "six": 0
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"xle\", \"look\": 120, \"target\": 4.0}": {
+   "n": 66,
+   "shorts": 14,
+   "G": 0.226,
+   "WR": 77.3,
+   "stops": 11,
+   "S": [
+    9,
+    8,
+    8
+   ],
+   "GM": [
+    9,
+    8,
+    7
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.54,
+    -0.6,
+    0.87
+   ],
+   "excess_vs_always_long_by_year": [
+    -0.23,
+    -1.59,
+    -1.14
+   ],
+   "excess_overall": -0.985,
+   "margin": 0,
+   "level1": true,
+   "cross_passed": 11,
+   "cross_G": -0.237,
+   "stress2020": {
+    "S": 0,
+    "GM": 0,
+    "six": 0
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"basket\", \"look\": 20, \"target\": 3.0}": {
+   "n": 68,
+   "shorts": 18,
+   "G": 1.159,
+   "WR": 89.7,
+   "stops": 7,
+   "S": [
+    11,
+    10,
+    9
+   ],
+   "GM": [
+    11,
+    10,
+    9
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    2.3,
+    -0.02,
+    1.21
+   ],
+   "excess_vs_always_long_by_year": [
+    1.6,
+    -1.35,
+    -0.9
+   ],
+   "excess_overall": -0.177,
+   "margin": 2,
+   "level1": true,
+   "cross_passed": 17,
+   "cross_G": 1.24,
+   "stress2020": {
+    "S": 3,
+    "GM": 3,
+    "six": 20
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": true,
+   "gate_C": true,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"basket\", \"look\": 20, \"target\": 4.0}": {
+   "n": 68,
+   "shorts": 18,
+   "G": 1.455,
+   "WR": 86.8,
+   "stops": 9,
+   "S": [
+    11,
+    9,
+    9
+   ],
+   "GM": [
+    11,
+    9,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    2.51,
+    -0.1,
+    2.06
+   ],
+   "excess_vs_always_long_by_year": [
+    1.74,
+    -1.09,
+    0.05
+   ],
+   "excess_overall": 0.243,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 17,
+   "cross_G": 1.307,
+   "stress2020": {
+    "S": 3,
+    "GM": 3,
+    "six": 20
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": true,
+   "gate_B": true,
+   "gate_C": true,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"basket\", \"look\": 40, \"target\": 3.0}": {
+   "n": 68,
+   "shorts": 16,
+   "G": 0.81,
+   "WR": 86.8,
+   "stops": 8,
+   "S": [
+    10,
+    10,
+    8
+   ],
+   "GM": [
+    10,
+    10,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.8,
+    1.25,
+    0.3
+   ],
+   "excess_vs_always_long_by_year": [
+    0.1,
+    -0.08,
+    -1.81
+   ],
+   "excess_overall": -0.526,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 15,
+   "cross_G": 0.752,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 8
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"basket\", \"look\": 40, \"target\": 4.0}": {
+   "n": 68,
+   "shorts": 16,
+   "G": 0.667,
+   "WR": 80.9,
+   "stops": 11,
+   "S": [
+    10,
+    9,
+    8
+   ],
+   "GM": [
+    10,
+    9,
+    7
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.89,
+    0.96,
+    0.05
+   ],
+   "excess_vs_always_long_by_year": [
+    0.13,
+    -0.04,
+    -1.96
+   ],
+   "excess_overall": -0.545,
+   "margin": 0,
+   "level1": true,
+   "cross_passed": 15,
+   "cross_G": 0.747,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 8
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"basket\", \"look\": 60, \"target\": 3.0}": {
+   "n": 68,
+   "shorts": 22,
+   "G": 1.106,
+   "WR": 88.2,
+   "stops": 7,
+   "S": [
+    10,
+    10,
+    9
+   ],
+   "GM": [
+    10,
+    10,
+    9
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.8,
+    1.34,
+    1.2
+   ],
+   "excess_vs_always_long_by_year": [
+    0.1,
+    0.01,
+    -0.91
+   ],
+   "excess_overall": -0.229,
+   "margin": 2,
+   "level1": true,
+   "cross_passed": 16,
+   "cross_G": 0.98,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 6
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"basket\", \"look\": 60, \"target\": 4.0}": {
+   "n": 68,
+   "shorts": 22,
+   "G": 1.579,
+   "WR": 85.3,
+   "stops": 8,
+   "S": [
+    10,
+    10,
+    9
+   ],
+   "GM": [
+    10,
+    10,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.89,
+    1.87,
+    2.06
+   ],
+   "excess_vs_always_long_by_year": [
+    0.13,
+    0.87,
+    0.05
+   ],
+   "excess_overall": 0.368,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 15,
+   "cross_G": 1.138,
+   "stress2020": {
+    "S": 1,
+    "GM": 1,
+    "six": 6
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": true,
+   "gate_B": true,
+   "gate_C": false,
+   "gate_E": true,
+   "neighbours_level1": 3,
+   "neighbours": 3,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"basket\", \"look\": 120, \"target\": 3.0}": {
+   "n": 66,
+   "shorts": 14,
+   "G": 0.541,
+   "WR": 84.8,
+   "stops": 8,
+   "S": [
+    9,
+    10,
+    8
+   ],
+   "GM": [
+    9,
+    10,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.6,
+    0.06,
+    1.06
+   ],
+   "excess_vs_always_long_by_year": [
+    -0.1,
+    -1.27,
+    -1.05
+   ],
+   "excess_overall": -0.795,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 14,
+   "cross_G": 0.244,
+   "stress2020": {
+    "S": 0,
+    "GM": 0,
+    "six": 0
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"basket\", \"look\": 120, \"target\": 4.0}": {
+   "n": 66,
+   "shorts": 14,
+   "G": 0.42,
+   "WR": 80.3,
+   "stops": 11,
+   "S": [
+    9,
+    9,
+    8
+   ],
+   "GM": [
+    9,
+    9,
+    7
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.54,
+    -0.06,
+    0.87
+   ],
+   "excess_vs_always_long_by_year": [
+    -0.23,
+    -1.05,
+    -1.14
+   ],
+   "excess_overall": -0.791,
+   "margin": 0,
+   "level1": true,
+   "cross_passed": 12,
+   "cross_G": 0.066,
+   "stress2020": {
+    "S": 0,
+    "GM": 0,
+    "six": 0
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": false,
+   "gate_B": false,
+   "gate_C": false,
+   "gate_E": false,
+   "neighbours_level1": 2,
+   "neighbours": 2,
+   "gate_D": true,
+   "passes": false
+  },
+  "{\"source\": \"long\", \"look\": 0, \"target\": 3.0}": {
+   "n": 68,
+   "shorts": 0,
+   "G": 1.336,
+   "WR": 89.7,
+   "stops": 6,
+   "S": [
+    10,
+    10,
+    9
+   ],
+   "GM": [
+    10,
+    10,
+    9
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.7,
+    1.33,
+    2.11
+   ],
+   "excess_vs_always_long_by_year": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "excess_overall": 0.0,
+   "margin": 2,
+   "level1": true,
+   "cross_passed": 17,
+   "cross_G": 1.079,
+   "stress2020": {
+    "S": 3,
+    "GM": 3,
+    "six": 19
+   },
+   "break_even_win_rate": 83.3,
+   "gate_A": true,
+   "gate_B": true,
+   "gate_C": true,
+   "gate_E": false,
+   "neighbours_level1": 0,
+   "neighbours": 0,
+   "gate_D": false,
+   "passes": false
+  },
+  "{\"source\": \"long\", \"look\": 0, \"target\": 4.0}": {
+   "n": 68,
+   "shorts": 0,
+   "G": 1.211,
+   "WR": 83.8,
+   "stops": 9,
+   "S": [
+    10,
+    9,
+    9
+   ],
+   "GM": [
+    10,
+    9,
+    8
+   ],
+   "need": [
+    8,
+    8,
+    7
+   ],
+   "G_by_year": [
+    0.77,
+    0.99,
+    2.01
+   ],
+   "excess_vs_always_long_by_year": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "excess_overall": 0.0,
+   "margin": 1,
+   "level1": true,
+   "cross_passed": 17,
+   "cross_G": 1.27,
+   "stress2020": {
+    "S": 3,
+    "GM": 3,
+    "six": 18
+   },
+   "break_even_win_rate": 78.9,
+   "gate_A": false,
+   "gate_B": true,
+   "gate_C": true,
+   "gate_E": false,
+   "neighbours_level1": 0,
+   "neighbours": 0,
+   "gate_D": false,
+   "passes": false
+  }
+ }
+}

@@ -48,6 +48,7 @@ DESC = {
  'R7_one_a_month_stop5': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +2%, at a 5% stop, or after 20 trading days.',
  'R8_peer_fusion_stop5': 'Model E with a 5% stop added: buys CNQ on the Peer-Fusion model\u2019s strongest forecasts and holds 5 days.',
  'R10_monthly_campaign_four_goals': 'Two trades a month, one in each half, on the first day the Peer-Fusion model is at least neutral. Sells at +6%, at a 15% stop, or after 60 trading days. Built for all four goals.',
+ 'R13_two_buys_stop15': 'Model M’s signal and exit with two buys at different times: on the day after the signal it buys at 10:00 and again at 1:00 pm. Sells each at +4%, at a 15% stop, or after 60 trading days.',
  'R14_dip_campaign': 'Waits each month for CNQ to fall 5% below its 10-day high (or buys on the 15th trading day if it has not), then buys twice the next day, at 10:00 and 1:00 pm. Sells each at +3%, at a 15% stop, or after 60 trading days. No machine learning.',
  'R9_one_a_month_stop15': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +4%, at a 15% stop, or after 60 trading days.',
  'R6_one_a_month': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +4%, or after 60 trading days if the target is not reached. No stop.',
@@ -387,16 +388,33 @@ if all3:
 HERO_TAG = (f'<span class="tag good">Level 1 reached on G, WR and S within the 15% loss limit: {", ".join(E(c["name"]) for c in all3)}</span> ' + ('' if any(c['GM_level'] for c in OKM) else '<span class="tag warn">GM1 not reached yet</span> ')
             + ('' if d.get('level1_on_all_three_within_5pct') else '<span class="tag warn">Not yet within the 5% limit</span>') if all3
             else '<span class="tag warn">No model reaches level 1 on all goals within the loss limits yet</span>')
+# models at level 1 on WR, S and GM that miss G (inside the 15% limit), and the all-four flag
+three_no_g = [c for c in OKM if c['WR_level'] and c['S_level'] and c['GM_level'] and not c['G_level']]
+THREE_NOTES = {
+ 'R13_two_buys_stop15': [
+  'What it is. Model M\u2019s signal and exit with two $1,000 buys on the day after the signal, at 10:00 and at 1:00 pm.',
+  'What it reaches. The first model at level 1 on both month goals: S 9 / 10 / 8 of 11 and GM 8 / 10 / 8 of 11, with a 78.6% win rate.',
+  'What it misses. Its average trade made +0.23%; G1 needs 1%. 13 of its 70 trades were stopped at 15%, and the likely range of the average runs from about \u22121.6% to +1.9%.',
+  'What it shows about model M. O buys a few hours after M on the same signals. In 7 of 35 months M\u2019s trade reached +4% while at least one of O\u2019s did not. In three of them (January 2025, February 2025, June 2026) M won on an overnight jump, and both of O\u2019s buys, made after the jump, were stopped. M\u2019s 88.6% win rate depends on its exact entry price.',
+  'More money at work. $2,000 goes in at each monthly entry, up to six trades are open at once, and in six months both buys were stopped, a loss of 30% for the month.',
+  'How it was run. It reached level 1 on the training years with no spare month, which did not pass the stricter training test; it was run once at the owner\u2019s standing instruction to test each trained model. This was run 22 on the test years.',
+ ]}
+if three_no_g:
+    _b = ''.join(f'<h3>{E(c["name"])}: WR{c["WR_level"]}, S{c["S_level"]}, GM{c["GM_level"]}, but not G1</h3><ul>' + ''.join(f'<li>{t}</li>' for t in THREE_NOTES.get(c['id'], [])) + '</ul>' for c in three_no_g)
+    ALL3_CARD += f'<div class="note2 rule"><div class="eyebrow" style="margin-bottom:6px">Level 1 on win rate and both month goals, not on profit per trade</div>{_b}</div>'
+if not d.get('level1_on_all_four'):
+    HERO_TAG += ' <span class="tag warn">No model reaches level 1 on all four goals yet</span>'
 sbest = max(d['methods'], key=lambda c: (s_worst(c), c['progress']['S']))
 gbm_best = max(OKM, key=lambda c: (gm_worst(c), c['progress']['GM']))
 same_best = max((c['best_month_avg_pct_per_trade'] for c in d['methods'] if KIND[c['id']] == 'Same-day'))
 any_s = [c for c in d['methods'] if c['S_level'] > 0]
+GM_LEAD = (f"GM1 needs 8 such months in every year. It is reached by" if gbm_best['GM_level'] else "No model reaches GM1, which needs 8 such months in every year. The closest inside the loss limits is")
 S_NOTE = ((f"{E(any_s[0]['name'])} reaches level S{any_s[0]['S_level']}. " if any_s else "No model reaches level S1. ")
           + f"The closest is {E(sbest['name'])}, with {s_text(sbest)} months above 1% per trade. "
           + f"The same-day models never have such a month: their best month averages {same_best:.2f}% per trade. "
           + "The multi-day models trade a few times a year, so many of their months are empty. "
           + f"The monthly-profit goal (GM) looks at each month\u2019s total instead: the closest is {E(gbm_best['name'])}, with "
-          + ' \u00b7 '.join(f"{y}: {v['months_total_5pct']} of {v['months']}" for y, v in gbm_best['by_year'].items()) + " months of 5% or more. No model reaches GM1.")
+          + ' \u00b7 '.join(f"{y}: {v['months_total_5pct']} of {v['months']}" for y, v in gbm_best['by_year'].items()) + " months of 5% or more. " + (f"It reaches GM{gbm_best['GM_level']}." if gbm_best['GM_level'] else "No model reaches GM1."))
 
 multi_top = [c for c in TOP5 if KIND[c['id']] == 'Multi-day']
 FEW_NOTE = (f"{', '.join(E(c['name']) for c in multi_top)} made {', '.join(str(c['trades']) for c in multi_top)} trades in almost three years. "
@@ -500,7 +518,7 @@ html = f'''<!doctype html>
       <p class="swipe">Swipe sideways to see all 35 months.</p><div class="hm-scroll"><div class="hm">{years}{head_gm}{hm_rows_gm}</div></div>
       <div class="tipbox" role="status" aria-live="polite">Point at a square to see that month.</div>
     </div>
-    <p class="fine" style="margin-top:10px">No model reaches GM1, which needs 8 such months in every year. The closest inside the loss limits is {E(gbm_best['name'])}, with {' &middot; '.join(f"{y}: {v['months_total_5pct']} of {v['months']}" for y, v in gbm_best['by_year'].items())}. Models that take one trade a month and sell at +4% rarely total 5% in a month; models with many small trades have more profitable months but few as large as 5%.</p>
+    <p class="fine" style="margin-top:10px">{GM_LEAD} {E(gbm_best['name'])}, with {' &middot; '.join(f"{y}: {v['months_total_5pct']} of {v['months']}" for y, v in gbm_best['by_year'].items())}. Models that take one trade a month and sell at +4% rarely total 5% in a month; models with many small trades have more profitable months but few as large as 5%.</p>
   </section>
 
 {STOP_SECTION}
@@ -540,7 +558,7 @@ html = f'''<!doctype html>
         <li>Level 1 on all four goals. After model N a new model must pass its training-years test with a margin of one month on S and on GM, and the same rule must hold on the five peer stocks. 1,620 settings were tried on 2021 to 2023 with the test years removed, with stops from 1% to 15%. None passed, so nothing new was run on the test years.</li>
         <li>Trades opened at the same time. By the owner's rule, trades opened at exactly the same time count as one trade; trades opened at different times count separately, even on the same day. No score on this page changed when the rule was applied.</li>
         <li>Model P, run once and not level 1. P passed a stricter training-years test by a wide margin (95.6% of its trades won there) and was then run once on the test years, the twenty-first such run. There 80% won, which is below the 83% it needs to break even with a +3% target and a 15% stop. Waiting for a dip added nothing on the test years.</li>
-        <li>Model O, not run. Model M with two $1,000 buys at different times was tested on the training years. All six buy patterns reached level 1 on all four goals there, but with no spare month in 2021 (exactly 8 of 12), so by the rule set after model N it was not run on the test years. It would be the same bet as M with $2,000 at risk.</li>
+        <li>Model Q, not run. A version that sells short when the trend is down was tested on the training years. None of its 24 settings passed, and most did worse than always buying, so it was not run on the test years.</li>
         <li>2026 has 11 months of data. Its months are judged on the same fractions (8/12, 10/12, 12/12).</li>
       </ul>
     </div>
