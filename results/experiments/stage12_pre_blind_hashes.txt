@@ -1,0 +1,10 @@
+6e3c70313afeb854fe4db9eb0fd7dff84532044ef7cc35cd046d9ddd88225817  results/stage12_frozen.pkl
+9ddc1eccfb95ec63c9e5b4aa4372504e2b4a42769c5fa24aac0567470b16979c  src/s12_lib.py
+9ebaf14522e0ba9f8e2e7adbd1c62525a1b09cbdd356b542256dd09300978990  src/stage12_field_fusion.py
+a4479e88b3fcb22ef780dcbbc7f4643baf1419ab5f4f50a3e8139939408e265f  src/s12_transformer.py
+
+# Note: the three script hashes above are of the working-folder copies that produced the blind run.
+# The published copies differ only in two path constants (data/raw/..., results/experiments/...).
+# Reproducibility of the published code is shown directly: a full walk-forward re-run from the
+# published code rebuilds stage12_frozen.pkl with the same sha256 (first line), and
+# "python3 src/stage12_field_fusion.py verify" reproduces stage12_blind_results.json exactly.
