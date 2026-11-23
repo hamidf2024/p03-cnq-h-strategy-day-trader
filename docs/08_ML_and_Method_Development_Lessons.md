@@ -324,6 +324,27 @@ per-stage section at the end.)*
   where the same cost turns V7.1's +0.0204% negative. **Lesson:** the cost
   problem found in Stages 9-10 belongs to very small per-trade edges, not to
   CNQ; holding period is the most direct lever on it.
+- **(Goal scoring) A win rate that drops break-even trades can hide a third
+  of the trades.** Scored on 2024-2026, V7.1 percent-scaled wins 70.2% of
+  decided trades but 46.3% of all trades, because 34% of its trades end
+  within half a cent of entry. Under the first number it reaches WR2; under
+  the second it reaches nothing, and the top five changes. **Lesson:** print
+  the scratch count and the wins-of-all-trades figure beside any win rate,
+  and settle which one a goal means before scoring against it.
+- **(Goal scoring) A steadiness goal measured gross rewards trade count.**
+  Rule OR Model is the only method with 8 of 12 months above 1% in every
+  year, and it gets there with 3,890 trades of +0.018% each; the same trades
+  cost about $1,082 per $1,000 stake at 1 cent per share against $691 of
+  gross profit. **Lesson:** any goal built on summed gross returns should be
+  shown with its after-cost twin, or it will favour whichever method trades
+  most.
+- **(Goal scoring) A composite ranking is only as good as its weakest
+  input.** Averaging progress on three ladders put four near-identical
+  same-day methods in the top five, all of them unprofitable after costs,
+  ahead of the one model closest to the profit goal. **Lesson:** fix the
+  ranking rule before computing it (done here), then publish the leaders of
+  each goal and the after-cost flag beside it so the ranking cannot be read
+  alone.
 
 ## 5. Strategy-domain lessons (useful context for any new method on this instrument/timeframe)
 
@@ -420,6 +441,13 @@ per-stage section at the end.)*
   the path to a design is part of the evidence about it -- in this case it
   is what explains why the selected model's validation numbers were too
   good.
+- **(Goal scoring) Save the per-trade list of every blind run.** Stages 10
+  and 11 saved only totals, so scoring the new goals meant re-running six
+  frozen configurations and first proving they reproduced the published
+  trade counts and averages. They did, exactly, but only because the code
+  and configurations were frozen. **Lesson:** a new question about an old
+  result needs the trades, not the summary; write the trade list out at the
+  time, and keep a regression check that fails loudly if a re-run differs.
 
 ## 7. What this means for Stage 11 / new ML models, concretely
 
@@ -543,3 +571,18 @@ from zero. The lessons are filed in the topic sections above, each marked
 *Added after Stage 12, in preparation for Stage 13: one data lesson in
 Section 1 on checking a source's feed and licence before first use
 (`11_Peer_and_Oil_Data_Sources.md`).*
+
+## 10. Goal-ladder scoring additions (2026-11-23)
+
+*The owner set three goals with three levels each (gross % per trade: 1 / 2 /
+more than 3; win rate: 50 / 65 / more than 75; months per year above 1%: 8 /
+10 / 12 of 12) and asked for $1,000 per trade as the dollar basis. All 16
+methods were scored on 2024-2026 (`src/goals_scorecard.py`,
+`07_Goals_and_Targets.md`). No method reaches level 1 on all three. The
+lessons are filed above, each marked "(Goal scoring)":*
+
+- Section 4 (evaluation): show wins of all trades beside the win rate; pair
+  any summed-gross goal with its after-cost figure; never read a composite
+  ranking alone.
+- Section 6 (process): save per-trade lists from every blind run, and gate
+  any re-run on reproducing the published numbers.
