@@ -92,7 +92,7 @@ MAX_LOSS_PCT = 15.0           # a method is ranked, and its levels count, inside
 STRICT_LOSS_PCT = 5.0
 # methods that carry a stop at the level or tighter by design (a gap through the stop can still exceed it)
 STOP_AT_STRICT = {'R4_goal_shaped_exits', 'R7_one_a_month_stop5', 'R8_peer_fusion_stop5'}
-STOP_AT_LIMIT = STOP_AT_STRICT | {'R9_one_a_month_stop15', 'R10_monthly_campaign_four_goals'}
+STOP_AT_LIMIT = STOP_AT_STRICT | {'R9_one_a_month_stop15', 'R10_monthly_campaign_four_goals', 'R14_dip_campaign'}
 
 META = {   # id: (display name, family, holding, stage, how the settings were chosen)
     'V1': ('V1', 'Intraday zone rule', 'same day', 1, 'original hand-set rules'),
@@ -122,6 +122,8 @@ META = {   # id: (display name, family, holding, stage, how the settings were ch
     'R8_peer_fusion_stop5': ('L. Peer-Fusion GBM, 5% stop', 'Swing ML model', '5 days', 13, 'walk-forward on 2020-2023'),
     'R9_one_a_month_stop15': ('M. One-a-month, 15% stop', 'Swing ML model', 'up to 60 days', 13, 'walk-forward on 2020-2023'),
     'R10_monthly_campaign_four_goals': ('N. Two-a-month campaign', 'Swing ML model', 'up to 60 days', 13, 'walk-forward on 2020-2023'),
+    # model O (two buys at different times) was stopped at the training gate and has no test run
+    'R14_dip_campaign': ('P. Dip-timed campaign', 'Swing price rule', 'up to 60 days', 13, 'selected on 2020-2023'),
 }
 
 
