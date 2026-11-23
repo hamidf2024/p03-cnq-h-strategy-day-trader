@@ -12,7 +12,9 @@ Sources (see docs/11_Peer_and_Oil_Data_Sources.md for why these were chosen):
 Run this on a machine that can reach data.alpaca.markets and api.eia.gov
 (the cloud research environment cannot), from the repository root:
 
-    python3 src/stage13_download_peer_oil_data.py
+    python3 src/stage13_download_peer_oil_data.py           (the eight symbols; also refreshes them for a forward test)
+    python3 src/stage13_download_peer_oil_data.py extra     (eighteen more symbols: new information, see EXTRA_SYMBOLS)
+    python3 src/stage13_download_peer_oil_data.py all       (both)
 
 It asks for the Alpaca key id and secret (the secret is typed hidden). They
 are used for this run only: never written to disk, never printed. To skip the
@@ -49,6 +51,16 @@ from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 SYMBOLS = ['CNQ', 'SU', 'CVE', 'IMO', 'XOM', 'CVX', 'USO', 'XLE']
+# Stage 14, new information from the same source (run with the word "extra" or "all"):
+#   USL  12-month oil fund     (USL against USO shows the slope of the oil futures curve)
+#   BNO  Brent oil fund        (BNO against USO shows the Brent-WTI gap)
+#   UNG  natural gas fund      (CNQ produces gas as well as oil)
+#   VLO, MPC, PSX  refiners    (refiner against producer shows the refining margin)
+#   XOP, OIH  producers and oil-service funds     ENB, TRP  Canadian pipelines
+#   FXC  Canadian dollar       UUP  US dollar      EWC  Canadian stock market
+#   SPY  US stock market       VIXY  stock-market volatility      TLT  long bonds
+#   HYG  high-yield bonds      GLD  gold
+EXTRA_SYMBOLS = ['USL', 'BNO', 'UNG', 'VLO', 'MPC', 'PSX', 'XOP', 'OIH', 'ENB', 'TRP', 'FXC', 'UUP', 'EWC', 'SPY', 'VIXY', 'TLT', 'HYG', 'GLD']
 START = '2020-07-27'
 OUT_DIR = 'data/raw/peers'
 ALPACA_URL = 'https://data.alpaca.markets/v2/stocks/bars'
@@ -221,12 +233,13 @@ def eia_wti_spot(start, fetch=http_json):
         offset += 5000
 
 
-def main():
+def main(which='core'):
+    symbols = {'core': SYMBOLS, 'extra': EXTRA_SYMBOLS, 'all': SYMBOLS + EXTRA_SYMBOLS}[which]
     get_keys()
     # SIP history is free only when the end time is at least 15 minutes old
     end = (datetime.now(timezone.utc) - timedelta(minutes=20)).strftime('%Y-%m-%dT%H:%M:%SZ')
     done, failed = [], []
-    for s in SYMBOLS:
+    for s in symbols:
         try:
             bars, pages = alpaca_bars(s, START, end)
         except urllib.error.HTTPError as e:
@@ -245,14 +258,14 @@ def main():
         write_csv(path, ['Datetime', 'Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits'], rows)
         print(f'{s}: {len(bars):,} bars fetched in {pages} requests -> {len(rows):,} session bars, {days} days -> {path}')
         done.append(s)
-    if os.environ.get('EIA_API_KEY', '').strip():
+    if which != 'extra' and os.environ.get('EIA_API_KEY', '').strip():
         try:
             rows = eia_wti_spot('2020-07-01')
             write_csv(f'{OUT_DIR}/WTI_spot_daily_EIA.csv', ['Date', 'WTI_spot_USD_per_bbl'], rows)
             print(f'WTI spot (EIA RWTC): {len(rows)} days, {rows[0][0]} .. {rows[-1][0]}')
         except Exception as e:
             print('EIA refresh skipped:', str(e)[:150])
-    print(f'Finished: {len(done)} of {len(SYMBOLS)} symbols saved in {OUT_DIR}/' + (f'; failed: {", ".join(failed)}' if failed else ''))
+    print(f'Finished: {len(done)} of {len(symbols)} symbols saved in {OUT_DIR}/' + (f'; failed: {", ".join(failed)}' if failed else ''))
     print('Next: python3 src/stage13_check_peer_data.py')
 
 
@@ -287,4 +300,10 @@ def selftest():
 
 
 if __name__ == '__main__':
-    selftest() if (len(sys.argv) > 1 and sys.argv[1] == 'selftest') else main()
+    arg = sys.argv[1] if len(sys.argv) > 1 else 'core'
+    if arg == 'selftest':
+        selftest()
+    elif arg in ('core', 'extra', 'all'):
+        main(arg)
+    else:
+        sys.exit('Use: python3 src/stage13_download_peer_oil_data.py [core | extra | all | selftest]')
