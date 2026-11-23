@@ -84,6 +84,12 @@ per-stage section at the end.)*
   is, what share of the market it covers, and what its terms say about
   model training and publication -- and prefer the primary publisher over a
   mirror.
+- **(Stage 13) Peer data was the missing ingredient for the profit goal.** One
+  model trained on six oil stocks at once (six times the labels) is the first
+  in the project to clear 1% per trade on unseen years, in each year
+  (+1.41%, 39 trades). The CNQ-only version of the same idea reached 0.99% on
+  25 trades with one losing year. **Lesson:** before adding model capacity,
+  add independent rows; related instruments are the cheapest source.
 
 ## 2. Labeling and feature engineering lessons (for ML specifically)
 
@@ -157,6 +163,17 @@ per-stage section at the end.)*
   **Lesson:** use physics, control and information-theory constructs to
   describe the state of the market causally, and let a regularised model
   and walk-forward validation decide how much weight each deserves.
+- **(Stage 13) Set entry thresholds on the model's own recent forecasts.** A
+  trailing rank over the last 120 out-of-sample forecasts gave 37 validation
+  and 39 test trades; Stage 12's fixed training quantile gave 25 where 72
+  were expected. **Lesson:** in-sample forecasts are more spread out than live
+  ones; a causal trailing rank keeps trade frequency stable.
+- **(Stage 13) The model with the best rank correlation was not the best to
+  trade.** The transformer had the highest out-of-fold rank correlation
+  (0.076 against 0.059 for gradient boosting), yet the ensemble containing it
+  traded worse than gradient boosting alone, on validation and on test.
+  **Lesson:** judge a forecaster on the trades its top forecasts produce, not
+  on its average correlation.
 
 ## 3. Overfitting-prevention lessons (the ones that generalize beyond this project)
 
@@ -261,6 +278,17 @@ per-stage section at the end.)*
   threshold; anchor thresholds to something stable (here, a quantile of the
   model's own predictions on its training rows) and inspect per-fold counts
   before reading any performance number.
+- **(Stage 13) A gate passed in a rising market proves little.** On 2021-2023
+  buying CNQ on any day for 5 days averaged +1.04%, and 53% of months were
+  above 1%. Model J passed "level 1 in every validation year" with zero excess
+  over entering on any day. **Lesson:** every validation gate needs a
+  no-skill line built with the same exit rule; report the excess beside the
+  raw level.
+- **(Stage 13) Repeating until a goal is met changes what the result means.**
+  Six models were run on 2024-2026 in this stage, the last two designed after
+  earlier results were known. **Lesson:** log every look in a file the code
+  enforces, state the count beside the result, and treat a level reached this
+  way as a candidate for forward testing, not as a finding.
 
 ## 4. Evaluation and metrics lessons
 
@@ -351,6 +379,21 @@ per-stage section at the end.)*
   computing it (done here), and publish the leader of each goal, the
   after-cost flag and the trade count beside it so the ranking is never read
   alone.
+- **(Stage 13) Goals that count winners reward small wins and large losses.**
+  A +4% target with no stop reached WR3 and S1 with 31 winners and four
+  losers of up to 17%. Win rate and months-above-target say nothing about
+  the size of the losses. **Lesson:** beside any goal that counts winners,
+  report the worst trade, the average loser, the capital at work when trades
+  overlap, and the result of the same exit entered on any day.
+- **(Stage 13) Work out what a goal requires before building for it.** A
+  short calculation on training data showed S1 needs 75 to 80% directional
+  accuracy with time-based exits, far beyond any model here. That redirected
+  the work from forecasting to exit design after one round instead of many.
+  **Lesson:** turn each goal into a required accuracy or edge first.
+- **(Stage 13) Count months by entry and say so.** S places a trade in its
+  entry month, so a trade that takes two months to reach its target still
+  makes its entry month count. **Lesson:** state the attribution rule next to
+  any per-period count.
 
 ## 5. Strategy-domain lessons (useful context for any new method on this instrument/timeframe)
 
@@ -404,6 +447,17 @@ per-stage section at the end.)*
   one regime is a hidden parameter; the volatility level (1.89% a day blind
   against 2.44% in training) and the speed of the surrounding trend both
   changed the recovery time.
+- **(Stage 13) First-passage exits turn a market's swing into a high hit
+  rate.** For CNQ, +2% within 20 days was reached in 82 to 96% of trades and
+  +4% within 60 days in 87 to 89%, in both the training and the test years.
+  The cost is the tail: the trades that miss lose 6 to 17%. **Lesson:** a
+  target exit is a way to shape results, not a source of edge; its average
+  equals the market's drift over the holding time plus whatever the entry
+  adds.
+- **(Stage 13) Relative value against peers and oil was real but small.**
+  The spring rule's excess was +1.3% per trade on validation and +0.4% on
+  test, with half its trades short. **Lesson:** useful as a feature (it is
+  inside model E), weak as a stand-alone rule.
 
 ## 6. Process lessons (how this project avoided repeating its own mistakes)
 
@@ -462,6 +516,10 @@ per-stage section at the end.)*
   X; for example model M in March would count because ...") would have
   caught it. **Lesson:** when a goal's wording allows two formulas, show the
   formula and an example and get a yes before building on it.
+- **(Stage 13) Publish and report each model as it lands.** Each model was
+  frozen, run once, scored, put on the website and reported before the next
+  was designed. **Lesson:** it keeps the record of what was known when each
+  design was made, which is what makes the count of looks honest.
 
 ## 7. What this means for Stage 11 / new ML models, concretely
 
@@ -603,3 +661,24 @@ The lessons are filed above, each marked "(Goal scoring)":*
 - Section 6 (process): save per-trade lists from every blind run and gate
   re-runs on reproducing published numbers; restate a new goal with a worked
   example before scoring it.
+
+
+## 11. Stage 13 additions (peer-and-oil models, 2026-11-23)
+
+*Stage 13 (`12_Stage13_Peer_Fusion_Research.md`) built six models with the
+peer and oil data. E, a pooled gradient-boosted model, reached G1 and WR1.
+J, one trade a month with a +4% target and no stop, reached level 1 on all
+three goals on 2024-2026, with cautions about its loss shape and the number
+of test runs. Lessons are filed above, each marked "(Stage 13)":*
+
+- Section 1 (data): peer data supplied the independent rows the profit goal
+  needed.
+- Section 2 (ML): trailing-rank thresholds; rank correlation is not trade
+  performance.
+- Section 3 (overfitting): a gate passed in a rising market proves little;
+  repeated runs change what a result means.
+- Section 4 (evaluation): goals that count winners reward negative skew;
+  compute what a goal requires first; state how months are attributed.
+- Section 5 (strategy): first-passage exits shape results and carry a tail;
+  relative value is a feature, not a rule.
+- Section 6 (process): publish and report each model as it lands.
