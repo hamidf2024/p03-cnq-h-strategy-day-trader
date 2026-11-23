@@ -40,7 +40,13 @@ DESC = {
  'B_field_fusion_gbm': 'Machine-learning model on 33 signals. Buys its strongest forecasts and holds 5 days.',
  'C_transformer_probe': 'A small transformer reads the 5-minute bars and picks days to buy. Holds 5 days.',
  'D_fusion_gate': 'The spring-release signal, taken only when the Field-Fusion model agrees.',
+ 'R1_peer_fusion_gbm': 'One machine-learning model trained on six oil stocks at once, with oil and peer signals. Buys CNQ on its strongest forecasts and holds 5 days.',
+ 'R2_peer_oil_spring': 'Buys CNQ when it is stretched below its peers and oil and starts to turn back, and sells short in the opposite case. Holds 5 days.',
+ 'R3_fusion_ensemble': 'Three models voting together: gradient boosting, a linear model and a cross-asset transformer. Holds 5 days.',
+ 'R4_goal_shaped_exits': 'The Peer-Fusion signal with a 5% profit target and a 5% stop, for up to 10 days.',
+ 'R5_first_passage': 'Peer-Fusion entries with a profit-target exit, built to trade in most months.',
 }
+NEW_STAGE = 13
 KIND = {c['id']: ('Same-day' if c['holding'] == 'same day' else 'Multi-day') for c in d['methods']}
 SHORT = {'Donchian_long': 'Donchian long-only', 'Donchian_ls': 'Donchian long+short'}
 def nm(c): return SHORT.get(c['id'], c['name'])
@@ -62,6 +68,10 @@ def pct(v, nd=2, sign=False):
 def usd(v, nd=0, sign=True):
     s = f'${abs(v):,.{nd}f}'
     return (MIN if v < -0.5 * 10 ** -nd else ('+' if sign and v > 0 else '')) + s
+
+
+def NEWTAG(c):
+    return ' <span class="tag newtag">New</span>' if c['stage'] == NEW_STAGE else ''
 
 
 def meter(kind, value, lv, compact=False):
@@ -130,7 +140,7 @@ def top_row(c):
     g, wr = c['gross_pct_per_trade'], c['win_rate']
     return f'''<li class="card toprow">
       <div class="rank" aria-label="Rank {c['rank']}">{c['rank']}</div>
-      <div class="tw"><h3>{E(c['name'])}</h3><div class="meta"><span class="kind">{KIND[c['id']]}</span><span>{c['trades']:,} trades</span></div><p>{E(DESC[c['id']])}</p></div>
+      <div class="tw"><h3>{E(c['name'])}{NEWTAG(c)}</h3><div class="meta"><span class="kind">{KIND[c['id']]}</span><span>{c['trades']:,} trades</span></div><p>{E(DESC[c['id']])}</p></div>
       <div class="meters">
         <div class="m"><div class="m-top"><span class="m-name">Profit per trade</span><span class="m-val">{pct(g)}</span>{chip('G', c['G_level'])}</div>{meter('G', g, c['G_level'])}</div>
         <div class="m"><div class="m-top"><span class="m-name">Win rate</span><span class="m-val">{wr:.1f}%</span>{chip('WR', c['WR_level'])}</div>{meter('WR', wr, c['WR_level'])}</div>
@@ -150,7 +160,7 @@ def table_row(c):
     net = c['dollars_per_trade_after_1c']
     return f'''<tr data-kind="{KIND[c['id']]}">
       <td class="num rk">{rk}</td>
-      <td class="nm"><strong>{E(c['name'])}</strong><span>{KIND[c['id']]} · {c['trades']:,} trades</span></td>
+      <td class="nm"><strong>{E(c['name'])}{NEWTAG(c)}</strong><span>{KIND[c['id']]} · {c['trades']:,} trades</span></td>
       <td class="mc"><div class="mv">{pct(g)}</div>{meter('G', g, c['G_level'], True)}</td>
       <td class="mc"><div class="mv">{wr:.1f}%<small>{c['wins_share_of_all_trades']:.0f}% of all trades</small></div>{meter('WR', wr, c['WR_level'], True)}</td>
       <td class="mc"><div class="mv">{s_worst(c):.0f} of 12</div>{meter('S', s_worst(c), c['S_level'], True)}</td>
@@ -222,6 +232,11 @@ def money_table_row(c):
 money_table = ''.join(money_table_row(c) for c in ORDER)
 
 n_models = len(d['methods'])
+gbest = max(d['methods'], key=lambda c: c['gross_pct_per_trade'])
+LOOKS = int(sys.argv[4]) if len(sys.argv) > 4 else 8
+all3 = [M[i] for i in d.get('level1_on_all_three', [])]
+HERO_TAG = (f'<span class="tag good">Level 1 reached on all three goals: {", ".join(E(c["name"]) for c in all3)}</span>' if all3
+            else '<span class="tag warn">No model reaches level 1 on all three goals yet</span>')
 sbest = max(d['methods'], key=lambda c: (s_worst(c), c['progress']['S']))
 same_best = max((c['best_month_avg_pct_per_trade'] for c in d['methods'] if KIND[c['id']] == 'Same-day'))
 any_s = [c for c in d['methods'] if c['S_level'] > 0]
@@ -266,7 +281,7 @@ html = f'''<!doctype html>
     <div class="eyebrow">Project 3 &middot; CNQ 5-Minute Zone Day Trading</div>
     <h1>{n_models} trading models, scored against three goals</h1>
     <p class="lede">Every model and method built in this project for trading Canadian Natural Resources (CNQ) is scored here on the same three goals. Scores use January 2024 to November 2026, years the models were not trained on. Dollar figures assume $1,000 invested in each trade.</p>
-    <p style="margin-top:14px"><span class="tag warn">No model reaches level 1 on all three goals yet</span> <span class="tag muted">Research only, hypothetical backtests</span> <span class="tag muted">Updated Nov 23, 2026</span></p>
+    <p style="margin-top:14px">{HERO_TAG} <span class="tag muted">Research only, hypothetical backtests</span> <span class="tag muted">Updated Nov 23, 2026</span></p>
     <nav class="toc" aria-label="On this page"><a href="#goals">The goals</a><a href="#top5">Top 5</a><a href="#all">All {n_models} models</a><a href="#months">Month by month</a><a href="#money">$1,000 per trade</a><a href="#measure">How it is measured</a><a href="project-03-research.html">Research record</a></nav>
   </section>
 
@@ -275,7 +290,7 @@ html = f'''<!doctype html>
     <p class="sub">Three goals, each with three levels. A filled step means at least one model has reached that level.</p>
     <div class="goals">{goals_html}</div>
     <div class="statstrip" style="margin-top:16px">
-      <div class="primary"><div class="k">Models scored</div><div class="v">{n_models}</div><div class="s">10 same-day, 6 multi-day</div></div>
+      <div class="primary"><div class="k">Models scored</div><div class="v">{n_models}</div><div class="s">{sum(KIND[c['id']] == 'Same-day' for c in d['methods'])} same-day, {sum(KIND[c['id']] == 'Multi-day' for c in d['methods'])} multi-day</div></div>
       <div><div class="k">Test period</div><div class="v">35 months</div><div class="s">Jan 2024 to Nov 18, 2026</div></div>
       <div><div class="k">Money per trade</div><div class="v">$1,000</div><div class="s">about 28 CNQ shares</div></div>
       <div><div class="k">Profitable after costs</div><div class="v">{n_profit} of {n_models}</div><div class="s">at 1&cent; per share</div></div>
@@ -290,7 +305,7 @@ html = f'''<!doctype html>
       <h3>Three things to know before relying on this ranking</h3>
       <ul>
         <li><strong>Few trades.</strong> {FEW_NOTE}</li>
-        <li><strong>Costs.</strong> The same-day models make about $0.20 per $1,000 trade. A cost of 1&cent; per share is about $0.28 per trade, so they lose money once it is charged. {E(M['C_transformer_probe']['name'])}, {E(bgbm['name'])} and {E(M['D_fusion_gate']['name'])} are the only models that keep a profit after costs.</li>
+        <li><strong>Costs.</strong> The same-day models make about $0.20 per $1,000 trade. A cost of 1&cent; per share is about $0.28 per trade, so they lose money once it is charged. The models that keep a profit after costs are {', '.join(E(c['name']) for c in ORDER if c['profitable_after_1c'])}.</li>
         <li><strong>Break-even trades.</strong> The win rate leaves out trades that end within half a cent of the entry price. The same-day models have many of these: {E(pctm['name'])} wins {pctm['win_rate']:.0f}% of decided trades but {pctm['wins_share_of_all_trades']:.0f}% of all trades. If a break-even trade is not counted as a win, the top five becomes {', '.join(E(n) for n in STRICT5)}.</li>
       </ul>
     </div>
@@ -335,7 +350,7 @@ html = f'''<!doctype html>
         <tbody>{money_table}</tbody>
       </table></div>
     </details>
-    <p class="fine" style="margin-top:10px">{E(rom['name'])} shows why costs matter: {rom['trades']:,} trades made {usd(rom['dollars_total'], 0, False)} before costs, and the cost of those trades comes to about {usd(rom['cost_1c_dollars_total'], 0, False)}. {E(bgbm['name'])} made {usd(bgbm['dollars_total'], 0, False)} from {bgbm['trades']} trades and paid about {usd(bgbm['cost_1c_dollars_total'], 0, False)} in costs, but two of its trades supplied nearly all of the profit.</p>
+    <p class="fine" style="margin-top:10px">{E(rom['name'])} shows why costs matter: {rom['trades']:,} trades made {usd(rom['dollars_total'], 0, False)} before costs, and the cost of those trades comes to about {usd(rom['cost_1c_dollars_total'], 0, False)}. {E(gbest['name'])} made {usd(gbest['dollars_total'], 0, False)} from {gbest['trades']} trades and paid about {usd(gbest['cost_1c_dollars_total'], 0, False)} in costs.</p>
   </section>
 
   <section id="measure">
@@ -348,8 +363,9 @@ html = f'''<!doctype html>
     <div class="card" style="margin-top:16px">
       <h3>Limits of these results</h3>
       <ul>
-        <li>One stock. All results are for CNQ only, on one data feed (IEX), and are backtests, not real trades.</li>
-        <li>Few trades for the multi-day models. {E(bgbm['name'])} has {bgbm['trades']} trades in almost three years, so its 0.99% average could easily be luck. Its range of likely values runs from about {MIN}0.9% to +2.9%.</li>
+        <li>One stock. All results are for CNQ only and are backtests, not real trades. Models E onward use consolidated-market prices; earlier models use one exchange's feed (IEX).</li>
+        <li>Few trades for the multi-day models. {E(gbest['name'])} has {gbest['trades']} trades in almost three years. Its average of {pct(gbest['gross_pct_per_trade'])} per trade has a likely range of {pct(gbest['gross_pct_per_trade_ci95'][0], 1, True)} to {pct(gbest['gross_pct_per_trade_ci95'][1], 1, True)}.</li>
+        <li>The test years have now been looked at {LOOKS} times by different models. Each extra look makes a lucky result more likely, so the newest results need confirming on data after November 2026.</li>
         <li>A rising stock helps long trades. CNQ rose about 39% over the test period, and a randomly timed 5-day purchase made +0.35% on average.</li>
         <li>2026 has 11 months of data. Its months are judged on the same fractions (8/12, 10/12, 12/12).</li>
       </ul>

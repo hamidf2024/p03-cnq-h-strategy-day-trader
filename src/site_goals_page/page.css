@@ -142,3 +142,5 @@ table.score th:nth-child(1){width:58px}table.score th:nth-child(2){width:21%}tab
 .research-link p{color:var(--muted)}
 .research-cta{font-weight:600;color:var(--accent)}
 .hero .lede{max-width:720px}
+
+.newtag{font-size:10.5px;padding:1px 7px;vertical-align:2px;margin-left:4px}
