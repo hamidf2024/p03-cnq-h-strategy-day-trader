@@ -10,13 +10,15 @@ Sources (see docs/11_Peer_and_Oil_Data_Sources.md for why these were chosen):
     Cushing (series RWTC), public domain.
 
 Run this on a machine that can reach data.alpaca.markets and api.eia.gov
-(the cloud research environment cannot). Keys are read from environment
-variables and are never written to disk or printed:
+(the cloud research environment cannot), from the repository root:
 
-    export APCA_API_KEY_ID=...        # Alpaca key id
-    export APCA_API_SECRET_KEY=...    # Alpaca secret
-    export EIA_API_KEY=...            # optional; skip WTI spot if unset
     python3 src/stage13_download_peer_oil_data.py
+
+It asks for the Alpaca key id and secret (the secret is typed hidden). They
+are used for this run only: never written to disk, never printed. To skip the
+prompts, set APCA_API_KEY_ID and APCA_API_SECRET_KEY in the environment
+(real values, not placeholders); set EIA_API_KEY as well to refresh the EIA
+spot series (optional -- it is already saved locally).
 
 Output: one CSV per symbol in data/raw/peers/, in the same layout as
 data/raw/CNQ_5min_20200727_to_20261118.csv (US/Eastern timestamps, regular
@@ -25,18 +27,22 @@ data/raw/peers/WTI_spot_daily_EIA.csv.
 
 STATUS: request parameters follow Alpaca's and EIA's published API
 documentation; paging, time-zone conversion and session filtering are unit
-tested with mocked responses (run with `selftest`). It has NOT yet been run
-against the live APIs from the research environment.
+tested with mocked responses (run with `selftest`). The research environment
+cannot reach the live APIs, so the first live run is the owner's.
 
 Licence note: Alpaca states that API data may not be redistributed. Keep the
 downloaded files private (do not commit them to a public repository) unless
 the owner has confirmed otherwise.
 """
 import csv
+import getpass
 import json
 import os
+import ssl
+import subprocess
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -50,10 +56,91 @@ EIA_URL = 'https://api.eia.gov/v2/petroleum/pri/spt/data/'
 NY = ZoneInfo('America/New_York')
 
 
+def _ssl_context():
+    """Certificate verification stays ON. python.org builds of Python on macOS
+    ship without a CA bundle until "Install Certificates.command" is run, so
+    look for one in the usual places instead of failing."""
+    ctx = ssl.create_default_context()
+    try:
+        import certifi
+        ctx.load_verify_locations(certifi.where())
+    except Exception:
+        pass
+    for path in ('/etc/ssl/cert.pem', '/etc/ssl/certs/ca-certificates.crt'):
+        if os.path.exists(path):
+            try:
+                ctx.load_verify_locations(path)
+            except Exception:
+                pass
+    return ctx
+
+
+_CTX = None
+
+
+def _curl_json(url, headers):
+    """Fallback that uses the system curl (and so the system certificate store).
+    Headers go in through stdin, not the command line, so keys never appear in
+    the process list."""
+    cfg = 'url = "%s"\n' % url + ''.join('header = "%s: %s"\n' % (k, v) for k, v in (headers or {}).items())
+    r = subprocess.run(['curl', '-sS', '--max-time', '90', '-w', '\n%{http_code}', '-K', '-'],
+                       input=cfg.encode(), capture_output=True)
+    if r.returncode != 0:
+        raise RuntimeError('curl failed: ' + r.stderr.decode(errors='replace').strip()[:200])
+    body, _, code = r.stdout.decode('utf-8').rpartition('\n')
+    if code != '200':
+        raise urllib.error.HTTPError(url.split('?')[0], int(code or 0), body[:200], None, None)
+    return json.loads(body)
+
+
 def http_json(url, headers=None):
-    req = urllib.request.Request(url, headers=headers or {})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read().decode('utf-8'))
+    global _CTX
+    if _CTX is None:
+        _CTX = _ssl_context()
+    for attempt in range(5):
+        try:
+            req = urllib.request.Request(url, headers=headers or {})
+            with urllib.request.urlopen(req, timeout=90, context=_CTX) as r:
+                return json.loads(r.read().decode('utf-8'))
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < 4:          # rate limit: wait and retry
+                time.sleep(15)
+                continue
+            raise
+        except urllib.error.URLError as e:
+            if isinstance(e.reason, ssl.SSLCertVerificationError):
+                return _curl_json(url, headers)
+            if attempt < 4:
+                time.sleep(3)
+                continue
+            raise
+
+
+def explain_http_error(e, what):
+    code = getattr(e, 'code', None)
+    if code in (401, 403):
+        return (f'{what}: the server refused the request (HTTP {code}). For Alpaca this means the key id or '
+                'secret is wrong, or was copied with extra spaces. Create or view keys in the Alpaca dashboard '
+                '(Home > API Keys) and run again. Paper-trading keys work for market data.')
+    if code == 422:
+        return f'{what}: the server rejected the request parameters (HTTP 422): {getattr(e, "reason", "")}'
+    return f'{what}: HTTP {code}: {getattr(e, "reason", "")}'
+
+
+PLACEHOLDERS = {'', 'your_key_id', 'your_secret', '...', 'xxx'}
+
+
+def get_keys():
+    kid = os.environ.get('APCA_API_KEY_ID', '').strip()
+    sec = os.environ.get('APCA_API_SECRET_KEY', '').strip()
+    if kid in PLACEHOLDERS or sec in PLACEHOLDERS:
+        print('Alpaca API keys are needed (free account: Alpaca dashboard > Home > API Keys).')
+        print('They are used for this run only and are not saved or shown.')
+        kid = input('  Alpaca key id: ').strip()
+        sec = getpass.getpass('  Alpaca secret (typing is hidden): ').strip()
+    if kid in PLACEHOLDERS or sec in PLACEHOLDERS:
+        sys.exit('No keys given -- nothing downloaded.')
+    os.environ['APCA_API_KEY_ID'], os.environ['APCA_API_SECRET_KEY'] = kid, sec
 
 
 def alpaca_bars(symbol, start, end, fetch=http_json, feed='sip'):
@@ -110,24 +197,38 @@ def eia_wti_spot(start, fetch=http_json):
 
 
 def main():
-    if not os.environ.get('APCA_API_KEY_ID') or not os.environ.get('APCA_API_SECRET_KEY'):
-        sys.exit('Set APCA_API_KEY_ID and APCA_API_SECRET_KEY first (see the header of this file).')
+    get_keys()
     # SIP history is free only when the end time is at least 15 minutes old
     end = (datetime.now(timezone.utc) - timedelta(minutes=20)).strftime('%Y-%m-%dT%H:%M:%SZ')
+    done, failed = [], []
     for s in SYMBOLS:
-        bars, pages = alpaca_bars(s, START, end)
+        try:
+            bars, pages = alpaca_bars(s, START, end)
+        except urllib.error.HTTPError as e:
+            print(explain_http_error(e, s))
+            if e.code in (401, 403):
+                sys.exit(1)
+            failed.append(s)
+            continue
         rows = to_session_rows(bars)
+        if not rows:
+            print(f'{s}: no bars returned')
+            failed.append(s)
+            continue
         days = len({r[0][:10] for r in rows})
-        path = f'{OUT_DIR}/{s}_5min_sip_{START.replace("-", "")}_to_{rows[-1][0][:10].replace("-", "") if rows else "none"}.csv'
+        path = f'{OUT_DIR}/{s}_5min_sip_{START.replace("-", "")}_to_{rows[-1][0][:10].replace("-", "")}.csv'
         write_csv(path, ['Datetime', 'Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits'], rows)
         print(f'{s}: {len(bars):,} bars fetched in {pages} requests -> {len(rows):,} session bars, {days} days -> {path}')
-    if os.environ.get('EIA_API_KEY'):
-        rows = eia_wti_spot('2020-07-01')
-        write_csv(f'{OUT_DIR}/WTI_spot_daily_EIA.csv', ['Date', 'WTI_spot_USD_per_bbl'], rows)
-        print(f'WTI spot (EIA RWTC): {len(rows)} days, {rows[0][0]} .. {rows[-1][0]}')
-    else:
-        print('EIA_API_KEY not set: skipped WTI spot. It can also be downloaded by hand from '
-              'https://www.eia.gov/dnav/pet/hist/RWTCD.htm')
+        done.append(s)
+    if os.environ.get('EIA_API_KEY', '').strip():
+        try:
+            rows = eia_wti_spot('2020-07-01')
+            write_csv(f'{OUT_DIR}/WTI_spot_daily_EIA.csv', ['Date', 'WTI_spot_USD_per_bbl'], rows)
+            print(f'WTI spot (EIA RWTC): {len(rows)} days, {rows[0][0]} .. {rows[-1][0]}')
+        except Exception as e:
+            print('EIA refresh skipped:', str(e)[:150])
+    print(f'Finished: {len(done)} of {len(SYMBOLS)} symbols saved in {OUT_DIR}/' + (f'; failed: {", ".join(failed)}' if failed else ''))
+    print('Next: python3 src/stage13_check_peer_data.py')
 
 
 def selftest():
@@ -154,6 +255,9 @@ def selftest():
     assert rows[0][1:6] == [16.0, 16.2, 15.9, 16.1, 100]
     e = [{'response': {'data': [{'period': '2020-07-01', 'value': 39.8}, {'period': '2020-07-02', 'value': None}]}}]
     assert eia_wti_spot('2020-07-01', fetch=lambda u, h=None: e[0]) == [['2020-07-01', 39.8]]
+    ctx = _ssl_context()
+    assert ctx.verify_mode == ssl.CERT_REQUIRED and ctx.check_hostname      # verification is never switched off
+    assert 'HTTP 401' in explain_http_error(urllib.error.HTTPError('u', 401, 'x', None, None), 'SU')
     print('selftest passed: paging, feed/adjustment/timeframe parameters, US/Eastern conversion across DST, session filter, EIA parsing')
 
 
