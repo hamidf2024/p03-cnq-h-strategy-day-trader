@@ -42,7 +42,8 @@ MIN_TRADES_PER_YEAR = 6
 
 # ----------------------------------------------------------------- data
 def get_panel():
-    f = f'{RES}/stage13_panel_cache.pkl'
+    cut = os.environ.get('S13_CUTOFF', '')
+    f = f'{RES}/stage13_panel_cache{"_to_" + cut if cut else ""}.pkl'      # holds prices: local only
     if os.path.exists(f):
         return pickle.load(open(f, 'rb'))
     out = L.build_panel(); pickle.dump(out, open(f, 'wb')); return out
@@ -366,7 +367,7 @@ def signal_from_cfg(cfg, cnq, preds):
     if cfg.get('monthly'):                       # one trade a month: the first day whose score clears the bar
         sc = score_series(preds[cfg['H']], cfg['src']); out = pd.Series(0.0, index=sc.index); done = set()
         for d, v in sc.items():
-            m = (d.year, d.month)
+            m = (d.year, d.month) if cfg.get('per_month', 1) == 1 else (d.year, d.month, int(d.day > 15))   # two a month: one per half
             if m not in done and not np.isnan(v) and v >= cfg['q']:
                 out[d] = 1; done.add(m)
         return out
@@ -573,11 +574,60 @@ def round9():
     print('R9 validation', {k: st[k] for k in ('n', 'G', 'WR', 'S', 'excess')}, [p['G'] for p in st['per_year'].values()], flush=True)
 
 
+def round10():
+    """R10: a monthly campaign aimed at level 1 on all FOUR goals (G, WR, S and GM, the month total of 5% or
+    more), inside the 15% loss limit. One or two trades a month from the R1 model, a target large enough that
+    the month's total can reach 5%, a 10% or 15% stop. Selected on 2021-2023 only; run it with
+    S13_CUTOFF=2023-12-29 so the test years are not in the data at all."""
+    assert os.environ.get('S13_CUTOFF', '') <= '2023-12-31' and os.environ.get('S13_CUTOFF'), 'run the selection with S13_CUTOFF=2023-12-29'
+    frozen = pickle.load(open(f'{RES}/stage13_frozen.pkl', 'rb'))
+    panel, D, cal, feats, cnq, path, bench, T = setup()
+    assert cal.max() <= pd.Timestamp('2023-12-31')
+    grid = [dict(src='gbm', H=5, side='long', q=0.5, monthly=True, per_month=k, overlap=True, hold=hold, target=t, stop=st)
+            for k in (1, 2) for t in (4.0, 5.5, 6.0, 8.0) for st in (10.0, 15.0) for hold in (40, 60)]
+    res = {}
+    for cfg in grid:
+        end = cal[-cfg['hold'] - 1]
+        sig = signal_from_cfg(cfg, cnq, frozen['oof']).reindex(cal).fillna(0)
+        t = L.run_trades(path, sig, cfg['hold'], cfg['target'], cfg['stop'], start='2021-01-01', end=str(end.date()), overlap=True)
+        per = {}
+        for y in VAL_YEARS:
+            ty = t[t.entry_date.dt.year == y]; avail = 12 if y < 2023 else int(end.month); g = ty.groupby(ty.entry_date.dt.month).ret
+            per[y] = dict(n=int(len(ty)), G=round(float(ty.ret.mean()), 3) if len(ty) else -9.0, WR=round(float((ty.ret > 0).mean() * 100), 1) if len(ty) else 0.0,
+                          S=int((g.mean() > 1).sum()), GM=int((g.sum() >= 5).sum()), months=avail)
+        need = lambda p: int(np.ceil(8 / 12 * p['months']))
+        ok = all(p['G'] >= 1 and p['WR'] >= 50 and p['S'] >= need(p) and p['GM'] >= need(p) for p in per.values())
+        res[json.dumps(cfg, sort_keys=True)] = dict(n=int(len(t)), G=round(float(t.ret.mean()), 3), WR=round(float((t.ret > 0).mean() * 100), 1),
+                                                    worst=round(float(t.ret.min()), 1), per_year=per, level1_all_four_every_year=bool(ok),
+                                                    margin=min(min(p['S'], p['GM']) / p['months'] for p in per.values()))
+    passers = {k: v for k, v in res.items() if v['level1_all_four_every_year']}
+    for k, v in sorted(res.items(), key=lambda kv: -(kv[1]['margin'] * 100 + kv[1]['G']))[:8]:
+        c = json.loads(k)
+        print('per month', c['per_month'], 'T', c['target'], 'stop', c['stop'], 'hold', c['hold'], '| n', v['n'], 'G', v['G'], 'WR', v['WR'],
+              'S', [p['S'] for p in v['per_year'].values()], 'GM', [p['GM'] for p in v['per_year'].values()], 'G by yr', [p['G'] for p in v['per_year'].values()],
+              'L1x4' if v['level1_all_four_every_year'] else '', flush=True)
+    wf = json.load(open(f'{RES}/stage13_walkforward_results.json'))
+    entry = dict(settings=res, level1_all_four_in_every_validation_year=sorted(passers),
+                 rule='settings that reach G1, WR1, S1 and GM1 in each of 2021, 2022, 2023; among them the widest margin on the two month goals, then G; '
+                      'if none passes, no model is frozen and nothing is run on 2024-2026')
+    if passers:
+        best = max(passers, key=lambda k: (passers[k]['margin'], passers[k]['G']))
+        entry.update(chosen=json.loads(best), chosen_stats=res[best])
+        pickle.dump(dict(chosen={'R10_monthly_campaign_four_goals': json.loads(best)}, finals=frozen['finals'], oof=frozen['oof'], feats=frozen['feats'], gbm_params=GBM),
+                    open(f'{RES}/stage13_frozen_R10.pkl', 'wb'))
+        print('chosen', best, flush=True)
+    wf['rounds']['R10_monthly_campaign_four_goals'] = entry
+    json.dump(wf, open(f'{RES}/stage13_walkforward_results.json', 'w'), indent=1, default=str)
+    print('passers', len(passers), 'of', len(res), flush=True)
+
+
 if __name__ == '__main__':
     os.makedirs(RES, exist_ok=True)
     mode = sys.argv[1] if len(sys.argv) > 1 else ''
     if mode == 'walkforward':
         walkforward()
+    elif mode == 'round10':
+        round10()
     elif mode == 'round9':
         round9()
     elif mode == 'round8':
