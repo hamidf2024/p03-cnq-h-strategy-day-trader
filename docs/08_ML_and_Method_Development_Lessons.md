@@ -308,3 +308,69 @@ return per day, currently 10-22x out of reach across all validated methods):
    (the 1%/day target) are higher than before -- if anything, the larger the
    target, the larger the temptation to curve-fit toward it, and the more
    this discipline matters.
+
+## 8. Stage 11 additions (per-trade target research, 2026-11-23)
+
+*The owner sharpened Target 1 to >1% gross **per trade** (see
+`07_Goals_and_Targets.md`'s 2026-11-23 update) -- a materially harder bar
+than per-day. Stage 11 (`09_Stage11_Per_Trade_Target_Research.md`) is the
+research cycle run against it. These lessons generalize beyond that
+specific target.*
+
+- **Check the instrument's own volatility against the target BEFORE
+  building anything, not after.** Stage 11 computed CNQ's actual daily
+  high-low range (2024-2026: ~2.0-2.4% of open, on average) before writing
+  a single line of model code, and that one number by itself ruled out
+  every same-day trade structure for a >1%-net-of-losers-per-trade target
+  -- a same-day trade cannot average more than roughly half the day's own
+  total range, even with perfect entries. **Lesson: for any numeric
+  per-trade or per-period target, compute the instrument's own realized
+  range at the intended holding period FIRST** -- it tells you immediately
+  whether the target is a modeling problem (find a better rule within a
+  feasible structure) or a structural one (the holding period itself must
+  change), and saves real effort that would otherwise go into tuning a
+  structure that cannot reach the number by construction.
+- **A multi-day/swing structure opens up per-trade magnitudes a same-day
+  structure cannot reach, but trades far too infrequently to validate
+  reliably on one symbol.** Stage 11's Donchian-channel breakout swing
+  system produced individual blind-test trades of +7.55% and +19.43% --
+  both impossible for any EOD-flattened method -- but only 9-17 total
+  blind trades across 3 full years, net to a roughly breakeven-to-negative
+  average. **Lesson: when a new method's edge shows up only in rare, large
+  trades (a trend-following profile, not a high-frequency one), a 2-3 year
+  single-symbol blind test is very likely too small a sample to tell
+  "doesn't work" apart from "hasn't had enough chances yet" -- treat this
+  pattern as a signal to scale sample size (multi-symbol/basket) before
+  concluding the mechanism itself failed, not as a disproof on its own.**
+- **"Let winners run" being rejected 4 times for the existing mean-reversion
+  setup (Section 5 above) did not transfer to a genuinely different holding
+  structure, exactly as flagged it might not.** Stage 11's swing system IS
+  a "let winners run" design in spirit (a trailing channel exit, no fixed
+  target) and, unlike the 4 earlier same-day variants, it did produce real
+  outsized winners in blind testing. It still didn't net positive overall
+  in this particular 3-year window -- but for a different reason (sample
+  size, per the point above), not the same reason the 4 same-day variants
+  failed. **Lesson: when a prior negative finding is retested on a
+  structurally different method, as this project's own lessons explicitly
+  recommend, a different outcome for a different reason is a useful,
+  distinct result -- don't collapse it into "still doesn't work" without
+  checking WHY it didn't work this time.**
+- **Percent-of-price scaling a fixed-dollar rule is worth checking
+  explicitly when the price level has moved a lot, but check it before
+  assuming it explains a gap.** CNQ's average price rose 4.6x (2020 to
+  2026) across this project's data while V7/V7.1's stop/target stayed
+  fixed in cents -- a plausible, concrete reason "Avg gross %/trade" could
+  be smaller than the strategy's designed edge in later years. Stage 11
+  tested this directly and found an **essentially null result** (0.0205%
+  vs. the original 0.0204%/trade) -- the walk-forward grid search picked
+  the narrowest offset on every fold, meaning this specific mechanism
+  (band/zone-touch tolerance staying fixed-dollar, and the weak-candle
+  early-exit rule dominating actual captured win/loss size over the
+  nominal stop/target distance) already tracks price level well enough
+  through other paths. **Lesson: a plausible mechanical hypothesis for why
+  a number looks small is still worth testing on its own, even when (maybe
+  especially when) it later turns out not to be the explanation -- a
+  quick, narrowly-scoped null result is cheap and closes off a specific,
+  recurring question (reviewers/the owner will keep asking "did you
+  account for the price change?" otherwise) rather than being wasted
+  effort.**
