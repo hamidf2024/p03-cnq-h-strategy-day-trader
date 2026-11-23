@@ -162,15 +162,15 @@ class Path:
         return d, float(self.close[d]), 'time'
 
 
-def run_trades(path, signal, H, target=None, stop=None, start=None, end=None):
-    """signal: Series date -> +1 / -1 / 0. One position at a time."""
+def run_trades(path, signal, H, target=None, stop=None, start=None, end=None, overlap=False):
+    """signal: Series date -> +1 / -1 / 0. One position at a time unless overlap=True."""
     out = []; busy_until = None
     for day, side in signal.items():
         if side == 0 or np.isnan(side) or day not in path.pos:
             continue
         if (start is not None and day < pd.Timestamp(start)) or (end is not None and day > pd.Timestamp(end)):
             continue
-        if busy_until is not None and day <= busy_until:
+        if not overlap and busy_until is not None and day <= busy_until:
             continue
         if path.pos[day] >= len(path.days) - 1:
             continue

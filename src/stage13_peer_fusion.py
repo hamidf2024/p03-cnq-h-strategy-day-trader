@@ -234,8 +234,8 @@ class Bench:
         return self.cache[key]
 
 
-def evaluate(path, bench, sig, H, target, stop, years, start=None, end=None):
-    t = L.run_trades(path, sig, H, target, stop, start=start or f'{years[0]}-01-01', end=end or f'{years[-1]}-12-31')
+def evaluate(path, bench, sig, H, target, stop, years, start=None, end=None, overlap=False):
+    t = L.run_trades(path, sig, H, target, stop, start=start or f'{years[0]}-01-01', end=end or f'{years[-1]}-12-31', overlap=overlap)
     per_year = {}
     for y in years:
         ty = t[t.entry_date.dt.year == y] if len(t) else t
@@ -363,6 +363,13 @@ def signal_from_cfg(cfg, cnq, preds):
         return spring_signal(cnq, cfg['k'], cfg['side'])
     if cfg['src'] == 'always':
         return cnq.valid.astype(float)
+    if cfg.get('monthly'):                       # one trade a month: the first day whose score clears the bar
+        sc = score_series(preds[cfg['H']], cfg['src']); out = pd.Series(0.0, index=sc.index); done = set()
+        for d, v in sc.items():
+            m = (d.year, d.month)
+            if m not in done and not np.isnan(v) and v >= cfg['q']:
+                out[d] = 1; done.add(m)
+        return out
     return sig_from_score(score_series(preds[cfg['H']], cfg['src']), cfg['side'], cfg.get('q', 0.85))
 
 
@@ -385,7 +392,8 @@ def blind(artefact, verify=False):
     for name in todo:
         cfg = frozen['chosen'][name]
         sig = signal_from_cfg(cfg, cnq, preds).reindex(cal).fillna(0)
-        t, st = evaluate(path, bench, sig, cfg.get('hold', cfg['H']), cfg['target'], cfg['stop'], BLIND_YEARS, start=L.BLIND_START, end=L.BLIND_END)
+        t, st = evaluate(path, bench, sig, cfg.get('hold', cfg['H']), cfg['target'], cfg['stop'], BLIND_YEARS, start=L.BLIND_START, end=L.BLIND_END,
+                         overlap=cfg.get('overlap', False))
         st['setting'] = cfg
         if len(t):
             rng = np.random.default_rng(0); r = t.ret.values
@@ -414,11 +422,89 @@ def blind(artefact, verify=False):
     a.to_csv(pub, mode='a', header=not os.path.exists(pub), index=False); b.to_csv(loc, mode='a', header=not os.path.exists(loc), index=False)
 
 
+def round5():
+    """R5, first-passage campaign (designed after R1-R4 were validated, selected on 2021-2023 only).
+    Idea from first-passage-time theory: a profit target that is small next to the stock's monthly swing is
+    reached in most trades, so most months end with every trade a winner; what is given up is that the trades
+    which miss the target lose more. Entries come from the R1 model, with a lower bar so that there is a trade
+    in most months."""
+    frozen = pickle.load(open(f'{RES}/stage13_frozen.pkl', 'rb'))
+    panel, D, cal, feats, cnq, path, bench, T = setup()
+    train_days = cal[cal <= L.TRAIN_END]; VAL_END = str(train_days[-21].date())
+    grid = [dict(src=src, H=5, side='long', q=q, hold=hold, target=t, stop=st)
+            for src, q in (('always', None), ('gbm', 0.5), ('gbm', 0.7)) for t in (2.0, 3.0, 4.0) for hold in (10, 20) for st in (None, 10.0)]
+    res = {}
+    for cfg in grid:
+        sig = signal_from_cfg(cfg, cnq, frozen['oof']).reindex(train_days).fillna(0)
+        _, st = evaluate(path, bench, sig, cfg['hold'], cfg['target'], cfg['stop'], VAL_YEARS, end=VAL_END)
+        res[json.dumps(cfg, sort_keys=True)] = st
+    def level1(v):
+        return all(p['n'] and p['G'] >= 1 and p['WR'] >= 50 and p['S'] >= 8 for p in v['per_year'].values())
+    passers = {k: v for k, v in res.items() if level1(v)}
+    if passers:
+        best = max(passers, key=lambda k: passers[k]['worst_year_excess'])
+    else:
+        best = max(res, key=lambda k: (min(res[k]['S']), res[k]['G']))
+    wf = json.load(open(f'{RES}/stage13_walkforward_results.json'))
+    wf['rounds']['R5_first_passage'] = dict(settings=res, chosen=json.loads(best), level1_in_every_validation_year=sorted(passers),
+                                            chosen_stats=res[best], strict_view=strict_view(res, VAL_YEARS),
+                                            rule='settings that reach G1, WR1 and S1 in each of 2021, 2022, 2023; among them the best worst-year '
+                                                 'excess over entering every day with the same exit; if none, the highest worst-year S, then G')
+    json.dump(wf, open(f'{RES}/stage13_walkforward_results.json', 'w'), indent=1, default=str)
+    fz = dict(chosen={'R5_first_passage': json.loads(best)}, finals=frozen['finals'], oof=frozen['oof'], feats=frozen['feats'], gbm_params=GBM)
+    pickle.dump(fz, open(f'{RES}/stage13_frozen_R5.pkl', 'wb'))
+    rows = sorted(res.items(), key=lambda kv: -(min(kv[1]['S']) * 100 + (kv[1]['worst_year_excess'] or -9)))
+    for k, v in rows[:12]:
+        c = json.loads(k)
+        print(c['src'], c['q'], 'T', c['target'], 'hold', c['hold'], 'stop', c['stop'], '| n', v['n'], 'G', v['G'], 'WR', v['WR'], 'S', v['S'],
+              'ex', v['excess'], 'worst-yr ex', v['worst_year_excess'], 'L1' if level1(v) else '')
+    print('passers', len(passers), 'chosen', best, flush=True)
+
+
+def round6():
+    """R6, one-a-month campaign (designed after R5's blind result; selected on 2021-2023 only).
+    One trade per calendar month, on the first day the R1 model's score clears a bar; exit at a profit target
+    or after a long time limit; trades may overlap. With one trade a month, a month counts toward S when that
+    trade makes more than 1%, so the target is set above 1% and the time limit is long."""
+    frozen = pickle.load(open(f'{RES}/stage13_frozen.pkl', 'rb'))
+    panel, D, cal, feats, cnq, path, bench, T = setup()
+    train_days = cal[cal <= L.TRAIN_END]
+    grid = [dict(src='gbm', H=5, side='long', q=q, monthly=True, overlap=True, hold=hold, target=t, stop=None)
+            for q in (0.5, 0.7) for t in (3.0, 4.0, 5.0) for hold in (20, 40, 60)]
+    res = {}
+    for cfg in grid:
+        end = train_days[-cfg['hold'] - 1]                                  # every exit falls inside 2023
+        sig = signal_from_cfg(cfg, cnq, frozen['oof']).reindex(train_days).fillna(0)
+        _, st = evaluate(path, bench, sig, cfg['hold'], cfg['target'], cfg['stop'], VAL_YEARS, end=str(end.date()), overlap=True)
+        st['months_available'] = {y: (12 if y < 2023 else int(end.month)) for y in VAL_YEARS}
+        res[json.dumps(cfg, sort_keys=True)] = st
+    def level1(v):
+        return all(p['n'] and p['G'] >= 1 and p['WR'] >= 50 and p['S'] >= int(np.ceil(8 / 12 * v['months_available'][int(y)]))
+                   for y, p in v['per_year'].items())
+    passers = {k: v for k, v in res.items() if level1(v)}
+    best = max(passers, key=lambda k: passers[k]['worst_year_excess']) if passers else max(res, key=lambda k: (min(res[k]['S']), res[k]['G']))
+    wf = json.load(open(f'{RES}/stage13_walkforward_results.json'))
+    wf['rounds']['R6_one_a_month'] = dict(settings=res, chosen=json.loads(best), level1_in_every_validation_year=sorted(passers), chosen_stats=res[best],
+                                          rule='as R5; S judged on 8/12 of the months available in each validation year')
+    json.dump(wf, open(f'{RES}/stage13_walkforward_results.json', 'w'), indent=1, default=str)
+    pickle.dump(dict(chosen={'R6_one_a_month': json.loads(best)}, finals=frozen['finals'], oof=frozen['oof'], feats=frozen['feats'], gbm_params=GBM),
+                open(f'{RES}/stage13_frozen_R6.pkl', 'wb'))
+    for k, v in sorted(res.items(), key=lambda kv: -(kv[1]['worst_year_excess'] or -9)):
+        c = json.loads(k)
+        print('q', c['q'], 'T', c['target'], 'hold', c['hold'], '| n', v['n'], 'G', v['G'], 'WR', v['WR'], 'S', v['S'], 'ex', v['excess'],
+              'worst-yr ex', v['worst_year_excess'], [(p['G']) for p in v['per_year'].values()], 'L1' if level1(v) else '')
+    print('passers', len(passers), 'chosen', best, flush=True)
+
+
 if __name__ == '__main__':
     os.makedirs(RES, exist_ok=True)
     mode = sys.argv[1] if len(sys.argv) > 1 else ''
     if mode == 'walkforward':
         walkforward()
+    elif mode == 'round6':
+        round6()
+    elif mode == 'round5':
+        round5()
     elif mode == 'blind':
         blind(sys.argv[2] if len(sys.argv) > 2 else 'stage13_frozen.pkl')
     elif mode == 'verify':

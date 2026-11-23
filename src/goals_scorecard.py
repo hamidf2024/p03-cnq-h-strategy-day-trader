@@ -93,8 +93,7 @@ META = {   # id: (display name, family, holding, stage, how the settings were ch
     'R3_fusion_ensemble': ('G. Fusion ensemble', 'Swing ML model', '5 days', 13, 'walk-forward on 2020-2023'),
     'R4_goal_shaped_exits': ('H. Peer-Fusion, target and stop', 'Swing ML model', 'up to 10 days', 13, 'walk-forward on 2020-2023'),
     'R5_first_passage': ('I. First-passage campaign', 'Swing ML model', 'up to 20 days', 13, 'walk-forward on 2020-2023'),
-    'R6': ('J.', 'Swing ML model', 'days', 13, 'walk-forward on 2020-2023'),
-    'R7': ('K.', 'Swing ML model', 'days', 13, 'walk-forward on 2020-2023'),
+    'R6_one_a_month': ('J. One-a-month campaign', 'Swing ML model', 'up to 60 days', 13, 'walk-forward on 2020-2023'),
 }
 
 
