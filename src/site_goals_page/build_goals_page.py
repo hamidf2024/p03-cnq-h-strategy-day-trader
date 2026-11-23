@@ -47,6 +47,7 @@ DESC = {
  'R5_first_passage': 'Peer-Fusion entries with a lower bar and a 2% profit target, for up to 20 days. Built to trade in most months.',
  'R7_one_a_month_stop5': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +2%, at a 5% stop, or after 20 trading days.',
  'R8_peer_fusion_stop5': 'Model E with a 5% stop added: buys CNQ on the Peer-Fusion model\u2019s strongest forecasts and holds 5 days.',
+ 'R9_one_a_month_stop15': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +4%, at a 15% stop, or after 60 trading days.',
  'R6_one_a_month': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +4%, or after 60 trading days if the target is not reached. No stop.',
 }
 NEW_STAGE = 13
@@ -175,7 +176,7 @@ def table_row(c):
       <td class="mc"><div class="mv">{wr:.1f}%<small>{c['wins_share_of_all_trades']:.0f}% of all trades</small></div>{meter('WR', wr, c['WR_level'], True)}</td>
       <td class="mc"><div class="mv">{sfmt(s_worst(c))} of 12</div>{meter('S', s_worst(c), c['S_level'], True)}</td>
       <td class="lvs">{lv}</td>
-      <td class="num">{pct(c['worst_trade_pct'], 1)}<br><span class="lv {'on' if c['keeps_loss_limit'] else 'over'}">{'within 5%' if c['keeps_loss_limit'] else 'over 5%'}</span></td>
+      <td class="num">{pct(c['worst_trade_pct'], 1)}<br><span class="lv {'on' if c['keeps_strict_loss_limit'] else ('mid' if c['keeps_loss_limit'] else 'over')}">{'within 5%' if c['keeps_strict_loss_limit'] else ('within 15%' if c['keeps_loss_limit'] else 'over 15%')}</span></td>
       <td class="num {"pos" if net > 0 else "neg"}">{usd(net, 2)}</td>
     </tr>'''
 
@@ -247,6 +248,14 @@ gbest = max(d['methods'], key=lambda c: c['gross_pct_per_trade'])
 LOOKS = int(sys.argv[4]) if len(sys.argv) > 4 else 8
 all3 = [M[i] for i in d.get('level1_on_all_three', [])]
 ALL3_NOTES = {
+ 'R9_one_a_month_stop15': [
+  'What it is. Model J with a 15% stop added: one trade a month, sold at +4%, at the stop, or after 60 trading days.',
+  'How it gets there. 31 of its 35 trades reached +4%. A month with one +4% trade counts toward S, wins toward WR, and lifts the average toward G.',
+  'What it gives up. The 4 trades that missed were stopped at about 15% each (the worst, 15.7%, gapped through the stop). Four such losses cancel about fifteen winners.',
+  'It does not keep the 5% limit. With a 5% stop the same idea (model K) averaged +0.02% per trade.',
+  'More than $1,000 can be at work: a new trade opens each month while old ones may still be open, up to three at once.',
+  'The average is not yet proven. Its likely range runs from about \u22120.4% to +3.5% per trade, and on the 2021\u20132023 training years it lost money in one year of three (2022). It was the ninth new model run on 2024\u20132026 in this stage, so it needs confirming on trades after November 2026.',
+ ],
  'R6_one_a_month': [
   'How it gets there. It sells every trade at +4%, and 31 of its 35 trades reached that. A month with one +4% trade counts toward S, wins toward WR, and lifts the average toward G.',
   'What it gives up. The 4 trades that missed the target were held with no stop and lost 12%, 17%, 0.4% and 17%. One of them was still open, 17% down, when the data ended on November 20, 2026.',
@@ -254,17 +263,19 @@ ALL3_NOTES = {
   'How much is the model and how much is the exit rule. Entering on any day with the same exit rule made about +1.0% per trade over these years. The model\u2019s choice of day added about +1.2%. On the 2021\u20132023 training years its choice of day added nothing, so that part is not yet proven.',
   'It was the sixth new model run on 2024\u20132026 in this round, and it was designed after seeing the fifth. The result needs confirming on trades after November 2026 before it is relied on.',
  ]}
-n_keep = sum(c['keeps_loss_limit'] for c in d['methods'])
+n_keep = sum(c['keeps_loss_limit'] for c in d['methods']); n_keep5 = sum(c['keeps_strict_loss_limit'] for c in d['methods'])
+all3_5 = d.get('level1_on_all_three_within_5pct', [])
 broke = [M[i] for i in d.get('level1_but_breaks_loss_limit', [])]
 ALL3_CARD = ''
 if broke and not all3:
-    blocks = ''.join(f'<h3>{E(c["name"])} reaches G{c["G_level"]}, WR{c["WR_level"]}, S{c["S_level"]} but breaks the 5% rule</h3><ul>' + ''.join(f'<li>{t}</li>' for t in ALL3_NOTES.get(c['id'], [])) + '</ul>' for c in broke)
+    blocks = ''.join(f'<h3>{E(c["name"])} reaches G{c["G_level"]}, WR{c["WR_level"]}, S{c["S_level"]} but breaks the risk rule</h3><ul>' + ''.join(f'<li>{t}</li>' for t in ALL3_NOTES.get(c['id'], [])) + '</ul>' for c in broke)
     ALL3_CARD = f'<div class="note2"><div class="eyebrow">Reached the three levels, outside the risk rule</div>{blocks}</div>'
 if all3:
     blocks = ''.join(f'<h3>{E(c["name"])}: G{c["G_level"]}, WR{c["WR_level"]}, S{c["S_level"]}</h3><ul>' + ''.join(f'<li>{t}</li>' for t in ALL3_NOTES.get(c['id'], [])) + '</ul>' for c in all3)
-    ALL3_CARD = f'<div class="note2 reached"><div class="eyebrow">Level 1 reached on all three goals</div>{blocks}</div>'
-HERO_TAG = (f'<span class="tag good">Level 1 reached on all three goals: {", ".join(E(c["name"]) for c in all3)}</span>' if all3
-            else '<span class="tag warn">No model reaches level 1 on all three goals within the 5% loss limit yet</span>')
+    ALL3_CARD = f'<div class="note2 reached"><div class="eyebrow">Level 1 reached on all three goals, inside the 15% loss limit</div>{blocks}</div>'
+HERO_TAG = (f'<span class="tag good">Level 1 reached on all three goals within the 15% loss limit: {", ".join(E(c["name"]) for c in all3)}</span> '
+            + ('' if d.get('level1_on_all_three_within_5pct') else '<span class="tag warn">Not yet within the 5% limit</span>') if all3
+            else '<span class="tag warn">No model reaches level 1 on all three goals within the loss limits yet</span>')
 sbest = max(d['methods'], key=lambda c: (s_worst(c), c['progress']['S']))
 same_best = max((c['best_month_avg_pct_per_trade'] for c in d['methods'] if KIND[c['id']] == 'Same-day'))
 any_s = [c for c in d['methods'] if c['S_level'] > 0]
@@ -315,9 +326,9 @@ html = f'''<!doctype html>
 
   <section id="goals">
     <h2>The goals</h2>
-    <p class="sub">Three goals, each with three levels. A filled step means at least one model has reached that level while keeping the 5% loss rule.</p>
+    <p class="sub">Three goals, each with three levels. A filled step means at least one model has reached that level inside the 15% loss limit.</p>
     <div class="goals">{goals_html}</div>
-    <div class="note2 rule"><h3>Risk rule: no trade may lose more than 5%</h3><p>Added by the owner on November 23, 2026. Every model must carry a stop no further than 5% from its entry, which is $50 on a $1,000 trade. A model's levels count, and it is ranked, only if it keeps this rule. {n_keep} of {n_models} models keep it. A price gap through the stop can still make one loss a little larger; the worst trade is shown for every model.</p></div>
+    <div class="note2 rule"><h3>Risk rule: two limits on the worst trade, 5% and 15%</h3><p>Set by the owner on November 23, 2026. A model must carry a stop, and the scoreboard shows which limit it keeps: 5% ($50 on a $1,000 trade) or 15% ($150). A model's levels count, and it is ranked, only inside the 15% limit. {n_keep5} of {n_models} models keep the 5% limit and {n_keep} keep the 15% limit. A price gap through the stop can still make one loss a little larger; the worst trade is shown for every model.</p></div>
     {ALL3_CARD}
     <div class="statstrip" style="margin-top:16px">
       <div class="primary"><div class="k">Models scored</div><div class="v">{n_models}</div><div class="s">{sum(KIND[c['id']] == 'Same-day' for c in d['methods'])} same-day, {sum(KIND[c['id']] == 'Multi-day' for c in d['methods'])} multi-day</div></div>
@@ -329,7 +340,7 @@ html = f'''<!doctype html>
 
   <section id="top5">
     <h2>Top 5 models</h2>
-    <p class="sub">Ranked by overall progress: how far a model is toward the top level of each goal (3% per trade, 75% win rate, 12 of 12 months), averaged over the three. Only models that keep the 5% loss rule are ranked. The marks on each bar are levels 1, 2 and 3.</p>
+    <p class="sub">Ranked by overall progress: how far a model is toward the top level of each goal (3% per trade, 75% win rate, 12 of 12 months), averaged over the three. Only models inside the 15% loss limit are ranked; the table shows which also keep 5%. The marks on each bar are levels 1, 2 and 3.</p>
     <ol class="top5">{top_html}</ol>
     <div class="note2">
       <h3>Three things to know before relying on this ranking</h3>
@@ -351,7 +362,7 @@ html = f'''<!doctype html>
         <tbody>{table_html}</tbody>
       </table></div>
     </div>
-    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. The steady-months figure is the worst of the three years, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 5% loss rule, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
+    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. The steady-months figure is the worst of the three years, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
   </section>
 
   <section id="months">
