@@ -221,9 +221,53 @@ GM.** Doubling the trades per month doubled the stops in falling stretches
 of its two trades is stopped. A passing margin of zero on the training years
 was not a margin.
 
+## 12. Addendum: a stricter gate after N, and a search that spent no test run
+
+After N the training gate was tightened and written into the code before
+anything was computed (`src/s13_ladder_gate_search.py`, run with the test
+years removed from the data):
+
+- **A.** On CNQ, in each of 2021, 2022 and 2023, S and GM must each beat the
+  level-1 count by at least one month; over the three years G at least 1.25%
+  and win rate at least 55%.
+- **B.** The same exit and second-entry rule, with a plain first-day-of-month
+  entry, must reach S1 and GM1 in at least 14 of the 18 stock-years of the
+  six stocks (CNQ, SU, CVE, IMO, XOM, CVX), with at least 1.0% per trade
+  across all six.
+- **C.** A second trade must be a separate decision on a later day.
+
+Family searched: a monthly campaign whose second entry is none, five or ten
+sessions later, on a dip of 2% or 3%, or on a rise of 1% or 2%; targets 2.6,
+3, 4 and 5.5%; stops 10 and 15%; time limits 40 and 60 sessions. 112 eligible
+settings.
+
+**Result: none of the 112 clears the gate. No model was frozen and no run on
+2024-2026 was made; the count of looks stays at twenty.** No eligible setting
+cleared part A at all (best worst-year margin: zero months); two cleared part
+B. The closest were a second entry on a dip of 2% or 3% with a +5.5% target
+(training G +2.8%, S 8 / 9 / 10, GM 8 / 9 / 9, margin zero in 2021).
+
+One ineligible setting clears both parts: **two $1,000 trades opened on the
+same day** with model M's exit (+4% target, 15% stop, 60 sessions). That is
+model M with twice the money on each entry, not a new model: G, WR and S are
+M's, and GM passes only because the month's total is a sum over trades, so
+two trades of +4% add up to 8%. Read off M's already-published 2024-2026
+months, it would score GM 10 / 12 / 9 of 11. That is arithmetic on a known
+result and adds no evidence. Whether trades opened together should count
+separately towards GM is a question about the goal, put to the owner; it is
+not counted here.
+
+What this says: on these data, exits and entry spacing cannot lift the month
+goals above the level-1 line with room to spare, even in three rising years.
+Reaching level 1 on all four goals with a margin needs a better forecast of
+the month ahead, which means new information (Section 8), not another
+arrangement of the same trades.
+
 ## Code and results
 
-`src/s13_lib.py`, `src/s13_feasibility.py`, `src/stage13_peer_fusion.py`
+`src/s13_lib.py`, `src/s13_feasibility.py`, `src/s13_ladder_gate_search.py`
+(the stricter gate and the 112-setting search, results in
+`results/experiments/stage13_round11_gate_search.json`), `src/stage13_peer_fusion.py`
 (modes `walkforward`, `round5`, `round6`, `round7` to `round10`, `blind`, `verify`);
 `results/experiments/stage13_feasibility.json`,
 `stage13_walkforward_results.json`, `stage13_frozen.pkl`,

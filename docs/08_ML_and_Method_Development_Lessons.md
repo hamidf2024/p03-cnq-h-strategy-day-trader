@@ -295,6 +295,18 @@ per-stage section at the end.)*
   8 and 5 on the test years. **Lesson:** require a margin on any counted
   goal (for example one month to spare in every year) before spending a test
   run, and treat a setting that passes with none as a fail.
+- **(Stage 13) Write the gate before the search, and let "nothing passed" be
+  a result.** After N the gate was tightened in code first (one month of
+  margin on each month goal in every training year, and the same rule on the
+  five peer stocks), then 112 settings were run with the test years removed.
+  None passed, so no run on 2024-2026 was made. A search that ends without a
+  test run is the gate working, not a wasted stage.
+- **(Stage 13) Check whether a goal can be met by counting instead of by
+  trading.** GM adds up the percentages of a month's trades, so opening two
+  $1,000 trades on the same day doubles the month's total without changing
+  the bet. When a goal can be reached by splitting or repeating a position,
+  say so and ask the owner how the goal should count before reporting it as
+  reached.
 
 ## 4. Evaluation and metrics lessons
 
@@ -698,3 +710,6 @@ of test runs. Lessons are filed above, each marked "(Stage 13)":*
 - Section 5 (strategy): first-passage exits shape results and carry a tail;
   relative value is a feature, not a rule.
 - Section 6 (process): publish and report each model as it lands.
+- Section 3 (overfitting), added after model N: a pass at the threshold is
+  not a pass; write the gate before the search and accept an empty result;
+  check whether a goal can be met by counting trades rather than by trading.

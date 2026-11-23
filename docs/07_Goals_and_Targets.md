@@ -98,6 +98,17 @@ S 6 / 8 / 5, GM 6 / 8 / 5**; 12 trades stopped at 15%; year totals +14.9%,
 on all four goals is not reached. This was the twentieth walk-forward model
 run on 2024-2026.
 
+**Stricter gate and a search with no test run (2026-11-23).** After N, a new
+model must pass its training-years gate with a margin of at least one month
+on S and GM in every year, and the same rule must hold on the five peer
+stocks. 112 settings of a monthly campaign with a second, later entry were
+tested on 2021-2023 with the test years removed: none passed, so nothing was
+run on 2024-2026 (still twenty looks). The one arrangement that passes is two
+$1,000 trades opened on the same day with model M's exit, which is model M
+with double the money rather than a new model; it would lift GM only because
+GM adds up trades. Whether that should count is an open question for the
+owner (`docs/12`, Section 12).
+
 **The fourth goal, GM.** No model reaches GM1. The closest inside the loss
 limits is E. Peer-Fusion GBM with 3 / 2 / 2 months of 5% or more.
 Model M is far from it by design: one trade a month sold at +4% makes a
