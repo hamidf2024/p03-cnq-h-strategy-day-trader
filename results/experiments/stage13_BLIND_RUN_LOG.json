@@ -108,5 +108,16 @@
   ],
   "blind_look_number": 10,
   "result_sha256": "e82a6541b0bef978c638d0bc8f05a0e84525173767bf3fac16e07f2e207ce413"
+ },
+ "R14_dip_campaign": {
+  "frozen_artefact": "stage13_frozen_R14.pkl",
+  "frozen_sha256": "e942072bb4c00c7b92df9f929f24d236cf90a2e99de32ea4ad2e33eaa1903495",
+  "ran_on": "2026-11-23 22:05:31.530177",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 11,
+  "result_sha256": "34f029454e91f446dad4cdbe9b3035f0108d1e8e56c2dc940c6f47c56b37cf2d"
  }
 }

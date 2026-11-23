@@ -325,6 +325,25 @@ per-stage section at the end.)*
   trades, so the owner was asked whether trades opened together count
   separately. The answer (same time: one trade; different times: separate)
   went into the charter and the scoring code before any model used it.
+- **(Stage 13) A gate built from one market regime cannot test for another.**
+  Model P passed four checks: a spare-month margin, the five peer stocks,
+  late 2020, and its neighbouring settings. All four drew on the same rising
+  years, and 561 of 1,008 settings reached level 1 there. On 2024-2026 its
+  win rate fell from 96% to 80% and it lost money. Checks across stocks and
+  settings show a result is not one setting's luck; they do not show the
+  regime will last. When more than half of a search passes, the search is
+  measuring the period, not the rule.
+- **(Stage 13) Work out the break-even win rate before trusting a high one.**
+  A +3% target with a 15% stop needs 83% winners to break even. A training
+  win rate of 96% looks like a wide margin and is only 13 points of room;
+  one slide (ten stops from six signals) used all of it. State the
+  break-even rate beside any win rate, and prefer exits whose break-even is
+  far below the rate expected in a bad year.
+- **(Stage 13) Compare with the no-skill line on the training years, not only
+  after the test.** On the test years P's timing added nothing over buying
+  every day with the same exit. That comparison was available on the
+  training years before the run and should be part of the gate: a timing
+  rule must beat "any day, same exit" in every training year.
 
 ## 4. Evaluation and metrics lessons
 
@@ -731,3 +750,6 @@ of test runs. Lessons are filed above, each marked "(Stage 13)":*
 - Section 3 (overfitting), added after model N: a pass at the threshold is
   not a pass; write the gate before the search and accept an empty result;
   check whether a goal can be met by counting trades rather than by trading.
+- Section 3, added after model P: a gate built from one regime cannot test
+  for another; work out the break-even win rate; compare with the no-skill
+  line on the training years before the test run.

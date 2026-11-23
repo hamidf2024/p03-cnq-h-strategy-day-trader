@@ -48,6 +48,7 @@ DESC = {
  'R7_one_a_month_stop5': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +2%, at a 5% stop, or after 20 trading days.',
  'R8_peer_fusion_stop5': 'Model E with a 5% stop added: buys CNQ on the Peer-Fusion model\u2019s strongest forecasts and holds 5 days.',
  'R10_monthly_campaign_four_goals': 'Two trades a month, one in each half, on the first day the Peer-Fusion model is at least neutral. Sells at +6%, at a 15% stop, or after 60 trading days. Built for all four goals.',
+ 'R14_dip_campaign': 'Waits each month for CNQ to fall 5% below its 10-day high (or buys on the 15th trading day if it has not), then buys twice the next day, at 10:00 and 1:00 pm. Sells each at +3%, at a 15% stop, or after 60 trading days. No machine learning.',
  'R9_one_a_month_stop15': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +4%, at a 15% stop, or after 60 trading days.',
  'R6_one_a_month': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +4%, or after 60 trading days if the target is not reached. No stop.',
 }
@@ -347,6 +348,14 @@ if os.path.exists(_sf):
 """
 
 LOOKS = int(sys.argv[4]) if len(sys.argv) > 4 else 8
+# a model can lead the ranking and still lose money: say so when it happens
+_losers = [c for c in TOP5 if c['gross_pct_per_trade'] < 0]
+RANK_NOTE = ('<li><strong>Rank is not profit.</strong> ' + ' '.join(
+    f"{E(c['name'])} is ranked {TOP5.index(c) + 1} because of its win rate and its months on S and GM, but its average trade lost "
+    f"{abs(c['gross_pct_per_trade']):.2f}% and it lost {usd(abs(c['dollars_total']), 0, False)} in all at $1,000 a trade." for c in _losers)
+    + ' The ranking measures progress toward the four goals, not money made.</li>') if _losers else \
+    '<li><strong>Rank is not profit.</strong> The ranking measures progress toward the four goals, not money made; check the profit column as well.</li>'
+
 all3 = [M[i] for i in d.get('level1_on_all_three', [])]
 ALL3_NOTES = {
  'R9_one_a_month_stop15': [
@@ -449,8 +458,9 @@ html = f'''<!doctype html>
     <p class="sub">Ranked by overall progress: how far a model is toward the top level of each goal (3% per trade, 75% win rate, and 12 of 12 months on each of the two month goals), averaged over the four. Only models inside the 15% loss limit are ranked; the table shows which also keep 5%. The marks on each bar are levels 1, 2 and 3.</p>
     <ol class="top5">{top_html}</ol>
     <div class="note2">
-      <h3>Three things to know before relying on this ranking</h3>
+      <h3>Four things to know before relying on this ranking</h3>
       <ul>
+        {RANK_NOTE}
         <li><strong>Few trades.</strong> {FEW_NOTE}</li>
         <li><strong>Costs.</strong> The same-day models make about $0.20 per $1,000 trade. A cost of 1&cent; per share is about $0.28 per trade, so they lose money once it is charged. The models that keep a profit after costs are {', '.join(E(c['name']) for c in ORDER if c['profitable_after_1c'])}.</li>
         <li><strong>Break-even trades.</strong> The win rate leaves out trades that end within half a cent of the entry price. The same-day models have many of these: {E(pctm['name'])} wins {pctm['win_rate']:.0f}% of decided trades but {pctm['wins_share_of_all_trades']:.0f}% of all trades. If a break-even trade is not counted as a win, the top five becomes {', '.join(E(n) for n in STRICT5)}.</li>
@@ -529,6 +539,7 @@ html = f'''<!doctype html>
         <li>Higher levels. A search of 135 settings on the 2021 to 2023 training years, with the test years removed from the data, found none that reaches level 2 on all three goals in every year, and none that reaches level 3. No new model was run on the test years for those levels.</li>
         <li>Level 1 on all four goals. After model N a new model must pass its training-years test with a margin of one month on S and on GM, and the same rule must hold on the five peer stocks. 1,620 settings were tried on 2021 to 2023 with the test years removed, with stops from 1% to 15%. None passed, so nothing new was run on the test years.</li>
         <li>Trades opened at the same time. By the owner's rule, trades opened at exactly the same time count as one trade; trades opened at different times count separately, even on the same day. No score on this page changed when the rule was applied.</li>
+        <li>Model P, run once and not level 1. P passed a stricter training-years test by a wide margin (95.6% of its trades won there) and was then run once on the test years, the twenty-first such run. There 80% won, which is below the 83% it needs to break even with a +3% target and a 15% stop. Waiting for a dip added nothing on the test years.</li>
         <li>Model O, not run. Model M with two $1,000 buys at different times was tested on the training years. All six buy patterns reached level 1 on all four goals there, but with no spare month in 2021 (exactly 8 of 12), so by the rule set after model N it was not run on the test years. It would be the same bet as M with $2,000 at risk.</li>
         <li>2026 has 11 months of data. Its months are judged on the same fractions (8/12, 10/12, 12/12).</li>
       </ul>
