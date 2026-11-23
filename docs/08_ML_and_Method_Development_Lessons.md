@@ -70,6 +70,21 @@ per-stage section at the end.)*
   symbols the model has never seen for a clean test, and is the only
   practical way to reach a trade count that can confirm or reject an edge.
 
+- **(Stage 13 preparation) Read the feed and the licence before choosing a
+  data source, not after.** The data-source review
+  (`11_Peer_and_Oil_Data_Sources.md`) found three things that had been missed
+  when the CNQ history was first acquired: the vendor's free plan allows the
+  consolidated feed for historical requests (the CNQ file used the IEX feed,
+  about 2.5% of market volume, which is a likely contributor to the vendor-
+  sensitivity noted above); the vendor states its data may not be
+  redistributed, while this repository is public; and a widely used free
+  mirror of the official oil-price series forbids machine-learning use in
+  its terms, where the official source is public domain. **Lesson:** for
+  every new data source record, before the first download, which feed it
+  is, what share of the market it covers, and what its terms say about
+  model training and publication -- and prefer the primary publisher over a
+  mirror.
+
 ## 2. Labeling and feature engineering lessons (for ML specifically)
 
 - **Label candidates by simulating the existing rule engine's own management,
@@ -524,3 +539,7 @@ from zero. The lessons are filed in the topic sections above, each marked
 - Section 5 (strategy): pullback recovery time is regime-dependent.
 - Section 6 (process): enforce the single blind run in code; publish the
   superseded protocol and exploration scripts.
+
+*Added after Stage 12, in preparation for Stage 13: one data lesson in
+Section 1 on checking a source's feed and licence before first use
+(`11_Peer_and_Oil_Data_Sources.md`).*
