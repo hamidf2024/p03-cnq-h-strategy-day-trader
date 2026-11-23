@@ -80,7 +80,7 @@ def NEWTAG(c):
 
 def meter(kind, value, lv, compact=False):
     """One goal meter: fill to the value, three ticks at the three levels."""
-    mx, ticks = {'G': (G_MAX, (1, 2, 3)), 'WR': (WR_MAX, (50, 65, 75)), 'S': (S_MAX, (8, 10, 12))}[kind]
+    mx, ticks = {'G': (G_MAX, (1, 2, 3)), 'WR': (WR_MAX, (50, 65, 75)), 'S': (S_MAX, (8, 10, 12)), 'GM': (S_MAX, (8, 10, 12))}[kind]
     w = max(0.0, min(100.0, 100 * value / mx))
     t = ''.join(f'<b style="left:{100 * x / mx:.2f}%"></b>' for x in ticks)
     lab = '' if compact else '<div class="m-ticks">' + ''.join(
@@ -94,6 +94,10 @@ def chip(kind, lv):
 
 def sfmt(v):
     return f'{v:.0f}' if abs(v - round(v)) < 0.05 else f'{v:.1f}'
+
+
+def gm_worst(c):
+    return c['months_total_5pct_worst_year_per_12']
 
 
 def s_worst(c):
@@ -118,6 +122,8 @@ def best(kind):
         c = max(OKM, key=lambda c: c['gross_pct_per_trade']); return c, pct(c['gross_pct_per_trade']), c['G_level']
     if kind == 'WR':
         c = max([c for c in d['methods'] if c['enough_trades_to_rank']], key=lambda c: c['win_rate']); return c, f"{c['win_rate']:.1f}%", c['WR_level']
+    if kind == 'GM':
+        c = max(OKM, key=lambda c: (gm_worst(c), c['progress']['GM'])); return c, f"{sfmt(gm_worst(c))} of 12", c['GM_level']
     c = max(OKM, key=lambda c: s_worst(c)); return c, f"{sfmt(s_worst(c))} of 12", c['S_level']
 
 
@@ -144,7 +150,10 @@ goals_html = (
                 'Winning trades as a share of winning and losing trades. Break-even trades are left out.')
     + goal_card('S', 'Steady months', 'In how many months of the year does the average trade make more than 1%?',
                 [('8 of 12', 'months'), ('10 of 12', 'months'), ('12 of 12', 'every month')],
-                'Months in which the average gross profit per trade is above 1%. A month with no trades does not count. A level must hold in every year tested.'))
+                'Months in which the average gross profit per trade is above 1%. A month with no trades does not count. A level must hold in every year tested.')
+    + goal_card('GM', 'Monthly profit', 'In how many months of the year do the month\u2019s trades add up to 5% or more?',
+                [('8 of 12', 'months'), ('10 of 12', 'months'), ('12 of 12', 'every month')],
+                'Months whose trades together make 5% or more, which is $50 or more at $1,000 per trade. A level must hold in every year tested.'))
 
 # ------------------------------------------------------------------ top 5
 def top_row(c):
@@ -156,6 +165,7 @@ def top_row(c):
         <div class="m"><div class="m-top"><span class="m-name">Profit per trade</span><span class="m-val">{pct(g)}</span>{chip('G', c['G_level'])}</div>{meter('G', g, c['G_level'])}</div>
         <div class="m"><div class="m-top"><span class="m-name">Win rate</span><span class="m-val">{wr:.1f}%</span>{chip('WR', c['WR_level'])}</div>{meter('WR', wr, c['WR_level'])}</div>
         <div class="m"><div class="m-top"><span class="m-name">Steady months, worst year</span><span class="m-val">{sfmt(s_worst(c))} of 12</span>{chip('S', c['S_level'])}</div>{meter('S', s_worst(c), c['S_level'])}</div>
+        <div class="m"><div class="m-top"><span class="m-name">Months of 5% or more, worst year</span><span class="m-val">{sfmt(gm_worst(c))} of 12</span>{chip('GM', c['GM_level'])}</div>{meter('GM', gm_worst(c), c['GM_level'])}</div>
       </div>
       <div class="money"><span class="k">On $1,000 per trade</span><span class="v">{usd(c['dollars_per_trade'], 2)}</span><span class="s">per trade, before costs</span><span class="s after">{usd(c['dollars_per_trade_after_1c'], 2)} after costs</span>{cost_tag(c)}</div>
     </li>'''
@@ -167,7 +177,7 @@ top_html = ''.join(top_row(c) for c in TOP5)
 def table_row(c):
     g, wr = c['gross_pct_per_trade'], c['win_rate']
     rk = c.get('rank', '–')
-    lv = ''.join(f'<span class="lv {"on" if l else ""}">{k}{l}</span>' for k, l in (('G', c['G_level']), ('WR', c['WR_level']), ('S', c['S_level'])))
+    lv = ''.join(f'<span class="lv {"on" if l else ""}">{k}{l}</span>' for k, l in (('G', c['G_level']), ('WR', c['WR_level']), ('S', c['S_level']), ('GM', c['GM_level'])))
     net = c['dollars_per_trade_after_1c']
     return f'''<tr data-kind="{KIND[c['id']]}">
       <td class="num rk">{rk}</td>
@@ -175,6 +185,7 @@ def table_row(c):
       <td class="mc"><div class="mv">{pct(g)}</div>{meter('G', g, c['G_level'], True)}</td>
       <td class="mc"><div class="mv">{wr:.1f}%<small>{c['wins_share_of_all_trades']:.0f}% of all trades</small></div>{meter('WR', wr, c['WR_level'], True)}</td>
       <td class="mc"><div class="mv">{sfmt(s_worst(c))} of 12</div>{meter('S', s_worst(c), c['S_level'], True)}</td>
+      <td class="mc"><div class="mv">{sfmt(gm_worst(c))} of 12</div>{meter('GM', gm_worst(c), c['GM_level'], True)}</td>
       <td class="lvs">{lv}</td>
       <td class="num">{pct(c['worst_trade_pct'], 1)}<br><span class="lv {'on' if c['keeps_strict_loss_limit'] else ('mid' if c['keeps_loss_limit'] else 'over')}">{'within 5%' if c['keeps_strict_loss_limit'] else ('within 15%' if c['keeps_loss_limit'] else 'over 15%')}</span></td>
       <td class="num {"pos" if net > 0 else "neg"}">{usd(net, 2)}</td>
@@ -252,6 +263,7 @@ ALL3_NOTES = {
   'What it is. Model J with a 15% stop added: one trade a month, sold at +4%, at the stop, or after 60 trading days.',
   'How it gets there. 31 of its 35 trades reached +4%. A month with one +4% trade counts toward S, wins toward WR, and lifts the average toward G.',
   'What it gives up. The 4 trades that missed were stopped at about 15% each (the worst, 15.7%, gapped through the stop). Four such losses cancel about fifteen winners.',
+  'It does not reach the monthly-profit goal (GM). With one trade a month sold at +4%, a month\u2019s total reached 5% only once in 35 months.',
   'It does not keep the 5% limit. With a 5% stop the same idea (model K) averaged +0.02% per trade.',
   'More than $1,000 can be at work: a new trade opens each month while old ones may still be open, up to three at once.',
   'The average is not yet proven. Its likely range runs from about \u22120.4% to +3.5% per trade, and on the 2021\u20132023 training years it lost money in one year of three (2022). It was the ninth new model run on 2024\u20132026 in this stage, so it needs confirming on trades after November 2026.',
@@ -272,17 +284,21 @@ if broke and not all3:
     ALL3_CARD = f'<div class="note2"><div class="eyebrow">Reached the three levels, outside the risk rule</div>{blocks}</div>'
 if all3:
     blocks = ''.join(f'<h3>{E(c["name"])}: G{c["G_level"]}, WR{c["WR_level"]}, S{c["S_level"]}</h3><ul>' + ''.join(f'<li>{t}</li>' for t in ALL3_NOTES.get(c['id'], [])) + '</ul>' for c in all3)
-    ALL3_CARD = f'<div class="note2 reached"><div class="eyebrow">Level 1 reached on all three goals, inside the 15% loss limit</div>{blocks}</div>'
-HERO_TAG = (f'<span class="tag good">Level 1 reached on all three goals within the 15% loss limit: {", ".join(E(c["name"]) for c in all3)}</span> '
+    ALL3_CARD = f'<div class="note2 reached"><div class="eyebrow">Level 1 reached on G, WR and S, inside the 15% loss limit</div>{blocks}</div>'
+HERO_TAG = (f'<span class="tag good">Level 1 reached on G, WR and S within the 15% loss limit: {", ".join(E(c["name"]) for c in all3)}</span> ' + ('' if any(c['GM_level'] for c in OKM) else '<span class="tag warn">GM1 not reached yet</span> ')
             + ('' if d.get('level1_on_all_three_within_5pct') else '<span class="tag warn">Not yet within the 5% limit</span>') if all3
-            else '<span class="tag warn">No model reaches level 1 on all three goals within the loss limits yet</span>')
+            else '<span class="tag warn">No model reaches level 1 on all goals within the loss limits yet</span>')
 sbest = max(d['methods'], key=lambda c: (s_worst(c), c['progress']['S']))
+gbm_best = max(OKM, key=lambda c: (gm_worst(c), c['progress']['GM']))
 same_best = max((c['best_month_avg_pct_per_trade'] for c in d['methods'] if KIND[c['id']] == 'Same-day'))
 any_s = [c for c in d['methods'] if c['S_level'] > 0]
 S_NOTE = ((f"{E(any_s[0]['name'])} reaches level S{any_s[0]['S_level']}. " if any_s else "No model reaches level S1. ")
           + f"The closest is {E(sbest['name'])}, with {s_text(sbest)} months above 1% per trade. "
           + f"The same-day models never have such a month: their best month averages {same_best:.2f}% per trade. "
-          + "The multi-day models trade a few times a year, so many of their months are empty.")
+          + "The multi-day models trade a few times a year, so many of their months are empty. "
+          + f"The monthly-profit goal (GM) looks at each month\u2019s total instead: the closest is {E(gbm_best['name'])}, with "
+          + ' \u00b7 '.join(f"{y}: {v['months_total_5pct']} of {v['months']}" for y, v in gbm_best['by_year'].items()) + " months of 5% or more. No model reaches GM1.")
+
 multi_top = [c for c in TOP5 if KIND[c['id']] == 'Multi-day']
 FEW_NOTE = (f"{', '.join(E(c['name']) for c in multi_top)} made {', '.join(str(c['trades']) for c in multi_top)} trades in almost three years. "
             "With so few trades their averages can change a lot with a handful of results, and one or two large trades can make a month count."
@@ -300,7 +316,7 @@ html = f'''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CNQ 5-Minute Zone Day Trading — Hamid Faghidi</title>
-<meta name="description" content="Project 3: {n_models} models and methods for trading CNQ, scored against three goals (profit per trade, win rate, steady months) on 2024-2026, with $1,000 invested per trade.">
+<meta name="description" content="Project 3: {n_models} models and methods for trading CNQ, scored against four goals (profit per trade, win rate, steady months, monthly profit) on 2024-2026, with $1,000 invested per trade.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
@@ -318,15 +334,15 @@ html = f'''<!doctype html>
   <div class="crumbs" style="padding-top:20px"><a href="../">Home</a><span class="sep">/</span><a href="./">AI Trading</a><span class="sep">/</span><span>Project 3</span></div>
   <section class="hero" style="padding-top:28px">
     <div class="eyebrow">Project 3 &middot; CNQ 5-Minute Zone Day Trading</div>
-    <h1>{n_models} trading models, scored against three goals</h1>
-    <p class="lede">Every model and method built in this project for trading Canadian Natural Resources (CNQ) is scored here on the same three goals. Scores use January 2024 to November 2026, years the models were not trained on. Dollar figures assume $1,000 invested in each trade.</p>
+    <h1>{n_models} trading models, scored against four goals</h1>
+    <p class="lede">Every model and method built in this project for trading Canadian Natural Resources (CNQ) is scored here on the same four goals. Scores use January 2024 to November 2026, years the models were not trained on. Dollar figures assume $1,000 invested in each trade.</p>
     <p style="margin-top:14px">{HERO_TAG} <span class="tag muted">Research only, hypothetical backtests</span> <span class="tag muted">Updated Nov 23, 2026</span></p>
     <nav class="toc" aria-label="On this page"><a href="#goals">The goals</a><a href="#top5">Top 5</a><a href="#all">All {n_models} models</a><a href="#months">Month by month</a><a href="#money">$1,000 per trade</a><a href="#measure">How it is measured</a><a href="project-03-research.html">Research record</a></nav>
   </section>
 
   <section id="goals">
     <h2>The goals</h2>
-    <p class="sub">Three goals, each with three levels. A filled step means at least one model has reached that level inside the 15% loss limit.</p>
+    <p class="sub">Four goals, each with three levels. A filled step means at least one model has reached that level inside the 15% loss limit.</p>
     <div class="goals">{goals_html}</div>
     <div class="note2 rule"><h3>Risk rule: two limits on the worst trade, 5% and 15%</h3><p>Set by the owner on November 23, 2026. A model must carry a stop, and the scoreboard shows which limit it keeps: 5% ($50 on a $1,000 trade) or 15% ($150). A model's levels count, and it is ranked, only inside the 15% limit. {n_keep5} of {n_models} models keep the 5% limit and {n_keep} keep the 15% limit. A price gap through the stop can still make one loss a little larger; the worst trade is shown for every model.</p></div>
     {ALL3_CARD}
@@ -340,7 +356,7 @@ html = f'''<!doctype html>
 
   <section id="top5">
     <h2>Top 5 models</h2>
-    <p class="sub">Ranked by overall progress: how far a model is toward the top level of each goal (3% per trade, 75% win rate, 12 of 12 months), averaged over the three. Only models inside the 15% loss limit are ranked; the table shows which also keep 5%. The marks on each bar are levels 1, 2 and 3.</p>
+    <p class="sub">Ranked by overall progress: how far a model is toward the top level of each goal (3% per trade, 75% win rate, and 12 of 12 months on each of the two month goals), averaged over the four. Only models inside the 15% loss limit are ranked; the table shows which also keep 5%. The marks on each bar are levels 1, 2 and 3.</p>
     <ol class="top5">{top_html}</ol>
     <div class="note2">
       <h3>Three things to know before relying on this ranking</h3>
@@ -358,7 +374,7 @@ html = f'''<!doctype html>
     <div class="tabs" role="group" aria-label="Filter models"><button type="button" id="f-all" aria-pressed="true" data-f="">All</button><button type="button" id="f-same" aria-pressed="false" data-f="Same-day">Same-day</button><button type="button" id="f-multi" aria-pressed="false" data-f="Multi-day">Multi-day</button></div>
     <div class="card" style="padding:6px 0 0">
       <p class="swipe" style="padding:10px 16px 0">Swipe sideways to see every column.</p><div class="table-scroll"><table class="score" id="score">
-        <thead><tr><th class="num">Rank</th><th>Model</th><th>G &middot; profit per trade</th><th>WR &middot; win rate</th><th>S &middot; steady months</th><th>Levels</th><th class="num">Worst trade</th><th class="num">After costs, per $1,000 trade</th></tr></thead>
+        <thead><tr><th class="num">Rank</th><th>Model</th><th>G &middot; profit per trade</th><th>WR &middot; win rate</th><th>S &middot; steady months</th><th>GM &middot; months of 5% or more</th><th>Levels</th><th class="num">Worst trade</th><th class="num">After costs, per $1,000 trade</th></tr></thead>
         <tbody>{table_html}</tbody>
       </table></div>
     </div>
@@ -399,7 +415,7 @@ html = f'''<!doctype html>
     <div class="grid g3">
       <div class="card"><h3>Fair test</h3><p>Models were trained and tuned on 2020 to 2023, then frozen and run once on 2024 to 2026. No model was adjusted after its run. A check on November 23, 2026 rebuilt every model input with 2024 to 2026 removed from the data and got identical values, so no input can see the test years. Models I to M were designed after earlier test results were known; that is why the number of looks is stated.</p></div>
       <div class="card"><h3>Gross and after costs</h3><p>The goals are gross, before costs. Robinhood and Schwab charge no commission on CNQ, but each trade still loses a little to the bid-ask spread. The page uses 1&cent; per share for that.</p></div>
-      <div class="card"><h3>Ranking rule</h3><p>Overall progress is the average of three fractions: profit per trade out of 3%, win rate out of 75%, and the share of months whose average trade is above 1%. The rule was fixed before the scores were computed.</p></div>
+      <div class="card"><h3>Ranking rule</h3><p>Overall progress is the average of four fractions: profit per trade out of 3%, win rate out of 75%, the share of months whose average trade is above 1%, and the share of months whose total is 5% or more. The rule was fixed before the scores were computed.</p></div>
     </div>
     <div class="card" style="margin-top:16px">
       <h3>Limits of these results</h3>

@@ -11,6 +11,7 @@
 | **Data** | CNQ 5-minute regular-session bars, 2026-05-20 → 2026-08-14 |
 | **Best result (V7.1, Jul 1 – Aug 14)** | 75 trades · 72.9% win rate · profit factor 3.81 · gross +2.69 $/share (+0.42/week); **+1.19 after 2¢/share costs** |
 | **Goals (set 2026-11-23)** | Gross per trade G1 1% · G2 2% · G3 >3%; win rate WR1 50% · WR2 65% · WR3 >75%; months per year in which the average trade is above 1%: S1 8/12 · S2 10/12 · S3 12/12 |
+| **Fourth goal (owner, 2026-11-23)** | GM: months per year whose trades add up to 5% or more; GM1 8/12 · GM2 10/12 · GM3 12/12. No model reaches GM1 yet (best: 2 of 12 in its weakest year) |
 | **Risk rule (owner, 2026-11-23)** | Worst trade within 15% for levels to count; each model is also marked against a stricter 5% limit |
 | **Scored on 2024–2026 (25 models, $1,000 per trade)** | Inside the 15% limit, model M (one trade a month, +4% target, 15% stop) reaches level 1 on all three goals: +1.85% per trade (G1), 88.6% win rate (WR3), 10 / 12 / 9-of-11 months (S1); to be confirmed on new data. Inside the 5% limit none does yet: model L has G1 and WR1 (+1.05%, 60.5%). See [`docs/12_Stage13_Peer_Fusion_Research.md`](docs/12_Stage13_Peer_Fusion_Research.md) and [`docs/07_Goals_and_Targets.md`](docs/07_Goals_and_Targets.md) |
 | **Earlier targets** | Win rate > 60% ✅ · net > 1.0 $/share per week ❌ (best legitimate: 0.42) |
