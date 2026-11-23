@@ -659,5 +659,91 @@
   },
   "worst_trade": -15.72,
   "worst_year_excess": -1.561
+ },
+ "R14_dip_campaign": {
+  "G": -0.206,
+  "GM": [
+   7,
+   10,
+   10
+  ],
+  "G_ci95": [
+   -1.89,
+   1.27
+  ],
+  "G_dip": -0.572,
+  "G_fallback": 1.565,
+  "S": [
+   7,
+   10,
+   10
+  ],
+  "WR": 80.0,
+  "avg_days_held": 15.9,
+  "best_month_total_pct": 7.8,
+  "best_trade": 4.81,
+  "dip_signals": 29,
+  "excess": -0.045,
+  "exits": {
+   "stop": 10,
+   "target": 56,
+   "time": 4
+  },
+  "fallback_signals": 6,
+  "max_open_at_once": 6,
+  "median": 3.0,
+  "n": 70,
+  "net_after_1c": -0.234,
+  "no_skill_line_by_year": {
+   "2024": -1.691,
+   "2025": 0.618,
+   "2026": 0.658
+  },
+  "per_year": {
+   "2024": {
+    "G": -3.067,
+    "GM": 7,
+    "S": 7,
+    "WR": 62.5,
+    "both": 7,
+    "months": 12,
+    "n": 24,
+    "need": 8,
+    "total_pct": -73.6
+   },
+   "2025": {
+    "G": 0.759,
+    "GM": 10,
+    "S": 10,
+    "WR": 87.5,
+    "both": 10,
+    "months": 12,
+    "n": 24,
+    "need": 8,
+    "total_pct": 18.2
+   },
+   "2026": {
+    "G": 1.863,
+    "GM": 10,
+    "S": 10,
+    "WR": 90.9,
+    "both": 10,
+    "months": 11,
+    "n": 22,
+    "need": 8,
+    "total_pct": 41.0
+   }
+  },
+  "setting": {
+   "buys": "next1000+next1300",
+   "fallback": 15,
+   "stop": 15.0,
+   "target": 3.0,
+   "trigger": "dd10",
+   "x": 5.0
+  },
+  "signals": 35,
+  "worst_month_total_pct": -30.0,
+  "worst_trade": -15.04
  }
 }
