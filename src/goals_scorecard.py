@@ -87,6 +87,14 @@ META = {   # id: (display name, family, holding, stage, how the settings were ch
     'B_field_fusion_gbm': ('B. Field-Fusion GBM', 'Swing ML model', '5 days', 12, 'walk-forward on 2020-2023'),
     'C_transformer_probe': ('C. Transformer probe', 'Swing ML model', '5 days', 12, 'walk-forward on 2020-2023'),
     'D_fusion_gate': ('D. Fusion gate', 'Swing rule + ML', '5 days', 12, 'walk-forward on 2020-2023'),
+    # Stage 13 (consolidated-feed prices; peer and oil data). Trade lists: stage13_blind_trades_LOCAL_ONLY.csv
+    'R1_peer_fusion_gbm': ('E. Peer-Fusion GBM', 'Swing ML model', '5 days', 13, 'walk-forward on 2020-2023'),
+    'R2_peer_oil_spring': ('F. Peer-and-oil spring', 'Swing physics rule', '5 days', 13, 'walk-forward on 2020-2023'),
+    'R3_fusion_ensemble': ('G. Fusion ensemble', 'Swing ML model', '5 days', 13, 'walk-forward on 2020-2023'),
+    'R4_goal_shaped_exits': ('H. Peer-Fusion, target and stop', 'Swing ML model', 'up to 10 days', 13, 'walk-forward on 2020-2023'),
+    'R5_first_passage': ('I. First-passage campaign', 'Swing ML model', 'up to 20 days', 13, 'walk-forward on 2020-2023'),
+    'R6': ('J.', 'Swing ML model', 'days', 13, 'walk-forward on 2020-2023'),
+    'R7': ('K.', 'Swing ML model', 'days', 13, 'walk-forward on 2020-2023'),
 }
 
 
@@ -197,6 +205,8 @@ def score(paths, stage11, stage12, outdir):
         gw = t.ret[t.ret > 0].sum(); gl = -t.ret[t.ret < 0].sum()      # on equal dollars per trade
         wr_all = 100 * wins / len(t)
         cost_per_trade = float((0.01 / t.entry_price * STAKE).mean())    # 1 cent/share on a $1,000 position
+        _rng = np.random.default_rng(0); _r = t.ret.values
+        _bs = [_rng.choice(_r, len(_r)).mean() for _ in range(2000)]      # bootstrap range of the average
         msum = t.groupby('month').ret.sum().reindex(all_months, fill_value=0.0)
         mcnt = t.groupby('month').size().reindex(all_months, fill_value=0)
         mavg = t.groupby('month').ret.mean().reindex(all_months)          # NaN where there was no trade
@@ -229,6 +239,8 @@ def score(paths, stage11, stage12, outdir):
             id=mid, name=name, family=family, holding=holding, stage=stage, settings=chosen,
             trades=int(len(t)), trades_per_year=round(len(t) / 2.88, 1),
             gross_pct_per_trade=round(g, 4), dollars_per_trade=round(g * STAKE / 100, 2),
+            gross_pct_per_trade_ci95=[round(float(np.percentile(_bs, 2.5)), 2), round(float(np.percentile(_bs, 97.5)), 2)],
+            worst_trade_pct=round(float(t.ret.min()), 2), best_trade_pct=round(float(t.ret.max()), 2),
             median_pct_per_trade=round(float(t.ret.median()), 4),
             win_rate=round(wr, 1), wins=wins, losses=losses, scratches=int(len(t) - wins - losses),
             wins_share_of_all_trades=round(wr_all, 1),
@@ -264,6 +276,7 @@ def score(paths, stage11, stage12, outdir):
                            f'{MIN_TRADES_FOR_RANK} blind trades are not ranked'),
         top5=[c['id'] for c in ranked[:5]],
         top5_if_scratch_is_not_a_win=[c['id'] for c in strict[:5]],
+        level1_on_all_three=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level']) >= 1],
         leaders=dict(G=max(cards, key=lambda c: c['gross_pct_per_trade'])['id'],
                      S_worst_year=max(cards, key=lambda c: (c['months_above_1pct_worst_year_per_12'], c['progress']['S']))['id'],
                      WR=max([c for c in cards if c['enough_trades_to_rank']], key=lambda c: c['win_rate'])['id'],
