@@ -109,6 +109,15 @@ with double the money rather than a new model; it would lift GM only because
 GM adds up trades. Whether that should count is an open question for the
 owner (`docs/12`, Section 12).
 
+**Stops from 1% to 15% (owner's request, 2026-11-23).** To find the best stop
+size, 1,620 settings were tested on 2021-2023 with the test years removed:
+ten stop sizes from 1% to 15%, six targets, three time limits, nine entry
+patterns. The best stop is 15%, the widest allowed: with one trade a month
+and a +5.5% target, G is +2.08%, the win rate 81%, S 8 / 9 / 9 and GM 8 / 9 /
+9 at 15%, against +0.86%, 56%, 5 / 7 / 6 at 5% and +0.95%, 31%, 3 / 4 / 3 at
+1%. No setting passed the gate, so nothing was run on 2024-2026 (`docs/12`,
+Section 13).
+
 **The fourth goal, GM.** No model reaches GM1. The closest inside the loss
 limits is E. Peer-Fusion GBM with 3 / 2 / 2 months of 5% or more.
 Model M is far from it by design: one trade a month sold at +4% makes a

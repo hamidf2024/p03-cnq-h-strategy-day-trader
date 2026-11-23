@@ -300,6 +300,52 @@ money_table = ''.join(money_table_row(c) for c in ORDER)
 
 n_models = len(d['methods'])
 gbest = max(d['methods'], key=lambda c: c['gross_pct_per_trade'])
+# ---- stop-size study on the training years (round 12 search); the section is left out if the file is absent
+STOP_SECTION = ''
+_sf = f'{SRC}/stage13_round12_stop_range_search.json'
+if os.path.exists(_sf):
+    _r = json.load(open(_sf)); _S = _r['settings']
+    def _row(st, T=5.5, H=60):
+        return _S[json.dumps(dict(second='none', target=T, stop=float(st), hold=H), sort_keys=True)]
+    _stops = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15]
+    _rows = {st: _row(st) for st in _stops}
+    _best = max(_stops, key=lambda st: (min(min(a, b) - n for a, b, n in zip(_rows[st]['S'], _rows[st]['GM'], _rows[st]['need'])), _rows[st]['G']))
+    _need = _rows[15]['need']
+    def _tr(st):
+        v = _rows[st]; ok = lambda xs: all(x >= n for x, n in zip(xs, v['need']))
+        tag = ' <span class="lv on">Best</span>' if st == _best else ''
+        cls = ' class="stop-best"' if st == _best else ''
+        return (f'<tr{cls}><td><strong>{st}%</strong>{tag}</td>'
+                f'<td class="num {"pos" if v["G"] >= 1 else ""}">{pct(v["G"], 2, True)}</td>'
+                f'<td class="num {"pos" if v["WR"] >= 50 else ""}">{v["WR"]:.0f}%</td>'
+                f'<td class="num">{v["stops"]} of {v["n"]}</td>'
+                f'<td class="num {"pos" if ok(v["S"]) else ""}">{" / ".join(str(x) for x in v["S"])}</td>'
+                f'<td class="num {"pos" if ok(v["GM"]) else ""}">{" / ".join(str(x) for x in v["GM"])}</td></tr>')
+    _bs = _r['by_stop']
+    _wr_none = [st for st in _stops if _bs[str(float(st))]['share_with_WR50'] == 0]
+    STOP_SECTION = f"""
+  <section id="stops">
+    <h2>Which stop size works best?</h2>
+    <p class="sub">The owner asked for every stop from 1% to 15% to be tried, to find the best one. This was done on the training years only (2021 to 2023); the test years were removed from the data first.</p>
+    <div class="card" style="padding:6px 0 0">
+      <p class="swipe" style="padding:10px 16px 0">Swipe sideways to see every column.</p><div class="table-scroll"><table>
+        <thead><tr><th>Stop size</th><th class="num">Profit per trade</th><th class="num">Win rate</th><th class="num">Trades stopped out</th><th class="num">S months 2021 / 2022 / 2023</th><th class="num">GM months 2021 / 2022 / 2023</th></tr></thead>
+        <tbody>{''.join(_tr(st) for st in _stops)}</tbody>
+      </table></div>
+    </div>
+    <p class="fine" style="margin-top:10px">Same rule on every line, only the stop changes: one trade a month, sell at +5.5%, or after 60 trading days. Level 1 needs {_need[0]} / {_need[1]} / {_need[2]} months (2023 has 10 usable months). Green marks a figure that reaches level 1.</p>
+    <div class="note2">
+      <h3>What the stop study shows</h3>
+      <ul>
+        <li><strong>The best stop is {_best}%, the widest one allowed.</strong> Profit per trade is highest there, and the win rate and both month goals fall step by step as the stop gets tighter. CNQ often dips a few percent before it rises, so a tight stop sells many trades that would have ended as winners.</li>
+        <li><strong>Stops of 5% or less cut the win rate sharply.</strong> With a 1% stop, {_rows[1]['stops']} of {_rows[1]['n']} trades were stopped out and the win rate was {_rows[1]['WR']:.0f}%. With 15%, {_rows[15]['stops']} of {_rows[15]['n']} were stopped and the win rate was {_rows[15]['WR']:.0f}%.</li>
+        <li><strong>No stop size passes the test for a new model.</strong> {_r['n_eligible']:,} settings were tried: ten stop sizes, six profit targets, three time limits and nine entry patterns (one trade a month, or a second trade added later, on a dip, on a rise, or after a stop). None reached level 1 on all four goals with one month to spare in every training year, so nothing new was run on the test years.</li>
+        <li><strong>These are rising years.</strong> CNQ rose in 2021, 2022 and 2023. In a falling year a wide stop loses more on each losing trade, which is what the 5% and 15% loss limits are for.</li>
+      </ul>
+    </div>
+  </section>
+"""
+
 LOOKS = int(sys.argv[4]) if len(sys.argv) > 4 else 8
 all3 = [M[i] for i in d.get('level1_on_all_three', [])]
 ALL3_NOTES = {
@@ -381,7 +427,7 @@ html = f'''<!doctype html>
     <h1>{n_models} trading models, scored against four goals</h1>
     <p class="lede">Every model and method built in this project for trading Canadian Natural Resources (CNQ) is scored here on the same four goals. Scores use January 2024 to November 2026, years the models were not trained on. Dollar figures assume $1,000 invested in each trade.</p>
     <p style="margin-top:14px">{HERO_TAG} <span class="tag muted">Research only, hypothetical backtests</span> <span class="tag muted">Updated Nov 23, 2026</span></p>
-    <nav class="toc" aria-label="On this page"><a href="#goals">The goals</a><a href="#top5">Top 5</a><a href="#all">All {n_models} models</a><a href="#months">Steady months</a><a href="#gm-months">Monthly profit</a><a href="#money">$1,000 per trade</a><a href="#measure">How it is measured</a><a href="project-03-research.html">Research record</a></nav>
+    <nav class="toc" aria-label="On this page"><a href="#goals">The goals</a><a href="#top5">Top 5</a><a href="#all">All {n_models} models</a><a href="#months">Steady months</a><a href="#gm-months">Monthly profit</a>{'<a href="#stops">Stop size</a>' if STOP_SECTION else ''}<a href="#money">$1,000 per trade</a><a href="#measure">How it is measured</a><a href="project-03-research.html">Research record</a></nav>
   </section>
 
   <section id="goals">
@@ -447,6 +493,7 @@ html = f'''<!doctype html>
     <p class="fine" style="margin-top:10px">No model reaches GM1, which needs 8 such months in every year. The closest inside the loss limits is {E(gbm_best['name'])}, with {' &middot; '.join(f"{y}: {v['months_total_5pct']} of {v['months']}" for y, v in gbm_best['by_year'].items())}. Models that take one trade a month and sell at +4% rarely total 5% in a month; models with many small trades have more profitable months but few as large as 5%.</p>
   </section>
 
+{STOP_SECTION}
   <section id="money">
     <h2>What $1,000 per trade would have made</h2>
     <p class="sub">Each trade buys $1,000 of CNQ. When it is sold, the same $1,000 is used for the next trade; profits are not reinvested. Totals cover January 2024 to November 18, 2026.</p>
@@ -480,7 +527,7 @@ html = f'''<!doctype html>
         <li>The test years have now been looked at {LOOKS} times by different models. Each extra look makes a lucky result more likely, so the newest results need confirming on data after November 2026.</li>
         <li>A rising stock helps long trades. CNQ rose about 39% over the test period, and a randomly timed 5-day purchase made +0.35% on average.</li>
         <li>Higher levels. A search of 135 settings on the 2021 to 2023 training years, with the test years removed from the data, found none that reaches level 2 on all three goals in every year, and none that reaches level 3. No new model was run on the test years for those levels.</li>
-        <li>Level 1 on all four goals. After model N a new model must pass its training-years test with a margin of one month on S and on GM, and the same rule must hold on the five peer stocks. 112 settings were tried on 2021 to 2023 with the test years removed. None passed, so nothing new was run on the test years.</li>
+        <li>Level 1 on all four goals. After model N a new model must pass its training-years test with a margin of one month on S and on GM, and the same rule must hold on the five peer stocks. 1,620 settings were tried on 2021 to 2023 with the test years removed, with stops from 1% to 15%. None passed, so nothing new was run on the test years.</li>
         <li>GM adds up trades. Two $1,000 trades opened on the same day count twice towards a month's total. Model M traded that way would show GM 10 / 12 / 9 of 11, but it is the same bet with $2,000 at risk, so it is not counted as a new model here.</li>
         <li>2026 has 11 months of data. Its months are judged on the same fractions (8/12, 10/12, 12/12).</li>
       </ul>
