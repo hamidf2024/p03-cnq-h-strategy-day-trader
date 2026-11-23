@@ -1,0 +1,68 @@
+{
+ "R1_peer_fusion_gbm": {
+  "frozen_artefact": "stage13_frozen.pkl",
+  "frozen_sha256": "e5c38b0d6f4ea00c152c19fc37e59a52eda260c67c28b142c43397c6156a173b",
+  "ran_on": "2026-11-23 17:25:24.652025",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 1,
+  "result_sha256": "64da24653c30c37627efbf22da61b39e1bf8a49ee8ae3155ea18b3c1c8454d58"
+ },
+ "R2_peer_oil_spring": {
+  "frozen_artefact": "stage13_frozen.pkl",
+  "frozen_sha256": "e5c38b0d6f4ea00c152c19fc37e59a52eda260c67c28b142c43397c6156a173b",
+  "ran_on": "2026-11-23 17:25:24.722112",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 2,
+  "result_sha256": "9ef6d6da49691e52f0bb1b01c38a3ba6176256c2a254b50db94555178976381c"
+ },
+ "R3_fusion_ensemble": {
+  "frozen_artefact": "stage13_frozen.pkl",
+  "frozen_sha256": "e5c38b0d6f4ea00c152c19fc37e59a52eda260c67c28b142c43397c6156a173b",
+  "ran_on": "2026-11-23 17:25:24.821645",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 3,
+  "result_sha256": "1b31ac7412a3197432fbf2bab120397ed0dd8a71d6d4f27f17df443d8c4a6648"
+ },
+ "R4_goal_shaped_exits": {
+  "frozen_artefact": "stage13_frozen.pkl",
+  "frozen_sha256": "e5c38b0d6f4ea00c152c19fc37e59a52eda260c67c28b142c43397c6156a173b",
+  "ran_on": "2026-11-23 17:25:24.978494",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 4,
+  "result_sha256": "9a55127db495dfbcfba37e5b37f44b5d36eee0169e78b78f28f01923ac796e3e"
+ },
+ "R5_first_passage": {
+  "frozen_artefact": "stage13_frozen_R5.pkl",
+  "frozen_sha256": "e94f7a6a258c7e2e4d83136ba35b372fc95755c87c049e61c4e2e715e4760f4a",
+  "ran_on": "2026-11-23 17:30:07.699403",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 5,
+  "result_sha256": "1411bdb53b9819dd5bb8025dc70e2fb361eff0fef1a7e3870f6f7fd956e528d7"
+ },
+ "R6_one_a_month": {
+  "frozen_artefact": "stage13_frozen_R6.pkl",
+  "frozen_sha256": "f2cc381ca551f011d3420c0992ee9b2ed48e90f692b1f61bbaa2f8a4f7a235d4",
+  "ran_on": "2026-11-23 17:31:34.743777",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 6,
+  "result_sha256": "79d2cf900152a44ccb7b1edae81361ec520afa598cb589def537737efe756b16"
+ }
+}

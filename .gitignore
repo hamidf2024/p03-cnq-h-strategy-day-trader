@@ -3,5 +3,8 @@
 # redistribution). See data/README.md for what belongs here and how to get it.
 data/raw/*.csv
 data/raw/peers/
+# Caches and trade lists that contain prices
+results/experiments/*_cache.pkl
+*_LOCAL_ONLY*
 __pycache__/
 *.pyc

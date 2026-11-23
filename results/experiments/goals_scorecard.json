@@ -36,24 +36,27 @@
   "ranking": "overall progress = average of three fractions: gross % per trade / 3%, win rate / 75%, share of months whose average trade is above 1% (each capped at 1); methods with fewer than 15 blind trades are not ranked"
  },
  "top5": [
-  "C_transformer_probe",
-  "B_field_fusion_gbm",
-  "D_fusion_gate",
-  "V7.1_pct",
-  "V7_wf"
+  "R6_one_a_month",
+  "R5_first_passage",
+  "R1_peer_fusion_gbm",
+  "R4_goal_shaped_exits",
+  "R3_fusion_ensemble"
  ],
  "top5_if_scratch_is_not_a_win": [
-  "C_transformer_probe",
-  "B_field_fusion_gbm",
-  "D_fusion_gate",
-  "A_spring_release",
-  "V7.1_pct"
+  "R6_one_a_month",
+  "R5_first_passage",
+  "R1_peer_fusion_gbm",
+  "R4_goal_shaped_exits",
+  "C_transformer_probe"
+ ],
+ "level1_on_all_three": [
+  "R6_one_a_month"
  ],
  "leaders": {
-  "G": "B_field_fusion_gbm",
-  "S_worst_year": "C_transformer_probe",
-  "WR": "V7.1_pct",
-  "S": "C_transformer_probe"
+  "G": "R6_one_a_month",
+  "S_worst_year": "R6_one_a_month",
+  "WR": "R6_one_a_month",
+  "S": "R6_one_a_month"
  },
  "methods": [
   {
@@ -67,6 +70,12 @@
    "trades_per_year": 574.3,
    "gross_pct_per_trade": 0.0158,
    "dollars_per_trade": 0.16,
+   "gross_pct_per_trade_ci95": [
+    0.0,
+    0.03
+   ],
+   "worst_trade_pct": -0.59,
+   "best_trade_pct": 1.2,
    "median_pct_per_trade": 0.0,
    "win_rate": 38.0,
    "wins": 272,
@@ -140,7 +149,7 @@
     "overall_if_scratch_is_not_a_win": 0.07484
    },
    "enough_trades_to_rank": true,
-   "rank": 14
+   "rank": 20
   },
   {
    "id": "V2",
@@ -153,6 +162,12 @@
    "trades_per_year": 737.5,
    "gross_pct_per_trade": 0.0109,
    "dollars_per_trade": 0.11,
+   "gross_pct_per_trade_ci95": [
+    -0.0,
+    0.02
+   ],
+   "worst_trade_pct": -0.59,
+   "best_trade_pct": 4.16,
    "median_pct_per_trade": 0.0,
    "win_rate": 49.1,
    "wins": 649,
@@ -226,7 +241,7 @@
     "overall_if_scratch_is_not_a_win": 0.13701
    },
    "enough_trades_to_rank": true,
-   "rank": 13
+   "rank": 19
   },
   {
    "id": "V3",
@@ -239,6 +254,12 @@
    "trades_per_year": 951.7,
    "gross_pct_per_trade": 0.0124,
    "dollars_per_trade": 0.12,
+   "gross_pct_per_trade_ci95": [
+    0.0,
+    0.02
+   ],
+   "worst_trade_pct": -0.59,
+   "best_trade_pct": 4.16,
    "median_pct_per_trade": 0.0,
    "win_rate": 49.3,
    "wins": 891,
@@ -312,7 +333,7 @@
     "overall_if_scratch_is_not_a_win": 0.14585
    },
    "enough_trades_to_rank": true,
-   "rank": 12
+   "rank": 18
   },
   {
    "id": "V4",
@@ -325,6 +346,12 @@
    "trades_per_year": 759.7,
    "gross_pct_per_trade": 0.0128,
    "dollars_per_trade": 0.13,
+   "gross_pct_per_trade_ci95": [
+    0.0,
+    0.03
+   ],
+   "worst_trade_pct": -0.59,
+   "best_trade_pct": 4.16,
    "median_pct_per_trade": 0.0,
    "win_rate": 49.3,
    "wins": 712,
@@ -398,7 +425,7 @@
     "overall_if_scratch_is_not_a_win": 0.14605
    },
    "enough_trades_to_rank": true,
-   "rank": 11
+   "rank": 17
   },
   {
    "id": "V5",
@@ -411,6 +438,12 @@
    "trades_per_year": 793.1,
    "gross_pct_per_trade": 0.0102,
    "dollars_per_trade": 0.1,
+   "gross_pct_per_trade_ci95": [
+    -0.0,
+    0.02
+   ],
+   "worst_trade_pct": -0.59,
+   "best_trade_pct": 1.47,
    "median_pct_per_trade": 0.0,
    "win_rate": 55.0,
    "wins": 938,
@@ -484,7 +517,7 @@
     "overall_if_scratch_is_not_a_win": 0.18366
    },
    "enough_trades_to_rank": true,
-   "rank": 9
+   "rank": 15
   },
   {
    "id": "V6",
@@ -497,6 +530,12 @@
    "trades_per_year": 622.9,
    "gross_pct_per_trade": 0.0157,
    "dollars_per_trade": 0.16,
+   "gross_pct_per_trade_ci95": [
+    0.0,
+    0.03
+   ],
+   "worst_trade_pct": -0.59,
+   "best_trade_pct": 1.47,
    "median_pct_per_trade": 0.0,
    "win_rate": 56.2,
    "wins": 760,
@@ -570,7 +609,7 @@
     "overall_if_scratch_is_not_a_win": 0.19002
    },
    "enough_trades_to_rank": true,
-   "rank": 8
+   "rank": 14
   },
   {
    "id": "V7_wf",
@@ -583,6 +622,12 @@
    "trades_per_year": 636.8,
    "gross_pct_per_trade": 0.0189,
    "dollars_per_trade": 0.19,
+   "gross_pct_per_trade_ci95": [
+    0.01,
+    0.03
+   ],
+   "worst_trade_pct": -0.6,
+   "best_trade_pct": 3.86,
    "median_pct_per_trade": 0.0,
    "win_rate": 59.9,
    "wins": 808,
@@ -656,7 +701,7 @@
     "overall_if_scratch_is_not_a_win": 0.1979
    },
    "enough_trades_to_rank": true,
-   "rank": 5
+   "rank": 11
   },
   {
    "id": "V7.1_wf",
@@ -669,6 +714,12 @@
    "trades_per_year": 554.5,
    "gross_pct_per_trade": 0.0204,
    "dollars_per_trade": 0.2,
+   "gross_pct_per_trade_ci95": [
+    0.01,
+    0.03
+   ],
+   "worst_trade_pct": -0.6,
+   "best_trade_pct": 3.86,
    "median_pct_per_trade": 0.0,
    "win_rate": 59.4,
    "wins": 671,
@@ -742,7 +793,7 @@
     "overall_if_scratch_is_not_a_win": 0.189
    },
    "enough_trades_to_rank": true,
-   "rank": 7
+   "rank": 13
   },
   {
    "id": "RuleOrModel",
@@ -755,6 +806,12 @@
    "trades_per_year": 1350.7,
    "gross_pct_per_trade": 0.0178,
    "dollars_per_trade": 0.18,
+   "gross_pct_per_trade_ci95": [
+    0.01,
+    0.03
+   ],
+   "worst_trade_pct": -0.6,
+   "best_trade_pct": 3.86,
    "median_pct_per_trade": 0.0,
    "win_rate": 59.9,
    "wins": 1790,
@@ -828,7 +885,7 @@
     "overall_if_scratch_is_not_a_win": 0.20649
    },
    "enough_trades_to_rank": true,
-   "rank": 6
+   "rank": 12
   },
   {
    "id": "V7.1_pct",
@@ -841,6 +898,12 @@
    "trades_per_year": 489.9,
    "gross_pct_per_trade": 0.0205,
    "dollars_per_trade": 0.2,
+   "gross_pct_per_trade_ci95": [
+    0.0,
+    0.04
+   ],
+   "worst_trade_pct": -2.04,
+   "best_trade_pct": 3.86,
    "median_pct_per_trade": 0.0,
    "win_rate": 70.2,
    "wins": 653,
@@ -914,7 +977,7 @@
     "overall_if_scratch_is_not_a_win": 0.20796
    },
    "enough_trades_to_rank": true,
-   "rank": 4
+   "rank": 10
   },
   {
    "id": "Donchian_long",
@@ -927,6 +990,12 @@
    "trades_per_year": 3.1,
    "gross_pct_per_trade": -0.0476,
    "dollars_per_trade": -0.48,
+   "gross_pct_per_trade_ci95": [
+    -4.08,
+    5.25
+   ],
+   "worst_trade_pct": -4.97,
+   "best_trade_pct": 19.43,
    "median_pct_per_trade": -3.8221,
    "win_rate": 22.2,
    "wins": 2,
@@ -1012,6 +1081,12 @@
    "trades_per_year": 5.9,
    "gross_pct_per_trade": -1.5874,
    "dollars_per_trade": -15.87,
+   "gross_pct_per_trade_ci95": [
+    -4.17,
+    1.71
+   ],
+   "worst_trade_pct": -7.24,
+   "best_trade_pct": 19.43,
    "median_pct_per_trade": -4.0495,
    "win_rate": 18.8,
    "wins": 3,
@@ -1085,7 +1160,7 @@
     "overall_if_scratch_is_not_a_win": 0.10705
    },
    "enough_trades_to_rank": true,
-   "rank": 15
+   "rank": 21
   },
   {
    "id": "A_spring_release",
@@ -1098,6 +1173,12 @@
    "trades_per_year": 7.3,
    "gross_pct_per_trade": -0.7046,
    "dollars_per_trade": -7.05,
+   "gross_pct_per_trade_ci95": [
+    -2.87,
+    1.49
+   ],
+   "worst_trade_pct": -9.94,
+   "best_trade_pct": 8.31,
    "median_pct_per_trade": -1.2008,
    "win_rate": 40.0,
    "wins": 8,
@@ -1171,7 +1252,7 @@
     "overall_if_scratch_is_not_a_win": 0.23581
    },
    "enough_trades_to_rank": true,
-   "rank": 10
+   "rank": 16
   },
   {
    "id": "B_field_fusion_gbm",
@@ -1184,6 +1265,12 @@
    "trades_per_year": 8.7,
    "gross_pct_per_trade": 0.9947,
    "dollars_per_trade": 9.95,
+   "gross_pct_per_trade_ci95": [
+    -0.82,
+    2.93
+   ],
+   "worst_trade_pct": -7.35,
+   "best_trade_pct": 13.14,
    "median_pct_per_trade": -0.4015,
    "win_rate": 48.0,
    "wins": 12,
@@ -1257,7 +1344,7 @@
     "overall_if_scratch_is_not_a_win": 0.39035
    },
    "enough_trades_to_rank": true,
-   "rank": 2
+   "rank": 8
   },
   {
    "id": "C_transformer_probe",
@@ -1270,6 +1357,12 @@
    "trades_per_year": 17.7,
    "gross_pct_per_trade": 0.6367,
    "dollars_per_trade": 6.37,
+   "gross_pct_per_trade_ci95": [
+    -0.47,
+    1.71
+   ],
+   "worst_trade_pct": -7.3,
+   "best_trade_pct": 8.21,
    "median_pct_per_trade": 0.0988,
    "win_rate": 51.0,
    "wins": 26,
@@ -1343,7 +1436,7 @@
     "overall_if_scratch_is_not_a_win": 0.40339
    },
    "enough_trades_to_rank": true,
-   "rank": 1
+   "rank": 6
   },
   {
    "id": "D_fusion_gate",
@@ -1356,6 +1449,12 @@
    "trades_per_year": 6.6,
    "gross_pct_per_trade": 0.5155,
    "dollars_per_trade": 5.15,
+   "gross_pct_per_trade_ci95": [
+    -1.39,
+    2.55
+   ],
+   "worst_trade_pct": -7.71,
+   "best_trade_pct": 8.31,
    "median_pct_per_trade": 0.4601,
    "win_rate": 55.6,
    "wins": 10,
@@ -1429,7 +1528,559 @@
     "overall_if_scratch_is_not_a_win": 0.36695
    },
    "enough_trades_to_rank": true,
+   "rank": 9
+  },
+  {
+   "id": "R1_peer_fusion_gbm",
+   "name": "E. Peer-Fusion GBM",
+   "family": "Swing ML model",
+   "holding": "5 days",
+   "stage": 13,
+   "settings": "walk-forward on 2020-2023",
+   "trades": 39,
+   "trades_per_year": 13.5,
+   "gross_pct_per_trade": 1.4058,
+   "dollars_per_trade": 14.06,
+   "gross_pct_per_trade_ci95": [
+    0.07,
+    2.78
+   ],
+   "worst_trade_pct": -7.08,
+   "best_trade_pct": 12.23,
+   "median_pct_per_trade": 0.7578,
+   "win_rate": 60.5,
+   "wins": 23,
+   "losses": 15,
+   "scratches": 1,
+   "wins_share_of_all_trades": 59.0,
+   "cost_1c_dollars_per_trade": 0.289,
+   "cost_1c_dollars_total": 11.26,
+   "shares_per_1000_avg": 28.9,
+   "profit_factor": 2.26,
+   "gross_pct_total": 54.83,
+   "dollars_total": 548.27,
+   "net_pct_per_trade_after_1c": 1.377,
+   "dollars_per_trade_after_1c": 13.77,
+   "dollars_total_after_1c": 537.01,
+   "profitable_after_1c": true,
+   "months_above_1pct_total": 14,
+   "months_total": 35,
+   "months_with_trades": 24,
+   "best_month_avg_pct_per_trade": 12.2321,
+   "months_above_1pct_avg_per_12": 4.8,
+   "months_above_1pct_worst_year_per_12": 4.0,
+   "avg_month_sum_gross_pct": 1.566,
+   "by_year": {
+    "2024": {
+     "trades": 15,
+     "gross_pct_per_trade": 1.4453,
+     "win_rate": 60.0,
+     "months": 12,
+     "months_above_1pct": 6,
+     "months_positive": 6,
+     "months_no_trades": 2,
+     "best_month_avg_pct_per_trade": 8.0882,
+     "gross_pct_year": 21.68,
+     "dollars_year": 216.8
+    },
+    "2025": {
+     "trades": 11,
+     "gross_pct_per_trade": 1.5516,
+     "win_rate": 50.0,
+     "months": 12,
+     "months_above_1pct": 4,
+     "months_positive": 4,
+     "months_no_trades": 5,
+     "best_month_avg_pct_per_trade": 12.2321,
+     "gross_pct_year": 17.07,
+     "dollars_year": 170.67
+    },
+    "2026": {
+     "trades": 13,
+     "gross_pct_per_trade": 1.2369,
+     "win_rate": 69.2,
+     "months": 11,
+     "months_above_1pct": 4,
+     "months_positive": 5,
+     "months_no_trades": 4,
+     "best_month_avg_pct_per_trade": 5.4582,
+     "gross_pct_year": 16.08,
+     "dollars_year": 160.8
+    }
+   },
+   "G_level": 1,
+   "WR_level": 1,
+   "S_level": 0,
+   "levels_total": 2,
+   "progress": {
+    "G": 0.469,
+    "WR": 0.807,
+    "S": 0.399,
+    "overall": 0.558,
+    "overall_if_scratch_is_not_a_win": 0.55131
+   },
+   "enough_trades_to_rank": true,
    "rank": 3
+  },
+  {
+   "id": "R2_peer_oil_spring",
+   "name": "F. Peer-and-oil spring",
+   "family": "Swing physics rule",
+   "holding": "5 days",
+   "stage": 13,
+   "settings": "walk-forward on 2020-2023",
+   "trades": 56,
+   "trades_per_year": 19.4,
+   "gross_pct_per_trade": 0.4324,
+   "dollars_per_trade": 4.32,
+   "gross_pct_per_trade_ci95": [
+    -0.68,
+    1.54
+   ],
+   "worst_trade_pct": -7.98,
+   "best_trade_pct": 13.49,
+   "median_pct_per_trade": 0.1457,
+   "win_rate": 50.9,
+   "wins": 28,
+   "losses": 27,
+   "scratches": 1,
+   "wins_share_of_all_trades": 50.0,
+   "cost_1c_dollars_per_trade": 0.283,
+   "cost_1c_dollars_total": 15.82,
+   "shares_per_1000_avg": 28.3,
+   "profit_factor": 1.29,
+   "gross_pct_total": 24.21,
+   "dollars_total": 242.13,
+   "net_pct_per_trade_after_1c": 0.4041,
+   "dollars_per_trade_after_1c": 4.04,
+   "dollars_total_after_1c": 226.3,
+   "profitable_after_1c": true,
+   "months_above_1pct_total": 13,
+   "months_total": 35,
+   "months_with_trades": 30,
+   "best_month_avg_pct_per_trade": 7.4158,
+   "months_above_1pct_avg_per_12": 4.5,
+   "months_above_1pct_worst_year_per_12": 3.0,
+   "avg_month_sum_gross_pct": 0.692,
+   "by_year": {
+    "2024": {
+     "trades": 17,
+     "gross_pct_per_trade": -0.2713,
+     "win_rate": 47.1,
+     "months": 12,
+     "months_above_1pct": 3,
+     "months_positive": 4,
+     "months_no_trades": 1,
+     "best_month_avg_pct_per_trade": 3.8643,
+     "gross_pct_year": -4.61,
+     "dollars_year": -46.12
+    },
+    "2025": {
+     "trades": 21,
+     "gross_pct_per_trade": 1.1611,
+     "win_rate": 65.0,
+     "months": 12,
+     "months_above_1pct": 6,
+     "months_positive": 7,
+     "months_no_trades": 1,
+     "best_month_avg_pct_per_trade": 5.7079,
+     "gross_pct_year": 24.38,
+     "dollars_year": 243.83
+    },
+    "2026": {
+     "trades": 18,
+     "gross_pct_per_trade": 0.2467,
+     "win_rate": 38.9,
+     "months": 11,
+     "months_above_1pct": 4,
+     "months_positive": 4,
+     "months_no_trades": 3,
+     "best_month_avg_pct_per_trade": 7.4158,
+     "gross_pct_year": 4.44,
+     "dollars_year": 44.41
+    }
+   },
+   "G_level": 0,
+   "WR_level": 1,
+   "S_level": 0,
+   "levels_total": 1,
+   "progress": {
+    "G": 0.144,
+    "WR": 0.679,
+    "S": 0.371,
+    "overall": 0.398,
+    "overall_if_scratch_is_not_a_win": 0.394
+   },
+   "enough_trades_to_rank": true,
+   "rank": 7
+  },
+  {
+   "id": "R3_fusion_ensemble",
+   "name": "G. Fusion ensemble",
+   "family": "Swing ML model",
+   "holding": "5 days",
+   "stage": 13,
+   "settings": "walk-forward on 2020-2023",
+   "trades": 38,
+   "trades_per_year": 13.2,
+   "gross_pct_per_trade": 0.8131,
+   "dollars_per_trade": 8.13,
+   "gross_pct_per_trade_ci95": [
+    -0.47,
+    2.1
+   ],
+   "worst_trade_pct": -7.46,
+   "best_trade_pct": 8.09,
+   "median_pct_per_trade": 1.3173,
+   "win_rate": 56.8,
+   "wins": 21,
+   "losses": 16,
+   "scratches": 1,
+   "wins_share_of_all_trades": 55.3,
+   "cost_1c_dollars_per_trade": 0.285,
+   "cost_1c_dollars_total": 10.84,
+   "shares_per_1000_avg": 28.5,
+   "profit_factor": 1.62,
+   "gross_pct_total": 30.9,
+   "dollars_total": 308.97,
+   "net_pct_per_trade_after_1c": 0.7845,
+   "dollars_per_trade_after_1c": 7.85,
+   "dollars_total_after_1c": 298.13,
+   "profitable_after_1c": true,
+   "months_above_1pct_total": 7,
+   "months_total": 35,
+   "months_with_trades": 21,
+   "best_month_avg_pct_per_trade": 7.3425,
+   "months_above_1pct_avg_per_12": 2.4,
+   "months_above_1pct_worst_year_per_12": 1.0,
+   "avg_month_sum_gross_pct": 0.883,
+   "by_year": {
+    "2024": {
+     "trades": 14,
+     "gross_pct_per_trade": -0.1408,
+     "win_rate": 42.9,
+     "months": 12,
+     "months_above_1pct": 1,
+     "months_positive": 4,
+     "months_no_trades": 5,
+     "best_month_avg_pct_per_trade": 5.0376,
+     "gross_pct_year": -1.97,
+     "dollars_year": -19.71
+    },
+    "2025": {
+     "trades": 12,
+     "gross_pct_per_trade": 1.7817,
+     "win_rate": 72.7,
+     "months": 12,
+     "months_above_1pct": 3,
+     "months_positive": 5,
+     "months_no_trades": 5,
+     "best_month_avg_pct_per_trade": 6.684,
+     "gross_pct_year": 21.38,
+     "dollars_year": 213.81
+    },
+    "2026": {
+     "trades": 12,
+     "gross_pct_per_trade": 0.9573,
+     "win_rate": 58.3,
+     "months": 11,
+     "months_above_1pct": 3,
+     "months_positive": 4,
+     "months_no_trades": 4,
+     "best_month_avg_pct_per_trade": 7.3425,
+     "gross_pct_year": 11.49,
+     "dollars_year": 114.87
+    }
+   },
+   "G_level": 0,
+   "WR_level": 1,
+   "S_level": 0,
+   "levels_total": 1,
+   "progress": {
+    "G": 0.271,
+    "WR": 0.757,
+    "S": 0.202,
+    "overall": 0.41,
+    "overall_if_scratch_is_not_a_win": 0.4033
+   },
+   "enough_trades_to_rank": true,
+   "rank": 5
+  },
+  {
+   "id": "R4_goal_shaped_exits",
+   "name": "H. Peer-Fusion, target and stop",
+   "family": "Swing ML model",
+   "holding": "up to 10 days",
+   "stage": 13,
+   "settings": "walk-forward on 2020-2023",
+   "trades": 38,
+   "trades_per_year": 13.2,
+   "gross_pct_per_trade": 0.8518,
+   "dollars_per_trade": 8.52,
+   "gross_pct_per_trade_ci95": [
+    -0.62,
+    2.32
+   ],
+   "worst_trade_pct": -5.01,
+   "best_trade_pct": 5.71,
+   "median_pct_per_trade": 5.0,
+   "win_rate": 55.3,
+   "wins": 21,
+   "losses": 17,
+   "scratches": 0,
+   "wins_share_of_all_trades": 55.3,
+   "cost_1c_dollars_per_trade": 0.296,
+   "cost_1c_dollars_total": 11.25,
+   "shares_per_1000_avg": 29.6,
+   "profit_factor": 1.46,
+   "gross_pct_total": 32.37,
+   "dollars_total": 323.67,
+   "net_pct_per_trade_after_1c": 0.8222,
+   "dollars_per_trade_after_1c": 8.22,
+   "dollars_total_after_1c": 312.42,
+   "profitable_after_1c": true,
+   "months_above_1pct_total": 11,
+   "months_total": 35,
+   "months_with_trades": 22,
+   "best_month_avg_pct_per_trade": 5.1633,
+   "months_above_1pct_avg_per_12": 3.7,
+   "months_above_1pct_worst_year_per_12": 2.2,
+   "avg_month_sum_gross_pct": 0.925,
+   "by_year": {
+    "2024": {
+     "trades": 13,
+     "gross_pct_per_trade": 1.3647,
+     "win_rate": 61.5,
+     "months": 12,
+     "months_above_1pct": 6,
+     "months_positive": 7,
+     "months_no_trades": 2,
+     "best_month_avg_pct_per_trade": 5.0,
+     "gross_pct_year": 17.74,
+     "dollars_year": 177.41
+    },
+    "2025": {
+     "trades": 13,
+     "gross_pct_per_trade": 0.315,
+     "win_rate": 46.2,
+     "months": 12,
+     "months_above_1pct": 3,
+     "months_positive": 3,
+     "months_no_trades": 6,
+     "best_month_avg_pct_per_trade": 5.0,
+     "gross_pct_year": 4.1,
+     "dollars_year": 40.95
+    },
+    "2026": {
+     "trades": 12,
+     "gross_pct_per_trade": 0.8775,
+     "win_rate": 58.3,
+     "months": 11,
+     "months_above_1pct": 2,
+     "months_positive": 3,
+     "months_no_trades": 5,
+     "best_month_avg_pct_per_trade": 5.1633,
+     "gross_pct_year": 10.53,
+     "dollars_year": 105.3
+    }
+   },
+   "G_level": 0,
+   "WR_level": 1,
+   "S_level": 0,
+   "levels_total": 1,
+   "progress": {
+    "G": 0.284,
+    "WR": 0.737,
+    "S": 0.311,
+    "overall": 0.444,
+    "overall_if_scratch_is_not_a_win": 0.44379
+   },
+   "enough_trades_to_rank": true,
+   "rank": 4
+  },
+  {
+   "id": "R5_first_passage",
+   "name": "I. First-passage campaign",
+   "family": "Swing ML model",
+   "holding": "up to 20 days",
+   "stage": 13,
+   "settings": "walk-forward on 2020-2023",
+   "trades": 78,
+   "trades_per_year": 27.1,
+   "gross_pct_per_trade": 0.5917,
+   "dollars_per_trade": 5.92,
+   "gross_pct_per_trade_ci95": [
+    -0.31,
+    1.37
+   ],
+   "worst_trade_pct": -17.3,
+   "best_trade_pct": 2.64,
+   "median_pct_per_trade": 2.0,
+   "win_rate": 84.6,
+   "wins": 66,
+   "losses": 12,
+   "scratches": 0,
+   "wins_share_of_all_trades": 84.6,
+   "cost_1c_dollars_per_trade": 0.271,
+   "cost_1c_dollars_total": 21.13,
+   "shares_per_1000_avg": 27.1,
+   "profit_factor": 1.53,
+   "gross_pct_total": 46.15,
+   "dollars_total": 461.5,
+   "net_pct_per_trade_after_1c": 0.5646,
+   "dollars_per_trade_after_1c": 5.65,
+   "dollars_total_after_1c": 440.37,
+   "profitable_after_1c": true,
+   "months_above_1pct_total": 22,
+   "months_total": 35,
+   "months_with_trades": 33,
+   "best_month_avg_pct_per_trade": 2.2376,
+   "months_above_1pct_avg_per_12": 7.6,
+   "months_above_1pct_worst_year_per_12": 6.0,
+   "avg_month_sum_gross_pct": 1.319,
+   "by_year": {
+    "2024": {
+     "trades": 27,
+     "gross_pct_per_trade": 0.3982,
+     "win_rate": 81.5,
+     "months": 12,
+     "months_above_1pct": 6,
+     "months_positive": 8,
+     "months_no_trades": 1,
+     "best_month_avg_pct_per_trade": 2.1205,
+     "gross_pct_year": 10.75,
+     "dollars_year": 107.52
+    },
+    "2025": {
+     "trades": 22,
+     "gross_pct_per_trade": 0.8043,
+     "win_rate": 81.8,
+     "months": 12,
+     "months_above_1pct": 7,
+     "months_positive": 9,
+     "months_no_trades": 1,
+     "best_month_avg_pct_per_trade": 2.0,
+     "gross_pct_year": 17.69,
+     "dollars_year": 176.94
+    },
+    "2026": {
+     "trades": 29,
+     "gross_pct_per_trade": 0.6105,
+     "win_rate": 89.7,
+     "months": 11,
+     "months_above_1pct": 9,
+     "months_positive": 9,
+     "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 2.2376,
+     "gross_pct_year": 17.7,
+     "dollars_year": 177.04
+    }
+   },
+   "G_level": 0,
+   "WR_level": 3,
+   "S_level": 0,
+   "levels_total": 3,
+   "progress": {
+    "G": 0.197,
+    "WR": 1.0,
+    "S": 0.634,
+    "overall": 0.61,
+    "overall_if_scratch_is_not_a_win": 0.61035
+   },
+   "enough_trades_to_rank": true,
+   "rank": 2
+  },
+  {
+   "id": "R6_one_a_month",
+   "name": "J. One-a-month campaign",
+   "family": "Swing ML model",
+   "holding": "up to 60 days",
+   "stage": 13,
+   "settings": "walk-forward on 2020-2023",
+   "trades": 35,
+   "trades_per_year": 12.2,
+   "gross_pct_per_trade": 2.2422,
+   "dollars_per_trade": 22.42,
+   "gross_pct_per_trade_ci95": [
+    0.26,
+    3.88
+   ],
+   "worst_trade_pct": -17.3,
+   "best_trade_pct": 5.54,
+   "median_pct_per_trade": 4.0,
+   "win_rate": 88.6,
+   "wins": 31,
+   "losses": 4,
+   "scratches": 0,
+   "wins_share_of_all_trades": 88.6,
+   "cost_1c_dollars_per_trade": 0.284,
+   "cost_1c_dollars_total": 9.94,
+   "shares_per_1000_avg": 28.4,
+   "profit_factor": 2.67,
+   "gross_pct_total": 78.48,
+   "dollars_total": 784.76,
+   "net_pct_per_trade_after_1c": 2.2137,
+   "dollars_per_trade_after_1c": 22.14,
+   "dollars_total_after_1c": 774.81,
+   "profitable_after_1c": true,
+   "months_above_1pct_total": 31,
+   "months_total": 35,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 5.5432,
+   "months_above_1pct_avg_per_12": 10.6,
+   "months_above_1pct_worst_year_per_12": 9.8,
+   "avg_month_sum_gross_pct": 2.242,
+   "by_year": {
+    "2024": {
+     "trades": 12,
+     "gross_pct_per_trade": 0.8839,
+     "win_rate": 83.3,
+     "months": 12,
+     "months_above_1pct": 10,
+     "months_positive": 10,
+     "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 4.0237,
+     "gross_pct_year": 10.61,
+     "dollars_year": 106.06
+    },
+    "2025": {
+     "trades": 12,
+     "gross_pct_per_trade": 4.1288,
+     "win_rate": 100.0,
+     "months": 12,
+     "months_above_1pct": 12,
+     "months_positive": 12,
+     "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 5.5432,
+     "gross_pct_year": 49.55,
+     "dollars_year": 495.46
+    },
+    "2026": {
+     "trades": 11,
+     "gross_pct_per_trade": 1.6658,
+     "win_rate": 81.8,
+     "months": 11,
+     "months_above_1pct": 9,
+     "months_positive": 9,
+     "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 4.0,
+     "gross_pct_year": 18.32,
+     "dollars_year": 183.23
+    }
+   },
+   "G_level": 2,
+   "WR_level": 3,
+   "S_level": 1,
+   "levels_total": 6,
+   "progress": {
+    "G": 0.747,
+    "WR": 1.0,
+    "S": 0.884,
+    "overall": 0.877,
+    "overall_if_scratch_is_not_a_win": 0.87708
+   },
+   "enough_trades_to_rank": true,
+   "rank": 1
   }
  ]
 }
