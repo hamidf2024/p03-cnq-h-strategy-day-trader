@@ -29,9 +29,11 @@ Two findings change how the data should be pulled:
    system or machine learning". EIA's own data is U.S.-government public
    domain.
 
-One thing needs the owner's decision (Section 5): Alpaca says its API data may
-not be redistributed, and this repository is public and already contains an
-Alpaca-sourced CNQ file.
+One licence point was put to the owner (Section 5): Alpaca says its API data
+may not be redistributed, and this public repository contained an
+Alpaca-sourced CNQ file. The owner decided on 2026-11-23 to keep all price
+data in the local project folder only, and that file has been removed from
+the repository.
 
 ## 1. What is needed
 
@@ -101,9 +103,9 @@ supplied through environment variables. It requests `timeframe=5Min`,
 `feed=sip`, `adjustment=split`, pages through results, converts to U.S.
 Eastern time, keeps the 09:30-15:55 session and writes one CSV per symbol in
 the CNQ file's layout to `data/raw/peers/`. Its paging, time-zone and session
-logic pass a self-test on mocked responses; **it has not yet been run against
-the live services**, because neither host is reachable from the cloud
-research environment.
+logic pass a self-test on mocked responses, and it was run successfully by
+the owner on 2026-11-23 (Section 7). Neither host is reachable from the cloud
+research environment, so it has to be run on the owner's machine.
 
 To get the data into the project, either of these works:
 
@@ -134,11 +136,12 @@ Checks to run before any model sees the new files (the project's standing
   data" [28]. The page does not define redistribution for an individual's
   non-commercial research repository, and the full terms were not read here.
   The cautious reading is that Alpaca-sourced price files should not sit in a
-  public repository. This already applies to
-  `data/raw/CNQ_5min_20200727_to_20261118.csv`. Options: make the repository
-  private; or keep code and results public and remove the raw price files
-  (publishing the download script instead, which is what Section 4 sets up);
-  or ask Alpaca. Until decided, new downloads are kept out of the repository.
+  public repository. **Decided 2026-11-23:** code, documents and result
+  summaries stay public; price files are kept only in the owner's local
+  project folder, and `data/raw/CNQ_5min_20200727_to_20261118.csv` was
+  removed from the repository's current version (earlier commits still
+  contain it; removing it from history would need the repository's history
+  to be rewritten, which has not been done).
 - **EIA:** public domain; an acknowledgment such as "Source: U.S. Energy
   Information Administration" is requested [17].
 - **FRED:** free for personal, non-commercial use, but not for developing or
@@ -156,31 +159,40 @@ Checks to run before any model sees the new files (the project's standing
   is confirmed, the stocks are not.
 - Free-plan intraday depth at Twelve Data and Tiingo.
 
-## 7. Collection status (2026-11-23)
+## 7. Collection status (2026-11-23): complete
 
-The owner asked for the data to be collected and for **all data files to be
-saved only in the local project folder** (`data/raw/peers/` in the local
-clone). Nothing in that folder is committed or pushed; the folder is excluded
-in the local clone, and only code and summary reports (no prices) go to the
-repository.
+All of the data in Section 0 has been collected. By the owner's instruction
+**every data file is saved only in the owner's local project folder**
+(`data/raw/` and `data/raw/peers/`); none of it is in this repository, the
+older CNQ price file has been removed from it, and duplicate copies elsewhere
+have been deleted. `.gitignore` keeps the price files out of git. What each
+local file is: `data/README.md`.
 
-| Item | Status |
+| Item | Result |
 |---|---|
-| EIA daily WTI spot (series RWTC) | **Collected.** 1,596 days from 2020-07-01 to 2026-11-17 (full history from 1986 also kept), no missing or non-positive values. The latest value, 89.53 on 2026-11-17, matches what FRED shows for the same series. Saved locally with the original EIA spreadsheet. |
-| 5-minute bars for CNQ, SU, CVE, IMO, XOM, CVX, USO, XLE (Alpaca) | **Not collected yet.** Needs the owner's Alpaca API key, and `data.alpaca.markets` is not reachable from either the cloud research environment or the sandbox on the Mac. The download script has to be run in the Mac's own Terminal (Section 4), or the host allowed. |
-| Independent daily cross-check (Yahoo or Stooq) | **Not collected.** The same network limits apply, and Stooq's direct download returned nothing. |
+| 5-minute bars, consolidated feed, split-adjusted: CNQ, SU, CVE, IMO, XOM, CVX, USO, XLE | **Collected** from Alpaca's free plan. 1,591 trading days each (2020-07-27 to 2026-11-23, the last day partial), about 123,400 regular-session bars per symbol. It took 52 to 86 requests per symbol, more than the estimate in Section 2, because pre-market and after-hours bars come back too and are filtered out. |
+| EIA daily WTI spot (series RWTC) | **Collected.** 1,596 days from 2020-07-01 to 2026-11-17 (full history from 1986 also kept). The latest value, 89.53 on 2026-11-17, matches FRED's copy of the series. |
+| Independent daily cross-check from a second vendor | **Not done.** No second source was reachable. The feed comparison below is the cross-check in hand. |
 
-First check on what is in hand (`src/stage13_check_peer_data.py`, summary in
-`results/experiments/stage13_data_checks.json`): daily WTI spot returns and
-CNQ daily returns have a correlation of 0.59 over 2020-2026, and between 0.59
-and 0.66 in every single year. Oil explains roughly a third of CNQ's daily
-variance, steadily, which is the case for adding it. The same script also
-shows the existing IEX-feed CNQ file has fewer than 70 of the 78 possible bars
-on 237 of its 1,584 days -- a direct measure of how thin that feed is, and
-the reason to re-pull CNQ on the consolidated feed.
+Checks (`src/stage13_check_peer_data.py`; summary without prices in
+`results/experiments/stage13_data_checks.json`):
 
-The check script reports whatever is present and lists what is missing, so it
-can simply be re-run once the stock files arrive.
+| Check | Finding |
+|---|---|
+| Not empty, well formed | Every file has about 123,400 rows and 7 to 8 MB. No empty cells, no zero or negative prices, no zero-volume bars, no duplicate timestamps, no bars outside 09:30-15:55, no impossible high/low/close rows. The largest single 5-minute move in any symbol is 6.6%. |
+| Completeness | All eight symbols have the same 1,591-day calendar and a median of 78 of 78 bars per day. Short days are the scheduled half-days and the partial last day (2026-11-23, 11 bars). **Three real gaps:** on 2021-04-19, 2021-10-25 and 2022-03-08 the five NYSE-listed symbols (CNQ, SU, CVE, XOM, CVX) have a single 09:30 bar and nothing else, while IMO, USO and XLE are complete. The vendor's history is missing those sessions for that group of stocks; the older IEX file lacks the same three days. They are 3 of 1,591 days (0.2%) and must be treated as missing, not as one-bar days. |
+| Splits | No overnight move above 20% in any symbol. CNQ's 2-for-1 on 2024-06-11 is adjusted correctly (closes of 35.46 and 35.57 either side). The largest overnight moves are real market days (2020-11-09 for most symbols). |
+| Consolidated feed vs the existing IEX file (CNQ) | Daily closes differ by 0.02% at the median, by more than 0.25% on 10 of 1,584 days, and by 1.73% at most (2024-12-23). Daily returns correlate 0.9988. The IEX file is about 4% of the consolidated volume, lacks four days entirely and has fewer than 70 bars on 237 days. Good enough to trust the daily-bar results so far; the intraday zone results should be re-run on the consolidated file before being relied on. |
+| Peers against CNQ | Daily-return correlation with CNQ: CVE 0.84, SU 0.83, XLE 0.82, IMO 0.80, XOM 0.74, CVX 0.73, USO 0.64. The Canadian producers are the closest peers, as expected. |
+| Oil | Daily WTI spot returns correlate 0.59 with CNQ (0.59 to 0.66 in every year) and 0.91 with USO (0.85 to 0.96 by year). On 10 days spot and USO differ by more than 5 points; the largest are days where the spot series moved without the fund (for example 2026-09-28: spot +15.3%, USO +1.1%), which is a property of the spot series, not bad USO data. This supports using USO for anything time-stamped and the spot series only as daily context. |
+
+How to handle the three gap days: drop them for the five affected symbols
+when daily bars are built (a one-bar day would otherwise produce a false daily
+range and close), and do not open or close a simulated trade on them.
+
+What this does not cover: a comparison against a second vendor, and whether the
+Stage 12 models give the same signals on the consolidated-feed CNQ file. The
+second is the first task of Stage 13.
 
 ## Sources
 
