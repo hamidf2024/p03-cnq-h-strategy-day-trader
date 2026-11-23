@@ -163,3 +163,4 @@ table.score{min-width:1160px}
 .score .yr em.neg{color:var(--bad)}
 table.score th:nth-child(3){width:196px}
 table.score{min-width:1210px}
+.score .yr.two{grid-template-columns:auto 1fr}
