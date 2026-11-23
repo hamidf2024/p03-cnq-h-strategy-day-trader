@@ -263,11 +263,55 @@ Reaching level 1 on all four goals with a margin needs a better forecast of
 the month ahead, which means new information (Section 8), not another
 arrangement of the same trades.
 
+## 13. Addendum: stops from 1% to 15% (owner's request), to find the best size
+
+The owner asked that the next model consider any stop from 1% to 15%.
+`src/s13_stop_range_search.py` repeats the Section 12 search with ten stop
+sizes (1, 2, 3, 4, 5, 6, 8, 10, 12, 15%), six targets (2.6 to 9%), three time
+limits (20, 40, 60 sessions) and nine entry patterns, one of them new: buying
+again at the close after a stop-out, up to two or three trades in the month.
+1,620 eligible settings; training years only, test years removed; same gate
+as Section 12.
+
+One trade a month, +5.5% target, 60 sessions, CNQ, 2021-2023 (32 trades):
+
+| Stop | G per trade | Win rate | Stopped out | S 2021/22/23 | GM 2021/22/23 |
+|---|---|---|---|---|---|
+| 1% | +0.95% | 31% | 22 | 3 / 4 / 3 | 3 / 4 / 3 |
+| 2% | +1.01% | 41% | 19 | 5 / 4 / 4 | 5 / 4 / 4 |
+| 3% | +0.96% | 47% | 17 | 5 / 5 / 5 | 5 / 5 / 5 |
+| 4% | +0.70% | 50% | 16 | 5 / 6 / 5 | 5 / 6 / 5 |
+| 5% | +0.86% | 56% | 14 | 5 / 7 / 6 | 5 / 7 / 6 |
+| 6% | +0.49% | 56% | 14 | 5 / 7 / 6 | 5 / 7 / 6 |
+| 8% | +0.92% | 66% | 11 | 5 / 8 / 8 | 5 / 8 / 8 |
+| 10% | +1.68% | 75% | 8 | 7 / 9 / 8 | 7 / 9 / 8 |
+| 12% | +1.65% | 78% | 7 | 7 / 9 / 9 | 7 / 9 / 9 |
+| 15% | +2.08% | 81% | 5 | 8 / 9 / 9 | 8 / 9 / 9 |
+
+(Level 1 needs 8 / 8 / 7 months.)
+
+**Result: the best stop on the training years is 15%, the widest allowed.
+None of the 1,620 settings clears the gate; no run on 2024-2026 was made
+(still twenty looks).** The best worst-year margin on the month goals at each
+stop size was -4 months at 1%, -3 from 2% to 8%, -1 at 10% and 12%, and 0 at
+15%. With stops of 1% to 3% almost no setting keeps a 50% win rate. Buying
+again after a stop did not help: a month with one stopped trade and one
+winner rarely averages above 1% per trade. Stops of 4% and 5% can reach G1
+and WR1 together (for example a second entry on a 2% dip, +5.5% target, 20
+sessions: +1.4% to +1.5%, 58% to 61%), which is what model L already does on
+the test years, but not the month goals.
+
+Why: CNQ's ordinary day-to-day swing is about 2%, so a stop of a few percent
+is inside the noise and sells trades that would have recovered. The caution
+is the same as before: 2021-2023 were rising years, and in a falling year a
+wide stop makes each loss larger.
+
 ## Code and results
 
 `src/s13_lib.py`, `src/s13_feasibility.py`, `src/s13_ladder_gate_search.py`
 (the stricter gate and the 112-setting search, results in
-`results/experiments/stage13_round11_gate_search.json`), `src/stage13_peer_fusion.py`
+`results/experiments/stage13_round11_gate_search.json`), `src/s13_stop_range_search.py`
+(stops from 1% to 15%, `stage13_round12_stop_range_search.json`), `src/stage13_peer_fusion.py`
 (modes `walkforward`, `round5`, `round6`, `round7` to `round10`, `blind`, `verify`);
 `results/experiments/stage13_feasibility.json`,
 `stage13_walkforward_results.json`, `stage13_frozen.pkl`,

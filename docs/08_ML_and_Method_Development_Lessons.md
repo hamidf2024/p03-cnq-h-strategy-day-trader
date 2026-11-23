@@ -307,6 +307,13 @@ per-stage section at the end.)*
   the bet. When a goal can be reached by splitting or repeating a position,
   say so and ask the owner how the goal should count before reporting it as
   reached.
+- **(Stage 13) Size the stop against the stock's ordinary swing.** CNQ moves
+  about 2% on an ordinary day. On the training years a stop of 1% to 3% was
+  hit in more than half of the monthly trades and the win rate fell below
+  50%; every step wider improved the win rate and the month goals, up to the
+  15% limit. A stop inside the noise is a cost, not protection. Test the
+  whole range on training data before choosing one, and remember the range
+  was priced in rising years.
 
 ## 4. Evaluation and metrics lessons
 
