@@ -64,6 +64,9 @@ Definitions
   trade is reported), or if its worst test trade was within it. A method
   outside the 15% level is scored but not ranked and its levels do not count;
   each method is also marked as inside or outside the 5% level.
+* Same-time rule (owner, 2026-11-23): trades opened at exactly the same time
+  count as one trade; trades opened at different times count separately, even
+  on the same day (merge_same_time).
 * Cost check: 1 cent per share for the round trip (spread and slippage; both
   brokers the owner uses charge no commission).
 """
@@ -192,6 +195,24 @@ def level(value, levels, top_strict=True):
     return lv
 
 
+SAME_TIME_MERGED = {}
+
+
+def merge_same_time(tr):
+    """Owner's rule (2026-11-23): trades opened at exactly the same time count as ONE trade; trades opened at
+    different times count separately, even on the same day. A list with an entry_time column is merged on
+    (method, date, time). The older multi-day lists have no time column because every entry is at the close,
+    so two rows of one method on one date are the same moment. The same-day methods hold one position at a
+    time by construction, so they cannot open two trades at the same moment and are left as they are."""
+    if 'entry_time' not in tr.columns:
+        tr['entry_time'] = np.nan
+    same_day = tr.method.map(lambda m: META.get(m, ('', '', ''))[2] == 'same day')
+    key = tr.entry_time.where(tr.entry_time.notna(), 'close').astype(str)
+    dup = tr.assign(_k=key).duplicated(subset=['method', 'entry_date', '_k'], keep='first') & ~same_day
+    SAME_TIME_MERGED.clear(); SAME_TIME_MERGED.update(tr[dup].groupby('method').size().to_dict())
+    return tr[~dup].copy()
+
+
 def load_trades(paths, stage11, stage12):
     frames = [pd.read_csv(p) for p in paths]
     if stage11:
@@ -206,6 +227,7 @@ def load_trades(paths, stage11, stage12):
                                         pnl=t.ret / 100 * t.entry)))
     tr = pd.concat(frames, ignore_index=True)
     tr['entry_date'] = pd.to_datetime(tr.entry_date)
+    tr = merge_same_time(tr)
     tr = tr[tr.entry_date.dt.year.astype(str).isin(BLIND)].copy()
     tr['ret'] = tr.pnl / tr.entry_price * 100
     tr['year'] = tr.entry_date.dt.year
@@ -314,6 +336,8 @@ def score(paths, stage11, stage12, outdir):
         level1_on_all_three=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level']) >= 1 and c['keeps_loss_limit']],
         level1_on_all_three_within_5pct=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level']) >= 1 and c['keeps_strict_loss_limit']],
         level1_but_breaks_loss_limit=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level']) >= 1 and not c['keeps_loss_limit']],
+        same_time_rule=dict(rule='trades opened at exactly the same time count as one trade; different times count separately',
+                            merged_trades_by_method={k: int(v) for k, v in SAME_TIME_MERGED.items()}),
         risk_rule=dict(max_loss_pct_per_trade=MAX_LOSS_PCT, strict_max_loss_pct_per_trade=STRICT_LOSS_PCT, methods_with_stop_at_limit=sorted(STOP_AT_LIMIT),
                        note='levels count, and a method is ranked, only if its worst trade is within the limit'),
         leaders=dict(G=max(cards, key=lambda c: c['gross_pct_per_trade'])['id'],
