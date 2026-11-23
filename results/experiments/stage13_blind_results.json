@@ -254,5 +254,139 @@
   },
   "worst_trade": -5.01,
   "worst_year_excess": 0.116
+ },
+ "R5_first_passage": {
+  "G": 0.592,
+  "G_ci95": [
+   -0.35,
+   1.38
+  ],
+  "G_without_top2": 0.54,
+  "S": [
+   6,
+   7,
+   9
+  ],
+  "WR": 84.6,
+  "avg_days_held": 6.6,
+  "best_trade": 2.64,
+  "excess": 0.248,
+  "exits": {
+   "target": 64,
+   "time": 14
+  },
+  "max_drawdown_sum_pct": -17.3,
+  "median": 2.0,
+  "min_trades_year": 22,
+  "n": 78,
+  "net_after_1c": 0.565,
+  "per_year": {
+   "2024": {
+    "G": 0.398,
+    "S": 6,
+    "WR": 81.5,
+    "excess": 0.395,
+    "months_traded": 11,
+    "n": 27,
+    "shorts": 0
+   },
+   "2025": {
+    "G": 0.804,
+    "S": 7,
+    "WR": 81.8,
+    "excess": 0.129,
+    "months_traded": 11,
+    "n": 22,
+    "shorts": 0
+   },
+   "2026": {
+    "G": 0.61,
+    "S": 9,
+    "WR": 89.7,
+    "excess": 0.202,
+    "months_traded": 11,
+    "n": 29,
+    "shorts": 0
+   }
+  },
+  "setting": {
+   "H": 5,
+   "hold": 20,
+   "q": 0.5,
+   "side": "long",
+   "src": "gbm",
+   "stop": null,
+   "target": 2.0
+  },
+  "worst_trade": -17.3,
+  "worst_year_excess": 0.129
+ },
+ "R6_one_a_month": {
+  "G": 2.242,
+  "G_ci95": [
+   0.26,
+   3.92
+  ],
+  "G_without_top2": 2.088,
+  "S": [
+   10,
+   12,
+   9
+  ],
+  "WR": 88.6,
+  "avg_days_held": 17.0,
+  "best_trade": 5.54,
+  "excess": 1.212,
+  "exits": {
+   "target": 31,
+   "time": 4
+  },
+  "max_drawdown_sum_pct": -29.42,
+  "median": 4.0,
+  "min_trades_year": 11,
+  "n": 35,
+  "net_after_1c": 2.214,
+  "per_year": {
+   "2024": {
+    "G": 0.884,
+    "S": 10,
+    "WR": 83.3,
+    "excess": 1.893,
+    "months_traded": 12,
+    "n": 12,
+    "shorts": 0
+   },
+   "2025": {
+    "G": 4.129,
+    "S": 12,
+    "WR": 100.0,
+    "excess": 1.573,
+    "months_traded": 12,
+    "n": 12,
+    "shorts": 0
+   },
+   "2026": {
+    "G": 1.666,
+    "S": 9,
+    "WR": 81.8,
+    "excess": 0.076,
+    "months_traded": 11,
+    "n": 11,
+    "shorts": 0
+   }
+  },
+  "setting": {
+   "H": 5,
+   "hold": 60,
+   "monthly": true,
+   "overlap": true,
+   "q": 0.5,
+   "side": "long",
+   "src": "gbm",
+   "stop": null,
+   "target": 4.0
+  },
+  "worst_trade": -17.3,
+  "worst_year_excess": 0.076
  }
 }

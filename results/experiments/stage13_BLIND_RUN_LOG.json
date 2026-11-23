@@ -42,5 +42,27 @@
   ],
   "blind_look_number": 4,
   "result_sha256": "9a55127db495dfbcfba37e5b37f44b5d36eee0169e78b78f28f01923ac796e3e"
+ },
+ "R5_first_passage": {
+  "frozen_artefact": "stage13_frozen_R5.pkl",
+  "frozen_sha256": "e94f7a6a258c7e2e4d83136ba35b372fc95755c87c049e61c4e2e715e4760f4a",
+  "ran_on": "2026-11-23 17:30:07.699403",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 5,
+  "result_sha256": "1411bdb53b9819dd5bb8025dc70e2fb361eff0fef1a7e3870f6f7fd956e528d7"
+ },
+ "R6_one_a_month": {
+  "frozen_artefact": "stage13_frozen_R6.pkl",
+  "frozen_sha256": "f2cc381ca551f011d3420c0992ee9b2ed48e90f692b1f61bbaa2f8a4f7a235d4",
+  "ran_on": "2026-11-23 17:31:34.743777",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 6,
+  "result_sha256": "79d2cf900152a44ccb7b1edae81361ec520afa598cb589def537737efe756b16"
  }
 }

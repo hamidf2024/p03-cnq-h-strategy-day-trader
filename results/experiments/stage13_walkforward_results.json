@@ -1218,6 +1218,2506 @@
     "stop": null,
     "target": null
    }
+  },
+  "R5_first_passage": {
+   "settings": {
+    "{\"H\": 5, \"hold\": 10, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": null, \"target\": 2.0}": {
+     "n": 140,
+     "G": 0.474,
+     "WR": 81.4,
+     "S": [
+      3,
+      7,
+      3
+     ],
+     "excess": -0.22,
+     "worst_year_excess": -1.194,
+     "min_trades_year": 30,
+     "per_year": {
+      "2021": {
+       "n": 53,
+       "G": 0.555,
+       "excess": -0.023,
+       "WR": 83.0,
+       "S": 3,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 57,
+       "G": 0.824,
+       "excess": 0.109,
+       "WR": 87.7,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 30,
+       "G": -0.332,
+       "excess": -1.194,
+       "WR": 66.7,
+       "S": 3,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": 10.0, \"target\": 2.0}": {
+     "n": 159,
+     "G": 0.528,
+     "WR": 82.4,
+     "S": [
+      3,
+      5,
+      4
+     ],
+     "excess": 0.028,
+     "worst_year_excess": -0.739,
+     "min_trades_year": 35,
+     "per_year": {
+      "2021": {
+       "n": 60,
+       "G": 0.59,
+       "excess": 0.428,
+       "WR": 85.0,
+       "S": 3,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 64,
+       "G": 0.741,
+       "excess": 0.073,
+       "WR": 85.9,
+       "S": 5,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 35,
+       "G": 0.033,
+       "excess": -0.739,
+       "WR": 71.4,
+       "S": 4,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": null, \"target\": 2.0}": {
+     "n": 105,
+     "G": 0.886,
+     "WR": 87.6,
+     "S": [
+      7,
+      9,
+      5
+     ],
+     "excess": -0.16,
+     "worst_year_excess": -1.156,
+     "min_trades_year": 22,
+     "per_year": {
+      "2021": {
+       "n": 32,
+       "G": 1.129,
+       "excess": -0.137,
+       "WR": 84.4,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 51,
+       "G": 1.124,
+       "excess": 0.256,
+       "WR": 94.1,
+       "S": 9,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 22,
+       "G": -0.019,
+       "excess": -1.156,
+       "WR": 77.3,
+       "S": 5,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": 10.0, \"target\": 2.0}": {
+     "n": 143,
+     "G": 0.602,
+     "WR": 86.7,
+     "S": [
+      5,
+      7,
+      7
+     ],
+     "excess": 0.078,
+     "worst_year_excess": -0.311,
+     "min_trades_year": 29,
+     "per_year": {
+      "2021": {
+       "n": 53,
+       "G": 0.493,
+       "excess": 0.227,
+       "WR": 86.8,
+       "S": 5,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 61,
+       "G": 0.734,
+       "excess": 0.134,
+       "WR": 88.5,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 29,
+       "G": 0.526,
+       "excess": -0.311,
+       "WR": 82.8,
+       "S": 7,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": null, \"target\": 3.0}": {
+     "n": 113,
+     "G": 0.879,
+     "WR": 71.7,
+     "S": [
+      6,
+      8,
+      4
+     ],
+     "excess": 0.031,
+     "worst_year_excess": -0.53,
+     "min_trades_year": 30,
+     "per_year": {
+      "2021": {
+       "n": 43,
+       "G": 1.216,
+       "excess": 0.402,
+       "WR": 76.7,
+       "S": 6,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 40,
+       "G": 0.797,
+       "excess": 0.052,
+       "WR": 72.5,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 30,
+       "G": 0.507,
+       "excess": -0.53,
+       "WR": 63.3,
+       "S": 4,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": 10.0, \"target\": 3.0}": {
+     "n": 124,
+     "G": 0.556,
+     "WR": 72.6,
+     "S": [
+      4,
+      7,
+      3
+     ],
+     "excess": -0.049,
+     "worst_year_excess": -0.481,
+     "min_trades_year": 31,
+     "per_year": {
+      "2021": {
+       "n": 44,
+       "G": 0.765,
+       "excess": 0.439,
+       "WR": 75.0,
+       "S": 4,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 49,
+       "G": 0.447,
+       "excess": -0.215,
+       "WR": 75.5,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 31,
+       "G": 0.431,
+       "excess": -0.481,
+       "WR": 64.5,
+       "S": 3,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": null, \"target\": 3.0}": {
+     "n": 87,
+     "G": 1.139,
+     "WR": 82.8,
+     "S": [
+      7,
+      9,
+      6
+     ],
+     "excess": 0.036,
+     "worst_year_excess": -1.056,
+     "min_trades_year": 20,
+     "per_year": {
+      "2021": {
+       "n": 32,
+       "G": 1.788,
+       "excess": 0.248,
+       "WR": 84.4,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 35,
+       "G": 1.072,
+       "excess": 0.466,
+       "WR": 88.6,
+       "S": 9,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 20,
+       "G": 0.215,
+       "excess": -1.056,
+       "WR": 70.0,
+       "S": 6,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": 10.0, \"target\": 3.0}": {
+     "n": 109,
+     "G": 0.657,
+     "WR": 79.8,
+     "S": [
+      5,
+      7,
+      5
+     ],
+     "excess": 0.162,
+     "worst_year_excess": -0.541,
+     "min_trades_year": 24,
+     "per_year": {
+      "2021": {
+       "n": 38,
+       "G": 0.799,
+       "excess": 0.401,
+       "WR": 81.6,
+       "S": 5,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 47,
+       "G": 0.752,
+       "excess": 0.329,
+       "WR": 83.0,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 24,
+       "G": 0.247,
+       "excess": -0.541,
+       "WR": 70.8,
+       "S": 5,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": null, \"target\": 4.0}": {
+     "n": 102,
+     "G": 0.956,
+     "WR": 69.6,
+     "S": [
+      5,
+      9,
+      3
+     ],
+     "excess": 0.03,
+     "worst_year_excess": -0.992,
+     "min_trades_year": 26,
+     "per_year": {
+      "2021": {
+       "n": 38,
+       "G": 1.435,
+       "excess": 0.462,
+       "WR": 68.4,
+       "S": 5,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 38,
+       "G": 1.017,
+       "excess": 0.298,
+       "WR": 76.3,
+       "S": 9,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 26,
+       "G": 0.165,
+       "excess": -0.992,
+       "WR": 61.5,
+       "S": 3,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": 10.0, \"target\": 4.0}": {
+     "n": 112,
+     "G": 0.843,
+     "WR": 70.5,
+     "S": [
+      6,
+      8,
+      3
+     ],
+     "excess": 0.125,
+     "worst_year_excess": -0.88,
+     "min_trades_year": 25,
+     "per_year": {
+      "2021": {
+       "n": 41,
+       "G": 1.362,
+       "excess": 0.876,
+       "WR": 73.2,
+       "S": 6,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 46,
+       "G": 0.755,
+       "excess": 0.002,
+       "WR": 73.9,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 25,
+       "G": 0.152,
+       "excess": -0.88,
+       "WR": 60.0,
+       "S": 3,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": null, \"target\": 4.0}": {
+     "n": 64,
+     "G": 1.353,
+     "WR": 78.1,
+     "S": [
+      8,
+      8,
+      6
+     ],
+     "excess": 0.074,
+     "worst_year_excess": -0.619,
+     "min_trades_year": 15,
+     "per_year": {
+      "2021": {
+       "n": 24,
+       "G": 2.175,
+       "excess": 0.393,
+       "WR": 79.2,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 25,
+       "G": 0.882,
+       "excess": 0.183,
+       "WR": 84.0,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 15,
+       "G": 0.821,
+       "excess": -0.619,
+       "WR": 66.7,
+       "S": 6,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": 10.0, \"target\": 4.0}": {
+     "n": 84,
+     "G": 0.999,
+     "WR": 76.2,
+     "S": [
+      5,
+      8,
+      5
+     ],
+     "excess": 0.391,
+     "worst_year_excess": -0.452,
+     "min_trades_year": 18,
+     "per_year": {
+      "2021": {
+       "n": 32,
+       "G": 1.084,
+       "excess": 0.588,
+       "WR": 78.1,
+       "S": 5,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 34,
+       "G": 1.172,
+       "excess": 0.652,
+       "WR": 79.4,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 18,
+       "G": 0.523,
+       "excess": -0.452,
+       "WR": 66.7,
+       "S": 5,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 2.0}": {
+     "n": 101,
+     "G": 0.953,
+     "WR": 84.0,
+     "S": [
+      5,
+      7,
+      9
+     ],
+     "excess": 0.249,
+     "worst_year_excess": -0.2,
+     "min_trades_year": 28,
+     "per_year": {
+      "2021": {
+       "n": 38,
+       "G": 0.716,
+       "excess": 0.138,
+       "WR": 84.2,
+       "S": 5,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 35,
+       "G": 0.515,
+       "excess": -0.2,
+       "WR": 79.4,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 28,
+       "G": 1.821,
+       "excess": 0.959,
+       "WR": 89.3,
+       "S": 9,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 2.0}": {
+     "n": 110,
+     "G": 0.688,
+     "WR": 83.5,
+     "S": [
+      5,
+      6,
+      9
+     ],
+     "excess": 0.171,
+     "worst_year_excess": -0.672,
+     "min_trades_year": 30,
+     "per_year": {
+      "2021": {
+       "n": 39,
+       "G": 0.705,
+       "excess": 0.543,
+       "WR": 84.6,
+       "S": 5,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 41,
+       "G": -0.004,
+       "excess": -0.672,
+       "WR": 77.5,
+       "S": 6,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 30,
+       "G": 1.611,
+       "excess": 0.839,
+       "WR": 90.0,
+       "S": 9,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 2.0}": {
+     "n": 89,
+     "G": 1.547,
+     "WR": 95.5,
+     "S": [
+      9,
+      11,
+      8
+     ],
+     "excess": 0.46,
+     "worst_year_excess": 0.329,
+     "min_trades_year": 25,
+     "per_year": {
+      "2021": {
+       "n": 32,
+       "G": 1.723,
+       "excess": 0.457,
+       "WR": 96.9,
+       "S": 9,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 32,
+       "G": 1.433,
+       "excess": 0.565,
+       "WR": 96.9,
+       "S": 11,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 25,
+       "G": 1.466,
+       "excess": 0.329,
+       "WR": 92.0,
+       "S": 8,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 2.0}": {
+     "n": 109,
+     "G": 0.892,
+     "WR": 89.0,
+     "S": [
+      7,
+      8,
+      7
+     ],
+     "excess": 0.348,
+     "worst_year_excess": -0.177,
+     "min_trades_year": 29,
+     "per_year": {
+      "2021": {
+       "n": 39,
+       "G": 1.209,
+       "excess": 0.942,
+       "WR": 92.3,
+       "S": 7,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 41,
+       "G": 0.423,
+       "excess": -0.177,
+       "WR": 85.4,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 29,
+       "G": 1.127,
+       "excess": 0.29,
+       "WR": 89.7,
+       "S": 7,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 3.0}": {
+     "n": 77,
+     "G": 0.868,
+     "WR": 71.1,
+     "S": [
+      5,
+      7,
+      8
+     ],
+     "excess": 0.016,
+     "worst_year_excess": -0.476,
+     "min_trades_year": 22,
+     "per_year": {
+      "2021": {
+       "n": 27,
+       "G": 0.693,
+       "excess": -0.121,
+       "WR": 74.1,
+       "S": 5,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 28,
+       "G": 0.269,
+       "excess": -0.476,
+       "WR": 63.0,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 22,
+       "G": 1.847,
+       "excess": 0.81,
+       "WR": 77.3,
+       "S": 8,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 3.0}": {
+     "n": 89,
+     "G": 0.428,
+     "WR": 72.7,
+     "S": [
+      5,
+      4,
+      8
+     ],
+     "excess": -0.205,
+     "worst_year_excess": -1.309,
+     "min_trades_year": 26,
+     "per_year": {
+      "2021": {
+       "n": 27,
+       "G": 0.715,
+       "excess": 0.39,
+       "WR": 74.1,
+       "S": 5,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 36,
+       "G": -0.647,
+       "excess": -1.309,
+       "WR": 65.7,
+       "S": 4,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 26,
+       "G": 1.62,
+       "excess": 0.708,
+       "WR": 80.8,
+       "S": 8,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 3.0}": {
+     "n": 63,
+     "G": 1.371,
+     "WR": 84.1,
+     "S": [
+      6,
+      8,
+      8
+     ],
+     "excess": 0.253,
+     "worst_year_excess": -0.233,
+     "min_trades_year": 19,
+     "per_year": {
+      "2021": {
+       "n": 21,
+       "G": 1.795,
+       "excess": 0.255,
+       "WR": 81.0,
+       "S": 6,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 23,
+       "G": 0.373,
+       "excess": -0.233,
+       "WR": 82.6,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 19,
+       "G": 2.11,
+       "excess": 0.838,
+       "WR": 89.5,
+       "S": 8,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 3.0}": {
+     "n": 83,
+     "G": 0.778,
+     "WR": 80.7,
+     "S": [
+      6,
+      6,
+      8
+     ],
+     "excess": 0.266,
+     "worst_year_excess": -0.64,
+     "min_trades_year": 22,
+     "per_year": {
+      "2021": {
+       "n": 26,
+       "G": 1.341,
+       "excess": 0.942,
+       "WR": 84.6,
+       "S": 6,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 35,
+       "G": -0.217,
+       "excess": -0.64,
+       "WR": 74.3,
+       "S": 6,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 22,
+       "G": 1.696,
+       "excess": 0.907,
+       "WR": 86.4,
+       "S": 8,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}": {
+     "n": 69,
+     "G": 1.273,
+     "WR": 69.1,
+     "S": [
+      6,
+      7,
+      9
+     ],
+     "excess": 0.329,
+     "worst_year_excess": -0.745,
+     "min_trades_year": 21,
+     "per_year": {
+      "2021": {
+       "n": 25,
+       "G": 1.642,
+       "excess": 0.668,
+       "WR": 76.0,
+       "S": 6,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 23,
+       "G": -0.026,
+       "excess": -0.745,
+       "WR": 54.5,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 21,
+       "G": 2.257,
+       "excess": 1.1,
+       "WR": 76.2,
+       "S": 9,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 4.0}": {
+     "n": 78,
+     "G": 0.791,
+     "WR": 70.1,
+     "S": [
+      6,
+      5,
+      8
+     ],
+     "excess": 0.041,
+     "worst_year_excess": -1.58,
+     "min_trades_year": 23,
+     "per_year": {
+      "2021": {
+       "n": 25,
+       "G": 1.573,
+       "excess": 1.086,
+       "WR": 76.0,
+       "S": 6,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 30,
+       "G": -0.827,
+       "excess": -1.58,
+       "WR": 58.6,
+       "S": 5,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 23,
+       "G": 2.052,
+       "excess": 1.021,
+       "WR": 78.3,
+       "S": 8,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}": {
+     "n": 51,
+     "G": 1.732,
+     "WR": 84.3,
+     "S": [
+      8,
+      8,
+      7
+     ],
+     "excess": 0.433,
+     "worst_year_excess": -0.348,
+     "min_trades_year": 15,
+     "per_year": {
+      "2021": {
+       "n": 18,
+       "G": 3.111,
+       "excess": 1.329,
+       "WR": 94.4,
+       "S": 8,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 18,
+       "G": 0.351,
+       "excess": -0.348,
+       "WR": 77.8,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 15,
+       "G": 1.734,
+       "excess": 0.293,
+       "WR": 80.0,
+       "S": 7,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 4.0}": {
+     "n": 67,
+     "G": 0.993,
+     "WR": 77.6,
+     "S": [
+      6,
+      7,
+      7
+     ],
+     "excess": 0.359,
+     "worst_year_excess": -0.758,
+     "min_trades_year": 18,
+     "per_year": {
+      "2021": {
+       "n": 23,
+       "G": 2.105,
+       "excess": 1.61,
+       "WR": 87.0,
+       "S": 6,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 26,
+       "G": -0.237,
+       "excess": -0.758,
+       "WR": 69.2,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 18,
+       "G": 1.348,
+       "excess": 0.374,
+       "WR": 77.8,
+       "S": 7,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 2.0}": {
+     "n": 67,
+     "G": 0.749,
+     "WR": 82.1,
+     "S": [
+      3,
+      9,
+      7
+     ],
+     "excess": 0.05,
+     "worst_year_excess": -0.813,
+     "min_trades_year": 15,
+     "per_year": {
+      "2021": {
+       "n": 24,
+       "G": -0.235,
+       "excess": -0.813,
+       "WR": 75.0,
+       "S": 3,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 28,
+       "G": 1.053,
+       "excess": 0.339,
+       "WR": 85.7,
+       "S": 9,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 15,
+       "G": 1.754,
+       "excess": 0.892,
+       "WR": 86.7,
+       "S": 7,
+       "months_traded": 9,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 2.0}": {
+     "n": 73,
+     "G": 0.477,
+     "WR": 82.2,
+     "S": [
+      3,
+      9,
+      8
+     ],
+     "excess": -0.034,
+     "worst_year_excess": -0.336,
+     "min_trades_year": 16,
+     "per_year": {
+      "2021": {
+       "n": 26,
+       "G": -0.175,
+       "excess": -0.336,
+       "WR": 76.9,
+       "S": 3,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 31,
+       "G": 0.576,
+       "excess": -0.092,
+       "WR": 83.9,
+       "S": 9,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 16,
+       "G": 1.344,
+       "excess": 0.571,
+       "WR": 87.5,
+       "S": 8,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 2.0}": {
+     "n": 57,
+     "G": 1.25,
+     "WR": 89.5,
+     "S": [
+      5,
+      11,
+      7
+     ],
+     "excess": 0.204,
+     "worst_year_excess": -0.628,
+     "min_trades_year": 14,
+     "per_year": {
+      "2021": {
+       "n": 16,
+       "G": 0.638,
+       "excess": -0.628,
+       "WR": 75.0,
+       "S": 5,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 27,
+       "G": 1.427,
+       "excess": 0.559,
+       "WR": 96.3,
+       "S": 11,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 14,
+       "G": 1.607,
+       "excess": 0.47,
+       "WR": 92.9,
+       "S": 7,
+       "months_traded": 8,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 2.0}": {
+     "n": 69,
+     "G": 0.488,
+     "WR": 84.1,
+     "S": [
+      4,
+      10,
+      7
+     ],
+     "excess": -0.052,
+     "worst_year_excess": -0.371,
+     "min_trades_year": 15,
+     "per_year": {
+      "2021": {
+       "n": 23,
+       "G": -0.105,
+       "excess": -0.371,
+       "WR": 78.3,
+       "S": 4,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 31,
+       "G": 0.695,
+       "excess": 0.095,
+       "WR": 87.1,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 15,
+       "G": 0.969,
+       "excess": 0.132,
+       "WR": 86.7,
+       "S": 7,
+       "months_traded": 9,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 3.0}": {
+     "n": 55,
+     "G": 0.54,
+     "WR": 69.1,
+     "S": [
+      2,
+      8,
+      6
+     ],
+     "excess": -0.299,
+     "worst_year_excess": -1.345,
+     "min_trades_year": 13,
+     "per_year": {
+      "2021": {
+       "n": 20,
+       "G": -0.531,
+       "excess": -1.345,
+       "WR": 65.0,
+       "S": 2,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 22,
+       "G": 1.023,
+       "excess": 0.278,
+       "WR": 68.2,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 13,
+       "G": 1.37,
+       "excess": 0.333,
+       "WR": 76.9,
+       "S": 6,
+       "months_traded": 8,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 3.0}": {
+     "n": 61,
+     "G": 0.034,
+     "WR": 68.9,
+     "S": [
+      2,
+      7,
+      6
+     ],
+     "excess": -0.565,
+     "worst_year_excess": -0.985,
+     "min_trades_year": 13,
+     "per_year": {
+      "2021": {
+       "n": 21,
+       "G": -0.334,
+       "excess": -0.659,
+       "WR": 66.7,
+       "S": 2,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 27,
+       "G": -0.323,
+       "excess": -0.985,
+       "WR": 66.7,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 13,
+       "G": 1.37,
+       "excess": 0.458,
+       "WR": 76.9,
+       "S": 6,
+       "months_traded": 8,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 3.0}": {
+     "n": 46,
+     "G": 0.58,
+     "WR": 76.1,
+     "S": [
+      4,
+      8,
+      5
+     ],
+     "excess": -0.47,
+     "worst_year_excess": -0.813,
+     "min_trades_year": 11,
+     "per_year": {
+      "2021": {
+       "n": 14,
+       "G": 0.727,
+       "excess": -0.813,
+       "WR": 64.3,
+       "S": 4,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 21,
+       "G": 0.028,
+       "excess": -0.578,
+       "WR": 81.0,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 11,
+       "G": 1.446,
+       "excess": 0.174,
+       "WR": 81.8,
+       "S": 5,
+       "months_traded": 7,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 3.0}": {
+     "n": 56,
+     "G": 0.139,
+     "WR": 75.0,
+     "S": [
+      4,
+      8,
+      5
+     ],
+     "excess": -0.347,
+     "worst_year_excess": -0.899,
+     "min_trades_year": 11,
+     "per_year": {
+      "2021": {
+       "n": 20,
+       "G": 0.19,
+       "excess": -0.209,
+       "WR": 75.0,
+       "S": 4,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 25,
+       "G": -0.476,
+       "excess": -0.899,
+       "WR": 72.0,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 11,
+       "G": 1.446,
+       "excess": 0.657,
+       "WR": 81.8,
+       "S": 5,
+       "months_traded": 7,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}": {
+     "n": 52,
+     "G": 0.98,
+     "WR": 67.3,
+     "S": [
+      3,
+      8,
+      6
+     ],
+     "excess": 0.059,
+     "worst_year_excess": -0.937,
+     "min_trades_year": 13,
+     "per_year": {
+      "2021": {
+       "n": 19,
+       "G": 0.037,
+       "excess": -0.937,
+       "WR": 63.2,
+       "S": 3,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 20,
+       "G": 1.312,
+       "excess": 0.593,
+       "WR": 65.0,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 13,
+       "G": 1.848,
+       "excess": 0.691,
+       "WR": 76.9,
+       "S": 6,
+       "months_traded": 8,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 10, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 4.0}": {
+     "n": 58,
+     "G": 0.412,
+     "WR": 67.2,
+     "S": [
+      3,
+      7,
+      6
+     ],
+     "excess": -0.311,
+     "worst_year_excess": -0.877,
+     "min_trades_year": 13,
+     "per_year": {
+      "2021": {
+       "n": 20,
+       "G": 0.149,
+       "excess": -0.338,
+       "WR": 65.0,
+       "S": 3,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 25,
+       "G": -0.124,
+       "excess": -0.877,
+       "WR": 64.0,
+       "S": 7,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 13,
+       "G": 1.848,
+       "excess": 0.816,
+       "WR": 76.9,
+       "S": 6,
+       "months_traded": 8,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}": {
+     "n": 41,
+     "G": 0.938,
+     "WR": 73.2,
+     "S": [
+      3,
+      9,
+      5
+     ],
+     "excess": -0.285,
+     "worst_year_excess": -1.038,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 13,
+       "G": 0.745,
+       "excess": -1.038,
+       "WR": 53.8,
+       "S": 3,
+       "months_traded": 8,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 18,
+       "G": 0.436,
+       "excess": -0.263,
+       "WR": 83.3,
+       "S": 9,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 2.093,
+       "excess": 0.652,
+       "WR": 80.0,
+       "S": 5,
+       "months_traded": 7,
+       "shorts": 0
+      }
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 4.0}": {
+     "n": 51,
+     "G": 0.437,
+     "WR": 70.6,
+     "S": [
+      3,
+      8,
+      5
+     ],
+     "excess": -0.163,
+     "worst_year_excess": -0.871,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 19,
+       "G": 0.476,
+       "excess": -0.019,
+       "WR": 68.4,
+       "S": 3,
+       "months_traded": 8,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 22,
+       "G": -0.35,
+       "excess": -0.871,
+       "WR": 68.2,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 2.093,
+       "excess": 1.118,
+       "WR": 80.0,
+       "S": 5,
+       "months_traded": 7,
+       "shorts": 0
+      }
+     }
+    }
+   },
+   "chosen": {
+    "H": 5,
+    "hold": 20,
+    "q": 0.5,
+    "side": "long",
+    "src": "gbm",
+    "stop": null,
+    "target": 2.0
+   },
+   "level1_in_every_validation_year": [
+    "{\"H\": 5, \"hold\": 20, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 2.0}"
+   ],
+   "chosen_stats": {
+    "n": 89,
+    "G": 1.547,
+    "WR": 95.5,
+    "S": [
+     9,
+     11,
+     8
+    ],
+    "excess": 0.46,
+    "worst_year_excess": 0.329,
+    "min_trades_year": 25,
+    "per_year": {
+     "2021": {
+      "n": 32,
+      "G": 1.723,
+      "excess": 0.457,
+      "WR": 96.9,
+      "S": 9,
+      "months_traded": 10,
+      "shorts": 0
+     },
+     "2022": {
+      "n": 32,
+      "G": 1.433,
+      "excess": 0.565,
+      "WR": 96.9,
+      "S": 11,
+      "months_traded": 12,
+      "shorts": 0
+     },
+     "2023": {
+      "n": 25,
+      "G": 1.466,
+      "excess": 0.329,
+      "WR": 92.0,
+      "S": 8,
+      "months_traded": 10,
+      "shorts": 0
+     }
+    }
+   },
+   "strict_view": [
+    {
+     "year": 2022,
+     "picked": "{\"H\": 5, \"hold\": 20, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": 10.0, \"target\": 4.0}",
+     "n": 26,
+     "G": -0.237,
+     "excess": -0.758
+    },
+    {
+     "year": 2023,
+     "picked": "{\"H\": 5, \"hold\": 20, \"q\": null, \"side\": \"long\", \"src\": \"always\", \"stop\": 10.0, \"target\": 4.0}",
+     "n": 18,
+     "G": 0.523,
+     "excess": -0.452
+    }
+   ],
+   "rule": "settings that reach G1, WR1 and S1 in each of 2021, 2022, 2023; among them the best worst-year excess over entering every day with the same exit; if none, the highest worst-year S, then G"
+  },
+  "R6_one_a_month": {
+   "settings": {
+    "{\"H\": 5, \"hold\": 20, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 3.0}": {
+     "n": 33,
+     "G": 0.403,
+     "WR": 75.8,
+     "S": [
+      7,
+      8,
+      10
+     ],
+     "excess": -0.708,
+     "worst_year_excess": -1.887,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 10,
+       "G": 0.44,
+       "excess": -1.1,
+       "WR": 70.0,
+       "S": 7,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": -1.281,
+       "excess": -1.887,
+       "WR": 66.7,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 11,
+       "G": 2.208,
+       "excess": 0.936,
+       "WR": 90.9,
+       "S": 10,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 40, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 3.0}": {
+     "n": 32,
+     "G": 0.965,
+     "WR": 84.4,
+     "S": [
+      8,
+      10,
+      9
+     ],
+     "excess": -0.772,
+     "worst_year_excess": -1.937,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 10,
+       "G": 1.216,
+       "excess": -0.648,
+       "WR": 80.0,
+       "S": 8,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": -0.226,
+       "excess": -1.937,
+       "WR": 83.3,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 2.145,
+       "excess": 0.502,
+       "WR": 90.0,
+       "S": 9,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 60, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 3.0}": {
+     "n": 32,
+     "G": 1.955,
+     "WR": 87.5,
+     "S": [
+      9,
+      10,
+      9
+     ],
+     "excess": -0.271,
+     "worst_year_excess": -1.218,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 10,
+       "G": 2.467,
+       "excess": 0.159,
+       "WR": 90.0,
+       "S": 9,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 0.788,
+       "excess": -1.218,
+       "WR": 83.3,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 2.845,
+       "excess": 0.435,
+       "WR": 90.0,
+       "S": 9,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 10
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}": {
+     "n": 33,
+     "G": 1.136,
+     "WR": 75.8,
+     "S": [
+      7,
+      8,
+      10
+     ],
+     "excess": -0.139,
+     "worst_year_excess": -1.288,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 10,
+       "G": 1.14,
+       "excess": -0.643,
+       "WR": 70.0,
+       "S": 7,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": -0.589,
+       "excess": -1.288,
+       "WR": 66.7,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 11,
+       "G": 3.013,
+       "excess": 1.573,
+       "WR": 90.9,
+       "S": 10,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 40, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}": {
+     "n": 32,
+     "G": 1.776,
+     "WR": 84.4,
+     "S": [
+      8,
+      10,
+      9
+     ],
+     "excess": -0.401,
+     "worst_year_excess": -1.655,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 10,
+       "G": 2.016,
+       "excess": -0.279,
+       "WR": 80.0,
+       "S": 8,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 0.601,
+       "excess": -1.655,
+       "WR": 83.3,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 2.945,
+       "excess": 0.983,
+       "WR": 90.0,
+       "S": 9,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 60, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}": {
+     "n": 32,
+     "G": 2.797,
+     "WR": 87.5,
+     "S": [
+      9,
+      10,
+      9
+     ],
+     "excess": -0.046,
+     "worst_year_excess": -0.971,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 10,
+       "G": 3.367,
+       "excess": 0.267,
+       "WR": 90.0,
+       "S": 9,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 1.615,
+       "excess": -0.971,
+       "WR": 83.3,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 3.645,
+       "excess": 0.75,
+       "WR": 90.0,
+       "S": 9,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 10
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 5.0}": {
+     "n": 33,
+     "G": 1.608,
+     "WR": 72.7,
+     "S": [
+      6,
+      8,
+      10
+     ],
+     "excess": 0.195,
+     "worst_year_excess": -0.95,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 10,
+       "G": 1.021,
+       "excess": -0.95,
+       "WR": 60.0,
+       "S": 6,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 0.189,
+       "excess": -0.723,
+       "WR": 66.7,
+       "S": 8,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 11,
+       "G": 3.69,
+       "excess": 2.236,
+       "WR": 90.9,
+       "S": 10,
+       "months_traded": 11,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 40, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 5.0}": {
+     "n": 32,
+     "G": 2.226,
+     "WR": 81.2,
+     "S": [
+      7,
+      10,
+      9
+     ],
+     "excess": -0.302,
+     "worst_year_excess": -1.477,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 10,
+       "G": 1.326,
+       "excess": -1.477,
+       "WR": 70.0,
+       "S": 7,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 1.541,
+       "excess": -1.039,
+       "WR": 83.3,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 3.949,
+       "excess": 1.755,
+       "WR": 90.0,
+       "S": 9,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 60, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 5.0}": {
+     "n": 32,
+     "G": 3.256,
+     "WR": 84.4,
+     "S": [
+      8,
+      10,
+      9
+     ],
+     "excess": -0.219,
+     "worst_year_excess": -1.212,
+     "min_trades_year": 10,
+     "per_year": {
+      "2021": {
+       "n": 10,
+       "G": 2.705,
+       "excess": -1.212,
+       "WR": 80.0,
+       "S": 8,
+       "months_traded": 10,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 2.555,
+       "excess": -0.582,
+       "WR": 83.3,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 4.649,
+       "excess": 1.211,
+       "WR": 90.0,
+       "S": 9,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 10
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"monthly\": true, \"overlap\": true, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 3.0}": {
+     "n": 31,
+     "G": 0.489,
+     "WR": 74.2,
+     "S": [
+      5,
+      9,
+      9
+     ],
+     "excess": -0.603,
+     "worst_year_excess": -1.573,
+     "min_trades_year": 9,
+     "per_year": {
+      "2021": {
+       "n": 9,
+       "G": -0.033,
+       "excess": -1.573,
+       "WR": 55.6,
+       "S": 5,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": -0.447,
+       "excess": -1.053,
+       "WR": 75.0,
+       "S": 9,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 2.083,
+       "excess": 0.812,
+       "WR": 90.0,
+       "S": 9,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 40, \"monthly\": true, \"overlap\": true, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 3.0}": {
+     "n": 30,
+     "G": 0.808,
+     "WR": 80.0,
+     "S": [
+      6,
+      10,
+      8
+     ],
+     "excess": -0.928,
+     "worst_year_excess": -2.216,
+     "min_trades_year": 9,
+     "per_year": {
+      "2021": {
+       "n": 9,
+       "G": -0.352,
+       "excess": -2.216,
+       "WR": 66.7,
+       "S": 6,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 0.944,
+       "excess": -0.767,
+       "WR": 83.3,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 9,
+       "G": 1.788,
+       "excess": 0.145,
+       "WR": 88.9,
+       "S": 8,
+       "months_traded": 9,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 60, \"monthly\": true, \"overlap\": true, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 3.0}": {
+     "n": 30,
+     "G": 1.563,
+     "WR": 86.7,
+     "S": [
+      7,
+      11,
+      8
+     ],
+     "excess": -0.654,
+     "worst_year_excess": -1.292,
+     "min_trades_year": 9,
+     "per_year": {
+      "2021": {
+       "n": 9,
+       "G": 1.016,
+       "excess": -1.292,
+       "WR": 77.8,
+       "S": 7,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 1.446,
+       "excess": -0.56,
+       "WR": 91.7,
+       "S": 11,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 9,
+       "G": 2.268,
+       "excess": -0.142,
+       "WR": 88.9,
+       "S": 8,
+       "months_traded": 9,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 10
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"monthly\": true, \"overlap\": true, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}": {
+     "n": 31,
+     "G": 1.062,
+     "WR": 71.0,
+     "S": [
+      5,
+      9,
+      8
+     ],
+     "excess": -0.191,
+     "worst_year_excess": -1.261,
+     "min_trades_year": 9,
+     "per_year": {
+      "2021": {
+       "n": 9,
+       "G": 0.522,
+       "excess": -1.261,
+       "WR": 55.6,
+       "S": 5,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 0.36,
+       "excess": -0.339,
+       "WR": 75.0,
+       "S": 9,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 2.389,
+       "excess": 0.949,
+       "WR": 80.0,
+       "S": 8,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 40, \"monthly\": true, \"overlap\": true, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}": {
+     "n": 30,
+     "G": 1.537,
+     "WR": 76.7,
+     "S": [
+      6,
+      10,
+      7
+     ],
+     "excess": -0.642,
+     "worst_year_excess": -1.981,
+     "min_trades_year": 9,
+     "per_year": {
+      "2021": {
+       "n": 9,
+       "G": 0.314,
+       "excess": -1.981,
+       "WR": 66.7,
+       "S": 6,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 1.839,
+       "excess": -0.418,
+       "WR": 83.3,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 9,
+       "G": 2.359,
+       "excess": 0.397,
+       "WR": 77.8,
+       "S": 7,
+       "months_traded": 9,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 60, \"monthly\": true, \"overlap\": true, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}": {
+     "n": 30,
+     "G": 2.586,
+     "WR": 86.7,
+     "S": [
+      7,
+      11,
+      8
+     ],
+     "excess": -0.247,
+     "worst_year_excess": -1.306,
+     "min_trades_year": 9,
+     "per_year": {
+      "2021": {
+       "n": 9,
+       "G": 1.793,
+       "excess": -1.306,
+       "WR": 77.8,
+       "S": 7,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 2.424,
+       "excess": -0.162,
+       "WR": 91.7,
+       "S": 11,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 9,
+       "G": 3.593,
+       "excess": 0.699,
+       "WR": 88.9,
+       "S": 8,
+       "months_traded": 9,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 10
+     }
+    },
+    "{\"H\": 5, \"hold\": 20, \"monthly\": true, \"overlap\": true, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 5.0}": {
+     "n": 31,
+     "G": 1.74,
+     "WR": 71.0,
+     "S": [
+      5,
+      9,
+      8
+     ],
+     "excess": 0.346,
+     "worst_year_excess": -1.162,
+     "min_trades_year": 9,
+     "per_year": {
+      "2021": {
+       "n": 9,
+       "G": 0.809,
+       "excess": -1.162,
+       "WR": 55.6,
+       "S": 5,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 1.291,
+       "excess": 0.379,
+       "WR": 75.0,
+       "S": 9,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 10,
+       "G": 3.116,
+       "excess": 1.662,
+       "WR": 80.0,
+       "S": 8,
+       "months_traded": 10,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 40, \"monthly\": true, \"overlap\": true, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 5.0}": {
+     "n": 30,
+     "G": 2.359,
+     "WR": 76.7,
+     "S": [
+      6,
+      10,
+      7
+     ],
+     "excess": -0.172,
+     "worst_year_excess": -1.821,
+     "min_trades_year": 9,
+     "per_year": {
+      "2021": {
+       "n": 9,
+       "G": 0.981,
+       "excess": -1.821,
+       "WR": 66.7,
+       "S": 6,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 2.849,
+       "excess": 0.268,
+       "WR": 83.3,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 9,
+       "G": 3.083,
+       "excess": 0.89,
+       "WR": 77.8,
+       "S": 7,
+       "months_traded": 9,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 11
+     }
+    },
+    "{\"H\": 5, \"hold\": 60, \"monthly\": true, \"overlap\": true, \"q\": 0.7, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 5.0}": {
+     "n": 30,
+     "G": 3.27,
+     "WR": 83.3,
+     "S": [
+      7,
+      10,
+      8
+     ],
+     "excess": -0.192,
+     "worst_year_excess": -1.346,
+     "min_trades_year": 9,
+     "per_year": {
+      "2021": {
+       "n": 9,
+       "G": 2.571,
+       "excess": -1.346,
+       "WR": 77.8,
+       "S": 7,
+       "months_traded": 9,
+       "shorts": 0
+      },
+      "2022": {
+       "n": 12,
+       "G": 2.925,
+       "excess": -0.212,
+       "WR": 83.3,
+       "S": 10,
+       "months_traded": 12,
+       "shorts": 0
+      },
+      "2023": {
+       "n": 9,
+       "G": 4.429,
+       "excess": 0.991,
+       "WR": 88.9,
+       "S": 8,
+       "months_traded": 9,
+       "shorts": 0
+      }
+     },
+     "months_available": {
+      "2021": 12,
+      "2022": 12,
+      "2023": 10
+     }
+    }
+   },
+   "chosen": {
+    "H": 5,
+    "hold": 60,
+    "monthly": true,
+    "overlap": true,
+    "q": 0.5,
+    "side": "long",
+    "src": "gbm",
+    "stop": null,
+    "target": 4.0
+   },
+   "level1_in_every_validation_year": [
+    "{\"H\": 5, \"hold\": 60, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 4.0}",
+    "{\"H\": 5, \"hold\": 60, \"monthly\": true, \"overlap\": true, \"q\": 0.5, \"side\": \"long\", \"src\": \"gbm\", \"stop\": null, \"target\": 5.0}"
+   ],
+   "chosen_stats": {
+    "n": 32,
+    "G": 2.797,
+    "WR": 87.5,
+    "S": [
+     9,
+     10,
+     9
+    ],
+    "excess": -0.046,
+    "worst_year_excess": -0.971,
+    "min_trades_year": 10,
+    "per_year": {
+     "2021": {
+      "n": 10,
+      "G": 3.367,
+      "excess": 0.267,
+      "WR": 90.0,
+      "S": 9,
+      "months_traded": 10,
+      "shorts": 0
+     },
+     "2022": {
+      "n": 12,
+      "G": 1.615,
+      "excess": -0.971,
+      "WR": 83.3,
+      "S": 10,
+      "months_traded": 12,
+      "shorts": 0
+     },
+     "2023": {
+      "n": 10,
+      "G": 3.645,
+      "excess": 0.75,
+      "WR": 90.0,
+      "S": 9,
+      "months_traded": 10,
+      "shorts": 0
+     }
+    },
+    "months_available": {
+     "2021": 12,
+     "2022": 12,
+     "2023": 10
+    }
+   },
+   "rule": "as R5; S judged on 8/12 of the months available in each validation year"
   }
  },
  "oof_rank_ic": {
