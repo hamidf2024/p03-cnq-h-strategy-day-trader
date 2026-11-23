@@ -121,9 +121,9 @@ goals_html = (
     + goal_card('WR', 'Win rate', 'How many trades win?',
                 [('50%', '1 in 2'), ('65%', 'about 2 in 3'), ('over 75%', '3 in 4')],
                 'Winning trades as a share of winning and losing trades. Break-even trades are left out.')
-    + goal_card('S', 'Steady months', 'In how many months of the year does it make more than 1%?',
+    + goal_card('S', 'Steady months', 'In how many months of the year does the average trade make more than 1%?',
                 [('8 of 12', 'months'), ('10 of 12', 'months'), ('12 of 12', 'every month')],
-                'Months whose trades add up to more than 1% of the $1,000 stake. A level must hold in every year tested.'))
+                'Months in which the average gross profit per trade is above 1%. A month with no trades does not count. A level must hold in every year tested.'))
 
 # ------------------------------------------------------------------ top 5
 def top_row(c):
@@ -175,10 +175,12 @@ years = '<div class="hm-row hm-years"><div class="hm-name"></div>' + ''.join(
 
 
 def cell(r):
-    v = float(r['gross_pct']); n = int(r['trades']); m = r['month']
-    cls = 'nt' if n == 0 else ('hit' if v > 1 else ('pos' if v > 0 else 'neg'))
+    n = int(r['trades']); m = r['month']
+    v = float(r['avg_gross_pct_per_trade']) if n else 0.0
+    cls = 'nt' if n == 0 else ('hit' if r['above_1pct_per_trade'] == 'True' else ('pos' if v > 0 else 'neg'))
     label = f"{LONG[int(m[5:]) - 1]} {m[:4]}"
-    tip = f"{label}: no trades" if n == 0 else f"{label}: {pct(v, 2, True)} ({usd(float(r['dollars_per_1000']), 0)} on $1,000), {n} trade{'s' if n != 1 else ''}"
+    tip = f"{label}: no trades" if n == 0 else (f"{label}: average {pct(v, 2, True)} per trade over {n} trade{'s' if n != 1 else ''} "
+                                                f"({usd(float(r['sum_dollars_per_1000']), 0)} in total at $1,000 per trade)")
     return GAP(m) + f'<span class="hm-c {cls}" data-tip="{tip}">{MIN if cls == "neg" else ""}</span>'
 
 
@@ -220,6 +222,17 @@ def money_table_row(c):
 money_table = ''.join(money_table_row(c) for c in ORDER)
 
 n_models = len(d['methods'])
+sbest = max(d['methods'], key=lambda c: (s_worst(c), c['progress']['S']))
+same_best = max((c['best_month_avg_pct_per_trade'] for c in d['methods'] if KIND[c['id']] == 'Same-day'))
+any_s = [c for c in d['methods'] if c['S_level'] > 0]
+S_NOTE = ((f"{E(any_s[0]['name'])} reaches level S{any_s[0]['S_level']}. " if any_s else "No model reaches level S1. ")
+          + f"The closest is {E(sbest['name'])}, with {s_text(sbest)} months above 1% per trade. "
+          + f"The same-day models never have such a month: their best month averages {same_best:.2f}% per trade. "
+          + "The multi-day models trade a few times a year, so many of their months are empty.")
+multi_top = [c for c in TOP5 if KIND[c['id']] == 'Multi-day']
+FEW_NOTE = (f"{', '.join(E(c['name']) for c in multi_top)} made {', '.join(str(c['trades']) for c in multi_top)} trades in almost three years. "
+            "With so few trades their averages can change a lot with a handful of results, and one or two large trades can make a month count."
+            if multi_top else "All five have more than a thousand trades.")
 n_profit = sum(c['profitable_after_1c'] for c in d['methods'])
 rom = M['RuleOrModel']; bgbm = M['B_field_fusion_gbm']; pctm = M['V7.1_pct']
 top_names = ', '.join(c['name'] for c in TOP5)
@@ -274,9 +287,10 @@ html = f'''<!doctype html>
     <p class="sub">Ranked by overall progress: how far a model is toward the top level of each goal (3% per trade, 75% win rate, 12 of 12 months), averaged over the three. The marks on each bar are levels 1, 2 and 3.</p>
     <ol class="top5">{top_html}</ol>
     <div class="note2">
-      <h3>Two things to know before relying on this ranking</h3>
+      <h3>Three things to know before relying on this ranking</h3>
       <ul>
-        <li><strong>Costs.</strong> Four of the five are same-day models that make about $0.20 per $1,000 trade. A cost of 1&cent; per share is about $0.28 per trade, so they lose money once it is charged. {E(M['C_transformer_probe']['name'])}, {E(bgbm['name'])} and {E(M['D_fusion_gate']['name'])} are the only models that keep a profit after costs.</li>
+        <li><strong>Few trades.</strong> {FEW_NOTE}</li>
+        <li><strong>Costs.</strong> The same-day models make about $0.20 per $1,000 trade. A cost of 1&cent; per share is about $0.28 per trade, so they lose money once it is charged. {E(M['C_transformer_probe']['name'])}, {E(bgbm['name'])} and {E(M['D_fusion_gate']['name'])} are the only models that keep a profit after costs.</li>
         <li><strong>Break-even trades.</strong> The win rate leaves out trades that end within half a cent of the entry price. The same-day models have many of these: {E(pctm['name'])} wins {pctm['win_rate']:.0f}% of decided trades but {pctm['wins_share_of_all_trades']:.0f}% of all trades. If a break-even trade is not counted as a win, the top five becomes {', '.join(E(n) for n in STRICT5)}.</li>
       </ul>
     </div>
@@ -292,18 +306,18 @@ html = f'''<!doctype html>
         <tbody>{table_html}</tbody>
       </table></div>
     </div>
-    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. The steady-months figure is the worst of the three years. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
+    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. The steady-months figure is the worst of the three years, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
   </section>
 
   <section id="months">
     <h2>Steadiness, month by month</h2>
-    <p class="sub">Each square is one month. A month counts toward the S goal when its trades add up to more than 1% of the $1,000 stake.</p>
+    <p class="sub">Each square is one month. A month counts toward the S goal when the trades opened in it average more than 1% profit each, before costs.</p>
     <div class="card">
-      <div class="hm-legend"><span><i class="hm-c hit"></i>Above 1% (counts)</span><span><i class="hm-c pos"></i>Profit, 1% or less</span><span><i class="hm-c neg">{MIN}</i>Loss</span><span><i class="hm-c nt"></i>No trades</span></div>
+      <div class="hm-legend"><span><i class="hm-c hit"></i>Average above 1% per trade (counts)</span><span><i class="hm-c pos"></i>Average profit, 1% or less</span><span><i class="hm-c neg">{MIN}</i>Average loss</span><span><i class="hm-c nt"></i>No trades</span></div>
       <p class="swipe">Swipe sideways to see all 35 months.</p><div class="hm-scroll"><div class="hm" id="hm">{years}{head}{hm_rows}</div></div>
       <div class="tipbox" id="tip" role="status" aria-live="polite">Point at a square to see that month.</div>
     </div>
-    <p class="fine" style="margin-top:10px">Only {E(rom['name'])} reaches level S1, with {s_text(rom)} months above 1%. The multi-day models trade a few times a year, so most of their months are empty.</p>
+    <p class="fine" style="margin-top:10px">{S_NOTE}</p>
   </section>
 
   <section id="money">
@@ -329,7 +343,7 @@ html = f'''<!doctype html>
     <div class="grid g3">
       <div class="card"><h3>Fair test</h3><p>Models were trained and tuned on 2020 to 2023, then frozen and run once on 2024 to 2026. Nothing was adjusted after seeing those results.</p></div>
       <div class="card"><h3>Gross and after costs</h3><p>The goals are gross, before costs. Robinhood and Schwab charge no commission on CNQ, but each trade still loses a little to the bid-ask spread. The page uses 1&cent; per share for that.</p></div>
-      <div class="card"><h3>Ranking rule</h3><p>Overall progress is the average of three fractions: profit per trade out of 3%, win rate out of 75%, and share of months above 1%. The rule was fixed before the scores were computed.</p></div>
+      <div class="card"><h3>Ranking rule</h3><p>Overall progress is the average of three fractions: profit per trade out of 3%, win rate out of 75%, and the share of months whose average trade is above 1%. The rule was fixed before the scores were computed.</p></div>
     </div>
     <div class="card" style="margin-top:16px">
       <h3>Limits of these results</h3>
