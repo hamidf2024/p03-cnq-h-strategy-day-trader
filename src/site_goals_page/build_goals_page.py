@@ -404,6 +404,27 @@ if three_no_g:
     ALL3_CARD += f'<div class="note2 rule"><div class="eyebrow" style="margin-bottom:6px">Level 1 on win rate and both month goals, not on profit per trade</div>{_b}</div>'
 if not d.get('level1_on_all_four'):
     HERO_TAG += ' <span class="tag warn">No model reaches level 1 on all four goals yet</span>'
+# combinations put together after the test (not results): shown so the reader can see why they are not counted
+_cf = f'{SRC}/stage13_after_the_fact_combinations.json'
+if os.path.exists(_cf):
+    _c = json.load(open(_cf))['combinations']
+    def _crow(k, v):
+        ok = v['level1_all_four']
+        return (f'<tr{" class=\'stop-best\'" if ok else ""}><td>{E(k)}</td><td class="num">{v["trades"]}</td><td class="num {"pos" if v["G"] >= 1 else ""}">{pct(v["G"], 2, True)}</td>'
+                f'<td class="num pos">{v["WR"]:.1f}%</td><td class="num {"pos" if min(v["S"]) >= 8 else ""}">{" / ".join(map(str, v["S"]))}</td>'
+                f'<td class="num {"pos" if min(v["GM"]) >= 8 else ""}">{" / ".join(map(str, v["GM"]))}</td><td>{"All four" if ok else ""}</td></tr>')
+    ALL3_CARD += f"""<div class="note2" id="afterfact"><h3>A combination that shows level 1 on all four goals, and why it is not counted</h3>
+      <p style="margin:0 0 10px;font-size:14.5px">Models M and O use the same signals and the same exit; they differ only in when they buy. Their tested trades can be put together afterwards in several ways. One way, M&rsquo;s buy at the close plus a second buy at 10:00 the next day, shows level 1 on all four goals on 2024 to 2026.</p>
+      <div class="table-scroll" style="background:var(--surface);border-radius:10px"><table>
+        <thead><tr><th>Buys</th><th class="num">Trades</th><th class="num">Profit per trade</th><th class="num">Win rate</th><th class="num">S months</th><th class="num">GM months</th><th>Level 1</th></tr></thead>
+        <tbody>{''.join(_crow(k, v) for k, v in _c.items())}</tbody>
+      </table></div>
+      <ul style="margin-top:12px">
+        <li><strong>It was picked with the answers in view.</strong> No new run was made; the table is built from trades already tested. Choosing the best of seven after seeing them is not a test.</li>
+        <li><strong>The training years chose differently.</strong> On 2021 to 2023 the fixed order put &ldquo;10:00 and 1:00 pm&rdquo; first. That is model O, which was the one tested, and it misses G1.</li>
+        <li><strong>There is no room to spare.</strong> +1.05% against a need of 1%; 8 months against a need of 8 in two years of three. One trade going the other way changes the answer.</li>
+        <li><strong>What would make it count.</strong> It has been frozen as of November 23, 2026, together with M, O and L, for a forward test on trades opened after that date. Only that can confirm it.</li>
+      </ul></div>"""
 sbest = max(d['methods'], key=lambda c: (s_worst(c), c['progress']['S']))
 gbm_best = max(OKM, key=lambda c: (gm_worst(c), c['progress']['GM']))
 same_best = max((c['best_month_avg_pct_per_trade'] for c in d['methods'] if KIND[c['id']] == 'Same-day'))
@@ -558,6 +579,7 @@ html = f'''<!doctype html>
         <li>Level 1 on all four goals. After model N a new model must pass its training-years test with a margin of one month on S and on GM, and the same rule must hold on the five peer stocks. 1,620 settings were tried on 2021 to 2023 with the test years removed, with stops from 1% to 15%. None passed, so nothing new was run on the test years.</li>
         <li>Trades opened at the same time. By the owner's rule, trades opened at exactly the same time count as one trade; trades opened at different times count separately, even on the same day. No score on this page changed when the rule was applied.</li>
         <li>Model P, run once and not level 1. P passed a stricter training-years test by a wide margin (95.6% of its trades won there) and was then run once on the test years, the twenty-first such run. There 80% won, which is below the 83% it needs to break even with a +3% target and a 15% stop. Waiting for a dip added nothing on the test years.</li>
+        <li>Forward test. Models M, O and L, and the combination described near the top of this page, were frozen on November 23, 2026. They will be scored on trades opened after that date when new price data is added. Nothing about them may be changed in the meantime.</li>
         <li>Model Q, not run. A version that sells short when the trend is down was tested on the training years. None of its 24 settings passed, and most did worse than always buying, so it was not run on the test years.</li>
         <li>2026 has 11 months of data. Its months are judged on the same fractions (8/12, 10/12, 12/12).</li>
       </ul>
