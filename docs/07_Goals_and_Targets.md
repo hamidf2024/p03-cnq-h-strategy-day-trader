@@ -38,6 +38,35 @@ reliably *positive* average on one symbol over only 9-17 blind trades.
 Full methodology, results tables, and next steps: see
 `09_Stage11_Per_Trade_Target_Research.md`.
 
+## Update 2026-11-23 (Stage 12): four multi-day candidates tested blind;
+   Target 1 still not met, best blind result +0.99% per trade
+
+The owner asked for a new, innovative model drawing on machine learning
+(including transformers) and on mathematics, physics and engineering, under
+the same discipline (walk-forward on 2020-2023, blind on 2024-2026). Stage 12
+(`10_Stage12_Field_Fusion_Research.md`) built and froze four multi-day,
+long-only candidates and ran each once on 2024-2026:
+
+| Method | Basis | Trades (2024-2026) | **Avg gross %/trade** | Excess over a random 5-day long | Gap to >1%/trade |
+|---|---|---|---|---|---|
+| Spring-release rule (the model selected by validation) | blind | 21 | **-0.70%** | -1.23% | negative |
+| Field-Fusion GBM | blind | 25 | **+0.99%** | +0.63% | just short; 95% interval -0.88% to +2.94% |
+| Transformer probe | blind | 51 | **+0.64%** | +0.17% | ~1.6x short |
+| Fusion gate | blind | 19 | **+0.52%** | +0.05% | ~1.9x short |
+
+**Target 1 status: not met.** The selected model failed outright. The best
+candidate is about 49 times V7.1's per-trade average and is the first result
+in this project that stays positive after a 1 cent/share cost (+0.97% per
+trade), but it is below 1%, rests on 25 trades, and two of those trades
+supply nearly all of the average. It is a lead to confirm on new data, not a
+result. The 2024-2026 years have now been used by these candidates and must
+not be used to retune them.
+
+Open question added for the owner: should Target 1 carry a minimum number of
+trades, and be stated in excess of simply holding CNQ for the same number of
+days? A randomly timed 5-day long averaged +0.35% over 2024-2026, so part of
+any long multi-day result is the stock's own rise rather than the method.
+
 ## Guardrails carried over from the charter (unchanged)
 
 Per `00_Project_Charter.docx` (amended 2026-10-28), the owner's priority order

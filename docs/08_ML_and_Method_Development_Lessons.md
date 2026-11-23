@@ -18,7 +18,11 @@ it is a reorganization of what this project already found.*
 draw on Stage 10's actual results (published on project-03.html and in
 `src/stage10_walk_forward_training.py`), but a formal dated research-log entry
 for Stage 10 still needs to be added to `06_Lessons_Learned.docx` -- flagged
-here rather than silently left out.*
+here rather than silently left out.* *(Resolved 2026-11-23: dated Stage 10,
+Stage 11 and Stage 12 entries are now in `06_Lessons_Learned.docx`. From
+Stage 12 on, each stage's lessons are filed directly into the topic section
+they belong to below, marked with the stage number, and indexed in a short
+per-stage section at the end.)*
 
 ## 1. Data lessons
 
@@ -55,6 +59,16 @@ here rather than silently left out.*
   a sample under a few hundred trades without flagging that explicitly; a
   model that looks excellent on 75 trades should be assumed to regress
   toward something much more modest once tested on years, not weeks, of data.
+
+- **(Stage 12) One symbol's own bars leave out its main driver, and cap how
+  much any model can learn.** Stage 12 had only CNQ's 5-minute bars; peer
+  stocks and crude oil could not be reached from the research environment.
+  Every candidate therefore had ~800 daily labels to learn from and ~8-17
+  blind trades a year to be judged on. **Lesson:** for a multi-day method,
+  treat peer and driver data (here SU, CVE, IMO, XOM, CVX, WTI) as a
+  prerequisite, not an extension -- it multiplies training labels, supplies
+  symbols the model has never seen for a clean test, and is the only
+  practical way to reach a trade count that can confirm or reject an edge.
 
 ## 2. Labeling and feature engineering lessons (for ML specifically)
 
@@ -99,6 +113,35 @@ here rather than silently left out.*
   existing rule's picks, not just aggregate metrics -- a model can look
   competitive in isolation while actually having learned something entirely
   different and weaker.
+
+- **(Stage 12) Label every day, not only the event days.** The Field-Fusion
+  model predicted the 5-day excess return for all ~800 training days rather
+  than for the ~40 days a rule would have traded. Its fold-by-fold rank
+  correlation was small but positive every year (+0.11 / +0.03 / +0.05) and
+  it held on blind data (+0.12), while the far better-looking event rule
+  reversed. **Lesson:** when events are scarce, train on the dense version of
+  the question and trade only the top of the ranking; and prefer a small
+  signal with the same sign in every fold over a large one in one fold.
+- **(Stage 12) A transformer can be given enough data by self-supervised
+  pretraining on the bars -- and still not beat a shallow tree model.** A
+  PatchTST-style encoder pretrained by masked-patch reconstruction on
+  62,000 five-minute bars, frozen, with a ridge probe, produced +0.64% per
+  blind trade (excess +0.17%) against the tree model's +0.99% (excess
+  +0.63%); its validation edge came from a single year. This agrees with
+  the 2025-2026 literature on time-series foundation models for returns
+  (zero-shot models at or below tree baselines). **Lesson:** this refines
+  the earlier "transformer ruled out" note: the obstacle is not that a
+  transformer cannot be trained here, it is that model capacity is not the
+  binding constraint -- independent data is.
+- **(Stage 12) Ideas from other fields earn their place as features, not as
+  trading rules.** Kalman-filter displacement and velocity, Ornstein-
+  Uhlenbeck expected reversion, realised-volatility ratios, jump share,
+  Hurst and path-efficiency measures were all among the tree model's most-
+  used inputs. The one candidate that turned a physics picture directly
+  into a rule (the "spring-release" entry) was the one that failed blind.
+  **Lesson:** use physics, control and information-theory constructs to
+  describe the state of the market causally, and let a regularised model
+  and walk-forward validation decide how much weight each deserves.
 
 ## 3. Overfitting-prevention lessons (the ones that generalize beyond this project)
 
@@ -172,6 +215,38 @@ here rather than silently left out.*
   filter using a rolling window that spans day boundaries, would break this
   optimization silently and produce wrong cached results).
 
+- **(Stage 12) The design search is part of the fit.** The spring-release
+  rule's final form (enter only after the stretch has started to shrink)
+  was chosen by trying several entry conditions on 2021-2023 -- the same
+  years then used to "validate" it. On those years it showed a t-statistic
+  of 2.1, a permutation p-value of 0.007 and positive results in all 60
+  neighbouring parameter settings. On blind 2024-2026 it lost 0.70% per
+  trade. **Lesson:** statistics computed after a search over rule *forms*
+  are in-sample no matter how they are labelled. Either freeze the form
+  before looking at any validation number, or hold back one training year
+  that the design search never touches and confirm on it before the blind
+  run. Count the variants tried and say so next to the result.
+- **(Stage 12) A clean parameter neighbourhood is not independent evidence.**
+  All 60 neighbours of the frozen rule were positive in training, which
+  looked like robustness. They were 60 slightly different views of the same
+  ~27 trades in the same three years. **Lesson:** neighbourhood checks
+  detect knife-edge parameters; they say nothing about whether the effect
+  exists outside the sample. Do not count them as confirmation.
+- **(Stage 12) When two validation views disagree, believe the stricter
+  one.** Scored the Stage-10 way (pick on the training years, score on the
+  next year) the same rule family showed +0.05% excess on its only fold with
+  more than five trades. The pooled view showed +2.36%. The pooled view was
+  used; the strict view was right. **Lesson:** a result has to survive the
+  harshest reasonable validation available, not the most flattering.
+- **(Stage 12) Check a threshold by the trade count it produces in each
+  fold, not only by the average it produces.** The first protocol set ML
+  trade thresholds on a small inner split; they ranged from -5.3 to +9.2
+  across folds and produced 1 trade in one year and 33 in another. The
+  average looked fine. **Lesson:** an unstable trade count is a broken
+  threshold; anchor thresholds to something stable (here, a quantile of the
+  model's own predictions on its training rows) and inspect per-fold counts
+  before reading any performance number.
+
 ## 4. Evaluation and metrics lessons
 
 - **Trading costs are not optional and change which method wins.** The
@@ -207,6 +282,33 @@ here rather than silently left out.*
   it room to generate more trades. **Lesson:** report both dimensions
   together, every time, and don't let a strong result on one dimension stand
   in for the other.
+
+- **(Stage 12) For any multi-day long method, report the return in excess of
+  simply being long.** A randomly timed 5-day long in CNQ averaged +0.92% in
+  2020-2023 and +0.35% in 2024-2026. A long swing rule inherits that for
+  free, so its raw average per trade overstates its skill. **Lesson:** next
+  to every per-trade average for a held position, report the same-length
+  random-entry return and the difference, and select on the difference.
+- **(Stage 12) Work out the sample size the claim needs before running the
+  test.** Five-day CNQ trades have a standard deviation of about 5%. Telling
+  a true 1% average from zero needs on the order of 100 trades; the blind
+  period supplied 19-51 per candidate. The Field-Fusion model's +0.99% has
+  a 95% interval of -0.88% to +2.94%. **Lesson:** if the available blind
+  data cannot deliver the required number of trades, say so before the run
+  and plan how to get it (more symbols, more time), instead of discovering
+  afterwards that neither success nor failure can be established.
+- **(Stage 12) An average-per-trade target is driven by a few trades; show
+  what is left without them.** Two of the Field-Fusion model's 25 blind
+  trades (+13.1%, +10.3%) account for almost all of its +0.99% average; the
+  other 23 average +0.06%, and the median trade is -0.40%. **Lesson:** always
+  report the median and the average excluding the top one or two trades
+  beside any per-trade average. This is the multi-day version of the
+  project's existing "traced to one trade" rule.
+- **(Stage 12) Costs stop mattering once the per-trade move is large.** At 1
+  cent per share the Field-Fusion model keeps +0.97% of +0.99% per trade,
+  where the same cost turns V7.1's +0.0204% negative. **Lesson:** the cost
+  problem found in Stages 9-10 belongs to very small per-trade edges, not to
+  CNQ; holding period is the most direct lever on it.
 
 ## 5. Strategy-domain lessons (useful context for any new method on this instrument/timeframe)
 
@@ -252,6 +354,15 @@ here rather than silently left out.*
   a short-side mirror (queued, not yet built) could add real, non-redundant
   value rather than just more of the same trades.
 
+- **(Stage 12) How long a pullback takes to recover is not a stable
+  property.** In 2021-2023, buying after a stretched pullback had started to
+  turn was followed by a bounce within five days in every year. In 2025-2026
+  the same entries were down 0.9% the next day and 1.0% after three days, and
+  were positive only by day ten. **Lesson:** a fixed holding period tuned on
+  one regime is a hidden parameter; the volatility level (1.89% a day blind
+  against 2.44% in training) and the speed of the surrounding trend both
+  changed the recovery time.
+
 ## 6. Process lessons (how this project avoided repeating its own mistakes)
 
 - **Persist the actual code, not just its prose description and outputs.**
@@ -280,6 +391,20 @@ here rather than silently left out.*
   to one trade, rejected" or "made every metric worse") is exactly as
   valuable as a positive one for stopping a future research cycle from
   re-testing the same dead end.
+
+- **(Stage 12) Make "the blind test is run once" a property of the code, not
+  a promise.** Stage 12 hashed the frozen models, logged the single blind
+  run, made the script refuse a second run, kept a separate `verify` mode
+  that only re-runs the identical artefact, and exercised the blind code
+  path on training data first (a dry run) so a coding slip could not force
+  a second look at the blind years. **Lesson:** build these guards before
+  the run; they cost minutes and remove the temptation and the ambiguity.
+- **(Stage 12) Publish the superseded protocol and the exploration scripts.**
+  The first protocol, its validation results and the five exploration
+  scripts that led to the final design are in the repository. **Lesson:**
+  the path to a design is part of the evidence about it -- in this case it
+  is what explains why the selected model's validation numbers were too
+  good.
 
 ## 7. What this means for Stage 11 / new ML models, concretely
 
@@ -374,3 +499,28 @@ specific target.*
   recurring question (reviewers/the owner will keep asking "did you
   account for the price change?" otherwise) rather than being wasted
   effort.**
+
+## 9. Stage 12 additions (field-fusion swing research, 2026-11-23)
+
+*Stage 12 (`10_Stage12_Field_Fusion_Research.md`) built four multi-day
+candidates on 2020-2023 -- a physics-based rule, a gradient-boosted model
+over features from several fields, a self-supervised transformer, and a
+meta-labelled combination -- and ran each once on 2024-2026. Target 1 was
+not met: the model chosen by validation lost 0.70% per trade; the best
+candidate averaged +0.99% on 25 trades, not statistically distinguishable
+from zero. The lessons are filed in the topic sections above, each marked
+"(Stage 12)":*
+
+- Section 1 (data): single-symbol data is the ceiling; peer and driver data
+  are a prerequisite for multi-day work.
+- Section 2 (ML): label every day; a pretrained transformer did not beat a
+  shallow tree model; other fields' ideas work as features, not as rules.
+- Section 3 (overfitting): the design search is part of the fit; a clean
+  neighbourhood is not independent evidence; believe the stricter
+  validation view; check thresholds by per-fold trade count.
+- Section 4 (evaluation): report excess over being long; compute the
+  required sample size first; show the average without the top trades;
+  costs fade at multi-day holds.
+- Section 5 (strategy): pullback recovery time is regime-dependent.
+- Section 6 (process): enforce the single blind run in code; publish the
+  superseded protocol and exploration scripts.

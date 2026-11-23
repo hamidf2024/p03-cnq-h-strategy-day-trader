@@ -1,0 +1,335 @@
+{
+ "meta": {
+  "frozen_sha256": "6e3c70313afeb854fe4db9eb0fd7dff84532044ef7cc35cd046d9ddd88225817",
+  "official": "A",
+  "blind_days": 723,
+  "first": "2024-01-02",
+  "last": "2026-11-18"
+ },
+ "A_spring_release": {
+  "config_H": 5,
+  "by_year": {
+   "2024": {
+    "n": 7,
+    "avg": 1.7138,
+    "med": 1.7681,
+    "win": 57.1429,
+    "pf": 3.6056,
+    "days": 5.0,
+    "best": 7.653,
+    "worst": -3.4034,
+    "total": 11.9964,
+    "excess": 1.7041,
+    "t_excess": 1.2031,
+    "t_raw": 1.2099
+   },
+   "2025": {
+    "n": 4,
+    "avg": -2.2668,
+    "med": -3.703,
+    "win": 25.0,
+    "pf": 0.2539,
+    "days": 5.0,
+    "best": 3.0862,
+    "worst": -4.7476,
+    "total": -9.0674,
+    "excess": -2.357,
+    "t_excess": -1.3032,
+    "t_raw": -1.2534
+   },
+   "2026": {
+    "n": 10,
+    "avg": -1.7726,
+    "med": -1.8638,
+    "win": 30.0,
+    "pf": 0.4895,
+    "days": 5.0,
+    "best": 8.3069,
+    "worst": -9.9421,
+    "total": -17.7255,
+    "excess": -2.8267,
+    "t_excess": -1.4904,
+    "t_raw": -0.9346
+   }
+  },
+  "drift_avg_Hday_ret_by_year": {
+   "2024": 0.01,
+   "2025": 0.09,
+   "2026": 1.054
+  },
+  "combined_2024_2026": {
+   "n": 21,
+   "avg": -0.7046,
+   "med": -1.2008,
+   "win": 38.0952,
+   "pf": 0.7126,
+   "days": 5.0,
+   "best": 8.3069,
+   "worst": -9.9421,
+   "total": -14.7965,
+   "excess": -1.227,
+   "t_excess": -1.084,
+   "t_raw": -0.6398,
+   "avg_ci95_bootstrap": [
+    -2.839,
+    1.406
+   ],
+   "excess_ci95_bootstrap": [
+    -3.435,
+    0.919
+   ],
+   "avg_net_at_1c_per_share": -0.7316,
+   "avg_net_at_10bps_round_trip": -0.8046,
+   "share_of_trades_above_1pct": 38.1,
+   "max_consecutive_losses": 4,
+   "equity_max_drawdown_pct_sum": -28.08
+  },
+  "signal_days": 54
+ },
+ "B_field_fusion_gbm": {
+  "config_H": 5,
+  "by_year": {
+   "2024": {
+    "n": 11,
+    "avg": 1.3393,
+    "med": 1.7681,
+    "win": 54.5455,
+    "pf": 2.1588,
+    "days": 5.0,
+    "best": 10.3213,
+    "worst": -4.2957,
+    "total": 14.7328,
+    "excess": 1.3297,
+    "t_excess": 1.0052,
+    "t_raw": 1.0125
+   },
+   "2025": {
+    "n": 6,
+    "avg": -0.1462,
+    "med": -0.5725,
+    "win": 33.3333,
+    "pf": 0.9058,
+    "days": 5.0,
+    "best": 4.4412,
+    "worst": -6.5707,
+    "total": -0.877,
+    "excess": -0.2363,
+    "t_excess": -0.143,
+    "t_raw": -0.0884
+   },
+   "2026": {
+    "n": 8,
+    "avg": 1.3764,
+    "med": 0.5057,
+    "win": 50.0,
+    "pf": 1.6873,
+    "days": 5.0,
+    "best": 13.1373,
+    "worst": -7.3523,
+    "total": 11.0113,
+    "excess": 0.3223,
+    "t_excess": 0.1332,
+    "t_raw": 0.5688
+   }
+  },
+  "drift_avg_Hday_ret_by_year": {
+   "2024": 0.01,
+   "2025": 0.09,
+   "2026": 1.054
+  },
+  "combined_2024_2026": {
+   "n": 25,
+   "avg": 0.9947,
+   "med": -0.4015,
+   "win": 48.0,
+   "pf": 1.6536,
+   "days": 5.0,
+   "best": 13.1373,
+   "worst": -7.3523,
+   "total": 24.8671,
+   "excess": 0.6315,
+   "t_excess": 0.6248,
+   "t_raw": 0.9844,
+   "avg_ci95_bootstrap": [
+    -0.884,
+    2.94
+   ],
+   "excess_ci95_bootstrap": [
+    -1.257,
+    2.563
+   ],
+   "avg_net_at_1c_per_share": 0.9653,
+   "avg_net_at_10bps_round_trip": 0.8947,
+   "share_of_trades_above_1pct": 48.0,
+   "max_consecutive_losses": 4,
+   "equity_max_drawdown_pct_sum": -14.07
+  },
+  "signal_days": 94,
+  "blind_rank_ic": 0.1194
+ },
+ "D_fusion_gate": {
+  "config_H": 5,
+  "by_year": {
+   "2024": {
+    "n": 7,
+    "avg": 1.7138,
+    "med": 1.7681,
+    "win": 57.1429,
+    "pf": 3.6056,
+    "days": 5.0,
+    "best": 7.653,
+    "worst": -3.4034,
+    "total": 11.9964,
+    "excess": 1.7041,
+    "t_excess": 1.2031,
+    "t_raw": 1.2099
+   },
+   "2025": {
+    "n": 4,
+    "avg": -0.5782,
+    "med": -0.5079,
+    "win": 50.0,
+    "pf": 0.7386,
+    "days": 5.0,
+    "best": 3.4504,
+    "worst": -4.7476,
+    "total": -2.3129,
+    "excess": -0.6684,
+    "t_excess": -0.3003,
+    "t_raw": -0.2598
+   },
+   "2026": {
+    "n": 8,
+    "avg": 0.0138,
+    "med": -0.4342,
+    "win": 50.0,
+    "pf": 1.0064,
+    "days": 5.0,
+    "best": 8.3069,
+    "worst": -7.7128,
+    "total": 0.1104,
+    "excess": -1.0404,
+    "t_excess": -0.5382,
+    "t_raw": 0.0071
+   }
+  },
+  "drift_avg_Hday_ret_by_year": {
+   "2024": 0.01,
+   "2025": 0.09,
+   "2026": 1.054
+  },
+  "combined_2024_2026": {
+   "n": 19,
+   "avg": 0.5155,
+   "med": 0.4601,
+   "win": 52.6316,
+   "pf": 1.318,
+   "days": 5.0,
+   "best": 8.3069,
+   "worst": -7.7128,
+   "total": 9.7939,
+   "excess": 0.0491,
+   "t_excess": 0.0463,
+   "t_raw": 0.4957,
+   "avg_ci95_bootstrap": [
+    -1.428,
+    2.467
+   ],
+   "excess_ci95_bootstrap": [
+    -1.939,
+    2.025
+   ],
+   "avg_net_at_1c_per_share": 0.4876,
+   "avg_net_at_10bps_round_trip": 0.4155,
+   "share_of_trades_above_1pct": 47.4,
+   "max_consecutive_losses": 2,
+   "equity_max_drawdown_pct_sum": -10.11
+  }
+ },
+ "C_transformer_probe": {
+  "config_H": 5,
+  "by_year": {
+   "2024": {
+    "n": 12,
+    "avg": 0.2984,
+    "med": -0.9658,
+    "win": 41.6667,
+    "pf": 1.239,
+    "days": 5.0,
+    "best": 8.2108,
+    "worst": -5.4277,
+    "total": 3.5806,
+    "excess": 0.2887,
+    "t_excess": 0.2702,
+    "t_raw": 0.2793
+   },
+   "2025": {
+    "n": 18,
+    "avg": 0.5088,
+    "med": 0.2505,
+    "win": 55.5556,
+    "pf": 1.3568,
+    "days": 5.0,
+    "best": 7.0099,
+    "worst": -5.4551,
+    "total": 9.1592,
+    "excess": 0.4187,
+    "t_excess": 0.4288,
+    "t_raw": 0.5211
+   },
+   "2026": {
+    "n": 21,
+    "avg": 0.9397,
+    "med": 2.0144,
+    "win": 52.381,
+    "pf": 1.6616,
+    "days": 4.9524,
+    "best": 7.1579,
+    "worst": -7.2977,
+    "total": 19.7336,
+    "excess": -0.1145,
+    "t_excess": -0.1186,
+    "t_raw": 0.9738
+   }
+  },
+  "drift_avg_Hday_ret_by_year": {
+   "2024": 0.01,
+   "2025": 0.09,
+   "2026": 1.054
+  },
+  "combined_2024_2026": {
+   "n": 51,
+   "avg": 0.6367,
+   "med": 0.0988,
+   "win": 50.9804,
+   "pf": 1.4608,
+   "days": 4.9804,
+   "best": 8.2108,
+   "worst": -7.2977,
+   "total": 32.4734,
+   "excess": 0.1686,
+   "t_excess": 0.2944,
+   "t_raw": 1.1113,
+   "avg_ci95_bootstrap": [
+    -0.502,
+    1.739
+   ],
+   "excess_ci95_bootstrap": [
+    -0.962,
+    1.255
+   ],
+   "avg_net_at_1c_per_share": 0.609,
+   "avg_net_at_10bps_round_trip": 0.5367,
+   "share_of_trades_above_1pct": 43.1,
+   "max_consecutive_losses": 5,
+   "equity_max_drawdown_pct_sum": -16.93
+  },
+  "blind_rank_ic": 0.0848
+ },
+ "context": {
+  "buy_and_hold_2024_2026_pct": 38.63,
+  "avg_daily_ret_pct": 0.063,
+  "avg_5day_ret_pct": 0.353,
+  "avg_10day_ret_pct": 0.74
+ }
+}

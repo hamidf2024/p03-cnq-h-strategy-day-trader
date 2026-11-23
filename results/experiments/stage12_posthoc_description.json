@@ -1,0 +1,47 @@
+{
+ "arithmetic_check": {
+  "trades": 116,
+  "mismatches": 0
+ },
+ "overlapping_positions": 0,
+ "B_rank_ic_by_year": {
+  "2024": 0.174,
+  "2025": 0.248,
+  "2026": -0.008
+ },
+ "B_blind_quintile_avg_5d_ret": [
+  -0.349,
+  0.191,
+  0.064,
+  0.509,
+  1.319
+ ],
+ "A_avg_path_after_entry_pct": {
+  "d1": -0.86,
+  "d2": -0.4,
+  "d3": -1.01,
+  "d5": -0.7,
+  "d10": 0.86
+ },
+ "A_trades_by_vol_regime": {
+  "train_median_daily_vol_pct": 2.23,
+  "high_vol": {
+   "n": 4,
+   "avg": -1.68
+  },
+  "low_vol": {
+   "n": 17,
+   "avg": -0.47
+  }
+ },
+ "context": {
+  "avg_daily_range_pct": 2.2,
+  "daily_vol_pct": 1.89,
+  "train_daily_vol_pct": 2.44,
+  "year_returns_pct": {
+   "2024": -6.0,
+   "2025": 8.0,
+   "2026": 32.7
+  }
+ }
+}
