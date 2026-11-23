@@ -556,11 +556,30 @@ def round8():
     print('R8 validation', {k: st[k] for k in ('n', 'G', 'WR', 'S', 'excess', 'worst_year_excess')}, flush=True)
 
 
+def round9():
+    """R9: model J unchanged (one trade a month, +4% target, 60 days) with a 15% stop, the owner's wider risk
+    level. One setting, nothing selected; the stop level was priced on 2021-2023 in round8."""
+    frozen = pickle.load(open(f'{RES}/stage13_frozen.pkl', 'rb'))
+    panel, D, cal, feats, cnq, path, bench, T = setup()
+    train_days = cal[cal <= L.TRAIN_END]
+    cfg = dict(src='gbm', H=5, side='long', q=0.5, monthly=True, overlap=True, hold=60, target=4.0, stop=15.0)
+    sig = signal_from_cfg(cfg, cnq, frozen['oof']).reindex(train_days).fillna(0)
+    _, st = evaluate(path, bench, sig, 60, 4.0, 15.0, VAL_YEARS, end=str(train_days[-61].date()), overlap=True)
+    wf = json.load(open(f'{RES}/stage13_walkforward_results.json'))
+    wf['rounds']['R9_one_a_month_stop15'] = dict(chosen=cfg, chosen_stats=st, rule='single setting: R6 with a 15% stop; nothing selected')
+    json.dump(wf, open(f'{RES}/stage13_walkforward_results.json', 'w'), indent=1, default=str)
+    pickle.dump(dict(chosen={'R9_one_a_month_stop15': cfg}, finals=frozen['finals'], oof=frozen['oof'], feats=frozen['feats'], gbm_params=GBM),
+                open(f'{RES}/stage13_frozen_R9.pkl', 'wb'))
+    print('R9 validation', {k: st[k] for k in ('n', 'G', 'WR', 'S', 'excess')}, [p['G'] for p in st['per_year'].values()], flush=True)
+
+
 if __name__ == '__main__':
     os.makedirs(RES, exist_ok=True)
     mode = sys.argv[1] if len(sys.argv) > 1 else ''
     if mode == 'walkforward':
         walkforward()
+    elif mode == 'round9':
+        round9()
     elif mode == 'round8':
         round8()
     elif mode == 'round7':
