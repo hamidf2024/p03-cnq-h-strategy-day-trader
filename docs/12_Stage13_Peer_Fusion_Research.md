@@ -348,13 +348,92 @@ $2,000 at risk on each monthly entry, and a run would show little that M's
 result does not already show. Whether to run it anyway, marked as run at the
 owner's request without passing the gate, is the owner's decision.
 
+## 15. Addendum: model P, a dip-timed campaign (passed the gate, failed the test)
+
+**Research step.** The owner asked again for deep research toward level 1 on
+all four goals. A review of the training years showed where months are lost:
+with model M's exit about 83% of all entry days end at the target, but days
+after a drop do better (lowest fifth of 5-day returns: 93% reach the target,
++3.0% per trade; highest fifth: 83%, +0.9%), and the failing months are
+months entered just before a slide (June 2021, June 2022, November 2022,
+April 2023), in which only the later, lower days work. M buys on the first
+acceptable day of the month. The literature points the same way: returns
+after short-term declines pay for supplying liquidity (Nagel 2012), and for a
+mean-reverting price there is an optimal entry level below the mean (Leung
+and Li 2015).
+
+**Model P** (`src/stage13_dip_campaign.py`). Each month, the first day
+(decided at 15:50) on which CNQ has fallen by a set amount; if none has come
+by a set trading day, buy on that day anyway. Two $1,000 buys at different
+times; each sells at a target, a stop, or after 60 sessions. No model is
+trained, so the same rule runs unchanged on the five peer stocks and on late
+2020.
+
+**Gate, fixed before the search and stricter than before** because 1,008
+settings were tried (five kinds of drop, four fallback days, three targets,
+two stops, three buy patterns): (A) one spare month on S and GM in every CNQ
+training year, G at least 1.25%, win rate at least 55%; (B) the same rule on
+the six stocks reaches level 1 in 15 of 18 stock-years with at least 1.0% per
+trade; (C) September to December 2020, not used for ranking: 3 of 4 months on
+CNQ and 16 of 24 stock-months; (D) at least half of the neighbouring settings
+also reach level 1 in every year.
+
+**Selection.** 561 of 1,008 settings reach level 1 on all four goals in every
+training year; 86 pass all four parts of the gate. Chosen by the fixed order:
+drop of 5% from the 10-day high, fallback on trading day 15, +3% target, 15%
+stop, buys at 10:00 and 13:00 of the next session. Training years: 68 trades,
+G +2.39%, win rate 95.6%, 3 stops, S and GM 11 / 11 / 10 against a need of
+8 / 8 / 7 (three spare months), 17 of 18 peer stock-years, late 2020 4 of 4,
+all four neighbours pass. Frozen as `stage13_frozen_R14.pkl`
+(sha256 e942072bb4c00c7b...), rehearsed on 2023, then run once.
+
+**Test result, 2024-2026, one run (look eleven of this stage, twenty-first
+overall):**
+
+| | Trades | G per trade | Win rate | S | GM | Year total |
+|---|---|---|---|---|---|---|
+| 2024 | 24 | -3.07% | 62.5% | 7 | 7 | -73.6% |
+| 2025 | 24 | +0.76% | 87.5% | 10 | 10 | +18.2% |
+| 2026 | 22 | +1.86% | 90.9% | 10 of 11 | 10 of 11 | +41.0% |
+| All | 70 | **-0.21%** (95% range -1.9% to +1.3%) | **80.0%** | **7 / 10 / 10** | **7 / 10 / 10** | -14.4% |
+
+56 targets, 10 stops, 4 time exits; worst trade -15.0%; worst month -30%
+(both buys stopped), which happened four times; up to six trades open at
+once; -0.23% per trade after the 1 cent cost. **Not level 1 on G, S or GM;
+WR3 only.** Two of the three years reach 10 months on both month goals; 2024
+has 7, one short, and the average trade loses money.
+
+**Why it failed.**
+- The pay-off is lopsided: +3% against -15% needs about 83% winners to break
+  even. P had 96% on the training years and 80% on the test years. A method
+  whose profit depends on a win rate staying above 90% has no room for a bad
+  stretch.
+- The stops came together. All ten were entered between May 2024 and
+  February 2025, eight of them from four dip signals between October 2024 and
+  February 2025, when CNQ kept falling after each 5% drop. Buying a dip works
+  while dips are bought; in a slide every dip is followed by another.
+- The timing rule added nothing on the test years. Buying after every day
+  with the same exit made the same per trade (excess -0.05%); the trades
+  taken on the fallback day made +1.57% and the dip trades -0.57%. On the
+  training years the dip looked like the source of the edge.
+- The stricter gate did not protect against this. Peer stocks, neighbouring
+  settings and late 2020 all agreed, and all came from the same rising
+  market. They test whether a result is a fluke of one setting, not whether
+  the market regime will last.
+
+By the fixed ranking rule P is ranked first of the 27 models (it has the most
+months on GM and a high win rate) although it lost money. The rule is left as
+it is; the page says so beside the ranking.
+
 ## Code and results
 
 `src/s13_lib.py`, `src/s13_feasibility.py`, `src/s13_ladder_gate_search.py`
 (the stricter gate and the 112-setting search, results in
 `results/experiments/stage13_round11_gate_search.json`), `src/s13_stop_range_search.py`
 (stops from 1% to 15%, `stage13_round12_stop_range_search.json`), `src/stage13_two_buys.py`
-(model O, `stage13_round13_two_buys_selection.json`), `src/stage13_peer_fusion.py`
+(model O, `stage13_round13_two_buys_selection.json`), `src/stage13_dip_campaign.py`
+(model P; `stage13_round14_dip_campaign_selection.json`, `stage13_frozen_R14.pkl`,
+`stage13_round14_blind_trades.csv`), `src/stage13_peer_fusion.py`
 (modes `walkforward`, `round5`, `round6`, `round7` to `round10`, `blind`, `verify`);
 `results/experiments/stage13_feasibility.json`,
 `stage13_walkforward_results.json`, `stage13_frozen.pkl`,
@@ -364,6 +443,11 @@ owner's request without passing the gate, is the owner's decision.
 list and the panel cache stay in the local folder only.
 
 ## Sources
+
+- Nagel, S. (2012), [Evaporating Liquidity](https://www.nber.org/papers/w17653)
+  (short-term reversal returns as pay for supplying liquidity).
+- Leung, T. and Li, X. (2015), [Optimal Mean Reversion Trading with Transaction Costs and Stop-Loss Exit](https://arxiv.org/abs/1411.5062)
+  (optimal entry and exit levels for a mean-reverting price).
 
 - Lopez de Prado, M. (2018), *Advances in Financial Machine Learning*
   (triple-barrier exits, meta-labelling, purged validation).
