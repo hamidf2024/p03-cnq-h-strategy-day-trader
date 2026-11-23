@@ -164,3 +164,12 @@ table.score{min-width:1160px}
 table.score th:nth-child(3){width:196px}
 table.score{min-width:1210px}
 .score .yr.two{grid-template-columns:auto 1fr}
+table.score th:nth-child(8){width:176px}table.score th:nth-child(9){width:auto}
+table.score{min-width:1180px}
+.score .risk{font-size:13px}
+.score .rl{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px}
+.score .rl span{color:var(--muted);font-size:12px}
+.score .rl b{font-variant-numeric:tabular-nums}
+.score .rl b.pos{color:var(--good)}.score .rl b.neg{color:var(--bad)}
+.score .rl.sep{border-top:1px solid var(--line);padding-top:6px;margin-top:6px;margin-bottom:0}
+.score .rl .lv{font-size:11px}

@@ -213,8 +213,7 @@ def table_row(c):
       <td class="mc"><div class="mv">{sfmt(s_worst(c))} of 12</div>{meter('S', s_worst(c), c['S_level'], True)}{by_year_simple(c, 'S')}</td>
       <td class="mc"><div class="mv">{sfmt(gm_worst(c))} of 12</div>{meter('GM', gm_worst(c), c['GM_level'], True)}{by_year_simple(c, 'GM')}</td>
       <td class="lvs">{lv}</td>
-      <td class="num">{pct(c['worst_trade_pct'], 1)}<br><span class="lv {'on' if c['keeps_strict_loss_limit'] else ('mid' if c['keeps_loss_limit'] else 'over')}">{'within 5%' if c['keeps_strict_loss_limit'] else ('within 15%' if c['keeps_loss_limit'] else 'over 15%')}</span></td>
-      <td class="num {"pos" if net > 0 else "neg"}">{usd(net, 2)}</td>
+      <td class="risk"><div class="rl"><span>Worst trade</span><b>{pct(c['worst_trade_pct'], 1)}</b></div><div class="rl"><span></span><span class="lv {'on' if c['keeps_strict_loss_limit'] else ('mid' if c['keeps_loss_limit'] else 'over')}">{'within 5%' if c['keeps_strict_loss_limit'] else ('within 15%' if c['keeps_loss_limit'] else 'over 15%')}</span></div><div class="rl sep"><span>After costs, per $1,000 trade</span><b class="{"pos" if net > 0 else "neg"}">{usd(net, 2)}</b></div></td>
     </tr>'''
 
 
@@ -415,7 +414,7 @@ html = f'''<!doctype html>
     <div class="tabs" role="group" aria-label="Filter models"><button type="button" id="f-all" aria-pressed="true" data-f="">All</button><button type="button" id="f-same" aria-pressed="false" data-f="Same-day">Same-day</button><button type="button" id="f-multi" aria-pressed="false" data-f="Multi-day">Multi-day</button></div>
     <div class="card" style="padding:6px 0 0">
       <p class="swipe" style="padding:10px 16px 0">Swipe sideways to see every column.</p><div class="table-scroll"><table class="score" id="score">
-        <thead><tr><th class="num">Rank</th><th>Model</th><th>G &middot; profit per trade; then each year: average, and $1,000 at year end</th><th>WR &middot; win rate; then each year</th><th>S &middot; steady months; then each year</th><th>GM &middot; months of 5% or more; then each year</th><th>Levels</th><th class="num">Worst trade</th><th class="num">After costs, per $1,000 trade</th></tr></thead>
+        <thead><tr><th class="num">Rank</th><th>Model</th><th>G &middot; profit per trade; then each year: average, and $1,000 at year end</th><th>WR &middot; win rate; then each year</th><th>S &middot; steady months; then each year</th><th>GM &middot; months of 5% or more; then each year</th><th>Levels</th><th>Worst trade, and profit after costs</th></tr></thead>
         <tbody>{table_html}</tbody>
       </table></div>
     </div>
