@@ -1,0 +1,7 @@
+# Price data is kept only in the owner's local project folder and is never
+# pushed (owner instruction, 2026-11-23; the data vendor does not allow
+# redistribution). See data/README.md for what belongs here and how to get it.
+data/raw/*.csv
+data/raw/peers/
+__pycache__/
+*.pyc
