@@ -40,6 +40,13 @@ recorded in `00_Project_Charter.docx` ("Performance Goals") and scored by
   gross % of the trades opened in it add up to 5% or more, $50 or more at
   $1,000 per trade. The owner confirmed the reading with an example: +4%,
   +4% and -2% make +6% and the month counts. Counted per year like S.
+- Same-time rule (owner, 2026-11-23): trades opened at exactly the same time
+  count as one trade; trades opened at different times count separately,
+  even on the same day. Two $1,000 buys at 3:55 pm at the same price that
+  each make +4% count once (+4%); a buy at 11:00 am and one at 3:55 pm that
+  each make +4% count as +8%. `merge_same_time` in `src/goals_scorecard.py`
+  applies it; no published score changed, because no model so far opens two
+  trades at the same moment.
 - After costs: 1 cent per share for the round trip, about $0.28 on a $1,000
   trade.
 
@@ -117,6 +124,18 @@ and a +5.5% target, G is +2.08%, the win rate 81%, S 8 / 9 / 9 and GM 8 / 9 /
 9 at 15%, against +0.86%, 56%, 5 / 7 / 6 at 5% and +0.95%, 31%, 3 / 4 / 3 at
 1%. No setting passed the gate, so nothing was run on 2024-2026 (`docs/12`,
 Section 13).
+
+**Model O, two buys at different times (2026-11-23): stopped at the training
+gate.** With the same-time rule settled, model M's signal and exit (+4%
+target, 15% stop, 60 sessions) were tested with two $1,000 buys at different
+times: six fixed patterns, for example 10:00 and the close of the session
+after the signal. On 2021-2023 with the test years removed, every pattern
+reached level 1 on all four goals (best: G +1.85%, win rate 87.5%, S 8 / 10 /
+10, GM 8 / 10 / 10 against a need of 8 / 8 / 7) and held on the peer stocks
+(15 to 17 of 18 stock-years). None had the required spare month: 2021 came
+in at exactly 8 of 12 for every pattern. By the gate fixed after model N, no
+pattern was frozen and no run on 2024-2026 was made (still twenty looks).
+`docs/12`, Section 14.
 
 **The fourth goal, GM.** No model reaches GM1. The closest inside the loss
 limits is E. Peer-Fusion GBM with 3 / 2 / 2 months of 5% or more.

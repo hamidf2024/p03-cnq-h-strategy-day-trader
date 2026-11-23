@@ -306,12 +306,55 @@ is inside the noise and sells trades that would have recovered. The caution
 is the same as before: 2021-2023 were rising years, and in a falling year a
 wide stop makes each loss larger.
 
+## 14. Addendum: the same-time rule, and model O (two buys at different times)
+
+**Owner's rule, 2026-11-23.** Trades opened at exactly the same time count as
+one trade; trades opened at different times count separately, even on the
+same day. It is in the charter, `docs/07` and the scoring code
+(`merge_same_time`). Re-scoring every model with the rule changed nothing:
+no model so far opens two trades at the same moment.
+
+**Model O** (`src/stage13_two_buys.py`). Model M's signal and exit, unchanged
+(first day of the month the Peer-Fusion model is at least neutral; +4%
+target, 15% stop, 60 sessions), with two $1,000 buys at different times. Six
+fixed buy patterns were the only thing selected. "At 10:00" means the close
+of the 5-minute bar ending at 10:00; two buys that fall on the same bar are
+the same time and count once.
+
+Training years only, test years removed, same gate as Sections 12 and 13:
+
+| Buys | Trades | G | Win rate | S 2021/22/23 | GM 2021/22/23 | Spare months | Peer stock-years |
+|---|---|---|---|---|---|---|---|
+| signal-day close, next day 10:00 | 64 | +1.72% | 85.9% | 8 / 9 / 10 | 8 / 9 / 9 | 0 | 15 of 18 |
+| signal-day close, next day 13:00 | 64 | +1.23% | 84.4% | 8 / 8 / 10 | 8 / 8 / 9 | 0 | 15 of 18 |
+| next day 09:35 and close | 64 | +1.85% | 87.5% | 8 / 9 / 10 | 8 / 9 / 10 | 0 | 16 of 18 |
+| next day 10:00 and 13:00 | 64 | +1.51% | 85.9% | 8 / 9 / 10 | 8 / 9 / 10 | 0 | 17 of 18 |
+| next day 10:00 and close | 64 | +1.85% | 87.5% | 8 / 10 / 10 | 8 / 10 / 10 | 0 | 16 of 18 |
+| next day 13:00 and close | 64 | +1.36% | 85.9% | 8 / 9 / 10 | 8 / 9 / 10 | 0 | 16 of 18 |
+
+(Level 1 needs 8 / 8 / 7 months; the gate needs one more in every year.)
+
+**Result: every pattern reaches level 1 on all four goals on the training
+years and holds on the peer stocks, but none has the spare month the gate
+requires: 2021 gives exactly 8 of 12 on both month goals for all six. Nothing
+was frozen and no run on 2024-2026 was made (still twenty looks).**
+
+This is the same position model N was in before its test run: level 1 on the
+training years with nothing to spare. The gate was written after N for this
+case, and it is applied here even though model M's known test result makes a
+good outcome for O likely. That likelihood is the reason for caution, not
+against it: O is M twice, its two buys usually win or lose together, it puts
+$2,000 at risk on each monthly entry, and a run would show little that M's
+result does not already show. Whether to run it anyway, marked as run at the
+owner's request without passing the gate, is the owner's decision.
+
 ## Code and results
 
 `src/s13_lib.py`, `src/s13_feasibility.py`, `src/s13_ladder_gate_search.py`
 (the stricter gate and the 112-setting search, results in
 `results/experiments/stage13_round11_gate_search.json`), `src/s13_stop_range_search.py`
-(stops from 1% to 15%, `stage13_round12_stop_range_search.json`), `src/stage13_peer_fusion.py`
+(stops from 1% to 15%, `stage13_round12_stop_range_search.json`), `src/stage13_two_buys.py`
+(model O, `stage13_round13_two_buys_selection.json`), `src/stage13_peer_fusion.py`
 (modes `walkforward`, `round5`, `round6`, `round7` to `round10`, `blind`, `verify`);
 `results/experiments/stage13_feasibility.json`,
 `stage13_walkforward_results.json`, `stage13_frozen.pkl`,

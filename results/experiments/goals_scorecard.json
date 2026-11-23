@@ -65,6 +65,10 @@
  "level1_but_breaks_loss_limit": [
   "R6_one_a_month"
  ],
+ "same_time_rule": {
+  "rule": "trades opened at exactly the same time count as one trade; different times count separately",
+  "merged_trades_by_method": {}
+ },
  "risk_rule": {
   "max_loss_pct_per_trade": 15.0,
   "strict_max_loss_pct_per_trade": 5.0,

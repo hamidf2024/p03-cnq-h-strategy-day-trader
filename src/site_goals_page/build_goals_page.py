@@ -155,7 +155,7 @@ goals_html = (
                 'Months in which the average gross profit per trade is above 1%. A month with no trades does not count. A level must hold in every year tested.')
     + goal_card('GM', 'Monthly profit', 'In how many months of the year do the month\u2019s trades add up to 5% or more?',
                 [('8 of 12', 'months'), ('10 of 12', 'months'), ('12 of 12', 'every month')],
-                'Months whose trades together make 5% or more, which is $50 or more at $1,000 per trade. A level must hold in every year tested.'))
+                'Months whose trades together make 5% or more, which is $50 or more at $1,000 per trade. Trades opened at exactly the same time count once. A level must hold in every year tested.'))
 
 # ------------------------------------------------------------------ top 5
 def top_row(c):
@@ -528,7 +528,8 @@ html = f'''<!doctype html>
         <li>A rising stock helps long trades. CNQ rose about 39% over the test period, and a randomly timed 5-day purchase made +0.35% on average.</li>
         <li>Higher levels. A search of 135 settings on the 2021 to 2023 training years, with the test years removed from the data, found none that reaches level 2 on all three goals in every year, and none that reaches level 3. No new model was run on the test years for those levels.</li>
         <li>Level 1 on all four goals. After model N a new model must pass its training-years test with a margin of one month on S and on GM, and the same rule must hold on the five peer stocks. 1,620 settings were tried on 2021 to 2023 with the test years removed, with stops from 1% to 15%. None passed, so nothing new was run on the test years.</li>
-        <li>GM adds up trades. Two $1,000 trades opened on the same day count twice towards a month's total. Model M traded that way would show GM 10 / 12 / 9 of 11, but it is the same bet with $2,000 at risk, so it is not counted as a new model here.</li>
+        <li>Trades opened at the same time. By the owner's rule, trades opened at exactly the same time count as one trade; trades opened at different times count separately, even on the same day. No score on this page changed when the rule was applied.</li>
+        <li>Model O, not run. Model M with two $1,000 buys at different times was tested on the training years. All six buy patterns reached level 1 on all four goals there, but with no spare month in 2021 (exactly 8 of 12), so by the rule set after model N it was not run on the test years. It would be the same bet as M with $2,000 at risk.</li>
         <li>2026 has 11 months of data. Its months are judged on the same fractions (8/12, 10/12, 12/12).</li>
       </ul>
     </div>

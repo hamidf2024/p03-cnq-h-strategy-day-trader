@@ -314,6 +314,17 @@ per-stage section at the end.)*
   15% limit. A stop inside the noise is a cost, not protection. Test the
   whole range on training data before choosing one, and remember the range
   was priced in rising years.
+- **(Stage 13) Hold the gate hardest when the answer looks known.** Model O
+  was model M with two buys at different times, and M's test result was
+  already public, so a good test result for O was likely. On the training
+  years O reached level 1 exactly, with no spare month in 2021, and the gate
+  stopped it. A gate that is waived when the outcome is expected to be good
+  is not a gate; the decision to run anyway belongs to the owner and is
+  recorded as such.
+- **(Stage 13) Settle how a goal counts before designing to it.** GM adds up
+  trades, so the owner was asked whether trades opened together count
+  separately. The answer (same time: one trade; different times: separate)
+  went into the charter and the scoring code before any model used it.
 
 ## 4. Evaluation and metrics lessons
 
