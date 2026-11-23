@@ -5527,6 +5527,62 @@
     }
    },
    "rule": "single setting: R1 with a 5% stop; nothing selected"
+  },
+  "R9_one_a_month_stop15": {
+   "chosen": {
+    "src": "gbm",
+    "H": 5,
+    "side": "long",
+    "q": 0.5,
+    "monthly": true,
+    "overlap": true,
+    "hold": 60,
+    "target": 4.0,
+    "stop": 15.0
+   },
+   "chosen_stats": {
+    "n": 32,
+    "G": 1.439,
+    "WR": 84.4,
+    "S": [
+     9,
+     9,
+     9
+    ],
+    "excess": 0.129,
+    "worst_year_excess": -1.723,
+    "min_trades_year": 10,
+    "per_year": {
+     "2021": {
+      "n": 10,
+      "G": 2.054,
+      "excess": 0.576,
+      "WR": 90.0,
+      "S": 9,
+      "months_traded": 10,
+      "shorts": 0
+     },
+     "2022": {
+      "n": 12,
+      "G": -0.911,
+      "excess": -1.723,
+      "WR": 75.0,
+      "S": 9,
+      "months_traded": 12,
+      "shorts": 0
+     },
+     "2023": {
+      "n": 10,
+      "G": 3.645,
+      "excess": 1.907,
+      "WR": 90.0,
+      "S": 9,
+      "months_traded": 10,
+      "shorts": 0
+     }
+    }
+   },
+   "rule": "single setting: R6 with a 15% stop; nothing selected"
   }
  },
  "oof_rank_ic": {
