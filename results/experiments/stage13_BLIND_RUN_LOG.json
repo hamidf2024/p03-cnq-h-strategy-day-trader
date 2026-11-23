@@ -119,5 +119,18 @@
   ],
   "blind_look_number": 11,
   "result_sha256": "34f029454e91f446dad4cdbe9b3035f0108d1e8e56c2dc940c6f47c56b37cf2d"
+ },
+ "R13_two_buys_stop15": {
+  "frozen_artefact": "stage13_frozen_R13.pkl",
+  "frozen_sha256": "eefbb02587a4b6381e38d019969350bce375a748f1e674360cbbd9f514eda291",
+  "ran_on": "2026-11-23 22:32:02.978072",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 12,
+  "result_sha256": "c6a84eb8ab7d65e5482459aecb2fee4c0c1598ac9e0cb815c033081259429df6",
+  "gate_passed": false,
+  "note": "did not pass the training gate (zero spare months in 2021); run under the owner's standing instruction to test each trained model on 2024-2026; model M twice, so a good result is expected and adds little independent evidence"
  }
 }
