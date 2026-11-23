@@ -175,6 +175,16 @@ def top_row(c):
 top_html = ''.join(top_row(c) for c in TOP5)
 
 # ------------------------------------------------------------------ all models table
+def by_year_list(c):
+    """Average gross % per trade in each test year, under the G bar."""
+    items = ''
+    for y, v in c['by_year'].items():
+        g = v['gross_pct_per_trade']
+        items += (f'<span>{y}</span><b class="none">no trades</b>' if g is None
+                  else f'<span>{y}</span><b class="{"neg" if g < 0 else ""}">{pct(g, 2, True)}</b>')
+    return f'<div class="yr" aria-label="Average gross percent per trade by year">{items}</div>'
+
+
 def table_row(c):
     g, wr = c['gross_pct_per_trade'], c['win_rate']
     rk = c.get('rank', '–')
@@ -183,7 +193,7 @@ def table_row(c):
     return f'''<tr data-kind="{KIND[c['id']]}">
       <td class="num rk">{rk}</td>
       <td class="nm"><strong>{E(c['name'])}{NEWTAG(c)}</strong><span>{KIND[c['id']]} · {c['trades']:,} trades</span></td>
-      <td class="mc"><div class="mv">{pct(g)}</div>{meter('G', g, c['G_level'], True)}</td>
+      <td class="mc"><div class="mv">{pct(g)}</div>{meter('G', g, c['G_level'], True)}{by_year_list(c)}</td>
       <td class="mc"><div class="mv">{wr:.1f}%<small>{c['wins_share_of_all_trades']:.0f}% of all trades</small></div>{meter('WR', wr, c['WR_level'], True)}</td>
       <td class="mc"><div class="mv">{sfmt(s_worst(c))} of 12</div>{meter('S', s_worst(c), c['S_level'], True)}</td>
       <td class="mc"><div class="mv">{sfmt(gm_worst(c))} of 12</div>{meter('GM', gm_worst(c), c['GM_level'], True)}</td>
@@ -390,11 +400,11 @@ html = f'''<!doctype html>
     <div class="tabs" role="group" aria-label="Filter models"><button type="button" id="f-all" aria-pressed="true" data-f="">All</button><button type="button" id="f-same" aria-pressed="false" data-f="Same-day">Same-day</button><button type="button" id="f-multi" aria-pressed="false" data-f="Multi-day">Multi-day</button></div>
     <div class="card" style="padding:6px 0 0">
       <p class="swipe" style="padding:10px 16px 0">Swipe sideways to see every column.</p><div class="table-scroll"><table class="score" id="score">
-        <thead><tr><th class="num">Rank</th><th>Model</th><th>G &middot; profit per trade</th><th>WR &middot; win rate</th><th>S &middot; steady months</th><th>GM &middot; months of 5% or more</th><th>Levels</th><th class="num">Worst trade</th><th class="num">After costs, per $1,000 trade</th></tr></thead>
+        <thead><tr><th class="num">Rank</th><th>Model</th><th>G &middot; profit per trade, then each year</th><th>WR &middot; win rate</th><th>S &middot; steady months</th><th>GM &middot; months of 5% or more</th><th>Levels</th><th class="num">Worst trade</th><th class="num">After costs, per $1,000 trade</th></tr></thead>
         <tbody>{table_html}</tbody>
       </table></div>
     </div>
-    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. The steady-months figure is the worst of the three years, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
+    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. Under each profit-per-trade bar is the average gross % per trade for 2024, 2025 and 2026 separately. The steady-months figure is the worst of the three years, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
   </section>
 
   <section id="months">
