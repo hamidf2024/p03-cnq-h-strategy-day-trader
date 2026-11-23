@@ -12,8 +12,10 @@ results/experiments/stage13_data_checks.json.
 
 Checks
   1. inventory        which expected files are missing
-  2. completeness     trading days vs the CNQ reference file, bars per day,
-                      duplicate timestamps, session bounds
+  2. completeness     empty cells, non-positive prices, zero-volume bars,
+                      trading days vs the CNQ reference file, bars per day,
+                      gap days (under 20 bars), duplicate timestamps, session
+                      bounds
   3. splits           largest overnight close-to-open move per symbol
   4. feed comparison  CNQ on the consolidated feed vs the existing IEX file
   5. oil              EIA spot coverage; spot vs USO and vs CNQ daily returns
@@ -66,6 +68,10 @@ def main():
                'days_missing_vs_reference': int(len(ref_days - days)),
                'days_extra_vs_reference': int(len(days - ref_days)),
                'bars_per_day_median': float(d.n.median()), 'days_under_70_bars': int((d.n < 70).sum()),
+               'empty_cells': int(df[['Open', 'High', 'Low', 'Close', 'Volume']].isna().sum().sum()),
+               'non_positive_prices': int((df[['Open', 'High', 'Low', 'Close']] <= 0).sum().sum()),
+               'zero_volume_bars': int((df.Volume <= 0).sum()),
+               'gap_days_under_20_bars': [str(x.date()) for x in d.index[d.n < 20]],
                'duplicate_timestamps': int(df.Datetime.duplicated().sum()),
                'bars_outside_0930_1555': int(((tm < 570) | (tm > 955)).sum()),
                'bad_ohlc_rows': int(((df.High < df.Low) | (df.Close > df.High) | (df.Close < df.Low)).sum()),
