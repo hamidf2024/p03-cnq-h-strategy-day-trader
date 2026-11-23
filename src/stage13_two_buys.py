@@ -23,6 +23,8 @@ Modes
     select   training years only; needs S13_CUTOFF=2023-12-29 so 2024-2026 is not in the data
     blind    one run on 2024-2026 of the frozen pattern; refuses to run twice
     verify   reproduces the stored blind result
+    freeze   freezes the pattern the fixed order puts first (used when no pattern passes the gate and the
+             owner's instruction is to test anyway; recorded as a run without passing the gate)
     dry      rehearses the blind code on 2023 with the test years removed; writes nothing
 
 GATE for select (unchanged from rounds 11 and 12, fixed before this round):
@@ -194,6 +196,23 @@ def select():
     json.dump(out, open(f'{RES}/stage13_round13_two_buys_selection.json', 'w'), indent=1, default=str)
 
 
+def freeze():
+    """Freezes the pattern that the fixed order puts first (largest worst-year margin on the month goals, then peer
+    stock-years, then G), read from the saved training-years selection. No pattern passed the gate (every one has zero
+    spare months in 2021, a year in which the forecasting model has no signal before March, so only ten months are
+    traded). The run is made under the owner's standing instruction to train on 2020-2023, test on 2024-2026 and
+    repeat, and is recorded as a run WITHOUT passing the gate."""
+    sel = json.load(open(f'{RES}/stage13_round13_two_buys_selection.json')); pats = sel['patterns']
+    best = max(pats, key=lambda k: (pats[k]['margin'], pats[k]['cross_passed'], pats[k]['G']))
+    frozen = pickle.load(open(f'{RES}/stage13_frozen.pkl', 'rb'))
+    note = ('did not pass the training gate (zero spare months in 2021); run under the owner\'s standing instruction to '
+            'test each trained model on 2024-2026; model M twice, so a good result is expected and adds little independent evidence')
+    blob = pickle.dumps(dict(chosen={NAME: dict(pattern=best, **M_CFG)}, finals=frozen['finals'], oof=frozen['oof'], feats=frozen['feats'],
+                             gate_passed=False, gate_note=note, selection_stats=pats[best]))
+    open(f'{RES}/{ART}', 'wb').write(blob)
+    print('FROZEN', best, pats[best]['G'], pats[best]['WR'], [p['S'] for p in pats[best]['per_year'].values()], hashlib.sha256(blob).hexdigest()[:16], flush=True)
+
+
 def blind(verify=False, dry=False):
     """dry=True rehearses every step on 2023 with the test years removed (S13_CUTOFF set); it writes nothing."""
     logf = f'{RES}/stage13_BLIND_RUN_LOG.json'; resf = f'{RES}/stage13_blind_results.json'
@@ -239,7 +258,8 @@ def blind(verify=False, dry=False):
         print('VERIFY', NAME, 'identical' if json.dumps(allres[NAME], sort_keys=True, default=str) == payload else 'DIFFERENT'); return
     allres[NAME] = json.loads(payload)
     log[NAME] = dict(frozen_artefact=ART, frozen_sha256=sha, ran_on=str(pd.Timestamp.now()), blind_window=[L.BLIND_START, L.BLIND_END],
-                     blind_look_number=len(log) + 1, result_sha256=hashlib.sha256(payload.encode()).hexdigest())
+                     blind_look_number=len(log) + 1, result_sha256=hashlib.sha256(payload.encode()).hexdigest(),
+                     gate_passed=frozen.get('gate_passed', True), note=frozen.get('gate_note', ''))
     json.dump(allres, open(resf, 'w'), indent=1); json.dump(log, open(logf, 'w'), indent=1)
     t.insert(0, 'model', NAME)
     t.drop(columns=['entry_price', 'exit_price', 'pnl']).to_csv(f'{RES}/stage13_round13_blind_trades.csv', index=False)         # published: no prices
@@ -256,6 +276,8 @@ if __name__ == '__main__':
         select()
     elif mode == 'blind':
         blind()
+    elif mode == 'freeze':
+        freeze()
     elif mode == 'dry':
         blind(dry=True)
     elif mode == 'verify':
