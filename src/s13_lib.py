@@ -24,7 +24,7 @@ def load_5min(sym):
     f = sorted(glob.glob(f'{DATA}/{sym}_5min_sip_*.csv'))[-1]
     df = pd.read_csv(f, usecols=['Datetime', 'Open', 'High', 'Low', 'Close', 'Volume'], parse_dates=['Datetime'])
     df['date'] = df.Datetime.dt.normalize()
-    df = df[df.date <= LAST_FULL_DAY]
+    df = df[df.date <= os.environ.get('S13_CUTOFF', LAST_FULL_DAY)]     # S13_CUTOFF=2023-12-29 removes the test years entirely
     n = df.groupby('date').Close.transform('size')
     return df[n >= 20].reset_index(drop=True)            # drops the three vendor gap days (single 09:30 bar)
 
