@@ -361,6 +361,13 @@ per-stage section at the end.)*
   short when the trend is down did worse than always buying in 17 of 24
   training settings: at one to three months a single stock tends to bounce,
   so the short is opened just before the rebound.
+- **(Stage 13) When a passing variant can be assembled without a run, the
+  test set is spent.** After 22 runs on 2024-2026, one of seven arrangements
+  of already-tested buys showed level 1 on all four goals. It was written up
+  as what it is, a choice made with the answers in view, and not as a
+  result. From that point the honest next step is a forward test: freeze the
+  candidates with their hashes and a date, and score only trades opened
+  afterwards.
 
 ## 4. Evaluation and metrics lessons
 
