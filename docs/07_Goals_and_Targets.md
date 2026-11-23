@@ -8,6 +8,36 @@ project's original objective and priority order) and `01_Phases_of_Development.d
 order is kept below as a guardrail, and this file adds the first concrete,
 numeric performance target the project is now aimed at.*
 
+## Update 2026-11-23: Target 1 sharpened to per-TRADE (supersedes the
+   per-day working definition's headline bar)
+
+Later the same day, the owner's instruction became explicit: "develop new
+model and trading method for CNQ that can reach our major goal which is
+more than 1 percent gross per trade averagely for 2024 to 2026... use the
+same approach for training data, 2020-2023 walk forward training and then
+testing on 2024-2026." This resolves one of the open questions below in
+the harder direction: **per trade**, not per day. For any realistic trade
+count above 1/day (every method tested so far runs 2-5/day), per-trade is
+the materially bigger bar of the two (per-day = trades/day x per-trade), so
+this is now Target 1's headline number; the per-day table immediately below
+is kept for context and because it's still a live, useful secondary view,
+not because it's still the primary bar.
+
+Stage 11 (`09_Stage11_Per_Trade_Target_Research.md`) is the research cycle
+run directly against this per-trade bar. Short version: **no method tested
+so far, old or new, averages anywhere close to >1% gross per trade on
+honest 2024-2026 blind data** -- the best positive, high-volume result
+(a percent-of-price-scaled variant of V7.1, tested in Stage 11) sits at
+0.0205%/trade, about 1/49th of target. Stage 11 also tested a genuinely
+new trade *structure* (a multi-day ATR/Donchian-channel swing-trend system,
+since a same-day structure is close to ruled out by CNQ's own ~2%/day
+average range -- see that document's Section 1 for the quantitative check)
+-- it proved capable of individual trades in the +7% to +19% range (which
+no same-day method can produce by construction) but did not yet validate a
+reliably *positive* average on one symbol over only 9-17 blind trades.
+Full methodology, results tables, and next steps: see
+`09_Stage11_Per_Trade_Target_Research.md`.
+
 ## Guardrails carried over from the charter (unchanged)
 
 Per `00_Project_Charter.docx` (amended 2026-10-28), the owner's priority order
