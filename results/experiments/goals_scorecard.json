@@ -45,17 +45,17 @@
  },
  "top5": [
   "R9_one_a_month_stop15",
+  "R10_monthly_campaign_four_goals",
   "R1_peer_fusion_gbm",
   "R8_peer_fusion_stop5",
-  "R7_one_a_month_stop5",
-  "R4_goal_shaped_exits"
+  "R7_one_a_month_stop5"
  ],
  "top5_if_scratch_is_not_a_win": [
   "R9_one_a_month_stop15",
+  "R10_monthly_campaign_four_goals",
   "R1_peer_fusion_gbm",
   "R8_peer_fusion_stop5",
-  "R7_one_a_month_stop5",
-  "R4_goal_shaped_exits"
+  "R7_one_a_month_stop5"
  ],
  "level1_on_all_four": [],
  "level1_on_all_three": [
@@ -69,6 +69,7 @@
   "max_loss_pct_per_trade": 15.0,
   "strict_max_loss_pct_per_trade": 5.0,
   "methods_with_stop_at_limit": [
+   "R10_monthly_campaign_four_goals",
    "R4_goal_shaped_exits",
    "R7_one_a_month_stop5",
    "R8_peer_fusion_stop5",
@@ -78,7 +79,7 @@
  },
  "leaders": {
   "G": "R6_one_a_month",
-  "GM": "R1_peer_fusion_gbm",
+  "GM": "R10_monthly_campaign_four_goals",
   "S_worst_year": "R6_one_a_month",
   "WR": "R9_one_a_month_stop15",
   "S": "R6_one_a_month"
@@ -185,7 +186,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 21
+   "rank": 22
   },
   {
    "id": "V2",
@@ -288,7 +289,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 20
+   "rank": 21
   },
   {
    "id": "V3",
@@ -391,7 +392,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 19
+   "rank": 20
   },
   {
    "id": "V4",
@@ -494,7 +495,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 18
+   "rank": 19
   },
   {
    "id": "V5",
@@ -597,7 +598,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 16
+   "rank": 17
   },
   {
    "id": "V6",
@@ -700,7 +701,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 17
+   "rank": 18
   },
   {
    "id": "V7_wf",
@@ -803,7 +804,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 13
+   "rank": 14
   },
   {
    "id": "V7.1_wf",
@@ -906,7 +907,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 14
+   "rank": 15
   },
   {
    "id": "RuleOrModel",
@@ -1009,7 +1010,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 12
+   "rank": 13
   },
   {
    "id": "V7.1_pct",
@@ -1112,7 +1113,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 11
+   "rank": 12
   },
   {
    "id": "Donchian_long",
@@ -1317,7 +1318,7 @@
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 22
+   "rank": 23
   },
   {
    "id": "A_spring_release",
@@ -1420,7 +1421,7 @@
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 15
+   "rank": 16
   },
   {
    "id": "B_field_fusion_gbm",
@@ -1523,7 +1524,7 @@
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 9
+   "rank": 10
   },
   {
    "id": "C_transformer_probe",
@@ -1626,7 +1627,7 @@
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 6
+   "rank": 7
   },
   {
    "id": "D_fusion_gate",
@@ -1729,7 +1730,7 @@
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 10
+   "rank": 11
   },
   {
    "id": "R1_peer_fusion_gbm",
@@ -1832,7 +1833,7 @@
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 2
+   "rank": 3
   },
   {
    "id": "R2_peer_oil_spring",
@@ -1935,7 +1936,7 @@
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 8
+   "rank": 9
   },
   {
    "id": "R3_fusion_ensemble",
@@ -2038,7 +2039,7 @@
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 7
+   "rank": 8
   },
   {
    "id": "R4_goal_shaped_exits",
@@ -2141,7 +2142,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 5
+   "rank": 6
   },
   {
    "id": "R5_first_passage",
@@ -2448,7 +2449,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 4
+   "rank": 5
   },
   {
    "id": "R8_peer_fusion_stop5",
@@ -2551,7 +2552,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 3
+   "rank": 4
   },
   {
    "id": "R9_one_a_month_stop15",
@@ -2655,6 +2656,109 @@
    "trades_beyond_loss_limit": 3,
    "enough_trades_to_rank": true,
    "rank": 1
+  },
+  {
+   "id": "R10_monthly_campaign_four_goals",
+   "name": "N. Two-a-month campaign",
+   "family": "Swing ML model",
+   "holding": "up to 60 days",
+   "stage": 13,
+   "settings": "walk-forward on 2020-2023",
+   "trades": 68,
+   "trades_per_year": 23.6,
+   "gross_pct_per_trade": 0.7385,
+   "dollars_per_trade": 7.39,
+   "gross_pct_per_trade_ci95": [
+    -1.33,
+    2.62
+   ],
+   "worst_trade_pct": -15.72,
+   "best_trade_pct": 8.11,
+   "median_pct_per_trade": 6.0,
+   "win_rate": 70.6,
+   "wins": 48,
+   "losses": 20,
+   "scratches": 0,
+   "wins_share_of_all_trades": 70.6,
+   "cost_1c_dollars_per_trade": 0.28,
+   "cost_1c_dollars_total": 19.07,
+   "shares_per_1000_avg": 28.0,
+   "profit_factor": 1.21,
+   "gross_pct_total": 50.22,
+   "dollars_total": 502.19,
+   "net_pct_per_trade_after_1c": 0.7105,
+   "dollars_per_trade_after_1c": 7.1,
+   "dollars_total_after_1c": 483.12,
+   "profitable_after_1c": true,
+   "months_above_1pct_total": 19,
+   "months_total": 35,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 6.2943,
+   "months_above_1pct_avg_per_12": 6.5,
+   "months_above_1pct_worst_year_per_12": 5.5,
+   "avg_month_sum_gross_pct": 1.435,
+   "months_total_5pct_all": 19,
+   "months_total_5pct_worst_year_per_12": 5.5,
+   "best_month_total_pct": 12.59,
+   "by_year": {
+    "2024": {
+     "trades": 24,
+     "gross_pct_per_trade": 0.6209,
+     "win_rate": 66.7,
+     "months": 12,
+     "months_above_1pct": 6,
+     "months_total_5pct": 6,
+     "months_positive": 7,
+     "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 6.2943,
+     "gross_pct_year": 14.9,
+     "dollars_year": 149.02
+    },
+    "2025": {
+     "trades": 22,
+     "gross_pct_per_trade": 2.5165,
+     "win_rate": 81.8,
+     "months": 12,
+     "months_above_1pct": 8,
+     "months_total_5pct": 8,
+     "months_positive": 9,
+     "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 6.0,
+     "gross_pct_year": 55.36,
+     "dollars_year": 553.63
+    },
+    "2026": {
+     "trades": 22,
+     "gross_pct_per_trade": -0.9112,
+     "win_rate": 63.6,
+     "months": 11,
+     "months_above_1pct": 5,
+     "months_total_5pct": 5,
+     "months_positive": 5,
+     "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 6.2169,
+     "gross_pct_year": -20.05,
+     "dollars_year": -200.46
+    }
+   },
+   "G_level": 0,
+   "WR_level": 2,
+   "S_level": 0,
+   "GM_level": 0,
+   "levels_total": 2,
+   "progress": {
+    "G": 0.246,
+    "WR": 0.941,
+    "S": 0.54,
+    "GM": 0.54,
+    "overall": 0.567,
+    "overall_if_scratch_is_not_a_win": 0.56704
+   },
+   "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 9,
+   "enough_trades_to_rank": true,
+   "rank": 2
   }
  ]
 }

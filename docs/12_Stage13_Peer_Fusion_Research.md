@@ -202,13 +202,32 @@ Test result: 35 trades, **+1.85% per trade (G1), 88.6% win rate (WR3), S 10 /
 inside the 15% limit; nothing does inside 5%. The cautions listed for J in
 Section 6 apply to M, except that its losses are capped near 15%.
 
+## 11. Addendum: fourth goal GM and model N
+
+The owner added a fourth goal, GM (months whose trades add up to 5% or more;
+8 / 10 / 12 of 12), and asked for a model at level 1 on all four goals.
+**Model N (R10)**: two trades a month, one in each half, on the first day the
+Peer-Fusion model is at least neutral; +6% target, 15% stop, 60-day limit.
+Selection used 2021-2023 only, with 2024-2026 removed from the data
+(`S13_CUTOFF`); 2 of 32 settings reached level 1 on all four goals in every
+training year, both at the threshold on the month goals.
+
+Test result, one run (look ten of this stage, twentieth overall): 68 trades,
++0.74% per trade (95% range -1.3% to +2.6%), 70.6% win rate, S 6 / 8 / 5,
+GM 6 / 8 / 5, 45 targets, 12 stops and 11 time exits, year totals +14.9%,
++55.4%, -20.0%, up to five trades open at once. **Not level 1 on G, S or
+GM.** Doubling the trades per month doubled the stops in falling stretches
+(late 2024, spring 2026), and a month fails both month goals as soon as one
+of its two trades is stopped. A passing margin of zero on the training years
+was not a margin.
+
 ## Code and results
 
 `src/s13_lib.py`, `src/s13_feasibility.py`, `src/stage13_peer_fusion.py`
-(modes `walkforward`, `round5`, `round6`, `round7`, `round8`, `round9`, `blind`, `verify`);
+(modes `walkforward`, `round5`, `round6`, `round7` to `round10`, `blind`, `verify`);
 `results/experiments/stage13_feasibility.json`,
 `stage13_walkforward_results.json`, `stage13_frozen.pkl`,
-`stage13_frozen_R5.pkl` to `stage13_frozen_R9.pkl`,
+`stage13_frozen_R5.pkl` to `stage13_frozen_R10.pkl`,
 `stage13_BLIND_RUN_LOG.json`, `stage13_blind_results.json`,
 `stage13_blind_trades.csv` (dates and returns, no prices). The priced trade
 list and the panel cache stay in the local folder only.

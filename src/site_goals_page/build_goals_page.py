@@ -47,6 +47,7 @@ DESC = {
  'R5_first_passage': 'Peer-Fusion entries with a lower bar and a 2% profit target, for up to 20 days. Built to trade in most months.',
  'R7_one_a_month_stop5': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +2%, at a 5% stop, or after 20 trading days.',
  'R8_peer_fusion_stop5': 'Model E with a 5% stop added: buys CNQ on the Peer-Fusion model\u2019s strongest forecasts and holds 5 days.',
+ 'R10_monthly_campaign_four_goals': 'Two trades a month, one in each half, on the first day the Peer-Fusion model is at least neutral. Sells at +6%, at a 15% stop, or after 60 trading days. Built for all four goals.',
  'R9_one_a_month_stop15': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +4%, at a 15% stop, or after 60 trading days.',
  'R6_one_a_month': 'One trade a month, on the first day the Peer-Fusion model is at least neutral. Sells at +4%, or after 60 trading days if the target is not reached. No stop.',
 }

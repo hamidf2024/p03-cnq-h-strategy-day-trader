@@ -289,6 +289,12 @@ per-stage section at the end.)*
   earlier results were known. **Lesson:** log every look in a file the code
   enforces, state the count beside the result, and treat a level reached this
   way as a candidate for forward testing, not as a finding.
+- **(Stage 13) Passing a gate exactly at its threshold is not passing.**
+  Model N cleared level 1 on all four goals in every training year with 8, 8
+  and 8 qualifying months against a requirement of 8, 8 and 7, then scored 6,
+  8 and 5 on the test years. **Lesson:** require a margin on any counted
+  goal (for example one month to spare in every year) before spending a test
+  run, and treat a setting that passes with none as a fail.
 
 ## 4. Evaluation and metrics lessons
 
