@@ -186,6 +186,20 @@ def by_year_list(c):
     return f'<div class="yr" aria-label="Average gross percent per trade by year">{items}</div>'
 
 
+def by_year_simple(c, kind):
+    """Each test year's own figure under the WR, S and GM bars."""
+    items = ''
+    for y, v in c['by_year'].items():
+        if kind == 'WR':
+            txt = 'no trades' if v['win_rate'] is None else f"{v['win_rate']:.1f}%"
+        elif kind == 'S':
+            txt = f"{v['months_above_1pct']} of {v['months']}"
+        else:
+            txt = f"{v['months_total_5pct']} of {v['months']}"
+        items += f'<span>{y}</span><b class="{"none" if txt == "no trades" else ""}">{txt}</b>'
+    return f'<div class="yr two">{items}</div>'
+
+
 def table_row(c):
     g, wr = c['gross_pct_per_trade'], c['win_rate']
     rk = c.get('rank', '–')
@@ -195,12 +209,11 @@ def table_row(c):
       <td class="num rk">{rk}</td>
       <td class="nm"><strong>{E(c['name'])}{NEWTAG(c)}</strong><span>{KIND[c['id']]} · {c['trades']:,} trades</span></td>
       <td class="mc"><div class="mv">{pct(g)}</div>{meter('G', g, c['G_level'], True)}{by_year_list(c)}</td>
-      <td class="mc"><div class="mv">{wr:.1f}%<small>{c['wins_share_of_all_trades']:.0f}% of all trades</small></div>{meter('WR', wr, c['WR_level'], True)}</td>
-      <td class="mc"><div class="mv">{sfmt(s_worst(c))} of 12</div>{meter('S', s_worst(c), c['S_level'], True)}</td>
-      <td class="mc"><div class="mv">{sfmt(gm_worst(c))} of 12</div>{meter('GM', gm_worst(c), c['GM_level'], True)}</td>
+      <td class="mc"><div class="mv">{wr:.1f}%<small>{c['wins_share_of_all_trades']:.0f}% of all trades</small></div>{meter('WR', wr, c['WR_level'], True)}{by_year_simple(c, 'WR')}</td>
+      <td class="mc"><div class="mv">{sfmt(s_worst(c))} of 12</div>{meter('S', s_worst(c), c['S_level'], True)}{by_year_simple(c, 'S')}</td>
+      <td class="mc"><div class="mv">{sfmt(gm_worst(c))} of 12</div>{meter('GM', gm_worst(c), c['GM_level'], True)}{by_year_simple(c, 'GM')}</td>
       <td class="lvs">{lv}</td>
-      <td class="num">{pct(c['worst_trade_pct'], 1)}<br><span class="lv {'on' if c['keeps_strict_loss_limit'] else ('mid' if c['keeps_loss_limit'] else 'over')}">{'within 5%' if c['keeps_strict_loss_limit'] else ('within 15%' if c['keeps_loss_limit'] else 'over 15%')}</span></td>
-      <td class="num {"pos" if net > 0 else "neg"}">{usd(net, 2)}</td>
+      <td class="risk"><div class="rl"><span>Worst trade</span><b>{pct(c['worst_trade_pct'], 1)}</b></div><div class="rl"><span></span><span class="lv {'on' if c['keeps_strict_loss_limit'] else ('mid' if c['keeps_loss_limit'] else 'over')}">{'within 5%' if c['keeps_strict_loss_limit'] else ('within 15%' if c['keeps_loss_limit'] else 'over 15%')}</span></div><div class="rl sep"><span>After costs, per $1,000 trade</span><b class="{"pos" if net > 0 else "neg"}">{usd(net, 2)}</b></div></td>
     </tr>'''
 
 
@@ -401,11 +414,11 @@ html = f'''<!doctype html>
     <div class="tabs" role="group" aria-label="Filter models"><button type="button" id="f-all" aria-pressed="true" data-f="">All</button><button type="button" id="f-same" aria-pressed="false" data-f="Same-day">Same-day</button><button type="button" id="f-multi" aria-pressed="false" data-f="Multi-day">Multi-day</button></div>
     <div class="card" style="padding:6px 0 0">
       <p class="swipe" style="padding:10px 16px 0">Swipe sideways to see every column.</p><div class="table-scroll"><table class="score" id="score">
-        <thead><tr><th class="num">Rank</th><th>Model</th><th>G &middot; profit per trade; then each year: average, and $1,000 at year end</th><th>WR &middot; win rate</th><th>S &middot; steady months</th><th>GM &middot; months of 5% or more</th><th>Levels</th><th class="num">Worst trade</th><th class="num">After costs, per $1,000 trade</th></tr></thead>
+        <thead><tr><th class="num">Rank</th><th>Model</th><th>G &middot; profit per trade; then each year: average, and $1,000 at year end</th><th>WR &middot; win rate; then each year</th><th>S &middot; steady months; then each year</th><th>GM &middot; months of 5% or more; then each year</th><th>Levels</th><th>Worst trade, and profit after costs</th></tr></thead>
         <tbody>{table_html}</tbody>
       </table></div>
     </div>
-    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. Under each profit-per-trade bar are two figures for 2024, 2025 and 2026: the average gross % per trade in that year, and what $1,000 would stand at by the end of that year when $1,000 goes into every trade and profits are not reinvested ($1,098 means $98 of profit; each year starts again from $1,000; before costs). The steady-months figure is the worst of the three years, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
+    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. Under each profit-per-trade bar are two figures for 2024, 2025 and 2026: the average gross % per trade in that year, and what $1,000 would stand at by the end of that year when $1,000 goes into every trade and profits are not reinvested ($1,098 means $98 of profit; each year starts again from $1,000; before costs). The win rate, steady months and monthly profit columns show each year's own figure in the same way. The headline steady-months and monthly-profit figures are the worst of the three years on a 12-month basis, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
   </section>
 
   <section id="months">
