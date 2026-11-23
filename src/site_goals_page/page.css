@@ -10,9 +10,10 @@ td.pos,strong.pos{color:var(--good);font-weight:700}
 td.neg,strong.neg{color:var(--bad);font-weight:700}
 
 /* goals */
-.goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.goals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:720px){.goals{grid-template-columns:minmax(0,1fr)}}
 .goal{display:flex;flex-direction:column;gap:14px}
-.goal header{display:flex;gap:14px;align-items:flex-start;min-height:76px}
+.goal header{display:flex;gap:14px;align-items:flex-start;min-height:58px}
 .goal .code{flex:none;width:52px;height:52px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--serif);font-size:21px;font-weight:600}
 .goal h3{margin:3px 0 2px;font-size:18px}
 .goal header p{margin:0;color:var(--muted);font-size:14px;line-height:1.4}
@@ -152,3 +153,5 @@ table.score th:nth-child(1){width:58px}table.score th:nth-child(2){width:21%}tab
 table.score th:nth-child(7){width:96px}table.score th:nth-child(8){width:104px}
 table.score{min-width:980px}
 .lv.mid{background:var(--warn-soft);color:var(--warn)}
+table.score th:nth-child(6){width:auto}table.score th:nth-child(7){width:158px}table.score th:nth-child(8){width:96px}table.score th:nth-child(9){width:104px}
+table.score{min-width:1160px}
