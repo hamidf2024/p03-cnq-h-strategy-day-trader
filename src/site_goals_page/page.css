@@ -155,7 +155,11 @@ table.score{min-width:980px}
 .lv.mid{background:var(--warn-soft);color:var(--warn)}
 table.score th:nth-child(6){width:auto}table.score th:nth-child(7){width:158px}table.score th:nth-child(8){width:96px}table.score th:nth-child(9){width:104px}
 table.score{min-width:1160px}
-.score .yr{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:12px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
+.score .yr{display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;font-size:12px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
 .score .yr b{font-weight:600;color:var(--ink);text-align:right}
 .score .yr b.neg{color:var(--bad)}
 .score .yr b.none{font-weight:400;color:var(--muted)}
+.score .yr em{font-style:normal;font-weight:600;color:var(--ink);text-align:right}
+.score .yr em.neg{color:var(--bad)}
+table.score th:nth-child(3){width:196px}
+table.score{min-width:1210px}

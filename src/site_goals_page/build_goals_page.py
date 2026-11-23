@@ -180,8 +180,9 @@ def by_year_list(c):
     items = ''
     for y, v in c['by_year'].items():
         g = v['gross_pct_per_trade']
-        items += (f'<span>{y}</span><b class="none">no trades</b>' if g is None
-                  else f'<span>{y}</span><b class="{"neg" if g < 0 else ""}">{pct(g, 2, True)}</b>')
+        end = 1000 + v['dollars_year']                      # $1,000 per trade, profits not reinvested
+        items += (f'<span>{y}</span><b class="none">no trades</b><em>$1,000</em>' if g is None
+                  else f'<span>{y}</span><b class="{"neg" if g < 0 else ""}">{pct(g, 2, True)}</b><em class="{"neg" if end < 1000 else ""}">${end:,.0f}</em>')
     return f'<div class="yr" aria-label="Average gross percent per trade by year">{items}</div>'
 
 
@@ -400,11 +401,11 @@ html = f'''<!doctype html>
     <div class="tabs" role="group" aria-label="Filter models"><button type="button" id="f-all" aria-pressed="true" data-f="">All</button><button type="button" id="f-same" aria-pressed="false" data-f="Same-day">Same-day</button><button type="button" id="f-multi" aria-pressed="false" data-f="Multi-day">Multi-day</button></div>
     <div class="card" style="padding:6px 0 0">
       <p class="swipe" style="padding:10px 16px 0">Swipe sideways to see every column.</p><div class="table-scroll"><table class="score" id="score">
-        <thead><tr><th class="num">Rank</th><th>Model</th><th>G &middot; profit per trade, then each year</th><th>WR &middot; win rate</th><th>S &middot; steady months</th><th>GM &middot; months of 5% or more</th><th>Levels</th><th class="num">Worst trade</th><th class="num">After costs, per $1,000 trade</th></tr></thead>
+        <thead><tr><th class="num">Rank</th><th>Model</th><th>G &middot; profit per trade; then each year: average, and $1,000 at year end</th><th>WR &middot; win rate</th><th>S &middot; steady months</th><th>GM &middot; months of 5% or more</th><th>Levels</th><th class="num">Worst trade</th><th class="num">After costs, per $1,000 trade</th></tr></thead>
         <tbody>{table_html}</tbody>
       </table></div>
     </div>
-    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. Under each profit-per-trade bar is the average gross % per trade for 2024, 2025 and 2026 separately. The steady-months figure is the worst of the three years, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
+    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. Under each profit-per-trade bar are two figures for 2024, 2025 and 2026: the average gross % per trade in that year, and what $1,000 would stand at by the end of that year when $1,000 goes into every trade and profits are not reinvested ($1,098 means $98 of profit; each year starts again from $1,000; before costs). The steady-months figure is the worst of the three years, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
   </section>
 
   <section id="months">
