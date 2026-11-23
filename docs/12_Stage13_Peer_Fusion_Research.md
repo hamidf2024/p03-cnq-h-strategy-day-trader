@@ -187,13 +187,28 @@ rising to 9/10/9 with none. CNQ moves about 5% in a normal week, so a 5% stop
 is hit by ordinary swings and removes the recovery that the target design
 relies on.
 
+## 10. Addendum: two risk levels (5% and 15%), model M
+
+The owner then asked for 5% and 15% to be considered together. Levels now
+count inside the 15% limit, and every model is also marked against 5%. One
+more model was run once on 2024-2026 (look nine of this stage): **M, model J
+unchanged with a 15% stop** (one setting, nothing selected; validation
++1.44%, 84.4%, S 9 / 9 / 9 of 10, with a losing year in 2022).
+
+Test result: 35 trades, **+1.85% per trade (G1), 88.6% win rate (WR3), S 10 /
+12 / 9 of 11 (S1)**, worst trade -15.7% (a gap through the stop), 95% range
+-0.4% to +3.5%, +1.82% after the 1 cent cost. By year: +0.82%, +4.13%,
++0.48%. Exits: 31 targets, 4 stops. M reaches level 1 on all three goals
+inside the 15% limit; nothing does inside 5%. The cautions listed for J in
+Section 6 apply to M, except that its losses are capped near 15%.
+
 ## Code and results
 
 `src/s13_lib.py`, `src/s13_feasibility.py`, `src/stage13_peer_fusion.py`
-(modes `walkforward`, `round5`, `round6`, `round7`, `round8`, `blind`, `verify`);
+(modes `walkforward`, `round5`, `round6`, `round7`, `round8`, `round9`, `blind`, `verify`);
 `results/experiments/stage13_feasibility.json`,
 `stage13_walkforward_results.json`, `stage13_frozen.pkl`,
-`stage13_frozen_R5.pkl` to `stage13_frozen_R8.pkl`,
+`stage13_frozen_R5.pkl` to `stage13_frozen_R9.pkl`,
 `stage13_BLIND_RUN_LOG.json`, `stage13_blind_results.json`,
 `stage13_blind_trades.csv` (dates and returns, no prices). The priced trade
 list and the panel cache stay in the local folder only.
