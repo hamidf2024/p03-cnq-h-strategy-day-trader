@@ -8,6 +8,9 @@ ladders the owner added to the charter on 2026-11-23, on the blind years
     S   steadiness: months in each year    S1 8 of 12  S2 10 of 12 S3 12 of 12
         in which the average gross % per
         trade is above 1%
+    GM  monthly profit: months in each     GM1 8 of 12 GM2 10 of 12 GM3 12 of 12
+        year whose trades add up to 5%
+        or more (added 2026-11-23)
 
 Nothing is tuned here. Each method is re-run with the configuration that was
 already frozen in its own stage, only to obtain a per-trade list from which
@@ -48,6 +51,10 @@ Definitions
   gross % was above 1%, which was a misreading). A month with no trade has no
   average and does not count. The month's summed gross % and its dollars on
   $1,000 per trade are still written out for reference.
+* A month counts toward GM when the gross % of the trades opened in it ADD UP
+  to 5% or more (the month's total, confirmed by the owner with a worked
+  example: +4%, +4% and -2% make +6% and count). That is $50 or more on
+  $1,000 per trade. GM is counted per year like S.
 * Steadiness is counted per calendar year. 2026 runs to 18 November, so it has
   11 months; its count is compared with the same fractions (8/12, 10/12, 12/12).
   A level counts as reached only if it is reached in every blind year.
@@ -73,6 +80,8 @@ STAKE = 1000.0
 G_LEVELS = (1.0, 2.0, 3.0)
 WR_LEVELS = (50.0, 65.0, 75.0)
 S_LEVELS = (8 / 12, 10 / 12, 12 / 12)
+GM_LEVELS = (8 / 12, 10 / 12, 12 / 12)
+GM_MONTH_TOTAL_PCT = 5.0
 MONTHS_IN_YEAR = {2024: 12, 2025: 12, 2026: 11}      # data ends 2026-11-18
 MIN_TRADES_FOR_RANK = 15
 # owner's risk rule (2026-11-23): two levels for the worst trade, 5% (strict) and 15% (wide)
@@ -225,12 +234,13 @@ def score(paths, stage11, stage12, outdir):
         mcnt = t.groupby('month').size().reindex(all_months, fill_value=0)
         mavg = t.groupby('month').ret.mean().reindex(all_months)          # NaN where there was no trade
         mhit = (mavg > 1.0)                                               # the S test: average per trade above 1%
+        mgm = (msum >= GM_MONTH_TOTAL_PCT)                                # the GM test: the month's total is 5% or more
         for m in all_months:
             mt = t[t.month == m]
             monthly_rows.append(dict(method=mid, month=m, trades=int(mcnt[m]), wins=int((mt.pnl > 0.005).sum()),
                                      losses=int((mt.pnl < -0.005).sum()),
                                      avg_gross_pct_per_trade=round(float(mavg[m]), 4) if mcnt[m] else None,
-                                     above_1pct_per_trade=bool(mhit[m]),
+                                     above_1pct_per_trade=bool(mhit[m]), total_at_least_5pct=bool(mgm[m]),
                                      sum_gross_pct=round(float(msum[m]), 4),
                                      sum_dollars_per_1000=round(float(msum[m]) * STAKE / 100, 2)))
         by_year = {}
@@ -241,10 +251,12 @@ def score(paths, stage11, stage12, outdir):
             wy = int((ty.pnl > 0.005).sum()); ly = int((ty.pnl < -0.005).sum())
             by_year[y] = dict(trades=int(len(ty)), gross_pct_per_trade=round(float(ty.ret.mean()), 4) if len(ty) else None,
                               win_rate=round(100 * wy / max(1, wy + ly), 1) if (wy + ly) else None,
-                              months=int(len(ms)), months_above_1pct=int(mh.sum()),
+                              months=int(len(ms)), months_above_1pct=int(mh.sum()), months_total_5pct=int((ms >= GM_MONTH_TOTAL_PCT).sum()),
                               months_positive=int((ma > 0).sum()), months_no_trades=int((mcnt[ms.index] == 0).sum()),
                               best_month_avg_pct_per_trade=round(float(ma.max()), 4) if ma.notna().any() else None,
                               gross_pct_year=round(float(ms.sum()), 2), dollars_year=round(float(ms.sum()) * STAKE / 100, 2))
+        gfrac = {y: by_year[y]['months_total_5pct'] / by_year[y]['months'] for y in by_year}
+        gm_min = min(gfrac.values()); gm_avg = float(np.mean(list(gfrac.values()))); gm_lv = level(gm_min, GM_LEVELS, top_strict=False)
         frac = {y: by_year[y]['months_above_1pct'] / by_year[y]['months'] for y in by_year}
         s_frac_min = min(frac.values()); s_frac_avg = float(np.mean(list(frac.values())))
         g_lv = level(g, G_LEVELS); wr_lv = level(wr, WR_LEVELS); s_lv = level(s_frac_min, S_LEVELS, top_strict=False)
@@ -269,10 +281,12 @@ def score(paths, stage11, stage12, outdir):
             best_month_avg_pct_per_trade=round(float(mavg.max()), 4),
             months_above_1pct_avg_per_12=round(12 * s_frac_avg, 1), months_above_1pct_worst_year_per_12=round(12 * s_frac_min, 1),
             avg_month_sum_gross_pct=round(float(msum.mean()), 3),
-            by_year=by_year, G_level=g_lv, WR_level=wr_lv, S_level=s_lv, levels_total=g_lv + wr_lv + s_lv,
-            progress=dict(G=round(prog_g, 3), WR=round(prog_wr, 3), S=round(prog_s, 3),
-                          overall=round((prog_g + prog_wr + prog_s) / 3, 3), overall_exact=(prog_g + prog_wr + prog_s) / 3,
-                          overall_if_scratch_is_not_a_win=round((prog_g + float(np.clip(wr_all / WR_LEVELS[2], 0, 1)) + prog_s) / 3, 5)),
+            months_total_5pct_all=int(mgm.sum()), months_total_5pct_worst_year_per_12=round(12 * gm_min, 1),
+            best_month_total_pct=round(float(msum.max()), 2),
+            by_year=by_year, G_level=g_lv, WR_level=wr_lv, S_level=s_lv, GM_level=gm_lv, levels_total=g_lv + wr_lv + s_lv + gm_lv,
+            progress=dict(G=round(prog_g, 3), WR=round(prog_wr, 3), S=round(prog_s, 3), GM=round(gm_avg, 3),
+                          overall=round((prog_g + prog_wr + prog_s + gm_avg) / 4, 3), overall_exact=(prog_g + prog_wr + prog_s + gm_avg) / 4,
+                          overall_if_scratch_is_not_a_win=round((prog_g + float(np.clip(wr_all / WR_LEVELS[2], 0, 1)) + prog_s + gm_avg) / 4, 5)),
             keeps_loss_limit=bool(mid in STOP_AT_LIMIT or t.ret.min() >= -MAX_LOSS_PCT),
             keeps_strict_loss_limit=bool(mid in STOP_AT_STRICT or t.ret.min() >= -STRICT_LOSS_PCT),
             trades_beyond_loss_limit=int((t.ret < -MAX_LOSS_PCT).sum()),
@@ -286,19 +300,23 @@ def score(paths, stage11, stage12, outdir):
     out = dict(
         goals=dict(G=dict(name='Average gross % per trade', levels=['>= 1%', '>= 2%', '> 3%']),
                    WR=dict(name='Win rate', levels=['>= 50%', '>= 65%', '> 75%']),
-                   S=dict(name='Months per year in which the average gross % per trade is above 1%', levels=['8 of 12', '10 of 12', '12 of 12'])),
+                   S=dict(name='Months per year in which the average gross % per trade is above 1%', levels=['8 of 12', '10 of 12', '12 of 12']),
+                   GM=dict(name="Months per year whose trades add up to 5% or more (the month's total gross %)", levels=['8 of 12', '10 of 12', '12 of 12'])),
         basis=dict(period='blind 2024-01-02 to 2026-11-18', stake_per_trade=STAKE, months_counted=MONTHS_IN_YEAR,
-                   ranking='overall progress = average of three fractions: gross % per trade / 3%, win rate / 75%, '
-                           'share of months whose average trade is above 1% (each capped at 1); methods with fewer than '
+                   ranking='overall progress = average of four fractions: gross % per trade / 3%, win rate / 75%, '
+                           'share of months whose average trade is above 1%, share of months whose total is 5% or more '
+                           '(each capped at 1); methods with fewer than '
                            f'{MIN_TRADES_FOR_RANK} blind trades are not ranked'),
         top5=[c['id'] for c in ranked[:5]],
         top5_if_scratch_is_not_a_win=[c['id'] for c in strict[:5]],
+        level1_on_all_four=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level'], c['GM_level']) >= 1 and c['keeps_loss_limit']],
         level1_on_all_three=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level']) >= 1 and c['keeps_loss_limit']],
         level1_on_all_three_within_5pct=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level']) >= 1 and c['keeps_strict_loss_limit']],
         level1_but_breaks_loss_limit=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level']) >= 1 and not c['keeps_loss_limit']],
         risk_rule=dict(max_loss_pct_per_trade=MAX_LOSS_PCT, strict_max_loss_pct_per_trade=STRICT_LOSS_PCT, methods_with_stop_at_limit=sorted(STOP_AT_LIMIT),
                        note='levels count, and a method is ranked, only if its worst trade is within the limit'),
         leaders=dict(G=max(cards, key=lambda c: c['gross_pct_per_trade'])['id'],
+                     GM=max(cards, key=lambda c: (c['months_total_5pct_worst_year_per_12'], c['progress']['GM']))['id'],
                      S_worst_year=max(cards, key=lambda c: (c['months_above_1pct_worst_year_per_12'], c['progress']['S']))['id'],
                      WR=max([c for c in cards if c['enough_trades_to_rank']], key=lambda c: c['win_rate'])['id'],
                      S=max(cards, key=lambda c: c['progress']['S'])['id']),
