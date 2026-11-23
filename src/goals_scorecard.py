@@ -51,6 +51,11 @@ Definitions
 * Steadiness is counted per calendar year. 2026 runs to 18 November, so it has
   11 months; its count is compared with the same fractions (8/12, 10/12, 12/12).
   A level counts as reached only if it is reached in every blind year.
+* Risk rule (owner, 2026-11-23): no trade may lose more than 5%. A method
+  keeps the rule if it carries a stop at 5% or tighter (a gap through the stop
+  can still make one loss larger; the worst trade is reported), or if its
+  worst test trade was within 5%. A method that breaks the rule is scored but
+  not ranked, and its levels do not count.
 * Cost check: 1 cent per share for the round trip (spread and slippage; both
   brokers the owner uses charge no commission).
 """
@@ -69,6 +74,9 @@ WR_LEVELS = (50.0, 65.0, 75.0)
 S_LEVELS = (8 / 12, 10 / 12, 12 / 12)
 MONTHS_IN_YEAR = {2024: 12, 2025: 12, 2026: 11}      # data ends 2026-11-18
 MIN_TRADES_FOR_RANK = 15
+MAX_LOSS_PCT = 5.0            # owner's risk rule (2026-11-23): no trade may lose more than 5%
+# methods that carry a stop at 5% or tighter by design (a gap through the stop can still exceed it)
+STOP_AT_LIMIT = {'R4_goal_shaped_exits', 'R7_one_a_month_stop5', 'R8_peer_fusion_stop5'}
 
 META = {   # id: (display name, family, holding, stage, how the settings were chosen)
     'V1': ('V1', 'Intraday zone rule', 'same day', 1, 'original hand-set rules'),
@@ -94,6 +102,8 @@ META = {   # id: (display name, family, holding, stage, how the settings were ch
     'R4_goal_shaped_exits': ('H. Peer-Fusion, target and stop', 'Swing ML model', 'up to 10 days', 13, 'walk-forward on 2020-2023'),
     'R5_first_passage': ('I. First-passage campaign', 'Swing ML model', 'up to 20 days', 13, 'walk-forward on 2020-2023'),
     'R6_one_a_month': ('J. One-a-month campaign', 'Swing ML model', 'up to 60 days', 13, 'walk-forward on 2020-2023'),
+    'R7_one_a_month_stop5': ('K. One-a-month, 5% stop', 'Swing ML model', 'up to 60 days', 13, 'walk-forward on 2020-2023'),
+    'R8_peer_fusion_stop5': ('L. Peer-Fusion GBM, 5% stop', 'Swing ML model', '5 days', 13, 'walk-forward on 2020-2023'),
 }
 
 
@@ -258,7 +268,9 @@ def score(paths, stage11, stage12, outdir):
             progress=dict(G=round(prog_g, 3), WR=round(prog_wr, 3), S=round(prog_s, 3),
                           overall=round((prog_g + prog_wr + prog_s) / 3, 3), overall_exact=(prog_g + prog_wr + prog_s) / 3,
                           overall_if_scratch_is_not_a_win=round((prog_g + float(np.clip(wr_all / WR_LEVELS[2], 0, 1)) + prog_s) / 3, 5)),
-            enough_trades_to_rank=bool(len(t) >= MIN_TRADES_FOR_RANK)))
+            keeps_loss_limit=bool(mid in STOP_AT_LIMIT or t.ret.min() >= -MAX_LOSS_PCT),
+            trades_beyond_loss_limit=int((t.ret < -MAX_LOSS_PCT).sum()),
+            enough_trades_to_rank=bool(len(t) >= MIN_TRADES_FOR_RANK and (mid in STOP_AT_LIMIT or t.ret.min() >= -MAX_LOSS_PCT))))
     ranked = sorted([c for c in cards if c['enough_trades_to_rank']], key=lambda c: -c['progress']['overall_exact'])
     for i, c in enumerate(ranked):
         c['rank'] = i + 1
@@ -275,7 +287,10 @@ def score(paths, stage11, stage12, outdir):
                            f'{MIN_TRADES_FOR_RANK} blind trades are not ranked'),
         top5=[c['id'] for c in ranked[:5]],
         top5_if_scratch_is_not_a_win=[c['id'] for c in strict[:5]],
-        level1_on_all_three=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level']) >= 1],
+        level1_on_all_three=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level']) >= 1 and c['keeps_loss_limit']],
+        level1_but_breaks_loss_limit=[c['id'] for c in cards if min(c['G_level'], c['WR_level'], c['S_level']) >= 1 and not c['keeps_loss_limit']],
+        risk_rule=dict(max_loss_pct_per_trade=MAX_LOSS_PCT, methods_with_stop_at_limit=sorted(STOP_AT_LIMIT),
+                       note='levels count, and a method is ranked, only if its worst trade is within the limit'),
         leaders=dict(G=max(cards, key=lambda c: c['gross_pct_per_trade'])['id'],
                      S_worst_year=max(cards, key=lambda c: (c['months_above_1pct_worst_year_per_12'], c['progress']['S']))['id'],
                      WR=max([c for c in cards if c['enough_trades_to_rank']], key=lambda c: c['win_rate'])['id'],

@@ -496,11 +496,75 @@ def round6():
     print('passers', len(passers), 'chosen', best, flush=True)
 
 
+def round7():
+    """R7, one-a-month campaign inside the owner's risk rule (added 2026-11-23): no trade may lose more than 5%,
+    so every trade carries a 5% stop. Same entry idea as R6; target, time limit and entry bar re-selected on
+    2021-2023 only."""
+    frozen = pickle.load(open(f'{RES}/stage13_frozen.pkl', 'rb'))
+    panel, D, cal, feats, cnq, path, bench, T = setup()
+    train_days = cal[cal <= L.TRAIN_END]
+    grid = [dict(src='gbm', H=5, side='long', q=q, monthly=True, overlap=True, hold=hold, target=t, stop=5.0)
+            for q in (0.5, 0.7, 0.85) for t in (2.0, 3.0, 4.0, 5.0) for hold in (20, 40, 60)]
+    res = {}
+    for cfg in grid:
+        end = train_days[-cfg['hold'] - 1]
+        sig = signal_from_cfg(cfg, cnq, frozen['oof']).reindex(train_days).fillna(0)
+        _, st = evaluate(path, bench, sig, cfg['hold'], cfg['target'], cfg['stop'], VAL_YEARS, end=str(end.date()), overlap=True)
+        st['months_available'] = {y: (12 if y < 2023 else int(end.month)) for y in VAL_YEARS}
+        res[json.dumps(cfg, sort_keys=True)] = st
+    def level1(v):
+        return all(p['n'] and p['G'] >= 1 and p['WR'] >= 50 and p['S'] >= int(np.ceil(8 / 12 * v['months_available'][int(y)]))
+                   for y, p in v['per_year'].items())
+    passers = {k: v for k, v in res.items() if level1(v)}
+    best = max(passers, key=lambda k: passers[k]['worst_year_excess']) if passers else max(res, key=lambda k: (min(res[k]['S']), res[k]['G']))
+    wf = json.load(open(f'{RES}/stage13_walkforward_results.json'))
+    wf['rounds']['R7_one_a_month_stop5'] = dict(settings=res, chosen=json.loads(best), level1_in_every_validation_year=sorted(passers),
+                                                chosen_stats=res[best], rule='as R6, every setting with a 5% stop')
+    json.dump(wf, open(f'{RES}/stage13_walkforward_results.json', 'w'), indent=1, default=str)
+    pickle.dump(dict(chosen={'R7_one_a_month_stop5': json.loads(best)}, finals=frozen['finals'], oof=frozen['oof'], feats=frozen['feats'], gbm_params=GBM),
+                open(f'{RES}/stage13_frozen_R7.pkl', 'wb'))
+    for k, v in sorted(res.items(), key=lambda kv: -(min(kv[1]['S']) * 100 + (kv[1]['G'] or -9)))[:10]:
+        c = json.loads(k)
+        print('q', c['q'], 'T', c['target'], 'hold', c['hold'], '| n', v['n'], 'G', v['G'], 'WR', v['WR'], 'S', v['S'], 'ex', v['excess'],
+              'worst-yr ex', v['worst_year_excess'], [(p['G']) for p in v['per_year'].values()], 'L1' if level1(v) else '')
+    print('passers', len(passers), 'chosen', best, res[best]['S'], res[best]['G'], flush=True)
+
+
+def round8():
+    """R8: model E unchanged (top 15% of its own forecasts, 5 days) with the owner's 5% stop added. One setting,
+    nothing selected. Also records, on 2021-2023 only, what model J's design does under stops of 5, 8, 10, 15%
+    and none, so the owner can see the price of the limit without another look at 2024-2026."""
+    frozen = pickle.load(open(f'{RES}/stage13_frozen.pkl', 'rb'))
+    panel, D, cal, feats, cnq, path, bench, T = setup()
+    train_days = cal[cal <= L.TRAIN_END]
+    cfg = dict(src='gbm', H=5, side='long', q=0.85, target=None, stop=5.0)
+    sig = signal_from_cfg(cfg, cnq, frozen['oof']).reindex(train_days).fillna(0)
+    _, st = evaluate(path, bench, sig, 5, None, 5.0, VAL_YEARS, end=str(train_days[-11].date()))
+    front = {}
+    for stop in (5.0, 8.0, 10.0, 15.0, None):
+        c = dict(src='gbm', H=5, side='long', q=0.5, monthly=True, overlap=True, hold=60, target=4.0, stop=stop)
+        sg = signal_from_cfg(c, cnq, frozen['oof']).reindex(train_days).fillna(0)
+        t, v = evaluate(path, bench, sg, 60, 4.0, stop, VAL_YEARS, end=str(train_days[-61].date()), overlap=True)
+        front[str(stop)] = dict(n=v['n'], G=v['G'], WR=v['WR'], S=v['S'], excess=v['excess'], worst_trade=round(float(t.ret.min()), 2))
+        print('J design, stop', stop, front[str(stop)], flush=True)
+    wf = json.load(open(f'{RES}/stage13_walkforward_results.json'))
+    wf['rounds']['R8_peer_fusion_stop5'] = dict(chosen=cfg, chosen_stats=st, rule='single setting: R1 with a 5% stop; nothing selected')
+    wf['stop_frontier_J_design_validation_only'] = front
+    json.dump(wf, open(f'{RES}/stage13_walkforward_results.json', 'w'), indent=1, default=str)
+    pickle.dump(dict(chosen={'R8_peer_fusion_stop5': cfg}, finals=frozen['finals'], oof=frozen['oof'], feats=frozen['feats'], gbm_params=GBM),
+                open(f'{RES}/stage13_frozen_R8.pkl', 'wb'))
+    print('R8 validation', {k: st[k] for k in ('n', 'G', 'WR', 'S', 'excess', 'worst_year_excess')}, flush=True)
+
+
 if __name__ == '__main__':
     os.makedirs(RES, exist_ok=True)
     mode = sys.argv[1] if len(sys.argv) > 1 else ''
     if mode == 'walkforward':
         walkforward()
+    elif mode == 'round8':
+        round8()
+    elif mode == 'round7':
+        round7()
     elif mode == 'round6':
         round6()
     elif mode == 'round5':
