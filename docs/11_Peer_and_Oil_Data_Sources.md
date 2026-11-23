@@ -156,6 +156,32 @@ Checks to run before any model sees the new files (the project's standing
   is confirmed, the stocks are not.
 - Free-plan intraday depth at Twelve Data and Tiingo.
 
+## 7. Collection status (2026-11-23)
+
+The owner asked for the data to be collected and for **all data files to be
+saved only in the local project folder** (`data/raw/peers/` in the local
+clone). Nothing in that folder is committed or pushed; the folder is excluded
+in the local clone, and only code and summary reports (no prices) go to the
+repository.
+
+| Item | Status |
+|---|---|
+| EIA daily WTI spot (series RWTC) | **Collected.** 1,596 days from 2020-07-01 to 2026-11-17 (full history from 1986 also kept), no missing or non-positive values. The latest value, 89.53 on 2026-11-17, matches what FRED shows for the same series. Saved locally with the original EIA spreadsheet. |
+| 5-minute bars for CNQ, SU, CVE, IMO, XOM, CVX, USO, XLE (Alpaca) | **Not collected yet.** Needs the owner's Alpaca API key, and `data.alpaca.markets` is not reachable from either the cloud research environment or the sandbox on the Mac. The download script has to be run in the Mac's own Terminal (Section 4), or the host allowed. |
+| Independent daily cross-check (Yahoo or Stooq) | **Not collected.** The same network limits apply, and Stooq's direct download returned nothing. |
+
+First check on what is in hand (`src/stage13_check_peer_data.py`, summary in
+`results/experiments/stage13_data_checks.json`): daily WTI spot returns and
+CNQ daily returns have a correlation of 0.59 over 2020-2026, and between 0.59
+and 0.66 in every single year. Oil explains roughly a third of CNQ's daily
+variance, steadily, which is the case for adding it. The same script also
+shows the existing IEX-feed CNQ file has fewer than 70 of the 78 possible bars
+on 237 of its 1,584 days -- a direct measure of how thin that feed is, and
+the reason to re-pull CNQ on the consolidated feed.
+
+The check script reports whatever is present and lists what is missing, so it
+can simply be re-run once the stock files arrive.
+
 ## Sources
 
 1. Alpaca, *About Market Data API* (plans, history, limits) -- https://docs.alpaca.markets/us/docs/about-market-data-api
