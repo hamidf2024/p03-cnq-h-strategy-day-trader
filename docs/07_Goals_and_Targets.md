@@ -62,30 +62,41 @@ Months are listed as 2024 / 2025 / 2026 (2026 has 11 months).
 | Rank | Model | Trades | G: avg gross %/trade | WR | S: months averaging above 1% per trade | GM: months totalling 5% or more | Levels | Worst trade and limit kept | $ per trade after 1 cent |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | M. One-a-month, 15% stop | 35 | +1.85% | 88.6% | 10 / 12 / 9 | 0 / 1 / 0 | G1 WR3 S1 GM0 | -15.7%, within 15% | +$18.18 |
-| 2 | E. Peer-Fusion GBM | 39 | +1.41% | 60.5% | 6 / 4 / 4 | 3 / 2 / 2 | G1 WR1 S0 GM0 | -7.1%, within 15% | +$13.77 |
-| 3 | L. Peer-Fusion GBM, 5% stop | 39 | +1.05% | 60.5% | 6 / 4 / 3 | 3 / 3 / 1 | G1 WR1 S0 GM0 | -5.0%, within 5% | +$10.17 |
-| 4 | K. One-a-month, 5% stop | 35 | +0.02% | 71.4% | 8 / 10 / 7 | 0 / 0 / 0 | G0 WR2 S0 GM0 | -5.4%, within 5% | -$0.12 |
-| 5 | H. Peer-Fusion, target and stop | 38 | +0.85% | 55.3% | 6 / 3 / 2 | 3 / 3 / 1 | G0 WR1 S0 GM0 | -5.0%, within 5% | +$8.22 |
-| 6 | C. Transformer probe | 51 | +0.64% | 51.0% | 3 / 3 / 5 | 1 / 2 / 4 | G0 WR1 S0 GM0 | -7.3%, within 15% | +$6.09 |
-| 7 | G. Fusion ensemble | 38 | +0.81% | 56.8% | 1 / 3 / 3 | 1 / 3 / 2 | G0 WR1 S0 GM0 | -7.5%, within 15% | +$7.85 |
-| 8 | F. Peer-and-oil spring | 56 | +0.43% | 50.9% | 3 / 6 / 4 | 1 / 3 / 3 | G0 WR1 S0 GM0 | -8.0%, within 15% | +$4.04 |
-| 9 | B. Field-Fusion GBM | 25 | +0.99% | 48.0% | 3 / 2 / 2 | 1 / 0 / 1 | G0 WR0 S0 GM0 | -7.3%, within 15% | +$9.65 |
-| 10 | D. Fusion gate | 19 | +0.52% | 55.6% | 4 / 2 / 2 | 1 / 0 / 1 | G0 WR1 S0 GM0 | -7.7%, within 15% | +$4.88 |
-| 11 | V7.1 percent-scaled | 1,411 | +0.02% | 70.2% | 0 / 0 / 0 | 0 / 1 / 0 | G0 WR2 S0 GM0 | -2.0%, within 5% | -$0.08 |
-| 12 | Rule OR Model | 3,890 | +0.02% | 59.9% | 0 / 0 / 0 | 0 / 1 / 4 | G0 WR1 S0 GM0 | -0.6%, within 5% | -$0.10 |
-| 13 | V7 | 1,834 | +0.02% | 59.9% | 0 / 0 / 0 | 0 / 0 / 0 | G0 WR1 S0 GM0 | -0.6%, within 5% | -$0.10 |
-| 14 | V7.1 | 1,597 | +0.02% | 59.4% | 0 / 0 / 0 | 0 / 0 / 0 | G0 WR1 S0 GM0 | -0.6%, within 5% | -$0.08 |
-| 15 | A. Spring-release | 21 | -0.70% | 40.0% | 4 / 1 / 2 | 1 / 0 / 1 | G0 WR0 S0 GM0 | -9.9%, within 15% | -$7.32 |
-| 16 | V5 | 2,284 | +0.01% | 55.0% | 0 / 0 / 0 | 0 / 0 / 1 | G0 WR1 S0 GM0 | -0.6%, within 5% | -$0.18 |
-| 17 | V6 | 1,794 | +0.02% | 56.2% | 0 / 0 / 0 | 0 / 0 / 0 | G0 WR1 S0 GM0 | -0.6%, within 5% | -$0.13 |
-| 18 | V4 | 2,188 | +0.01% | 49.3% | 0 / 0 / 0 | 0 / 1 / 1 | G0 WR0 S0 GM0 | -0.6%, within 5% | -$0.16 |
-| 19 | V3 | 2,741 | +0.01% | 49.3% | 0 / 0 / 0 | 0 / 1 / 1 | G0 WR0 S0 GM0 | -0.6%, within 5% | -$0.16 |
-| 20 | V2 | 2,124 | +0.01% | 49.1% | 0 / 0 / 0 | 0 / 0 / 0 | G0 WR0 S0 GM0 | -0.6%, within 5% | -$0.18 |
-| 21 | V1 | 1,654 | +0.02% | 38.0% | 0 / 0 / 0 | 0 / 1 / 0 | G0 WR0 S0 GM0 | -0.6%, within 5% | -$0.13 |
-| 22 | Donchian swing, long+short | 17 | -1.59% | 18.8% | 2 / 0 / 1 | 0 / 0 / 1 | G0 WR0 S0 GM0 | -7.2%, within 15% | -$16.16 |
+| 2 | N. Two-a-month campaign | 68 | +0.74% | 70.6% | 6 / 8 / 5 | 6 / 8 / 5 | G0 WR2 S0 GM0 | -15.7%, within 15% | +$7.10 |
+| 3 | E. Peer-Fusion GBM | 39 | +1.41% | 60.5% | 6 / 4 / 4 | 3 / 2 / 2 | G1 WR1 S0 GM0 | -7.1%, within 15% | +$13.77 |
+| 4 | L. Peer-Fusion GBM, 5% stop | 39 | +1.05% | 60.5% | 6 / 4 / 3 | 3 / 3 / 1 | G1 WR1 S0 GM0 | -5.0%, within 5% | +$10.17 |
+| 5 | K. One-a-month, 5% stop | 35 | +0.02% | 71.4% | 8 / 10 / 7 | 0 / 0 / 0 | G0 WR2 S0 GM0 | -5.4%, within 5% | -$0.12 |
+| 6 | H. Peer-Fusion, target and stop | 38 | +0.85% | 55.3% | 6 / 3 / 2 | 3 / 3 / 1 | G0 WR1 S0 GM0 | -5.0%, within 5% | +$8.22 |
+| 7 | C. Transformer probe | 51 | +0.64% | 51.0% | 3 / 3 / 5 | 1 / 2 / 4 | G0 WR1 S0 GM0 | -7.3%, within 15% | +$6.09 |
+| 8 | G. Fusion ensemble | 38 | +0.81% | 56.8% | 1 / 3 / 3 | 1 / 3 / 2 | G0 WR1 S0 GM0 | -7.5%, within 15% | +$7.85 |
+| 9 | F. Peer-and-oil spring | 56 | +0.43% | 50.9% | 3 / 6 / 4 | 1 / 3 / 3 | G0 WR1 S0 GM0 | -8.0%, within 15% | +$4.04 |
+| 10 | B. Field-Fusion GBM | 25 | +0.99% | 48.0% | 3 / 2 / 2 | 1 / 0 / 1 | G0 WR0 S0 GM0 | -7.3%, within 15% | +$9.65 |
+| 11 | D. Fusion gate | 19 | +0.52% | 55.6% | 4 / 2 / 2 | 1 / 0 / 1 | G0 WR1 S0 GM0 | -7.7%, within 15% | +$4.88 |
+| 12 | V7.1 percent-scaled | 1,411 | +0.02% | 70.2% | 0 / 0 / 0 | 0 / 1 / 0 | G0 WR2 S0 GM0 | -2.0%, within 5% | -$0.08 |
+| 13 | Rule OR Model | 3,890 | +0.02% | 59.9% | 0 / 0 / 0 | 0 / 1 / 4 | G0 WR1 S0 GM0 | -0.6%, within 5% | -$0.10 |
+| 14 | V7 | 1,834 | +0.02% | 59.9% | 0 / 0 / 0 | 0 / 0 / 0 | G0 WR1 S0 GM0 | -0.6%, within 5% | -$0.10 |
+| 15 | V7.1 | 1,597 | +0.02% | 59.4% | 0 / 0 / 0 | 0 / 0 / 0 | G0 WR1 S0 GM0 | -0.6%, within 5% | -$0.08 |
+| 16 | A. Spring-release | 21 | -0.70% | 40.0% | 4 / 1 / 2 | 1 / 0 / 1 | G0 WR0 S0 GM0 | -9.9%, within 15% | -$7.32 |
+| 17 | V5 | 2,284 | +0.01% | 55.0% | 0 / 0 / 0 | 0 / 0 / 1 | G0 WR1 S0 GM0 | -0.6%, within 5% | -$0.18 |
+| 18 | V6 | 1,794 | +0.02% | 56.2% | 0 / 0 / 0 | 0 / 0 / 0 | G0 WR1 S0 GM0 | -0.6%, within 5% | -$0.13 |
+| 19 | V4 | 2,188 | +0.01% | 49.3% | 0 / 0 / 0 | 0 / 1 / 1 | G0 WR0 S0 GM0 | -0.6%, within 5% | -$0.16 |
+| 20 | V3 | 2,741 | +0.01% | 49.3% | 0 / 0 / 0 | 0 / 1 / 1 | G0 WR0 S0 GM0 | -0.6%, within 5% | -$0.16 |
+| 21 | V2 | 2,124 | +0.01% | 49.1% | 0 / 0 / 0 | 0 / 0 / 0 | G0 WR0 S0 GM0 | -0.6%, within 5% | -$0.18 |
+| 22 | V1 | 1,654 | +0.02% | 38.0% | 0 / 0 / 0 | 0 / 1 / 0 | G0 WR0 S0 GM0 | -0.6%, within 5% | -$0.13 |
+| 23 | Donchian swing, long+short | 17 | -1.59% | 18.8% | 2 / 0 / 1 | 0 / 0 / 1 | G0 WR0 S0 GM0 | -7.2%, within 15% | -$16.16 |
 | not ranked | J. One-a-month campaign | 35 | +2.24% | 88.6% | 10 / 12 / 9 | 0 / 1 / 0 | G2 WR3 S1 GM0 | -17.3%, OVER 15% | +$22.14 |
 | not ranked | I. First-passage campaign | 78 | +0.59% | 84.6% | 6 / 7 / 9 | 3 / 1 / 4 | G0 WR3 S0 GM0 | -17.3%, OVER 15% | +$5.65 |
 | not ranked | Donchian swing, long-only | 9 | -0.05% | 22.2% | 1 / 0 / 1 | 1 / 0 / 1 | G0 WR0 S0 GM0 | -5.0%, within 5% | -$0.75 |
+
+**Attempt at level 1 on all four goals (model N, 2026-11-23).** Two trades a
+month (one in each half), +6% target, 15% stop, 60-day limit; chosen on
+2021-2023 with the test years removed from the data, where it reached level 1
+on all four goals in every year (G +2.60%, WR 79.7%, S 8 / 8 / 8, GM 8 / 8 / 7
+of 10). On 2024-2026, one run: 68 trades, **+0.74% per trade, 70.6% win rate,
+S 6 / 8 / 5, GM 6 / 8 / 5**; 12 trades stopped at 15%; year totals +14.9%,
++55.4%, -20.0%; up to five trades open at once. It reaches WR2 only. Level 1
+on all four goals is not reached. This was the twentieth walk-forward model
+run on 2024-2026.
 
 **The fourth goal, GM.** No model reaches GM1. The closest inside the loss
 limits is E. Peer-Fusion GBM with 3 / 2 / 2 months of 5% or more.
