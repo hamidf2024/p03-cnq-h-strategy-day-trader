@@ -10,6 +10,15 @@
    "days_extra_vs_reference": 7,
    "bars_per_day_median": 78.0,
    "days_under_70_bars": 16,
+   "empty_cells": 0,
+   "non_positive_prices": 0,
+   "zero_volume_bars": 0,
+   "gap_days_under_20_bars": [
+    "2021-04-19",
+    "2021-10-25",
+    "2022-03-08",
+    "2026-11-23"
+   ],
    "duplicate_timestamps": 0,
    "bars_outside_0930_1555": 0,
    "bad_ohlc_rows": 0,
@@ -38,6 +47,15 @@
    "days_extra_vs_reference": 7,
    "bars_per_day_median": 78.0,
    "days_under_70_bars": 17,
+   "empty_cells": 0,
+   "non_positive_prices": 0,
+   "zero_volume_bars": 0,
+   "gap_days_under_20_bars": [
+    "2021-04-19",
+    "2021-10-25",
+    "2022-03-08",
+    "2026-11-23"
+   ],
    "duplicate_timestamps": 0,
    "bars_outside_0930_1555": 0,
    "bad_ohlc_rows": 0,
@@ -55,6 +73,15 @@
    "days_extra_vs_reference": 7,
    "bars_per_day_median": 78.0,
    "days_under_70_bars": 16,
+   "empty_cells": 0,
+   "non_positive_prices": 0,
+   "zero_volume_bars": 0,
+   "gap_days_under_20_bars": [
+    "2021-04-19",
+    "2021-10-25",
+    "2022-03-08",
+    "2026-11-23"
+   ],
    "duplicate_timestamps": 0,
    "bars_outside_0930_1555": 0,
    "bad_ohlc_rows": 0,
@@ -72,6 +99,12 @@
    "days_extra_vs_reference": 7,
    "bars_per_day_median": 78.0,
    "days_under_70_bars": 16,
+   "empty_cells": 0,
+   "non_positive_prices": 0,
+   "zero_volume_bars": 0,
+   "gap_days_under_20_bars": [
+    "2026-11-23"
+   ],
    "duplicate_timestamps": 0,
    "bars_outside_0930_1555": 0,
    "bad_ohlc_rows": 0,
@@ -89,6 +122,15 @@
    "days_extra_vs_reference": 7,
    "bars_per_day_median": 78.0,
    "days_under_70_bars": 15,
+   "empty_cells": 0,
+   "non_positive_prices": 0,
+   "zero_volume_bars": 0,
+   "gap_days_under_20_bars": [
+    "2021-04-19",
+    "2021-10-25",
+    "2022-03-08",
+    "2026-11-23"
+   ],
    "duplicate_timestamps": 0,
    "bars_outside_0930_1555": 0,
    "bad_ohlc_rows": 0,
@@ -106,6 +148,15 @@
    "days_extra_vs_reference": 7,
    "bars_per_day_median": 78.0,
    "days_under_70_bars": 16,
+   "empty_cells": 0,
+   "non_positive_prices": 0,
+   "zero_volume_bars": 0,
+   "gap_days_under_20_bars": [
+    "2021-04-19",
+    "2021-10-25",
+    "2022-03-08",
+    "2026-11-23"
+   ],
    "duplicate_timestamps": 0,
    "bars_outside_0930_1555": 0,
    "bad_ohlc_rows": 0,
@@ -123,6 +174,12 @@
    "days_extra_vs_reference": 7,
    "bars_per_day_median": 78.0,
    "days_under_70_bars": 12,
+   "empty_cells": 0,
+   "non_positive_prices": 0,
+   "zero_volume_bars": 0,
+   "gap_days_under_20_bars": [
+    "2026-11-23"
+   ],
    "duplicate_timestamps": 0,
    "bars_outside_0930_1555": 0,
    "bad_ohlc_rows": 0,
@@ -140,6 +197,12 @@
    "days_extra_vs_reference": 7,
    "bars_per_day_median": 78.0,
    "days_under_70_bars": 12,
+   "empty_cells": 0,
+   "non_positive_prices": 0,
+   "zero_volume_bars": 0,
+   "gap_days_under_20_bars": [
+    "2026-11-23"
+   ],
    "duplicate_timestamps": 0,
    "bars_outside_0930_1555": 0,
    "bad_ohlc_rows": 0,

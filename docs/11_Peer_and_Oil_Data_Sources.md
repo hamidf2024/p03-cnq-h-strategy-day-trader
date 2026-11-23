@@ -179,11 +179,16 @@ Checks (`src/stage13_check_peer_data.py`; summary without prices in
 
 | Check | Finding |
 |---|---|
-| Completeness | All eight symbols have the same 1,591-day calendar. Median 78 of 78 bars per day. 12 to 17 days per symbol have fewer than 70 bars: the scheduled half-days, four other short days (2021-04-19, 2021-10-25, 2022-03-08, 2025-03-10) and the partial last day. No duplicate timestamps, no bars outside 09:30-15:55, no impossible high/low/close rows. |
+| Not empty, well formed | Every file has about 123,400 rows and 7 to 8 MB. No empty cells, no zero or negative prices, no zero-volume bars, no duplicate timestamps, no bars outside 09:30-15:55, no impossible high/low/close rows. The largest single 5-minute move in any symbol is 6.6%. |
+| Completeness | All eight symbols have the same 1,591-day calendar and a median of 78 of 78 bars per day. Short days are the scheduled half-days and the partial last day (2026-11-23, 11 bars). **Three real gaps:** on 2021-04-19, 2021-10-25 and 2022-03-08 the five NYSE-listed symbols (CNQ, SU, CVE, XOM, CVX) have a single 09:30 bar and nothing else, while IMO, USO and XLE are complete. The vendor's history is missing those sessions for that group of stocks; the older IEX file lacks the same three days. They are 3 of 1,591 days (0.2%) and must be treated as missing, not as one-bar days. |
 | Splits | No overnight move above 20% in any symbol. CNQ's 2-for-1 on 2024-06-11 is adjusted correctly (closes of 35.46 and 35.57 either side). The largest overnight moves are real market days (2020-11-09 for most symbols). |
 | Consolidated feed vs the existing IEX file (CNQ) | Daily closes differ by 0.02% at the median, by more than 0.25% on 10 of 1,584 days, and by 1.73% at most (2024-12-23). Daily returns correlate 0.9988. The IEX file is about 4% of the consolidated volume, lacks four days entirely and has fewer than 70 bars on 237 days. Good enough to trust the daily-bar results so far; the intraday zone results should be re-run on the consolidated file before being relied on. |
 | Peers against CNQ | Daily-return correlation with CNQ: CVE 0.84, SU 0.83, XLE 0.82, IMO 0.80, XOM 0.74, CVX 0.73, USO 0.64. The Canadian producers are the closest peers, as expected. |
 | Oil | Daily WTI spot returns correlate 0.59 with CNQ (0.59 to 0.66 in every year) and 0.91 with USO (0.85 to 0.96 by year). On 10 days spot and USO differ by more than 5 points; the largest are days where the spot series moved without the fund (for example 2026-09-28: spot +15.3%, USO +1.1%), which is a property of the spot series, not bad USO data. This supports using USO for anything time-stamped and the spot series only as daily context. |
+
+How to handle the three gap days: drop them for the five affected symbols
+when daily bars are built (a one-bar day would otherwise produce a false daily
+range and close), and do not open or close a simulated trade on them.
 
 What this does not cover: a comparison against a second vendor, and whether the
 Stage 12 models give the same signals on the consolidated-feed CNQ file. The
