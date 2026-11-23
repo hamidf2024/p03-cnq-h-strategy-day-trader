@@ -119,9 +119,10 @@ def http_json(url, headers=None):
 def explain_http_error(e, what):
     code = getattr(e, 'code', None)
     if code in (401, 403):
-        return (f'{what}: the server refused the request (HTTP {code}). For Alpaca this means the key id or '
-                'secret is wrong, or was copied with extra spaces. Create or view keys in the Alpaca dashboard '
-                '(Home > API Keys) and run again. Paper-trading keys work for market data.')
+        return (f'{what}: Alpaca did not accept the keys (HTTP {code}). Check that the first value is the one '
+                'labelled "Key" and the second the one labelled "Secret", both copied whole from the same '
+                '"API Keys" box, with no spaces. If the secret was lost, use "Regenerate" to get a new pair. '
+                'If paper-account keys keep being refused, generate keys under the live account instead.')
     if code == 422:
         return f'{what}: the server rejected the request parameters (HTTP 422): {getattr(e, "reason", "")}'
     return f'{what}: HTTP {code}: {getattr(e, "reason", "")}'
@@ -130,17 +131,41 @@ def explain_http_error(e, what):
 PLACEHOLDERS = {'', 'your_key_id', 'your_secret', '...', 'xxx'}
 
 
+def key_problem(kid, sec):
+    """Plain-language reason a pasted value cannot be a key, or None."""
+    for name, v in (('key id', kid), ('secret', sec)):
+        if v in PLACEHOLDERS:
+            return f'The {name} is empty.'
+        if '://' in v or '/' in v or 'alpaca.markets' in v.lower():
+            return (f'That {name} is a web address. In the API Keys box, "Endpoint" is the address -- do not use it. '
+                    'The key id is the value labelled "Key" (usually starts with PK or AK); '
+                    'the secret is the longer value labelled "Secret".')
+        if any(ch.isspace() for ch in v):
+            return f'The {name} contains a space or line break -- copy only the value itself.'
+    if kid == sec:
+        return 'The key id and the secret are the same value -- they are two different strings.'
+    return None
+
+
 def get_keys():
     kid = os.environ.get('APCA_API_KEY_ID', '').strip()
     sec = os.environ.get('APCA_API_SECRET_KEY', '').strip()
-    if kid in PLACEHOLDERS or sec in PLACEHOLDERS:
-        print('Alpaca API keys are needed (free account: Alpaca dashboard > Home > API Keys).')
-        print('They are used for this run only and are not saved or shown.')
-        kid = input('  Alpaca key id: ').strip()
-        sec = getpass.getpass('  Alpaca secret (typing is hidden): ').strip()
-    if kid in PLACEHOLDERS or sec in PLACEHOLDERS:
-        sys.exit('No keys given -- nothing downloaded.')
-    os.environ['APCA_API_KEY_ID'], os.environ['APCA_API_SECRET_KEY'] = kid, sec
+    if key_problem(kid, sec) is None:
+        return
+    print('Alpaca API keys are needed (Alpaca dashboard, Paper Trading, "API Keys" box).')
+    print('The box shows three things: Endpoint (a web address -- NOT needed), Key, and Secret.')
+    print('They are used for this run only and are not saved or shown.')
+    for _ in range(3):
+        kid = input('  Key (usually starts with PK): ').strip()
+        sec = getpass.getpass('  Secret (typing is hidden): ').strip()
+        problem = key_problem(kid, sec)
+        if problem is None:
+            os.environ['APCA_API_KEY_ID'], os.environ['APCA_API_SECRET_KEY'] = kid, sec
+            return
+        print('  ' + problem + ' Try again.' if kid or sec else '')
+        if not kid and not sec:
+            break
+    sys.exit('No usable keys given -- nothing downloaded.')
 
 
 def alpaca_bars(symbol, start, end, fetch=http_json, feed='sip'):
