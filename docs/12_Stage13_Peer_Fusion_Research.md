@@ -345,8 +345,8 @@ case, and it is applied here even though model M's known test result makes a
 good outcome for O likely. That likelihood is the reason for caution, not
 against it: O is M twice, its two buys usually win or lose together, it puts
 $2,000 at risk on each monthly entry, and a run would show little that M's
-result does not already show. Whether to run it anyway, marked as run at the
-owner's request without passing the gate, is the owner's decision.
+result does not already show. It was later run at the owner's standing instruction
+(Section 16).
 
 ## 15. Addendum: model P, a dip-timed campaign (passed the gate, failed the test)
 
@@ -425,6 +425,66 @@ By the fixed ranking rule P is ranked first of the 27 models (it has the most
 months on GM and a high win rate) although it lost money. The rule is left as
 it is; the page says so beside the ranking.
 
+## 16. Addendum: model O run on the test years (WR3, S1, GM1; not G1)
+
+The owner repeated the instruction to train on 2020-2023, test on 2024-2026
+and repeat until level 1 on the four goals is reached. Model O (Section 14)
+had been held back by the gate; it was frozen with the pattern the fixed
+order puts first (buys at 10:00 and 13:00 of the session after the signal;
+17 of 18 peer stock-years, training G +1.51%, win rate 85.9%), rehearsed on
+2023, and run once. The artefact and the run log record that it did not pass
+the gate (`gate_passed: false`). One fact about the gate result is worth
+recording: 2021 counted 8 of 12 months, but the forecasting model has no
+signal before March 2021, so only ten months were traded that year.
+
+**Test result, one run (look twelve of this stage, twenty-second overall):**
+
+| | Trades | G per trade | Win rate | S | GM | Year total |
+|---|---|---|---|---|---|---|
+| 2024 | 24 | +0.12% | 75.0% | 9 | 8 | +2.9% |
+| 2025 | 24 | +0.75% | 83.3% | 10 | 10 | +17.9% |
+| 2026 | 22 | -0.23% | 77.3% | 8 of 11 | 8 of 11 | -5.0% |
+| All | 70 | **+0.23%** (95% range -1.6% to +1.9%) | **78.6%** | **9 / 10 / 8** | **8 / 10 / 8** | +15.8% |
+
+54 targets, 13 stops, 3 time exits; worst trade -15.1%; both buys stopped in
+six months (-30% for the month); up to six trades open; +0.20% per trade
+after the 1 cent cost; excess over buying after every day with the same exit
++0.44%. **Level 1 on WR (WR3), S and GM; not on G.** It is the first model at
+level 1 on both month goals. No model reaches level 1 on all four.
+
+**What O shows about M.** The two models share signals and exits and differ
+only in when they buy: M at the signal day's close, O at 10:00 and 13:00 the
+next day. M has 4 stops in 35 trades; O has 13 in 70. In 7 of 35 months M's
+trade reached +4% and at least one of O's did not. In January 2025, February
+2025 and June 2026 M's trade won on an overnight jump straight after entry,
+and both of O's buys, made after the jump, slid to the 15% stop. So a good
+part of M's 88.6% win rate, and of its +1.85% per trade, came from the entry
+price of a few trades rather than from the signal. M's level-1 result on G,
+WR and S was already marked "to be confirmed"; this is evidence that it is
+fragile.
+
+## 17. Addendum: model Q, direction by trend (stopped at the gate)
+
+Models M, O and P lose their months and their profit in slides. The standard
+way to take the other side of a slide is time-series momentum (Moskowitz, Ooi
+and Pedersen 2012): trade with the sign of the asset's own past return. Model
+Q is O's campaign taken long when the trend is up and short when it is down
+(`src/s13_trend_direction_search.py`; trend of the stock itself, the sector
+fund or the six-stock basket; 20, 40, 60 or 120 sessions; +3% or +4% target).
+
+Training years only, test years removed. Gate: P's four parts, plus the check
+added after P that the rule must not do worse than "always long, same exit"
+in any training year. **None of the 24 settings passes.** Seventeen do worse
+than always buying over the three years. The 60-session settings do a little
+better (+0.3% to +0.9% per trade) but fail the late-2020 check, where selling
+short into the recovery lost in three months of four. No run on 2024-2026.
+
+The reason is the horizon. At one to three months a single stock's return
+tends to reverse rather than continue, so a trend rule sells short just
+before the bounce (July 2022 in the training years). The slide that hurt M, O
+and P on the test years is not something this rule would have known about in
+advance.
+
 ## Code and results
 
 `src/s13_lib.py`, `src/s13_feasibility.py`, `src/s13_ladder_gate_search.py`
@@ -433,7 +493,9 @@ it is; the page says so beside the ranking.
 (stops from 1% to 15%, `stage13_round12_stop_range_search.json`), `src/stage13_two_buys.py`
 (model O, `stage13_round13_two_buys_selection.json`), `src/stage13_dip_campaign.py`
 (model P; `stage13_round14_dip_campaign_selection.json`, `stage13_frozen_R14.pkl`,
-`stage13_round14_blind_trades.csv`), `src/stage13_peer_fusion.py`
+`stage13_round14_blind_trades.csv`), `src/s13_trend_direction_search.py`
+(model Q, `stage13_round15_trend_direction_search.json`); model O's test run:
+`stage13_frozen_R13.pkl`, `stage13_round13_blind_trades.csv`; `src/stage13_peer_fusion.py`
 (modes `walkforward`, `round5`, `round6`, `round7` to `round10`, `blind`, `verify`);
 `results/experiments/stage13_feasibility.json`,
 `stage13_walkforward_results.json`, `stage13_frozen.pkl`,
@@ -443,6 +505,9 @@ it is; the page says so beside the ranking.
 list and the panel cache stay in the local folder only.
 
 ## Sources
+
+- Moskowitz, T., Ooi, Y. H. and Pedersen, L. H. (2012), *Time series
+  momentum*, Journal of Financial Economics 104 (trend direction; model Q).
 
 - Nagel, S. (2012), [Evaporating Liquidity](https://www.nber.org/papers/w17653)
   (short-term reversal returns as pay for supplying liquidity).
