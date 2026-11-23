@@ -173,3 +173,5 @@ table.score{min-width:1180px}
 .score .rl b.pos{color:var(--good)}.score .rl b.neg{color:var(--bad)}
 .score .rl.sep{border-top:1px solid var(--line);padding-top:6px;margin-top:6px;margin-bottom:0}
 .score .rl .lv{font-size:11px}
+table.score th:nth-child(6){width:178px}
+table.score{min-width:1230px}
