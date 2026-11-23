@@ -10,8 +10,8 @@
 | **Worked on** | 2026-08-19 (one Claude session); exported 2026-10-28 |
 | **Data** | CNQ 5-minute regular-session bars, 2026-05-20 → 2026-08-14 |
 | **Best result (V7.1, Jul 1 – Aug 14)** | 75 trades · 72.9% win rate · profit factor 3.81 · gross +2.69 $/share (+0.42/week); **+1.19 after 2¢/share costs** |
-| **Goals (set 2026-11-23)** | Gross per trade G1 1% · G2 2% · G3 >3%; win rate WR1 50% · WR2 65% · WR3 >75%; months per year above 1% S1 8/12 · S2 10/12 · S3 12/12 |
-| **Scored on 2024–2026 (16 models, $1,000 per trade)** | Best gross per trade 0.99% (no G level yet) · best win rate 70.2% (WR2) · steadiest 8 of 12 months (S1) · no model at level 1 on all three. See [`docs/07_Goals_and_Targets.md`](docs/07_Goals_and_Targets.md) |
+| **Goals (set 2026-11-23)** | Gross per trade G1 1% · G2 2% · G3 >3%; win rate WR1 50% · WR2 65% · WR3 >75%; months per year in which the average trade is above 1%: S1 8/12 · S2 10/12 · S3 12/12 |
+| **Scored on 2024–2026 (16 models, $1,000 per trade)** | Best gross per trade 0.99% (no G level yet) · best win rate 70.2% (WR2) · steadiest 3 of 12 months in its weakest year (no S level yet) · no model at level 1 on all three. See [`docs/07_Goals_and_Targets.md`](docs/07_Goals_and_Targets.md) |
 | **Earlier targets** | Win rate > 60% ✅ · net > 1.0 $/share per week ❌ (best legitimate: 0.42) |
 | **Public report** | https://hamidf2024.github.io/ai-trading/project-03.html |
 
