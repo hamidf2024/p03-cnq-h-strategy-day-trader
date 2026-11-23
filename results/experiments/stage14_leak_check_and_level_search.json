@@ -1,0 +1,194 @@
+{
+ "features_identical_with_test_years_removed": true,
+ "features": 57,
+ "rows_compared": 5184,
+ "final_models_trained_to": {
+  "5": "2023-12-21"
+ },
+ "out_of_fold_predictions_span": [
+  "2021-01-04",
+  "2023-12-29"
+ ],
+ "last_day_in_search_data": "2023-12-29",
+ "settings_searched": 135,
+ "level2_in_every_training_year": 0,
+ "level3_in_every_training_year": 0,
+ "best_by_steadiness": [
+  {
+   "entry": "model at least neutral",
+   "target": 4.0,
+   "stop": 15.0,
+   "hold": 60,
+   "n": 32,
+   "G": 1.44,
+   "WR": 84.4,
+   "S": [
+    9,
+    9,
+    9
+   ],
+   "G_by_year": [
+    2.05,
+    -0.91,
+    3.64
+   ],
+   "level2_every_year": false,
+   "level3_every_year": false,
+   "worst": -16.7
+  },
+  {
+   "entry": "model at least neutral",
+   "target": 3.0,
+   "stop": 15.0,
+   "hold": 60,
+   "n": 32,
+   "G": 0.63,
+   "WR": 84.4,
+   "S": [
+    9,
+    9,
+    9
+   ],
+   "G_by_year": [
+    1.15,
+    -1.65,
+    2.84
+   ],
+   "level2_every_year": false,
+   "level3_every_year": false,
+   "worst": -16.7
+  },
+  {
+   "entry": "model at least neutral",
+   "target": 6.0,
+   "stop": 15.0,
+   "hold": 60,
+   "n": 32,
+   "G": 2.11,
+   "WR": 78.1,
+   "S": [
+    8,
+    9,
+    8
+   ],
+   "G_by_year": [
+    1.75,
+    0.61,
+    4.27
+   ],
+   "level2_every_year": false,
+   "level3_every_year": false,
+   "worst": -16.7
+  },
+  {
+   "entry": "model at least neutral",
+   "target": 5.0,
+   "stop": 15.0,
+   "hold": 60,
+   "n": 32,
+   "G": 1.73,
+   "WR": 81.2,
+   "S": [
+    8,
+    9,
+    9
+   ],
+   "G_by_year": [
+    0.95,
+    -0.05,
+    4.65
+   ],
+   "level2_every_year": false,
+   "level3_every_year": false,
+   "worst": -16.7
+  },
+  {
+   "entry": "model at least neutral",
+   "target": 4.0,
+   "stop": 15.0,
+   "hold": 40,
+   "n": 32,
+   "G": 1.0,
+   "WR": 81.2,
+   "S": [
+    8,
+    9,
+    9
+   ],
+   "G_by_year": [
+    1.35,
+    -0.91,
+    2.94
+   ],
+   "level2_every_year": false,
+   "level3_every_year": false,
+   "worst": -16.7
+  },
+  {
+   "entry": "model at least neutral",
+   "target": 4.0,
+   "stop": 10.0,
+   "hold": 40,
+   "n": 32,
+   "G": 0.93,
+   "WR": 78.1,
+   "S": [
+    8,
+    9,
+    8
+   ],
+   "G_by_year": [
+    1.2,
+    0.53,
+    1.14
+   ],
+   "level2_every_year": false,
+   "level3_every_year": false,
+   "worst": -10.6
+  },
+  {
+   "entry": "model at least neutral",
+   "target": 4.0,
+   "stop": 10.0,
+   "hold": 60,
+   "n": 32,
+   "G": 0.93,
+   "WR": 78.1,
+   "S": [
+    8,
+    9,
+    8
+   ],
+   "G_by_year": [
+    1.2,
+    0.53,
+    1.14
+   ],
+   "level2_every_year": false,
+   "level3_every_year": false,
+   "worst": -10.6
+  },
+  {
+   "entry": "model at least neutral",
+   "target": 3.0,
+   "stop": 15.0,
+   "hold": 40,
+   "n": 32,
+   "G": 0.22,
+   "WR": 81.2,
+   "S": [
+    8,
+    9,
+    9
+   ],
+   "G_by_year": [
+    0.55,
+    -1.65,
+    2.14
+   ],
+   "level2_every_year": false,
+   "level3_every_year": false,
+   "worst": -16.7
+  }
+ ]
+}
