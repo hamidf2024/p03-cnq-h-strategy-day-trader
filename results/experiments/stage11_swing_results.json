@@ -1,0 +1,521 @@
+{
+  "long_short": {
+    "label": "Donchian breakout, long+short",
+    "folds": {
+      "fold1": {
+        "train_years": [
+          "2020"
+        ],
+        "val_year": "2021",
+        "note": "no candidate cleared MIN_TRADES floor on training years"
+      },
+      "fold2": {
+        "train_years": [
+          "2020",
+          "2021"
+        ],
+        "val_year": "2022",
+        "chosen_entry_n": 20,
+        "chosen_exit_n": 20,
+        "train": {
+          "n": 8,
+          "gross_pct_avg": 3.1131378059992265,
+          "gross_pct_total": 24.905102447993812,
+          "win_rate": 37.5,
+          "pf": 1.9151368174722094,
+          "net_at1c_avg": 3.0387278965289797,
+          "avg_hold_days": 53.375
+        },
+        "val": {
+          "n": 8,
+          "gross_pct_avg": -1.2381809821062206,
+          "gross_pct_total": -9.905447856849765,
+          "win_rate": 12.5,
+          "pf": 0.7394617624888243,
+          "net_at1c_avg": -1.2743841802275497,
+          "avg_hold_days": 42.5
+        }
+      },
+      "fold3": {
+        "train_years": [
+          "2020",
+          "2021",
+          "2022"
+        ],
+        "val_year": "2023",
+        "chosen_entry_n": 55,
+        "chosen_exit_n": 10,
+        "train": {
+          "n": 8,
+          "gross_pct_avg": 7.868914120824941,
+          "gross_pct_total": 62.95131296659953,
+          "win_rate": 75.0,
+          "pf": 6.312499149117193,
+          "net_at1c_avg": 7.809851538930011,
+          "avg_hold_days": 46.5
+        },
+        "val": {
+          "n": 5,
+          "gross_pct_avg": -3.1702131612099116,
+          "gross_pct_total": -15.851065806049558,
+          "win_rate": 20.0,
+          "pf": 0.2467235236870848,
+          "net_at1c_avg": -3.2041105733553246,
+          "avg_hold_days": 19.0
+        }
+      }
+    },
+    "grid_candidate_counts": {
+      "20/10": 59,
+      "20/20": 53,
+      "55/10": 31,
+      "55/20": 28
+    },
+    "final": {
+      "chosen_entry_n": 55,
+      "chosen_exit_n": 20,
+      "train": {
+        "n": 11,
+        "gross_pct_avg": 4.050300942715219,
+        "gross_pct_total": 44.55331036986741,
+        "win_rate": 45.45454545454545,
+        "pf": 2.6510315511680584,
+        "net_at1c_avg": 4.004261943851319,
+        "avg_hold_days": 55.54545454545455
+      }
+    },
+    "test": {
+      "2024": {
+        "n": 6,
+        "gross_pct_avg": -0.95207879405738,
+        "gross_pct_total": -5.71247276434428,
+        "win_rate": 33.33333333333333,
+        "pf": 0.659590484381783,
+        "net_at1c_avg": -0.981906644151605,
+        "avg_hold_days": 44.5
+      },
+      "2025": {
+        "n": 6,
+        "gross_pct_avg": -4.635207370774317,
+        "gross_pct_total": -27.811244224645904,
+        "win_rate": 0.0,
+        "pf": 0.0,
+        "net_at1c_avg": -4.667697732613924,
+        "avg_hold_days": 10.5
+      },
+      "2026": {
+        "n": 5,
+        "gross_pct_avg": 1.3076453220954425,
+        "gross_pct_total": 6.538226610477213,
+        "win_rate": 25.0,
+        "pf": 1.5072626559819529,
+        "net_at1c_avg": 1.2850459691298908,
+        "avg_hold_days": 33.2
+      },
+      "combined": {
+        "n": 17,
+        "gross_pct_avg": -1.587381786971351,
+        "gross_pct_total": -26.985490378512967,
+        "win_rate": 18.75,
+        "pf": 0.5305373495740131,
+        "net_at1c_avg": -1.616023318526101,
+        "avg_hold_days": 29.176470588235293
+      }
+    },
+    "_final_trades_combined_detail": [
+      {
+        "side": "short",
+        "entry_date": "2024-02-05 00:00:00",
+        "entry_price": 29.975,
+        "exit_date": "2024-02-15 00:00:00",
+        "exit_price": 31.338250000000002,
+        "pnl": -1.3632500000000007,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2024-02-29 00:00:00",
+        "entry_price": 34.83,
+        "exit_date": "2024-05-01 00:00:00",
+        "exit_price": 37.46,
+        "pnl": 2.6300000000000026,
+        "reason": "20-day channel exit",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "short",
+        "entry_date": "2024-06-04 00:00:00",
+        "entry_price": 35.8725,
+        "exit_date": "2024-08-15 00:00:00",
+        "exit_price": 36.73,
+        "pnl": -0.8574999999999946,
+        "reason": "20-day channel exit",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2024-08-26 00:00:00",
+        "entry_price": 37.43,
+        "exit_date": "2024-09-03 00:00:00",
+        "exit_price": 35.6355,
+        "pnl": -1.7944999999999993,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "short",
+        "entry_date": "2024-09-13 00:00:00",
+        "entry_price": 31.94,
+        "exit_date": "2024-09-19 00:00:00",
+        "exit_price": 33.5525,
+        "pnl": -1.6125000000000007,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "short",
+        "entry_date": "2024-12-06 00:00:00",
+        "entry_price": 32.265,
+        "exit_date": "2025-03-25 00:00:00",
+        "exit_price": 31.13,
+        "pnl": 1.1350000000000016,
+        "reason": "20-day channel exit",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "short",
+        "entry_date": "2025-04-08 00:00:00",
+        "entry_price": 25.145,
+        "exit_date": "2025-04-09 00:00:00",
+        "exit_price": 26.9665,
+        "pnl": -1.8215000000000003,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2025-05-13 00:00:00",
+        "entry_price": 32.25,
+        "exit_date": "2025-05-16 00:00:00",
+        "exit_price": 30.648,
+        "pnl": -1.6020000000000003,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2025-06-11 00:00:00",
+        "entry_price": 32.72,
+        "exit_date": "2025-06-25 00:00:00",
+        "exit_price": 31.395,
+        "pnl": -1.3249999999999993,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "short",
+        "entry_date": "2025-08-11 00:00:00",
+        "entry_price": 29.89,
+        "exit_date": "2025-08-22 00:00:00",
+        "exit_price": 31.1275,
+        "pnl": -1.2375000000000007,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2025-09-16 00:00:00",
+        "entry_price": 32.94,
+        "exit_date": "2025-09-19 00:00:00",
+        "exit_price": 31.680999999999997,
+        "pnl": -1.2590000000000003,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2025-11-14 00:00:00",
+        "entry_price": 33.57,
+        "exit_date": "2025-12-15 00:00:00",
+        "exit_price": 32.365500000000004,
+        "pnl": -1.204499999999996,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2026-01-21 00:00:00",
+        "entry_price": 35.98,
+        "exit_date": "2026-04-17 00:00:00",
+        "exit_price": 42.97,
+        "pnl": 6.990000000000002,
+        "reason": "20-day channel exit",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "short",
+        "entry_date": "2026-06-18 00:00:00",
+        "entry_price": 41.03499984741211,
+        "exit_date": "2026-07-14 00:00:00",
+        "exit_price": 43.786000442504886,
+        "pnl": -2.7510005950927763,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2026-08-17 00:00:00",
+        "entry_price": 49.265,
+        "exit_date": "2026-09-21 00:00:00",
+        "exit_price": 48.31,
+        "pnl": -0.9549999999999983,
+        "reason": "20-day channel exit",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2026-10-16 00:00:00",
+        "entry_price": 53.83,
+        "exit_date": "2026-11-04 00:00:00",
+        "exit_price": 51.544,
+        "pnl": -2.2860000000000014,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "short",
+        "entry_date": "2026-11-18 00:00:00",
+        "entry_price": 45.54,
+        "exit_date": "2026-11-18 00:00:00",
+        "exit_price": 45.54,
+        "pnl": 0.0,
+        "reason": "End-of-data flatten",
+        "entry_n": 55,
+        "exit_n": 20
+      }
+    ]
+  },
+  "long_only": {
+    "label": "Donchian breakout, long only",
+    "folds": {
+      "fold1": {
+        "train_years": [
+          "2020"
+        ],
+        "val_year": "2021",
+        "note": "no candidate cleared MIN_TRADES floor on training years"
+      },
+      "fold2": {
+        "train_years": [
+          "2020",
+          "2021"
+        ],
+        "val_year": "2022",
+        "note": "no candidate cleared MIN_TRADES floor on training years"
+      },
+      "fold3": {
+        "train_years": [
+          "2020",
+          "2021",
+          "2022"
+        ],
+        "val_year": "2023",
+        "chosen_entry_n": 20,
+        "chosen_exit_n": 20,
+        "train": {
+          "n": 8,
+          "gross_pct_avg": 7.306631089456585,
+          "gross_pct_total": 58.45304871565268,
+          "win_rate": 50.0,
+          "pf": 3.683745548031977,
+          "net_at1c_avg": 7.252652602535514,
+          "avg_hold_days": 64.75
+        },
+        "val": {
+          "n": 5,
+          "gross_pct_avg": -2.851375496281134,
+          "gross_pct_total": -14.25687748140567,
+          "win_rate": 20.0,
+          "pf": 0.22562941514915602,
+          "net_at1c_avg": -2.883652279554037,
+          "avg_hold_days": 29.6
+        }
+      }
+    },
+    "grid_candidate_counts": {
+      "20/10": 26,
+      "20/20": 24,
+      "55/10": 19,
+      "55/20": 17
+    },
+    "final": {
+      "chosen_entry_n": 55,
+      "chosen_exit_n": 20,
+      "train": {
+        "n": 8,
+        "gross_pct_avg": 7.057053878823114,
+        "gross_pct_total": 56.45643103058491,
+        "win_rate": 62.5,
+        "pf": 4.743294982307818,
+        "net_at1c_avg": 7.007855949309464,
+        "avg_hold_days": 66.375
+      }
+    },
+    "test": {
+      "2024": {
+        "n": 2,
+        "gross_pct_avg": 1.3783395767802884,
+        "gross_pct_total": 2.756679153560577,
+        "win_rate": 50.0,
+        "pf": 1.5749930382712312,
+        "net_at1c_avg": 1.3506258672998919,
+        "avg_hold_days": 35.0
+      },
+      "2025": {
+        "n": 4,
+        "gross_pct_avg": -4.106769668641343,
+        "gross_pct_total": -16.427078674565372,
+        "win_rate": 0.0,
+        "pf": 0.0,
+        "net_at1c_avg": -4.137198875602382,
+        "avg_hold_days": 12.75
+      },
+      "2026": {
+        "n": 3,
+        "gross_pct_avg": 4.414087076017746,
+        "gross_pct_total": 13.242261228053238,
+        "win_rate": 33.33333333333333,
+        "pf": 3.140959791099849,
+        "net_at1c_avg": 4.391864207216107,
+        "avg_hold_days": 46.666666666666664
+      },
+      "combined": {
+        "n": 9,
+        "gross_pct_avg": -0.04757092143906247,
+        "gross_pct_total": -0.42813829295156225,
+        "win_rate": 22.22222222222222,
+        "pf": 0.9843782548425752,
+        "net_at1c_avg": -0.07466123846238008,
+        "avg_hold_days": 29.0
+      }
+    },
+    "_final_trades_combined_detail": [
+      {
+        "side": "long",
+        "entry_date": "2024-02-29 00:00:00",
+        "entry_price": 34.83,
+        "exit_date": "2024-05-01 00:00:00",
+        "exit_price": 37.46,
+        "pnl": 2.6300000000000026,
+        "reason": "20-day channel exit",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2024-08-26 00:00:00",
+        "entry_price": 37.43,
+        "exit_date": "2024-09-03 00:00:00",
+        "exit_price": 35.6355,
+        "pnl": -1.7944999999999993,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2025-05-13 00:00:00",
+        "entry_price": 32.25,
+        "exit_date": "2025-05-16 00:00:00",
+        "exit_price": 30.648,
+        "pnl": -1.6020000000000003,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2025-06-11 00:00:00",
+        "entry_price": 32.72,
+        "exit_date": "2025-06-25 00:00:00",
+        "exit_price": 31.395,
+        "pnl": -1.3249999999999993,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2025-09-16 00:00:00",
+        "entry_price": 32.94,
+        "exit_date": "2025-09-19 00:00:00",
+        "exit_price": 31.680999999999997,
+        "pnl": -1.2590000000000003,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2025-11-14 00:00:00",
+        "entry_price": 33.57,
+        "exit_date": "2025-12-15 00:00:00",
+        "exit_price": 32.365500000000004,
+        "pnl": -1.204499999999996,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2026-01-21 00:00:00",
+        "entry_price": 35.98,
+        "exit_date": "2026-04-17 00:00:00",
+        "exit_price": 42.97,
+        "pnl": 6.990000000000002,
+        "reason": "20-day channel exit",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2026-08-17 00:00:00",
+        "entry_price": 49.265,
+        "exit_date": "2026-09-21 00:00:00",
+        "exit_price": 48.31,
+        "pnl": -0.9549999999999983,
+        "reason": "20-day channel exit",
+        "entry_n": 55,
+        "exit_n": 20
+      },
+      {
+        "side": "long",
+        "entry_date": "2026-10-16 00:00:00",
+        "entry_price": 53.83,
+        "exit_date": "2026-11-04 00:00:00",
+        "exit_price": 51.544,
+        "pnl": -2.2860000000000014,
+        "reason": "Stop (2xATR)",
+        "entry_n": 55,
+        "exit_n": 20
+      }
+    ]
+  }
+}
