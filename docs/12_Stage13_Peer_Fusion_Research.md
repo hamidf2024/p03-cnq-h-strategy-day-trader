@@ -485,6 +485,54 @@ before the bounce (July 2022 in the training years). The slide that hurt M, O
 and P on the test years is not something this rule would have known about in
 advance.
 
+## 18. Addendum: a combination that shows level 1 on all four goals, why it is not counted, and the forward test
+
+Models M and O share signals and exits and differ only in when they buy, so
+their tested trades can be put together afterwards. No new run on 2024-2026
+was made for this section; it uses the published trade lists
+(`results/experiments/stage13_after_the_fact_combinations.json`).
+
+| Buys | Trades | G | Win rate | S | GM | Level 1 on all four |
+|---|---|---|---|---|---|---|
+| M alone: close of the signal day (as tested) | 35 | +1.85% | 88.6% | 10 / 12 / 9 | 0 / 1 / 0 | no |
+| 10:00 next day only | 35 | +0.25% | 77.1% | 8 / 10 / 9 | 0 / 0 / 0 | no |
+| 13:00 next day only | 35 | +0.20% | 80.0% | 10 / 10 / 8 | 0 / 0 / 1 | no |
+| O as tested: 10:00 and 13:00 next day | 70 | +0.23% | 78.6% | 9 / 10 / 8 | 8 / 10 / 8 | no |
+| **Close and 10:00 next day** | 70 | **+1.05%** | 82.9% | 9 / 10 / 8 | 8 / 10 / 8 | **yes** |
+| Close and 13:00 next day | 70 | +1.02% | 84.3% | 10 / 10 / 7 | 10 / 10 / 7 | no |
+| All three buys | 105 | +0.77% | 81.9% | 9 / 10 / 7 | 9 / 10 / 7 | no |
+
+One of seven arrangements shows level 1 on all four goals. **It is not
+counted as reached**, for three reasons. It was chosen with the answers in
+view: picking the best of seven after seeing them is not a test. The training
+years chose differently: the fixed order put "10:00 and 13:00" first, which is
+model O, and O misses G1. And there is no room to spare: +1.05% against a
+need of 1%, and 8 months against a need of 8 in two years of three, so one
+trade going the other way changes the answer.
+
+This is also the clearest picture so far of how far the test years have been
+used: after 22 runs, a variant that passes can be assembled without running
+anything. Further variants on the same data would add to that, not to
+knowledge.
+
+**Forward test.** The only test left that can confirm any of these is one on
+trades not yet made. Frozen on 2026-11-23, data ending 2026-11-20
+(`results/experiments/forward_test_manifest.json`, with the sha256 of each
+artefact): M, O, L (the model inside the 5% loss limit) and the combination
+above (`stage13_frozen_FORWARD_close_next1000.pkl`, marked forward-only; the
+code refuses to run it on 2024-2026). Nothing may be changed. Trades opened
+after the data end will be scored on the four goals when the owner refreshes
+the price files.
+
+**New information.** `src/stage13_download_peer_oil_data.py extra` now
+downloads eighteen more symbols from the same source as the present data: a
+12-month oil fund and a Brent fund (the slope of the oil futures curve and
+the Brent-WTI gap, read against USO), natural gas, three refiners (the
+refining margin), producer and oil-service funds, two Canadian pipelines, the
+Canadian dollar, the US dollar, the Canadian and US stock markets, a
+volatility fund, long bonds, high-yield bonds and gold. These are the inputs
+the Stage 14 brief asked for that can be had without a new vendor.
+
 ## Code and results
 
 `src/s13_lib.py`, `src/s13_feasibility.py`, `src/s13_ladder_gate_search.py`

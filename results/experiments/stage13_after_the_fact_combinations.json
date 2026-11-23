@@ -1,0 +1,127 @@
+{
+ "what": "Combinations of buys ALREADY tested on 2024-2026 (model M and the two legs of model O), put together afterwards from the published trade lists. No new run on the test years was made. These are not test results: the combination is chosen with the answers in view.",
+ "made_on": "2026-11-23",
+ "months_needed_per_year": "8 of 12 (2026 has 11 months: 8 of 11)",
+ "combinations": {
+  "M alone: buy at the signal day close (as tested)": {
+   "trades": 35,
+   "G": 1.85,
+   "WR": 88.6,
+   "S": [
+    10,
+    12,
+    9
+   ],
+   "GM": [
+    0,
+    1,
+    0
+   ],
+   "stops": 4,
+   "level1_all_four": false
+  },
+  "Buy at 10:00 next day only": {
+   "trades": 35,
+   "G": 0.25,
+   "WR": 77.1,
+   "S": [
+    8,
+    10,
+    9
+   ],
+   "GM": [
+    0,
+    0,
+    0
+   ],
+   "stops": 6,
+   "level1_all_four": false
+  },
+  "Buy at 1:00 pm next day only": {
+   "trades": 35,
+   "G": 0.2,
+   "WR": 80.0,
+   "S": [
+    10,
+    10,
+    8
+   ],
+   "GM": [
+    0,
+    0,
+    1
+   ],
+   "stops": 7,
+   "level1_all_four": false
+  },
+  "O as tested: 10:00 and 1:00 pm next day": {
+   "trades": 70,
+   "G": 0.23,
+   "WR": 78.6,
+   "S": [
+    9,
+    10,
+    8
+   ],
+   "GM": [
+    8,
+    10,
+    8
+   ],
+   "stops": 13,
+   "level1_all_four": false
+  },
+  "Close and 10:00 next day": {
+   "trades": 70,
+   "G": 1.05,
+   "WR": 82.9,
+   "S": [
+    9,
+    10,
+    8
+   ],
+   "GM": [
+    8,
+    10,
+    8
+   ],
+   "stops": 10,
+   "level1_all_four": true
+  },
+  "Close and 1:00 pm next day": {
+   "trades": 70,
+   "G": 1.02,
+   "WR": 84.3,
+   "S": [
+    10,
+    10,
+    7
+   ],
+   "GM": [
+    10,
+    10,
+    7
+   ],
+   "stops": 11,
+   "level1_all_four": false
+  },
+  "All three buys": {
+   "trades": 105,
+   "G": 0.77,
+   "WR": 81.9,
+   "S": [
+    9,
+    10,
+    7
+   ],
+   "GM": [
+    9,
+    10,
+    7
+   ],
+   "stops": 17,
+   "level1_all_four": false
+  }
+ },
+ "training_years_order": "On 2021-2023 the fixed order put \"10:00 and 1:00 pm next day\" first (17 of 18 peer stock-years); \"close and 10:00 next day\" had 15 of 18."
+}

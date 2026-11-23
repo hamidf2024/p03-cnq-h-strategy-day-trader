@@ -186,3 +186,8 @@ table.score{min-width:1228px}
 #stops th:first-child{width:18%}
 #stops td:first-child{white-space:nowrap}
 #stops tr.stop-best td{background:var(--accent-soft)}
+/* after-the-fact combinations */
+#afterfact table{min-width:640px;width:100%}
+#afterfact th{white-space:normal;vertical-align:bottom}
+#afterfact tr.stop-best td{background:var(--accent-soft)}
+#afterfact td:first-child{font-weight:600}

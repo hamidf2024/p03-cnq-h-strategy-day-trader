@@ -213,6 +213,19 @@ def freeze():
     print('FROZEN', best, pats[best]['G'], pats[best]['WR'], [p['S'] for p in pats[best]['per_year'].values()], hashlib.sha256(blob).hexdigest()[:16], flush=True)
 
 
+def freeze_forward(pattern='close+next1000'):
+    """Freezes a pattern for a FORWARD test only (trades after the data end of 2026-11-20). It was picked after the
+    test years had been seen, so it must never be reported as a result on 2024-2026; blind() refuses to run it."""
+    assert pattern in PATTERNS
+    frozen = pickle.load(open(f'{RES}/stage13_frozen.pkl', 'rb'))
+    note = ('picked on 2026-11-23 by looking at published 2024-2026 results (model M plus the 10:00 leg of model O); '
+            'not a test result; valid only for trades opened after 2026-11-20')
+    blob = pickle.dumps(dict(chosen={'R13F_close_next1000': dict(pattern=pattern, **M_CFG)}, finals=frozen['finals'], oof=frozen['oof'], feats=frozen['feats'],
+                             gate_passed=False, forward_only=True, selected_after_test=True, gate_note=note))
+    f = f'{RES}/stage13_frozen_FORWARD_close_next1000.pkl'; open(f, 'wb').write(blob)
+    print('FROZEN FOR FORWARD TEST', pattern, hashlib.sha256(blob).hexdigest(), flush=True)
+
+
 def blind(verify=False, dry=False):
     """dry=True rehearses every step on 2023 with the test years removed (S13_CUTOFF set); it writes nothing."""
     logf = f'{RES}/stage13_BLIND_RUN_LOG.json'; resf = f'{RES}/stage13_blind_results.json'
@@ -223,6 +236,7 @@ def blind(verify=False, dry=False):
     assert bool(os.environ.get('S13_CUTOFF')) == dry, 'blind/verify need the full data (unset S13_CUTOFF); dry needs S13_CUTOFF=2023-12-29'
     W0, W1, YRS, MAV = (L.BLIND_START, L.BLIND_END, YEARS_BLIND, MONTHS_BLIND) if not dry else ('2023-01-01', '2023-09-29', [2023], {2023: 9})
     blob = open(f'{RES}/{ART}', 'rb').read(); sha = hashlib.sha256(blob).hexdigest(); frozen = pickle.loads(blob)
+    assert not frozen.get('forward_only'), 'this artefact is for the forward test only; it must not be run on 2024-2026'
     cfg = frozen['chosen'][NAME]; pat = cfg['pattern']
     panel, D, cal, feats, cnq, path, bench, T = P.setup()
     assert feats == frozen['feats']
@@ -276,6 +290,8 @@ if __name__ == '__main__':
         select()
     elif mode == 'blind':
         blind()
+    elif mode == 'freeze_forward':
+        freeze_forward()
     elif mode == 'freeze':
         freeze()
     elif mode == 'dry':

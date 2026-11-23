@@ -185,6 +185,18 @@ with the test years removed: none of 24 settings passed, most did worse than
 always buying, and the few that did better failed the late-2020 check. No run
 on 2024-2026. `docs/12`, Sections 16 and 17.
 
+**A combination that shows level 1 on all four goals, not counted
+(2026-11-23).** Put together afterwards from trades already tested, model M's
+buy at the close plus a second buy at 10:00 the next day shows G +1.05%, win
+rate 82.9%, S 9 / 10 / 8 and GM 8 / 10 / 8 on 2024-2026. It is one of seven
+arrangements of the same buys and the only one that passes; it was picked
+with the answers in view, the training years chose a different arrangement
+(model O), and it has no room to spare on G, S or GM. It is not recorded as a
+test result and no model is recorded at level 1 on all four goals. It has
+been frozen, with M, O and L, for a forward test on trades opened after
+2026-11-20 (`results/experiments/forward_test_manifest.json`; `docs/12`,
+Section 18).
+
 **The fourth goal, GM.** No model reaches GM1. The closest inside the loss
 limits is E. Peer-Fusion GBM with 3 / 2 / 2 months of 5% or more.
 Model M is far from it by design: one trade a month sold at +4% makes a
