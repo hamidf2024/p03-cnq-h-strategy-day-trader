@@ -1,9 +1,11 @@
 (function(){
-var tip=document.getElementById('tip'),hm=document.getElementById('hm'),def=tip.textContent;
-function show(e){var c=e.target.closest?e.target.closest('.hm-c[data-tip]'):null;if(!c)return;
- tip.textContent=c.parentNode.querySelector('.hm-name').textContent+' · '+c.getAttribute('data-tip');}
-hm.addEventListener('mouseover',show);hm.addEventListener('click',show);
-hm.addEventListener('mouseleave',function(){tip.textContent=def;});
+Array.prototype.forEach.call(document.querySelectorAll('.hm'),function(hm){
+ var card=hm.parentNode;while(card&&!card.querySelector('.tipbox'))card=card.parentNode;if(!card)return;
+ var tip=card.querySelector('.tipbox'),def=tip.textContent;
+ function show(e){var c=e.target.closest?e.target.closest('.hm-c[data-tip]'):null;if(!c)return;
+  tip.textContent=c.parentNode.querySelector('.hm-name').textContent+' \u00b7 '+c.getAttribute('data-tip');}
+ hm.addEventListener('mouseover',show);hm.addEventListener('click',show);
+ hm.addEventListener('mouseleave',function(){tip.textContent=def;});});
 var btns=document.querySelectorAll('.tabs button[data-f]'),rows=document.querySelectorAll('#score tbody tr');
 Array.prototype.forEach.call(btns,function(b){b.addEventListener('click',function(){
  Array.prototype.forEach.call(btns,function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});

@@ -52,7 +52,8 @@ DESC = {
 }
 NEW_STAGE = 13
 KIND = {c['id']: ('Same-day' if c['holding'] == 'same day' else 'Multi-day') for c in d['methods']}
-SHORT = {'Donchian_long': 'Donchian long-only', 'Donchian_ls': 'Donchian long+short'}
+SHORT = {'Donchian_long': 'Donchian long-only', 'Donchian_ls': 'Donchian long+short', 'R8_peer_fusion_stop5': 'L. Peer-Fusion, 5% stop',
+         'R4_goal_shaped_exits': 'H. Target and stop', 'R6_one_a_month': 'J. One-a-month, no stop'}
 def nm(c): return SHORT.get(c['id'], c['name'])
 
 
@@ -221,6 +222,21 @@ hm_rows = ''.join(
     f'<div class="hm-row"><div class="hm-name">{E(nm(c))}</div>' + ''.join(cell(r) for r in monthly[c['id']])
     + f'<div class="hm-tot"><b>{c["months_above_1pct_total"]}</b> of {c["months_total"]}</div></div>' for c in ORDER)
 
+# ------------------------------------------------------------------ month grid for GM (the month's total)
+def cell_gm(r):
+    n = int(r['trades']); m = r['month']; v = float(r['sum_gross_pct']) if n else 0.0
+    cls = 'nt' if n == 0 else ('hit' if r['total_at_least_5pct'] == 'True' else ('pos' if v > 0 else 'neg'))
+    label = f"{LONG[int(m[5:]) - 1]} {m[:4]}"
+    tip = f"{label}: no trades" if n == 0 else (f"{label}: total {pct(v, 2, True)} from {n} trade{'s' if n != 1 else ''} "
+                                                f"({usd(float(r['sum_dollars_per_1000']), 0)} at $1,000 per trade)")
+    return GAP(m) + f'<span class="hm-c {cls}" data-tip="{tip}">{MIN if cls == "neg" else ""}</span>'
+
+
+head_gm = head.replace('Above 1%', '5% or more')
+hm_rows_gm = ''.join(
+    f'<div class="hm-row"><div class="hm-name">{E(nm(c))}</div>' + ''.join(cell_gm(r) for r in monthly[c['id']])
+    + f'<div class="hm-tot"><b>{c["months_total_5pct_all"]}</b> of {c["months_total"]}</div></div>' for c in ORDER)
+
 # ------------------------------------------------------------------ $1,000 chart + table
 BH = 390.0
 lo, hi = -450.0, 750.0
@@ -337,7 +353,7 @@ html = f'''<!doctype html>
     <h1>{n_models} trading models, scored against four goals</h1>
     <p class="lede">Every model and method built in this project for trading Canadian Natural Resources (CNQ) is scored here on the same four goals. Scores use January 2024 to November 2026, years the models were not trained on. Dollar figures assume $1,000 invested in each trade.</p>
     <p style="margin-top:14px">{HERO_TAG} <span class="tag muted">Research only, hypothetical backtests</span> <span class="tag muted">Updated Nov 23, 2026</span></p>
-    <nav class="toc" aria-label="On this page"><a href="#goals">The goals</a><a href="#top5">Top 5</a><a href="#all">All {n_models} models</a><a href="#months">Month by month</a><a href="#money">$1,000 per trade</a><a href="#measure">How it is measured</a><a href="project-03-research.html">Research record</a></nav>
+    <nav class="toc" aria-label="On this page"><a href="#goals">The goals</a><a href="#top5">Top 5</a><a href="#all">All {n_models} models</a><a href="#months">Steady months</a><a href="#gm-months">Monthly profit</a><a href="#money">$1,000 per trade</a><a href="#measure">How it is measured</a><a href="project-03-research.html">Research record</a></nav>
   </section>
 
   <section id="goals">
@@ -390,6 +406,17 @@ html = f'''<!doctype html>
       <div class="tipbox" id="tip" role="status" aria-live="polite">Point at a square to see that month.</div>
     </div>
     <p class="fine" style="margin-top:10px">{S_NOTE}</p>
+  </section>
+
+  <section id="gm-months">
+    <h2>Monthly profit, month by month</h2>
+    <p class="sub">Each square is one month. A month counts toward the GM goal when all the trades opened in it, winners and losers together, add up to 5% or more. That is $50 or more at $1,000 per trade.</p>
+    <div class="card">
+      <div class="hm-legend"><span><i class="hm-c hit"></i>Total of 5% or more (counts)</span><span><i class="hm-c pos"></i>Profit under 5%</span><span><i class="hm-c neg">{MIN}</i>Loss for the month</span><span><i class="hm-c nt"></i>No trades</span></div>
+      <p class="swipe">Swipe sideways to see all 35 months.</p><div class="hm-scroll"><div class="hm">{years}{head_gm}{hm_rows_gm}</div></div>
+      <div class="tipbox" role="status" aria-live="polite">Point at a square to see that month.</div>
+    </div>
+    <p class="fine" style="margin-top:10px">No model reaches GM1, which needs 8 such months in every year. The closest inside the loss limits is {E(gbm_best['name'])}, with {' &middot; '.join(f"{y}: {v['months_total_5pct']} of {v['months']}" for y, v in gbm_best['by_year'].items())}. Models that take one trade a month and sell at +4% rarely total 5% in a month; models with many small trades have more profitable months but few as large as 5%.</p>
   </section>
 
   <section id="money">
