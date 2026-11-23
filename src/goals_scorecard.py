@@ -6,8 +6,8 @@ ladders the owner added to the charter on 2026-11-23, on the blind years
     G   average gross % per trade          G1 >= 1%    G2 >= 2%    G3 > 3%
     WR  win rate                           WR1 >= 50%  WR2 >= 65%  WR3 > 75%
     S   steadiness: months in each year    S1 8 of 12  S2 10 of 12 S3 12 of 12
-        whose gross % for the month is
-        above 1%
+        in which the average gross % per
+        trade is above 1%
 
 Nothing is tuned here. Each method is re-run with the configuration that was
 already frozen in its own stage, only to obtain a per-trade list from which
@@ -42,9 +42,12 @@ Definitions
   also worked out with that stricter number (top5_if_scratch_is_not_a_win).
 * Profit factor = total of winning trades' gross % / total of losing trades'
   gross %, i.e. on equal dollars per trade.
-* Gross % for a month = the sum of the gross % of the trades opened in that
-  month, i.e. the month's profit as a share of a $1,000 stake that is put to
-  work again on each trade (not compounded). A month with no trade is 0%.
+* A month counts toward S when the average gross % per trade of the trades
+  opened in that month is above 1% (the owner's definition, confirmed
+  2026-11-23; the first version of this script counted months whose SUMMED
+  gross % was above 1%, which was a misreading). A month with no trade has no
+  average and does not count. The month's summed gross % and its dollars on
+  $1,000 per trade are still written out for reference.
 * Steadiness is counted per calendar year. 2026 runs to 18 November, so it has
   11 months; its count is compared with the same fractions (8/12, 10/12, 12/12).
   A level counts as reached only if it is reached in every blind year.
@@ -196,20 +199,27 @@ def score(paths, stage11, stage12, outdir):
         cost_per_trade = float((0.01 / t.entry_price * STAKE).mean())    # 1 cent/share on a $1,000 position
         msum = t.groupby('month').ret.sum().reindex(all_months, fill_value=0.0)
         mcnt = t.groupby('month').size().reindex(all_months, fill_value=0)
+        mavg = t.groupby('month').ret.mean().reindex(all_months)          # NaN where there was no trade
+        mhit = (mavg > 1.0)                                               # the S test: average per trade above 1%
         for m in all_months:
             mt = t[t.month == m]
             monthly_rows.append(dict(method=mid, month=m, trades=int(mcnt[m]), wins=int((mt.pnl > 0.005).sum()),
-                                     losses=int((mt.pnl < -0.005).sum()), gross_pct=round(float(msum[m]), 4),
-                                     dollars_per_1000=round(float(msum[m]) * STAKE / 100, 2)))
+                                     losses=int((mt.pnl < -0.005).sum()),
+                                     avg_gross_pct_per_trade=round(float(mavg[m]), 4) if mcnt[m] else None,
+                                     above_1pct_per_trade=bool(mhit[m]),
+                                     sum_gross_pct=round(float(msum[m]), 4),
+                                     sum_dollars_per_1000=round(float(msum[m]) * STAKE / 100, 2)))
         by_year = {}
         for y in (2024, 2025, 2026):
             ty = t[t.year == y]
             ms = msum[[m for m in all_months if m.startswith(str(y))]]
+            mh = mhit[ms.index]; ma = mavg[ms.index]
             wy = int((ty.pnl > 0.005).sum()); ly = int((ty.pnl < -0.005).sum())
             by_year[y] = dict(trades=int(len(ty)), gross_pct_per_trade=round(float(ty.ret.mean()), 4) if len(ty) else None,
                               win_rate=round(100 * wy / max(1, wy + ly), 1) if (wy + ly) else None,
-                              months=int(len(ms)), months_above_1pct=int((ms > 1.0).sum()),
-                              months_positive=int((ms > 0).sum()), months_no_trades=int((mcnt[ms.index] == 0).sum()),
+                              months=int(len(ms)), months_above_1pct=int(mh.sum()),
+                              months_positive=int((ma > 0).sum()), months_no_trades=int((mcnt[ms.index] == 0).sum()),
+                              best_month_avg_pct_per_trade=round(float(ma.max()), 4) if ma.notna().any() else None,
                               gross_pct_year=round(float(ms.sum()), 2), dollars_year=round(float(ms.sum()) * STAKE / 100, 2))
         frac = {y: by_year[y]['months_above_1pct'] / by_year[y]['months'] for y in by_year}
         s_frac_min = min(frac.values()); s_frac_avg = float(np.mean(list(frac.values())))
@@ -228,29 +238,34 @@ def score(paths, stage11, stage12, outdir):
             gross_pct_total=round(float(t.ret.sum()), 2), dollars_total=round(float(t.ret.sum()) * STAKE / 100, 2),
             net_pct_per_trade_after_1c=round(net1c, 4), dollars_per_trade_after_1c=round(net1c * STAKE / 100, 2),
             dollars_total_after_1c=round(net1c * len(t) * STAKE / 100, 2), profitable_after_1c=bool(net1c > 0),
-            months_above_1pct_total=int((msum > 1.0).sum()), months_total=len(all_months),
+            months_above_1pct_total=int(mhit.sum()), months_total=len(all_months),
+            months_with_trades=int((mcnt > 0).sum()),
+            best_month_avg_pct_per_trade=round(float(mavg.max()), 4),
             months_above_1pct_avg_per_12=round(12 * s_frac_avg, 1), months_above_1pct_worst_year_per_12=round(12 * s_frac_min, 1),
-            avg_month_gross_pct=round(float(msum.mean()), 3),
+            avg_month_sum_gross_pct=round(float(msum.mean()), 3),
             by_year=by_year, G_level=g_lv, WR_level=wr_lv, S_level=s_lv, levels_total=g_lv + wr_lv + s_lv,
             progress=dict(G=round(prog_g, 3), WR=round(prog_wr, 3), S=round(prog_s, 3),
-                          overall=round((prog_g + prog_wr + prog_s) / 3, 3),
-                          overall_if_scratch_is_not_a_win=round((prog_g + float(np.clip(wr_all / WR_LEVELS[2], 0, 1)) + prog_s) / 3, 3)),
+                          overall=round((prog_g + prog_wr + prog_s) / 3, 3), overall_exact=(prog_g + prog_wr + prog_s) / 3,
+                          overall_if_scratch_is_not_a_win=round((prog_g + float(np.clip(wr_all / WR_LEVELS[2], 0, 1)) + prog_s) / 3, 5)),
             enough_trades_to_rank=bool(len(t) >= MIN_TRADES_FOR_RANK)))
-    ranked = sorted([c for c in cards if c['enough_trades_to_rank']], key=lambda c: -c['progress']['overall'])
+    ranked = sorted([c for c in cards if c['enough_trades_to_rank']], key=lambda c: -c['progress']['overall_exact'])
     for i, c in enumerate(ranked):
         c['rank'] = i + 1
+    for c in cards:
+        del c['progress']['overall_exact']
     strict = sorted([c for c in cards if c['enough_trades_to_rank']], key=lambda c: -c['progress']['overall_if_scratch_is_not_a_win'])
     out = dict(
         goals=dict(G=dict(name='Average gross % per trade', levels=['>= 1%', '>= 2%', '> 3%']),
                    WR=dict(name='Win rate', levels=['>= 50%', '>= 65%', '> 75%']),
-                   S=dict(name='Months per year with gross % for the month above 1%', levels=['8 of 12', '10 of 12', '12 of 12'])),
+                   S=dict(name='Months per year in which the average gross % per trade is above 1%', levels=['8 of 12', '10 of 12', '12 of 12'])),
         basis=dict(period='blind 2024-01-02 to 2026-11-18', stake_per_trade=STAKE, months_counted=MONTHS_IN_YEAR,
                    ranking='overall progress = average of three fractions: gross % per trade / 3%, win rate / 75%, '
-                           'share of months above 1% (each capped at 1); methods with fewer than '
+                           'share of months whose average trade is above 1% (each capped at 1); methods with fewer than '
                            f'{MIN_TRADES_FOR_RANK} blind trades are not ranked'),
         top5=[c['id'] for c in ranked[:5]],
         top5_if_scratch_is_not_a_win=[c['id'] for c in strict[:5]],
         leaders=dict(G=max(cards, key=lambda c: c['gross_pct_per_trade'])['id'],
+                     S_worst_year=max(cards, key=lambda c: (c['months_above_1pct_worst_year_per_12'], c['progress']['S']))['id'],
                      WR=max([c for c in cards if c['enough_trades_to_rank']], key=lambda c: c['win_rate'])['id'],
                      S=max(cards, key=lambda c: c['progress']['S'])['id']),
         methods=cards)

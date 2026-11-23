@@ -19,7 +19,7 @@ recorded in `00_Project_Charter.docx` ("Performance Goals") and scored by
 |---|---|---|---|
 | **G**: average gross % per trade | G1: 1% | G2: 2% | G3: more than 3% |
 | **WR**: win rate | WR1: 50% | WR2: 65% | WR3: more than 75% |
-| **S**: months per year with a gross result above 1% for the month | S1: 8 of 12 | S2: 10 of 12 | S3: 12 of 12 |
+| **S**: months per year in which the average gross % per trade is above 1% | S1: 8 of 12 | S2: 10 of 12 | S3: 12 of 12 |
 
 **Definitions used for scoring.** All on the blind years 2024-01-02 to
 2026-11-18, with the configuration each method froze in its own stage.
@@ -29,54 +29,65 @@ recorded in `00_Project_Charter.docx` ("Performance Goals") and scored by
 - WR: wins / (wins + losses). A trade within half a cent per share of zero is
   a scratch and is left out (the project's convention since V1). The share of
   all trades that made money is given in brackets.
-- S: for each month, the sum of the gross % of the trades opened in it (the
-  month's profit as a share of a $1,000 stake reused for each trade, not
-  compounded). Months with no trade count as 0%. A level must hold in every
-  year; 2026 has 11 months and is judged on the same fraction.
+- S: a month counts when the average gross % per trade of the trades opened
+  in it is above 1%. A month with no trade does not count. A level must hold
+  in every year; 2026 has 11 months and is judged on the same fraction.
+  *Corrected 2026-11-23:* the first scoring counted months whose summed gross
+  % was above 1%. The owner confirmed the test is the average per trade
+  within the month, and everything below uses that.
 - After costs: 1 cent per share for the round trip, about $0.28 on a $1,000
   trade.
 
 ### Scorecard, blind 2024-2026, $1,000 per trade
 
-| Rank | Model | Trades | G: avg gross %/trade | WR (wins of all trades) | S: months above 1%, 2024 / 2025 / 2026 | Levels | $ per trade | $ per trade after 1 cent |
+| Rank | Model | Trades | G: avg gross %/trade | WR (wins of all trades) | S: months averaging above 1% per trade, 2024 / 2025 / 2026 | Levels | $ per trade | $ per trade after 1 cent |
 |---|---|---|---|---|---|---|---|---|
-| 1 | Rule OR Model | 3,890 | +0.02% | 59.9% (46%) | 8 of 12 / 8 of 12 / 8 of 11 | G0 WR1 S1 | +$0.18 | -$0.10 |
-| 2 | V7.1 percent-scaled | 1,411 | +0.02% | 70.2% (46%) | 6 of 12 / 6 of 12 / 6 of 11 | G0 WR2 S0 | +$0.20 | -$0.08 |
-| 3 | V7 | 1,834 | +0.02% | 59.9% (44%) | 5 of 12 / 7 of 12 / 6 of 11 | G0 WR1 S0 | +$0.19 | -$0.10 |
-| 4 | V7.1 | 1,597 | +0.02% | 59.4% (42%) | 5 of 12 / 5 of 12 / 6 of 11 | G0 WR1 S0 | +$0.20 | -$0.08 |
-| 5 | C. Transformer probe | 51 | +0.64% | 51.0% (51%) | 3 of 12 / 4 of 12 / 5 of 11 | G0 WR1 S0 | +$6.37 | +$6.09 |
-| 6 | B. Field-Fusion GBM | 25 | +0.99% | 48.0% (48%) | 4 of 12 / 2 of 12 / 3 of 11 | G0 WR0 S0 | +$9.95 | +$9.65 |
-| 7 | V3 | 2,741 | +0.01% | 49.3% (32%) | 7 of 12 / 7 of 12 / 5 of 11 | G0 WR0 S0 | +$0.12 | -$0.16 |
-| 8 | V6 | 1,794 | +0.02% | 56.2% (42%) | 6 of 12 / 4 of 12 / 5 of 11 | G0 WR1 S0 | +$0.16 | -$0.13 |
-| 9 | V5 | 2,284 | +0.01% | 55.0% (41%) | 6 of 12 / 4 of 12 / 5 of 11 | G0 WR1 S0 | +$0.10 | -$0.18 |
-| 10 | D. Fusion gate | 19 | +0.52% | 55.6% (53%) | 4 of 12 / 2 of 12 / 2 of 11 | G0 WR1 S0 | +$5.15 | +$4.88 |
-| 11 | V4 | 2,188 | +0.01% | 49.3% (32%) | 6 of 12 / 5 of 12 / 4 of 11 | G0 WR0 S0 | +$0.13 | -$0.16 |
-| 12 | V2 | 2,124 | +0.01% | 49.1% (31%) | 5 of 12 / 5 of 12 / 4 of 11 | G0 WR0 S0 | +$0.11 | -$0.18 |
-| 13 | V1 | 1,654 | +0.02% | 38.0% (16%) | 5 of 12 / 4 of 12 / 5 of 11 | G0 WR0 S0 | +$0.16 | -$0.13 |
-| 14 | A. Spring-release | 21 | -0.70% | 40.0% (38%) | 4 of 12 / 1 of 12 / 2 of 11 | G0 WR0 S0 | -$7.05 | -$7.32 |
+| 1 | C. Transformer probe | 51 | +0.64% | 51.0% (51%) | 3 of 12 / 3 of 12 / 5 of 11 | G0 WR1 S0 | +$6.37 | +$6.09 |
+| 2 | B. Field-Fusion GBM | 25 | +0.99% | 48.0% (48%) | 3 of 12 / 2 of 12 / 2 of 11 | G0 WR0 S0 | +$9.95 | +$9.65 |
+| 3 | D. Fusion gate | 19 | +0.52% | 55.6% (53%) | 4 of 12 / 2 of 12 / 2 of 11 | G0 WR1 S0 | +$5.15 | +$4.88 |
+| 4 | V7.1 percent-scaled | 1,411 | +0.02% | 70.2% (46%) | 0 of 12 / 0 of 12 / 0 of 11 | G0 WR2 S0 | +$0.20 | -$0.08 |
+| 5 | V7 | 1,834 | +0.02% | 59.9% (44%) | 0 of 12 / 0 of 12 / 0 of 11 | G0 WR1 S0 | +$0.19 | -$0.10 |
+| 6 | Rule OR Model | 3,890 | +0.02% | 59.9% (46%) | 0 of 12 / 0 of 12 / 0 of 11 | G0 WR1 S0 | +$0.18 | -$0.10 |
+| 7 | V7.1 | 1,597 | +0.02% | 59.4% (42%) | 0 of 12 / 0 of 12 / 0 of 11 | G0 WR1 S0 | +$0.20 | -$0.08 |
+| 8 | V6 | 1,794 | +0.02% | 56.2% (42%) | 0 of 12 / 0 of 12 / 0 of 11 | G0 WR1 S0 | +$0.16 | -$0.13 |
+| 9 | V5 | 2,284 | +0.01% | 55.0% (41%) | 0 of 12 / 0 of 12 / 0 of 11 | G0 WR1 S0 | +$0.10 | -$0.18 |
+| 10 | A. Spring-release | 21 | -0.70% | 40.0% (38%) | 4 of 12 / 1 of 12 / 2 of 11 | G0 WR0 S0 | -$7.05 | -$7.32 |
+| 11 | V4 | 2,188 | +0.01% | 49.3% (32%) | 0 of 12 / 0 of 12 / 0 of 11 | G0 WR0 S0 | +$0.13 | -$0.16 |
+| 12 | V3 | 2,741 | +0.01% | 49.3% (32%) | 0 of 12 / 0 of 12 / 0 of 11 | G0 WR0 S0 | +$0.12 | -$0.16 |
+| 13 | V2 | 2,124 | +0.01% | 49.1% (31%) | 0 of 12 / 0 of 12 / 0 of 11 | G0 WR0 S0 | +$0.11 | -$0.18 |
+| 14 | V1 | 1,654 | +0.02% | 38.0% (16%) | 0 of 12 / 0 of 12 / 0 of 11 | G0 WR0 S0 | +$0.16 | -$0.13 |
 | 15 | Donchian swing, long+short | 17 | -1.59% | 18.8% (18%) | 2 of 12 / 0 of 12 / 1 of 11 | G0 WR0 S0 | -$15.87 | -$16.16 |
 | not ranked | Donchian swing, long-only | 9 | -0.05% | 22.2% (22%) | 1 of 12 / 0 of 12 / 1 of 11 | G0 WR0 S0 | -$0.48 | -$0.75 |
 
 **Where the project stands.** No model reaches G1; the closest is B.
 Field-Fusion GBM at 0.99% on 25 trades. The best win rate is 70.2% (V7.1
-percent-scaled), which reaches WR2. Only Rule OR Model reaches S1. No model
-reaches level 1 on all three goals.
+percent-scaled), which reaches WR2. No model reaches S1: the closest is C.
+Transformer probe with 3, 3 and 5 qualifying months in the three years. The
+same-day models have no qualifying month at all; their best single month
+averages 0.13% per trade. No model reaches level 1 on all three goals.
 
 **Top five.** Ranked by overall progress = the average of gross % per trade
-/ 3%, win rate / 75% and the share of months above 1%, each capped at 1
-(methods with fewer than 15 blind trades are not ranked). The rule was fixed
-before the scores were computed: Rule OR Model, V7.1 percent-scaled, V7, V7.1, C. Transformer probe.
+/ 3%, win rate / 75% and the share of months averaging above 1% per trade,
+each capped at 1 (methods with fewer than 15 blind trades are not ranked).
+The rule was fixed before the scores were computed: C. Transformer probe, B. Field-Fusion GBM, D. Fusion gate, V7.1 percent-scaled, V7.
 
-**Two cautions.** (1) Every same-day model loses money after the 1 cent cost:
-they make about $0.20 per $1,000 trade and the cost is about $0.28. Only B, C
-and D keep a profit. (2) The same-day models have many scratches, so their
-win rates look higher than the share of trades that made money (V7.1
+**Three cautions.** (1) The three leaders are multi-day models with 51, 25
+and 19 trades in almost three years; a qualifying month is often a single
+trade. (2) Every same-day model loses money after the 1 cent cost: they make
+about $0.20 per $1,000 trade and the cost is about $0.28. Only B, C and D
+keep a profit. (3) The same-day models have many scratches, so their win
+rates look higher than the share of trades that made money (V7.1
 percent-scaled: 70.2% of decided trades, 46% of all trades). Counting a
-scratch as not a win, the top five becomes: Rule OR Model, C. Transformer probe, B. Field-Fusion GBM, V7.1 percent-scaled, V7.
+scratch as not a win, the top five becomes: C. Transformer probe, B. Field-Fusion GBM, D. Fusion gate, A. Spring-release, V7.1 percent-scaled.
+
+**What S asks for.** S1 needs a model whose average trade clears 1% in 8
+months of every year. That requires both a per-trade edge at the G1 level and
+enough trades to have one in most months. The multi-day models have the
+first in some months and lack the second; the same-day models have the
+second and are about fifty times short on the first.
 
 **Open question for the owner.** Should WR count a break-even trade as not a
 win, and should the goals be judged after the 1 cent cost rather than gross?
-Either choice changes which models lead.
 
 V1 to V6 use rules set by hand on Jul-Aug 2026, which lies inside the blind
 period, so their scores are flattering. The earlier targets below are kept

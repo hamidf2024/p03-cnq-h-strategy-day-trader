@@ -17,7 +17,7 @@
    ]
   },
   "S": {
-   "name": "Months per year with gross % for the month above 1%",
+   "name": "Months per year in which the average gross % per trade is above 1%",
    "levels": [
     "8 of 12",
     "10 of 12",
@@ -33,26 +33,27 @@
    "2025": 12,
    "2026": 11
   },
-  "ranking": "overall progress = average of three fractions: gross % per trade / 3%, win rate / 75%, share of months above 1% (each capped at 1); methods with fewer than 15 blind trades are not ranked"
+  "ranking": "overall progress = average of three fractions: gross % per trade / 3%, win rate / 75%, share of months whose average trade is above 1% (each capped at 1); methods with fewer than 15 blind trades are not ranked"
  },
  "top5": [
-  "RuleOrModel",
-  "V7.1_pct",
-  "V7_wf",
-  "V7.1_wf",
-  "C_transformer_probe"
- ],
- "top5_if_scratch_is_not_a_win": [
-  "RuleOrModel",
   "C_transformer_probe",
   "B_field_fusion_gbm",
+  "D_fusion_gate",
   "V7.1_pct",
   "V7_wf"
  ],
+ "top5_if_scratch_is_not_a_win": [
+  "C_transformer_probe",
+  "B_field_fusion_gbm",
+  "D_fusion_gate",
+  "A_spring_release",
+  "V7.1_pct"
+ ],
  "leaders": {
   "G": "B_field_fusion_gbm",
+  "S_worst_year": "C_transformer_probe",
   "WR": "V7.1_pct",
-  "S": "RuleOrModel"
+  "S": "C_transformer_probe"
  },
  "methods": [
   {
@@ -82,20 +83,23 @@
    "dollars_per_trade_after_1c": -0.13,
    "dollars_total_after_1c": -210.08,
    "profitable_after_1c": false,
-   "months_above_1pct_total": 14,
+   "months_above_1pct_total": 0,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 4.8,
-   "months_above_1pct_worst_year_per_12": 4.0,
-   "avg_month_gross_pct": 0.746,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 0.1075,
+   "months_above_1pct_avg_per_12": 0.0,
+   "months_above_1pct_worst_year_per_12": 0.0,
+   "avg_month_sum_gross_pct": 0.746,
    "by_year": {
     "2024": {
      "trades": 588,
      "gross_pct_per_trade": 0.0174,
      "win_rate": 38.8,
      "months": 12,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 9,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0828,
      "gross_pct_year": 10.25,
      "dollars_year": 102.53
     },
@@ -104,9 +108,10 @@
      "gross_pct_per_trade": 0.0109,
      "win_rate": 36.8,
      "months": 12,
-     "months_above_1pct": 4,
+     "months_above_1pct": 0,
      "months_positive": 6,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.1075,
      "gross_pct_year": 6.74,
      "dollars_year": 67.43
     },
@@ -115,9 +120,10 @@
      "gross_pct_per_trade": 0.0203,
      "win_rate": 38.7,
      "months": 11,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 6,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.095,
      "gross_pct_year": 9.1,
      "dollars_year": 91.04
     }
@@ -129,12 +135,12 @@
    "progress": {
     "G": 0.005,
     "WR": 0.507,
-    "S": 0.402,
-    "overall": 0.305,
-    "overall_if_scratch_is_not_a_win": 0.209
+    "S": 0.0,
+    "overall": 0.171,
+    "overall_if_scratch_is_not_a_win": 0.07484
    },
    "enough_trades_to_rank": true,
-   "rank": 13
+   "rank": 14
   },
   {
    "id": "V2",
@@ -163,20 +169,23 @@
    "dollars_per_trade_after_1c": -0.18,
    "dollars_total_after_1c": -381.36,
    "profitable_after_1c": false,
-   "months_above_1pct_total": 14,
+   "months_above_1pct_total": 0,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 4.8,
-   "months_above_1pct_worst_year_per_12": 4.4,
-   "avg_month_gross_pct": 0.659,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 0.0878,
+   "months_above_1pct_avg_per_12": 0.0,
+   "months_above_1pct_worst_year_per_12": 0.0,
+   "avg_month_sum_gross_pct": 0.659,
    "by_year": {
     "2024": {
      "trades": 804,
      "gross_pct_per_trade": 0.0135,
      "win_rate": 51.8,
      "months": 12,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 9,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0682,
      "gross_pct_year": 10.84,
      "dollars_year": 108.38
     },
@@ -185,9 +194,10 @@
      "gross_pct_per_trade": 0.0112,
      "win_rate": 50.9,
      "months": 12,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0772,
      "gross_pct_year": 9.18,
      "dollars_year": 91.79
     },
@@ -196,9 +206,10 @@
      "gross_pct_per_trade": 0.0061,
      "win_rate": 40.6,
      "months": 11,
-     "months_above_1pct": 4,
+     "months_above_1pct": 0,
      "months_positive": 5,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0878,
      "gross_pct_year": 3.05,
      "dollars_year": 30.47
     }
@@ -210,12 +221,12 @@
    "progress": {
     "G": 0.004,
     "WR": 0.655,
-    "S": 0.399,
-    "overall": 0.352,
-    "overall_if_scratch_is_not_a_win": 0.27
+    "S": 0.0,
+    "overall": 0.219,
+    "overall_if_scratch_is_not_a_win": 0.13701
    },
    "enough_trades_to_rank": true,
-   "rank": 12
+   "rank": 13
   },
   {
    "id": "V3",
@@ -244,20 +255,23 @@
    "dollars_per_trade_after_1c": -0.16,
    "dollars_total_after_1c": -449.83,
    "profitable_after_1c": false,
-   "months_above_1pct_total": 19,
+   "months_above_1pct_total": 0,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 6.5,
-   "months_above_1pct_worst_year_per_12": 5.5,
-   "avg_month_gross_pct": 0.969,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 0.0999,
+   "months_above_1pct_avg_per_12": 0.0,
+   "months_above_1pct_worst_year_per_12": 0.0,
+   "avg_month_sum_gross_pct": 0.969,
    "by_year": {
     "2024": {
      "trades": 966,
      "gross_pct_per_trade": 0.0127,
      "win_rate": 52.0,
      "months": 12,
-     "months_above_1pct": 7,
+     "months_above_1pct": 0,
      "months_positive": 9,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0596,
      "gross_pct_year": 12.29,
      "dollars_year": 122.89
     },
@@ -266,9 +280,10 @@
      "gross_pct_per_trade": 0.0113,
      "win_rate": 49.9,
      "months": 12,
-     "months_above_1pct": 7,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0788,
      "gross_pct_year": 12.48,
      "dollars_year": 124.78
     },
@@ -277,9 +292,10 @@
      "gross_pct_per_trade": 0.0137,
      "win_rate": 43.8,
      "months": 11,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 6,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0999,
      "gross_pct_year": 9.16,
      "dollars_year": 91.6
     }
@@ -291,12 +307,12 @@
    "progress": {
     "G": 0.004,
     "WR": 0.657,
-    "S": 0.54,
-    "overall": 0.401,
-    "overall_if_scratch_is_not_a_win": 0.326
+    "S": 0.0,
+    "overall": 0.221,
+    "overall_if_scratch_is_not_a_win": 0.14585
    },
    "enough_trades_to_rank": true,
-   "rank": 7
+   "rank": 12
   },
   {
    "id": "V4",
@@ -325,20 +341,23 @@
    "dollars_per_trade_after_1c": -0.16,
    "dollars_total_after_1c": -344.19,
    "profitable_after_1c": false,
-   "months_above_1pct_total": 15,
+   "months_above_1pct_total": 0,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 5.1,
-   "months_above_1pct_worst_year_per_12": 4.4,
-   "avg_month_gross_pct": 0.798,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 0.1103,
+   "months_above_1pct_avg_per_12": 0.0,
+   "months_above_1pct_worst_year_per_12": 0.0,
+   "avg_month_sum_gross_pct": 0.798,
    "by_year": {
     "2024": {
      "trades": 789,
      "gross_pct_per_trade": 0.0124,
      "win_rate": 52.3,
      "months": 12,
-     "months_above_1pct": 6,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0593,
      "gross_pct_year": 9.79,
      "dollars_year": 97.88
     },
@@ -347,9 +366,10 @@
      "gross_pct_per_trade": 0.0156,
      "win_rate": 50.7,
      "months": 12,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.1103,
      "gross_pct_year": 12.84,
      "dollars_year": 128.37
     },
@@ -358,9 +378,10 @@
      "gross_pct_per_trade": 0.0092,
      "win_rate": 42.5,
      "months": 11,
-     "months_above_1pct": 4,
+     "months_above_1pct": 0,
      "months_positive": 5,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.1043,
      "gross_pct_year": 5.32,
      "dollars_year": 53.16
     }
@@ -372,9 +393,9 @@
    "progress": {
     "G": 0.004,
     "WR": 0.657,
-    "S": 0.427,
-    "overall": 0.363,
-    "overall_if_scratch_is_not_a_win": 0.288
+    "S": 0.0,
+    "overall": 0.221,
+    "overall_if_scratch_is_not_a_win": 0.14605
    },
    "enough_trades_to_rank": true,
    "rank": 11
@@ -406,20 +427,23 @@
    "dollars_per_trade_after_1c": -0.18,
    "dollars_total_after_1c": -418.82,
    "profitable_after_1c": false,
-   "months_above_1pct_total": 15,
+   "months_above_1pct_total": 0,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 5.2,
-   "months_above_1pct_worst_year_per_12": 4.0,
-   "avg_month_gross_pct": 0.665,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 0.1039,
+   "months_above_1pct_avg_per_12": 0.0,
+   "months_above_1pct_worst_year_per_12": 0.0,
+   "avg_month_sum_gross_pct": 0.665,
    "by_year": {
     "2024": {
      "trades": 816,
      "gross_pct_per_trade": 0.0109,
      "win_rate": 55.5,
      "months": 12,
-     "months_above_1pct": 6,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0361,
      "gross_pct_year": 8.89,
      "dollars_year": 88.9
     },
@@ -428,9 +452,10 @@
      "gross_pct_per_trade": 0.0072,
      "win_rate": 57.4,
      "months": 12,
-     "months_above_1pct": 4,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0803,
      "gross_pct_year": 6.2,
      "dollars_year": 62.04
     },
@@ -439,9 +464,10 @@
      "gross_pct_per_trade": 0.0135,
      "win_rate": 50.9,
      "months": 11,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.1039,
      "gross_pct_year": 8.18,
      "dollars_year": 81.8
     }
@@ -453,9 +479,9 @@
    "progress": {
     "G": 0.003,
     "WR": 0.734,
-    "S": 0.429,
-    "overall": 0.389,
-    "overall_if_scratch_is_not_a_win": 0.327
+    "S": 0.0,
+    "overall": 0.246,
+    "overall_if_scratch_is_not_a_win": 0.18366
    },
    "enough_trades_to_rank": true,
    "rank": 9
@@ -487,20 +513,23 @@
    "dollars_per_trade_after_1c": -0.13,
    "dollars_total_after_1c": -229.72,
    "profitable_after_1c": false,
-   "months_above_1pct_total": 15,
+   "months_above_1pct_total": 0,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 5.2,
-   "months_above_1pct_worst_year_per_12": 4.0,
-   "avg_month_gross_pct": 0.804,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 0.0828,
+   "months_above_1pct_avg_per_12": 0.0,
+   "months_above_1pct_worst_year_per_12": 0.0,
+   "avg_month_sum_gross_pct": 0.804,
    "by_year": {
     "2024": {
      "trades": 667,
      "gross_pct_per_trade": 0.0162,
      "win_rate": 56.4,
      "months": 12,
-     "months_above_1pct": 6,
+     "months_above_1pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0587,
      "gross_pct_year": 10.8,
      "dollars_year": 107.98
     },
@@ -509,9 +538,10 @@
      "gross_pct_per_trade": 0.0141,
      "win_rate": 59.2,
      "months": 12,
-     "months_above_1pct": 4,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0747,
      "gross_pct_year": 9.19,
      "dollars_year": 91.93
     },
@@ -520,9 +550,10 @@
      "gross_pct_per_trade": 0.0171,
      "win_rate": 51.8,
      "months": 11,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0828,
      "gross_pct_year": 8.13,
      "dollars_year": 81.33
     }
@@ -534,9 +565,9 @@
    "progress": {
     "G": 0.005,
     "WR": 0.75,
-    "S": 0.429,
-    "overall": 0.395,
-    "overall_if_scratch_is_not_a_win": 0.333
+    "S": 0.0,
+    "overall": 0.252,
+    "overall_if_scratch_is_not_a_win": 0.19002
    },
    "enough_trades_to_rank": true,
    "rank": 8
@@ -568,20 +599,23 @@
    "dollars_per_trade_after_1c": -0.1,
    "dollars_total_after_1c": -180.16,
    "profitable_after_1c": false,
-   "months_above_1pct_total": 18,
+   "months_above_1pct_total": 0,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 6.2,
-   "months_above_1pct_worst_year_per_12": 5.0,
-   "avg_month_gross_pct": 0.988,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 0.1069,
+   "months_above_1pct_avg_per_12": 0.0,
+   "months_above_1pct_worst_year_per_12": 0.0,
+   "avg_month_sum_gross_pct": 0.988,
    "by_year": {
     "2024": {
      "trades": 664,
      "gross_pct_per_trade": 0.0183,
      "win_rate": 60.9,
      "months": 12,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 9,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0545,
      "gross_pct_year": 12.14,
      "dollars_year": 121.36
     },
@@ -590,9 +624,10 @@
      "gross_pct_per_trade": 0.0153,
      "win_rate": 60.4,
      "months": 12,
-     "months_above_1pct": 7,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0538,
      "gross_pct_year": 10.94,
      "dollars_year": 109.41
     },
@@ -601,9 +636,10 @@
      "gross_pct_per_trade": 0.0253,
      "win_rate": 57.6,
      "months": 11,
-     "months_above_1pct": 6,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.1069,
      "gross_pct_year": 11.5,
      "dollars_year": 115.01
     }
@@ -615,12 +651,12 @@
    "progress": {
     "G": 0.006,
     "WR": 0.799,
-    "S": 0.515,
-    "overall": 0.44,
-    "overall_if_scratch_is_not_a_win": 0.37
+    "S": 0.0,
+    "overall": 0.268,
+    "overall_if_scratch_is_not_a_win": 0.1979
    },
    "enough_trades_to_rank": true,
-   "rank": 3
+   "rank": 5
   },
   {
    "id": "V7.1_wf",
@@ -649,20 +685,23 @@
    "dollars_per_trade_after_1c": -0.08,
    "dollars_total_after_1c": -130.65,
    "profitable_after_1c": false,
-   "months_above_1pct_total": 16,
+   "months_above_1pct_total": 0,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 5.5,
-   "months_above_1pct_worst_year_per_12": 5.0,
-   "avg_month_gross_pct": 0.93,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 0.1069,
+   "months_above_1pct_avg_per_12": 0.0,
+   "months_above_1pct_worst_year_per_12": 0.0,
+   "avg_month_sum_gross_pct": 0.93,
    "by_year": {
     "2024": {
      "trades": 589,
      "gross_pct_per_trade": 0.0161,
      "win_rate": 59.5,
      "months": 12,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0618,
      "gross_pct_year": 9.49,
      "dollars_year": 94.92
     },
@@ -671,9 +710,10 @@
      "gross_pct_per_trade": 0.0193,
      "win_rate": 60.6,
      "months": 12,
-     "months_above_1pct": 5,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0662,
      "gross_pct_year": 11.59,
      "dollars_year": 115.88
     },
@@ -682,9 +722,10 @@
      "gross_pct_per_trade": 0.0281,
      "win_rate": 57.4,
      "months": 11,
-     "months_above_1pct": 6,
+     "months_above_1pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.1069,
      "gross_pct_year": 11.48,
      "dollars_year": 114.75
     }
@@ -696,12 +737,12 @@
    "progress": {
     "G": 0.007,
     "WR": 0.792,
-    "S": 0.46,
-    "overall": 0.419,
-    "overall_if_scratch_is_not_a_win": 0.342
+    "S": 0.0,
+    "overall": 0.266,
+    "overall_if_scratch_is_not_a_win": 0.189
    },
    "enough_trades_to_rank": true,
-   "rank": 4
+   "rank": 7
   },
   {
    "id": "RuleOrModel",
@@ -730,20 +771,23 @@
    "dollars_per_trade_after_1c": -0.1,
    "dollars_total_after_1c": -390.42,
    "profitable_after_1c": false,
-   "months_above_1pct_total": 24,
+   "months_above_1pct_total": 0,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 8.2,
-   "months_above_1pct_worst_year_per_12": 8.0,
-   "avg_month_gross_pct": 1.975,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 0.0836,
+   "months_above_1pct_avg_per_12": 0.0,
+   "months_above_1pct_worst_year_per_12": 0.0,
+   "avg_month_sum_gross_pct": 1.975,
    "by_year": {
     "2024": {
      "trades": 1194,
      "gross_pct_per_trade": 0.0143,
      "win_rate": 60.7,
      "months": 12,
-     "months_above_1pct": 8,
+     "months_above_1pct": 0,
      "months_positive": 10,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0554,
      "gross_pct_year": 17.07,
      "dollars_year": 170.72
     },
@@ -752,9 +796,10 @@
      "gross_pct_per_trade": 0.0145,
      "win_rate": 60.3,
      "months": 12,
-     "months_above_1pct": 8,
+     "months_above_1pct": 0,
      "months_positive": 10,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0613,
      "gross_pct_year": 19.43,
      "dollars_year": 194.29
     },
@@ -763,26 +808,27 @@
      "gross_pct_per_trade": 0.0241,
      "win_rate": 58.8,
      "months": 11,
-     "months_above_1pct": 8,
+     "months_above_1pct": 0,
      "months_positive": 10,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0836,
      "gross_pct_year": 32.61,
      "dollars_year": 326.07
     }
    },
    "G_level": 0,
    "WR_level": 1,
-   "S_level": 1,
-   "levels_total": 2,
+   "S_level": 0,
+   "levels_total": 1,
    "progress": {
     "G": 0.006,
     "WR": 0.799,
-    "S": 0.687,
-    "overall": 0.497,
-    "overall_if_scratch_is_not_a_win": 0.435
+    "S": 0.0,
+    "overall": 0.268,
+    "overall_if_scratch_is_not_a_win": 0.20649
    },
    "enough_trades_to_rank": true,
-   "rank": 1
+   "rank": 6
   },
   {
    "id": "V7.1_pct",
@@ -811,20 +857,23 @@
    "dollars_per_trade_after_1c": -0.08,
    "dollars_total_after_1c": -112.94,
    "profitable_after_1c": false,
-   "months_above_1pct_total": 18,
+   "months_above_1pct_total": 0,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 6.2,
-   "months_above_1pct_worst_year_per_12": 6.0,
-   "avg_month_gross_pct": 0.826,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 0.1269,
+   "months_above_1pct_avg_per_12": 0.0,
+   "months_above_1pct_worst_year_per_12": 0.0,
+   "avg_month_sum_gross_pct": 0.826,
    "by_year": {
     "2024": {
      "trades": 503,
      "gross_pct_per_trade": 0.0079,
      "win_rate": 70.2,
      "months": 12,
-     "months_above_1pct": 6,
+     "months_above_1pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.0663,
      "gross_pct_year": 3.97,
      "dollars_year": 39.67
     },
@@ -833,9 +882,10 @@
      "gross_pct_per_trade": 0.0268,
      "win_rate": 70.8,
      "months": 12,
-     "months_above_1pct": 6,
+     "months_above_1pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.102,
      "gross_pct_year": 14.39,
      "dollars_year": 143.89
     },
@@ -844,9 +894,10 @@
      "gross_pct_per_trade": 0.0284,
      "win_rate": 69.3,
      "months": 11,
-     "months_above_1pct": 6,
+     "months_above_1pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 0.1269,
      "gross_pct_year": 10.56,
      "dollars_year": 105.56
     }
@@ -858,12 +909,12 @@
    "progress": {
     "G": 0.007,
     "WR": 0.936,
-    "S": 0.515,
-    "overall": 0.486,
-    "overall_if_scratch_is_not_a_win": 0.38
+    "S": 0.0,
+    "overall": 0.314,
+    "overall_if_scratch_is_not_a_win": 0.20796
    },
    "enough_trades_to_rank": true,
-   "rank": 2
+   "rank": 4
   },
   {
    "id": "Donchian_long",
@@ -894,9 +945,11 @@
    "profitable_after_1c": false,
    "months_above_1pct_total": 2,
    "months_total": 35,
+   "months_with_trades": 9,
+   "best_month_avg_pct_per_trade": 19.4275,
    "months_above_1pct_avg_per_12": 0.7,
    "months_above_1pct_worst_year_per_12": 0.0,
-   "avg_month_gross_pct": -0.012,
+   "avg_month_sum_gross_pct": -0.012,
    "by_year": {
     "2024": {
      "trades": 2,
@@ -906,6 +959,7 @@
      "months_above_1pct": 1,
      "months_positive": 1,
      "months_no_trades": 10,
+     "best_month_avg_pct_per_trade": 7.551,
      "gross_pct_year": 2.76,
      "dollars_year": 27.57
     },
@@ -917,6 +971,7 @@
      "months_above_1pct": 0,
      "months_positive": 0,
      "months_no_trades": 8,
+     "best_month_avg_pct_per_trade": -3.588,
      "gross_pct_year": -16.43,
      "dollars_year": -164.27
     },
@@ -928,6 +983,7 @@
      "months_above_1pct": 1,
      "months_positive": 1,
      "months_no_trades": 8,
+     "best_month_avg_pct_per_trade": 19.4275,
      "gross_pct_year": 13.24,
      "dollars_year": 132.42
     }
@@ -941,7 +997,7 @@
     "WR": 0.296,
     "S": 0.058,
     "overall": 0.118,
-    "overall_if_scratch_is_not_a_win": 0.118
+    "overall_if_scratch_is_not_a_win": 0.11813
    },
    "enough_trades_to_rank": false
   },
@@ -974,9 +1030,11 @@
    "profitable_after_1c": false,
    "months_above_1pct_total": 3,
    "months_total": 35,
+   "months_with_trades": 16,
+   "best_month_avg_pct_per_trade": 19.4275,
    "months_above_1pct_avg_per_12": 1.0,
    "months_above_1pct_worst_year_per_12": 0.0,
-   "avg_month_gross_pct": -0.771,
+   "avg_month_sum_gross_pct": -0.771,
    "by_year": {
     "2024": {
      "trades": 6,
@@ -986,6 +1044,7 @@
      "months_above_1pct": 2,
      "months_positive": 2,
      "months_no_trades": 7,
+     "best_month_avg_pct_per_trade": 3.5177,
      "gross_pct_year": -5.71,
      "dollars_year": -57.12
     },
@@ -997,6 +1056,7 @@
      "months_above_1pct": 0,
      "months_positive": 0,
      "months_no_trades": 6,
+     "best_month_avg_pct_per_trade": -3.588,
      "gross_pct_year": -27.81,
      "dollars_year": -278.11
     },
@@ -1008,6 +1068,7 @@
      "months_above_1pct": 1,
      "months_positive": 1,
      "months_no_trades": 6,
+     "best_month_avg_pct_per_trade": 19.4275,
      "gross_pct_year": 6.54,
      "dollars_year": 65.38
     }
@@ -1021,7 +1082,7 @@
     "WR": 0.25,
     "S": 0.086,
     "overall": 0.112,
-    "overall_if_scratch_is_not_a_win": 0.107
+    "overall_if_scratch_is_not_a_win": 0.10705
    },
    "enough_trades_to_rank": true,
    "rank": 15
@@ -1055,9 +1116,11 @@
    "profitable_after_1c": false,
    "months_above_1pct_total": 7,
    "months_total": 35,
+   "months_with_trades": 17,
+   "best_month_avg_pct_per_trade": 8.3069,
    "months_above_1pct_avg_per_12": 2.4,
    "months_above_1pct_worst_year_per_12": 1.0,
-   "avg_month_gross_pct": -0.423,
+   "avg_month_sum_gross_pct": -0.423,
    "by_year": {
     "2024": {
      "trades": 7,
@@ -1067,6 +1130,7 @@
      "months_above_1pct": 4,
      "months_positive": 4,
      "months_no_trades": 6,
+     "best_month_avg_pct_per_trade": 7.653,
      "gross_pct_year": 12.0,
      "dollars_year": 119.96
     },
@@ -1078,6 +1142,7 @@
      "months_above_1pct": 1,
      "months_positive": 1,
      "months_no_trades": 8,
+     "best_month_avg_pct_per_trade": 3.0862,
      "gross_pct_year": -9.07,
      "dollars_year": -90.67
     },
@@ -1089,6 +1154,7 @@
      "months_above_1pct": 2,
      "months_positive": 2,
      "months_no_trades": 4,
+     "best_month_avg_pct_per_trade": 8.3069,
      "gross_pct_year": -17.73,
      "dollars_year": -177.26
     }
@@ -1102,10 +1168,10 @@
     "WR": 0.533,
     "S": 0.199,
     "overall": 0.244,
-    "overall_if_scratch_is_not_a_win": 0.236
+    "overall_if_scratch_is_not_a_win": 0.23581
    },
    "enough_trades_to_rank": true,
-   "rank": 14
+   "rank": 10
   },
   {
    "id": "B_field_fusion_gbm",
@@ -1134,20 +1200,23 @@
    "dollars_per_trade_after_1c": 9.65,
    "dollars_total_after_1c": 241.33,
    "profitable_after_1c": true,
-   "months_above_1pct_total": 9,
+   "months_above_1pct_total": 7,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 3.1,
+   "months_with_trades": 17,
+   "best_month_avg_pct_per_trade": 13.1373,
+   "months_above_1pct_avg_per_12": 2.4,
    "months_above_1pct_worst_year_per_12": 2.0,
-   "avg_month_gross_pct": 0.71,
+   "avg_month_sum_gross_pct": 0.71,
    "by_year": {
     "2024": {
      "trades": 11,
      "gross_pct_per_trade": 1.3393,
      "win_rate": 54.5,
      "months": 12,
-     "months_above_1pct": 4,
+     "months_above_1pct": 3,
      "months_positive": 5,
      "months_no_trades": 6,
+     "best_month_avg_pct_per_trade": 6.0447,
      "gross_pct_year": 14.73,
      "dollars_year": 147.33
     },
@@ -1159,6 +1228,7 @@
      "months_above_1pct": 2,
      "months_positive": 2,
      "months_no_trades": 7,
+     "best_month_avg_pct_per_trade": 4.4412,
      "gross_pct_year": -0.88,
      "dollars_year": -8.77
     },
@@ -1167,9 +1237,10 @@
      "gross_pct_per_trade": 1.3764,
      "win_rate": 50.0,
      "months": 11,
-     "months_above_1pct": 3,
+     "months_above_1pct": 2,
      "months_positive": 3,
      "months_no_trades": 5,
+     "best_month_avg_pct_per_trade": 13.1373,
      "gross_pct_year": 11.01,
      "dollars_year": 110.11
     }
@@ -1181,12 +1252,12 @@
    "progress": {
     "G": 0.332,
     "WR": 0.64,
-    "S": 0.258,
-    "overall": 0.41,
-    "overall_if_scratch_is_not_a_win": 0.41
+    "S": 0.199,
+    "overall": 0.39,
+    "overall_if_scratch_is_not_a_win": 0.39035
    },
    "enough_trades_to_rank": true,
-   "rank": 6
+   "rank": 2
   },
   {
    "id": "C_transformer_probe",
@@ -1215,11 +1286,13 @@
    "dollars_per_trade_after_1c": 6.09,
    "dollars_total_after_1c": 310.57,
    "profitable_after_1c": true,
-   "months_above_1pct_total": 12,
+   "months_above_1pct_total": 11,
    "months_total": 35,
-   "months_above_1pct_avg_per_12": 4.2,
+   "months_with_trades": 29,
+   "best_month_avg_pct_per_trade": 8.2108,
+   "months_above_1pct_avg_per_12": 3.8,
    "months_above_1pct_worst_year_per_12": 3.0,
-   "avg_month_gross_pct": 0.928,
+   "avg_month_sum_gross_pct": 0.928,
    "by_year": {
     "2024": {
      "trades": 12,
@@ -1229,6 +1302,7 @@
      "months_above_1pct": 3,
      "months_positive": 4,
      "months_no_trades": 3,
+     "best_month_avg_pct_per_trade": 8.2108,
      "gross_pct_year": 3.58,
      "dollars_year": 35.81
     },
@@ -1237,9 +1311,10 @@
      "gross_pct_per_trade": 0.5088,
      "win_rate": 55.6,
      "months": 12,
-     "months_above_1pct": 4,
+     "months_above_1pct": 3,
      "months_positive": 6,
      "months_no_trades": 2,
+     "best_month_avg_pct_per_trade": 5.2396,
      "gross_pct_year": 9.16,
      "dollars_year": 91.59
     },
@@ -1251,6 +1326,7 @@
      "months_above_1pct": 5,
      "months_positive": 7,
      "months_no_trades": 1,
+     "best_month_avg_pct_per_trade": 5.2713,
      "gross_pct_year": 19.73,
      "dollars_year": 197.34
     }
@@ -1262,12 +1338,12 @@
    "progress": {
     "G": 0.212,
     "WR": 0.68,
-    "S": 0.346,
-    "overall": 0.413,
-    "overall_if_scratch_is_not_a_win": 0.413
+    "S": 0.318,
+    "overall": 0.403,
+    "overall_if_scratch_is_not_a_win": 0.40339
    },
    "enough_trades_to_rank": true,
-   "rank": 5
+   "rank": 1
   },
   {
    "id": "D_fusion_gate",
@@ -1298,9 +1374,11 @@
    "profitable_after_1c": true,
    "months_above_1pct_total": 8,
    "months_total": 35,
+   "months_with_trades": 16,
+   "best_month_avg_pct_per_trade": 8.3069,
    "months_above_1pct_avg_per_12": 2.7,
    "months_above_1pct_worst_year_per_12": 2.0,
-   "avg_month_gross_pct": 0.28,
+   "avg_month_sum_gross_pct": 0.28,
    "by_year": {
     "2024": {
      "trades": 7,
@@ -1310,6 +1388,7 @@
      "months_above_1pct": 4,
      "months_positive": 4,
      "months_no_trades": 6,
+     "best_month_avg_pct_per_trade": 7.653,
      "gross_pct_year": 12.0,
      "dollars_year": 119.96
     },
@@ -1321,6 +1400,7 @@
      "months_above_1pct": 2,
      "months_positive": 2,
      "months_no_trades": 8,
+     "best_month_avg_pct_per_trade": 3.4504,
      "gross_pct_year": -2.31,
      "dollars_year": -23.13
     },
@@ -1332,6 +1412,7 @@
      "months_above_1pct": 2,
      "months_positive": 3,
      "months_no_trades": 5,
+     "best_month_avg_pct_per_trade": 8.3069,
      "gross_pct_year": 0.11,
      "dollars_year": 1.1
     }
@@ -1345,10 +1426,10 @@
     "WR": 0.741,
     "S": 0.227,
     "overall": 0.38,
-    "overall_if_scratch_is_not_a_win": 0.367
+    "overall_if_scratch_is_not_a_win": 0.36695
    },
    "enough_trades_to_rank": true,
-   "rank": 10
+   "rank": 3
   }
  ]
 }
