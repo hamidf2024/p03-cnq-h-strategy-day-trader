@@ -589,5 +589,75 @@
   },
   "worst_trade": -15.72,
   "worst_year_excess": -0.393
+ },
+ "R10_monthly_campaign_four_goals": {
+  "G": 0.739,
+  "G_ci95": [
+   -1.29,
+   2.63
+  ],
+  "G_without_top2": 0.525,
+  "S": [
+   6,
+   8,
+   5
+  ],
+  "WR": 70.6,
+  "avg_days_held": 24.1,
+  "best_trade": 8.11,
+  "excess": 0.724,
+  "exits": {
+   "stop": 12,
+   "target": 45,
+   "time": 11
+  },
+  "max_drawdown_sum_pct": -75.93,
+  "median": 6.0,
+  "min_trades_year": 22,
+  "n": 68,
+  "net_after_1c": 0.71,
+  "per_year": {
+   "2024": {
+    "G": 0.621,
+    "S": 6,
+    "WR": 66.7,
+    "excess": 2.77,
+    "months_traded": 12,
+    "n": 24,
+    "shorts": 0
+   },
+   "2025": {
+    "G": 2.517,
+    "S": 8,
+    "WR": 81.8,
+    "excess": 0.778,
+    "months_traded": 12,
+    "n": 22,
+    "shorts": 0
+   },
+   "2026": {
+    "G": -0.911,
+    "S": 5,
+    "WR": 63.6,
+    "excess": -1.561,
+    "months_traded": 11,
+    "n": 22,
+    "shorts": 0
+   }
+  },
+  "setting": {
+   "H": 5,
+   "hold": 60,
+   "monthly": true,
+   "overlap": true,
+   "per_month": 2,
+   "q": 0.5,
+   "side": "long",
+   "src": "gbm",
+   "stop": 15.0,
+   "target": 6.0
+  },
+  "worst_trade": -15.72,
+  "worst_year_excess": -1.561
  }
 }
