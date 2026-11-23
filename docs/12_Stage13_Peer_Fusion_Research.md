@@ -164,13 +164,36 @@ run log (`stage13_BLIND_RUN_LOG.json`) records each run and refuses a second.
 3. Test J's exit rule with E's stricter entry and with a wide catastrophe
    stop, on 2020-2023 only, then on new data.
 
+## 9. Addendum, same day: the owner's 5% worst-trade rule, models K and L
+
+After seeing model J, the owner added a risk rule: no trade may lose more
+than 5%, so every model carries a 5% stop, and levels count only inside the
+rule. Two more models were run once each on 2024-2026 (looks seven and eight
+of this stage):
+
+| Model | Idea | Validation (G / WR / S) | Test: trades | G | WR | S by year | Worst trade | Levels |
+|---|---|---|---|---|---|---|---|---|
+| K. One-a-month, 5% stop (R7) | J's design re-selected with a 5% stop: 2% target, 20 days | +0.33% / 75.8% / 8, 9, 8 (no setting passed the level-1 gate) | 35 | +0.02% | 71.4% | 8, 10, 7 of 11 | -5.4% | WR2 |
+| L. Peer-Fusion GBM, 5% stop (R8) | Model E unchanged plus a 5% stop; nothing selected | +1.09% / 56.4% / 2, 5, 7 | 39 | +1.05% | 60.5% | 6, 4, 3 | -5.0% | G1, WR1 |
+
+Inside the rule no model reaches level 1 on all three goals. L keeps G1 and
+WR1 (its 95% range is -0.4% to +2.6%, so it now includes zero). K keeps the
+shape that S and WR reward but its average falls to zero: with the stop at
+5% and the target at 2%, ten stops cancel twenty-five targets.
+
+The cost of the stop on the training years, for J's design: G +0.57% at 5%,
++0.62% at 8%, +0.93% at 10%, +1.44% at 15%, +2.80% with none; S 7/7/6 at 5%
+rising to 9/10/9 with none. CNQ moves about 5% in a normal week, so a 5% stop
+is hit by ordinary swings and removes the recovery that the target design
+relies on.
+
 ## Code and results
 
 `src/s13_lib.py`, `src/s13_feasibility.py`, `src/stage13_peer_fusion.py`
-(modes `walkforward`, `round5`, `round6`, `blind`, `verify`);
+(modes `walkforward`, `round5`, `round6`, `round7`, `round8`, `blind`, `verify`);
 `results/experiments/stage13_feasibility.json`,
 `stage13_walkforward_results.json`, `stage13_frozen.pkl`,
-`stage13_frozen_R5.pkl`, `stage13_frozen_R6.pkl`,
+`stage13_frozen_R5.pkl` to `stage13_frozen_R8.pkl`,
 `stage13_BLIND_RUN_LOG.json`, `stage13_blind_results.json`,
 `stage13_blind_trades.csv` (dates and returns, no prices). The priced trade
 list and the panel cache stay in the local folder only.
