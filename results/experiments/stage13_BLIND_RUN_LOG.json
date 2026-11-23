@@ -86,5 +86,16 @@
   ],
   "blind_look_number": 8,
   "result_sha256": "167fbcf8e687a02247d685bccbfb53862c73a484da646f9dd38500056617e30f"
+ },
+ "R9_one_a_month_stop15": {
+  "frozen_artefact": "stage13_frozen_R9.pkl",
+  "frozen_sha256": "2259efb464501377b9fb574bba6201a96e5d4076b64a33b9a189d75f66a42f74",
+  "ran_on": "2026-11-23 18:01:03.116366",
+  "blind_window": [
+   "2024-01-01",
+   "2026-11-18"
+  ],
+  "blind_look_number": 9,
+  "result_sha256": "2ba92b6f878207138002b26aaebc3a560d4bcca132b71e6da0ed854ebd56956c"
  }
 }

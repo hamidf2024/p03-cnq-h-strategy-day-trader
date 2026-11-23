@@ -36,36 +36,41 @@
   "ranking": "overall progress = average of three fractions: gross % per trade / 3%, win rate / 75%, share of months whose average trade is above 1% (each capped at 1); methods with fewer than 15 blind trades are not ranked"
  },
  "top5": [
+  "R9_one_a_month_stop15",
+  "R1_peer_fusion_gbm",
   "R7_one_a_month_stop5",
   "R8_peer_fusion_stop5",
-  "R4_goal_shaped_exits",
-  "V7.1_pct",
-  "V7_wf"
+  "R4_goal_shaped_exits"
  ],
  "top5_if_scratch_is_not_a_win": [
+  "R9_one_a_month_stop15",
   "R7_one_a_month_stop5",
+  "R1_peer_fusion_gbm",
   "R8_peer_fusion_stop5",
-  "R4_goal_shaped_exits",
-  "V7.1_pct",
-  "RuleOrModel"
+  "R4_goal_shaped_exits"
  ],
- "level1_on_all_three": [],
+ "level1_on_all_three": [
+  "R9_one_a_month_stop15"
+ ],
+ "level1_on_all_three_within_5pct": [],
  "level1_but_breaks_loss_limit": [
   "R6_one_a_month"
  ],
  "risk_rule": {
-  "max_loss_pct_per_trade": 5.0,
+  "max_loss_pct_per_trade": 15.0,
+  "strict_max_loss_pct_per_trade": 5.0,
   "methods_with_stop_at_limit": [
    "R4_goal_shaped_exits",
    "R7_one_a_month_stop5",
-   "R8_peer_fusion_stop5"
+   "R8_peer_fusion_stop5",
+   "R9_one_a_month_stop15"
   ],
   "note": "levels count, and a method is ranked, only if its worst trade is within the limit"
  },
  "leaders": {
   "G": "R6_one_a_month",
   "S_worst_year": "R6_one_a_month",
-  "WR": "R7_one_a_month_stop5",
+  "WR": "R9_one_a_month_stop15",
   "S": "R6_one_a_month"
  },
  "methods": [
@@ -159,9 +164,10 @@
     "overall_if_scratch_is_not_a_win": 0.07484
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 13
+   "rank": 21
   },
   {
    "id": "V2",
@@ -253,9 +259,10 @@
     "overall_if_scratch_is_not_a_win": 0.13701
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 12
+   "rank": 20
   },
   {
    "id": "V3",
@@ -347,9 +354,10 @@
     "overall_if_scratch_is_not_a_win": 0.14585
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 11
+   "rank": 19
   },
   {
    "id": "V4",
@@ -441,9 +449,10 @@
     "overall_if_scratch_is_not_a_win": 0.14605
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 10
+   "rank": 18
   },
   {
    "id": "V5",
@@ -535,9 +544,10 @@
     "overall_if_scratch_is_not_a_win": 0.18366
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 9
+   "rank": 16
   },
   {
    "id": "V6",
@@ -629,9 +639,10 @@
     "overall_if_scratch_is_not_a_win": 0.19002
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 8
+   "rank": 15
   },
   {
    "id": "V7_wf",
@@ -723,9 +734,10 @@
     "overall_if_scratch_is_not_a_win": 0.1979
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 5
+   "rank": 12
   },
   {
    "id": "V7.1_wf",
@@ -817,9 +829,10 @@
     "overall_if_scratch_is_not_a_win": 0.189
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 7
+   "rank": 14
   },
   {
    "id": "RuleOrModel",
@@ -911,9 +924,10 @@
     "overall_if_scratch_is_not_a_win": 0.20649
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 6
+   "rank": 13
   },
   {
    "id": "V7.1_pct",
@@ -1005,9 +1019,10 @@
     "overall_if_scratch_is_not_a_win": 0.20796
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 4
+   "rank": 11
   },
   {
    "id": "Donchian_long",
@@ -1099,6 +1114,7 @@
     "overall_if_scratch_is_not_a_win": 0.11813
    },
    "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": false
   },
@@ -1191,9 +1207,11 @@
     "overall": 0.112,
     "overall_if_scratch_is_not_a_win": 0.10705
    },
-   "keeps_loss_limit": false,
-   "trades_beyond_loss_limit": 3,
-   "enough_trades_to_rank": false
+   "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 0,
+   "enough_trades_to_rank": true,
+   "rank": 22
   },
   {
    "id": "A_spring_release",
@@ -1284,9 +1302,11 @@
     "overall": 0.244,
     "overall_if_scratch_is_not_a_win": 0.23581
    },
-   "keeps_loss_limit": false,
-   "trades_beyond_loss_limit": 4,
-   "enough_trades_to_rank": false
+   "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 0,
+   "enough_trades_to_rank": true,
+   "rank": 17
   },
   {
    "id": "B_field_fusion_gbm",
@@ -1377,9 +1397,11 @@
     "overall": 0.39,
     "overall_if_scratch_is_not_a_win": 0.39035
    },
-   "keeps_loss_limit": false,
-   "trades_beyond_loss_limit": 3,
-   "enough_trades_to_rank": false
+   "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 0,
+   "enough_trades_to_rank": true,
+   "rank": 9
   },
   {
    "id": "C_transformer_probe",
@@ -1470,9 +1492,11 @@
     "overall": 0.403,
     "overall_if_scratch_is_not_a_win": 0.40339
    },
-   "keeps_loss_limit": false,
-   "trades_beyond_loss_limit": 5,
-   "enough_trades_to_rank": false
+   "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 0,
+   "enough_trades_to_rank": true,
+   "rank": 7
   },
   {
    "id": "D_fusion_gate",
@@ -1563,9 +1587,11 @@
     "overall": 0.38,
     "overall_if_scratch_is_not_a_win": 0.36695
    },
-   "keeps_loss_limit": false,
-   "trades_beyond_loss_limit": 2,
-   "enough_trades_to_rank": false
+   "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 0,
+   "enough_trades_to_rank": true,
+   "rank": 10
   },
   {
    "id": "R1_peer_fusion_gbm",
@@ -1656,9 +1682,11 @@
     "overall": 0.558,
     "overall_if_scratch_is_not_a_win": 0.55131
    },
-   "keeps_loss_limit": false,
-   "trades_beyond_loss_limit": 3,
-   "enough_trades_to_rank": false
+   "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 0,
+   "enough_trades_to_rank": true,
+   "rank": 2
   },
   {
    "id": "R2_peer_oil_spring",
@@ -1749,9 +1777,11 @@
     "overall": 0.398,
     "overall_if_scratch_is_not_a_win": 0.394
    },
-   "keeps_loss_limit": false,
-   "trades_beyond_loss_limit": 3,
-   "enough_trades_to_rank": false
+   "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 0,
+   "enough_trades_to_rank": true,
+   "rank": 8
   },
   {
    "id": "R3_fusion_ensemble",
@@ -1842,9 +1872,11 @@
     "overall": 0.41,
     "overall_if_scratch_is_not_a_win": 0.4033
    },
-   "keeps_loss_limit": false,
-   "trades_beyond_loss_limit": 4,
-   "enough_trades_to_rank": false
+   "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 0,
+   "enough_trades_to_rank": true,
+   "rank": 6
   },
   {
    "id": "R4_goal_shaped_exits",
@@ -1936,9 +1968,10 @@
     "overall_if_scratch_is_not_a_win": 0.44379
    },
    "keeps_loss_limit": true,
-   "trades_beyond_loss_limit": 9,
+   "keeps_strict_loss_limit": true,
+   "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 3
+   "rank": 5
   },
   {
    "id": "R5_first_passage",
@@ -2030,7 +2063,8 @@
     "overall_if_scratch_is_not_a_win": 0.61035
    },
    "keeps_loss_limit": false,
-   "trades_beyond_loss_limit": 8,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 2,
    "enough_trades_to_rank": false
   },
   {
@@ -2123,7 +2157,8 @@
     "overall_if_scratch_is_not_a_win": 0.87708
    },
    "keeps_loss_limit": false,
-   "trades_beyond_loss_limit": 3,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 2,
    "enough_trades_to_rank": false
   },
   {
@@ -2216,9 +2251,10 @@
     "overall_if_scratch_is_not_a_win": 0.55669
    },
    "keeps_loss_limit": true,
-   "trades_beyond_loss_limit": 10,
+   "keeps_strict_loss_limit": true,
+   "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 1
+   "rank": 3
   },
   {
    "id": "R8_peer_fusion_stop5",
@@ -2310,9 +2346,105 @@
     "overall_if_scratch_is_not_a_win": 0.50127
    },
    "keeps_loss_limit": true,
-   "trades_beyond_loss_limit": 8,
+   "keeps_strict_loss_limit": true,
+   "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 2
+   "rank": 4
+  },
+  {
+   "id": "R9_one_a_month_stop15",
+   "name": "M. One-a-month, 15% stop",
+   "family": "Swing ML model",
+   "holding": "up to 60 days",
+   "stage": 13,
+   "settings": "walk-forward on 2020-2023",
+   "trades": 35,
+   "trades_per_year": 12.2,
+   "gross_pct_per_trade": 1.8464,
+   "dollars_per_trade": 18.46,
+   "gross_pct_per_trade_ci95": [
+    -0.35,
+    3.55
+   ],
+   "worst_trade_pct": -15.72,
+   "best_trade_pct": 5.54,
+   "median_pct_per_trade": 4.0,
+   "win_rate": 88.6,
+   "wins": 31,
+   "losses": 4,
+   "scratches": 0,
+   "wins_share_of_all_trades": 88.6,
+   "cost_1c_dollars_per_trade": 0.284,
+   "cost_1c_dollars_total": 9.94,
+   "shares_per_1000_avg": 28.4,
+   "profit_factor": 2.06,
+   "gross_pct_total": 64.62,
+   "dollars_total": 646.25,
+   "net_pct_per_trade_after_1c": 1.818,
+   "dollars_per_trade_after_1c": 18.18,
+   "dollars_total_after_1c": 636.3,
+   "profitable_after_1c": true,
+   "months_above_1pct_total": 31,
+   "months_total": 35,
+   "months_with_trades": 35,
+   "best_month_avg_pct_per_trade": 5.5432,
+   "months_above_1pct_avg_per_12": 10.6,
+   "months_above_1pct_worst_year_per_12": 9.8,
+   "avg_month_sum_gross_pct": 1.846,
+   "by_year": {
+    "2024": {
+     "trades": 12,
+     "gross_pct_per_trade": 0.8168,
+     "win_rate": 83.3,
+     "months": 12,
+     "months_above_1pct": 10,
+     "months_positive": 10,
+     "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 4.0237,
+     "gross_pct_year": 9.8,
+     "dollars_year": 98.02
+    },
+    "2025": {
+     "trades": 12,
+     "gross_pct_per_trade": 4.1288,
+     "win_rate": 100.0,
+     "months": 12,
+     "months_above_1pct": 12,
+     "months_positive": 12,
+     "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 5.5432,
+     "gross_pct_year": 49.55,
+     "dollars_year": 495.46
+    },
+    "2026": {
+     "trades": 11,
+     "gross_pct_per_trade": 0.4797,
+     "win_rate": 81.8,
+     "months": 11,
+     "months_above_1pct": 9,
+     "months_positive": 9,
+     "months_no_trades": 0,
+     "best_month_avg_pct_per_trade": 4.0,
+     "gross_pct_year": 5.28,
+     "dollars_year": 52.77
+    }
+   },
+   "G_level": 1,
+   "WR_level": 3,
+   "S_level": 1,
+   "levels_total": 5,
+   "progress": {
+    "G": 0.615,
+    "WR": 1.0,
+    "S": 0.884,
+    "overall": 0.833,
+    "overall_if_scratch_is_not_a_win": 0.8331
+   },
+   "keeps_loss_limit": true,
+   "keeps_strict_loss_limit": false,
+   "trades_beyond_loss_limit": 3,
+   "enough_trades_to_rank": true,
+   "rank": 1
   }
  ]
 }
