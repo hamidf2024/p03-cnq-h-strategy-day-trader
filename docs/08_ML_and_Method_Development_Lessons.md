@@ -394,6 +394,15 @@ per-stage section at the end.)*
   entry month, so a trade that takes two months to reach its target still
   makes its entry month count. **Lesson:** state the attribution rule next to
   any per-period count.
+- **(Stage 13) Set the risk limit before the performance goals are chased.**
+  The owner's 5% worst-trade rule was added after model J had reached all
+  three levels with losses of 17%. Under the rule J is out, and the same
+  design with a 5% stop averages zero. **Lesson:** a goal set needs its
+  loss limit from the start; otherwise the search finds the designs that the
+  missing limit allows.
+- **(Stage 13) Show what a limit costs on training data, not on the test
+  years.** The effect of stops at 5, 8, 10 and 15% was tabulated on 2021-2023
+  only, so the owner can choose a level without another look at 2024-2026.
 
 ## 5. Strategy-domain lessons (useful context for any new method on this instrument/timeframe)
 
@@ -678,7 +687,8 @@ of test runs. Lessons are filed above, each marked "(Stage 13)":*
 - Section 3 (overfitting): a gate passed in a rising market proves little;
   repeated runs change what a result means.
 - Section 4 (evaluation): goals that count winners reward negative skew;
-  compute what a goal requires first; state how months are attributed.
+  compute what a goal requires first; state how months are attributed; set
+  the risk limit before chasing the goals and price it on training data.
 - Section 5 (strategy): first-passage exits shape results and carry a tail;
   relative value is a feature, not a rule.
 - Section 6 (process): publish and report each model as it lands.
