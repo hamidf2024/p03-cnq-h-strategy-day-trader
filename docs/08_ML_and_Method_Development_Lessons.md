@@ -368,6 +368,18 @@ per-stage section at the end.)*
   result. From that point the honest next step is a forward test: freeze the
   candidates with their hashes and a date, and score only trades opened
   afterwards.
+- **(Stage 14) Test the information before building the model.** Before any
+  campaign was built on the eighteen new symbols, the same model was trained
+  with and without them and compared out of sample. The new features did
+  nothing at 5 sessions and helped at 20 (rank correlation for CNQ 0.114 to
+  0.166). That told us where a model could use them, and it is a result in
+  its own right even though the campaign built on it did not pass the gate.
+- **(Stage 14) Make the gate ask where the gain comes from.** Model R had to
+  beat the same campaign timed by the old forecast (it did, in all eight
+  settings) and beat buying every day in every year (it did not, in 2021).
+  The first says the new information matters; the second says the timing is
+  not yet reliable. Without both questions the near-miss would have looked
+  like a pass or like nothing.
 
 ## 4. Evaluation and metrics lessons
 
