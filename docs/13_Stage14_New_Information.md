@@ -125,10 +125,43 @@ Next steps, in order:
 3. Any model that passes the gate gets one run on 2024-2026, which would be
    run 23.
 
+## 5. Leak check, repeated on all 108 features (2026-11-24)
+
+Asked by the owner: confirm that no test-year data was used to build or
+design the models. Two different things are involved.
+
+**Data leak (checked, none found).** `src/stage14_leak_check.py`,
+`results/experiments/stage14_leak_check.json`:
+
+- Every feature (57 from Stage 13, 51 from Stage 14) was rebuilt from three
+  versions of the data: all of it, cut at 2023-12-29, and cut at 2025-06-30.
+  On every day the shorter versions contain, all 108 features are identical
+  to the full version (5,184 and 7,428 rows; largest difference 0.0). The
+  first comparison shows the training rows never saw 2024-2026; the second
+  shows that inside the test years a day's features never use a later day.
+- The frozen Peer-Fusion model was last trained on 2023-12-21 and its labels
+  reach 2023-12-29. Out-of-fold forecasts run from 2021-01-04 to 2023-12-29.
+- Every selection after model M (rounds 11 to 15 and Stage 14) was run with
+  the test years removed from the data at load, and the code stops if a
+  later day is present.
+- Models M, O and P were re-run from their frozen files on the refreshed
+  download and reproduced their published results exactly.
+
+**Design influence (present, cannot be removed).** The person choosing what
+to build next had seen earlier test results. E to H were fixed before any of
+them was run. Every model from I onward (I, J, K, L, M, N, O, P, Q, R) was
+designed after earlier results on 2024-2026 were known: J after I, M after
+J, P after the stops of N and M, and so on. V1 to V6 use rules set by hand
+on weeks in mid-2026, inside the test period. This is not a data leak, but
+it means the later results are less independent than the first ones, which
+is why the count of runs (22) is published and why the forward test on
+trades after 2026-11-20 is the confirmation that counts.
+
 ## Code and results
 
 `src/stage14_lib.py`, `src/stage14_information_test.py`,
-`src/stage14_macro_fusion.py`; `results/experiments/stage14_data_checks.json`,
+`src/stage14_macro_fusion.py`, `src/stage14_leak_check.py`;
+`results/experiments/stage14_data_checks.json`, `stage14_leak_check.json`,
 `stage14_information_test.json`, `stage14_macro_fusion_selection.json`. The
 out-of-fold forecasts (`stage14_oof_predictions_LOCAL_ONLY.pkl`) hold forward
 returns and stay in the local folder.
