@@ -109,10 +109,12 @@ def neg_by_year(c):
 
 
 def neg_tag(c, long=False):
-    """Goal 4 rule of 2026-11-24: a year counts only if it has no losing month."""
-    n = neg_by_year(c)
+    """Goal 4 rule (owner, 2026-11-24): a year counts only with at most one losing month, no worse than -2%."""
+    ys = list(c['by_year'].values()); n = [v['months_negative'] for v in ys]; ok = [v['gm_year_counts'] for v in ys]
     if sum(n) == 0:
         return '<span class="negtag ok">no losing month</span>'
+    if all(ok):
+        return '<span class="negtag ok">losses within the rule</span>'
     return f'<span class="negtag">losing months: {" / ".join(map(str, n))}</span>' if long else f'<span class="negtag">{max(n)} losing</span>'
 
 
@@ -167,9 +169,9 @@ goals_html = (
     + goal_card('S', 'Steady months', 'In how many months of the year does the average trade make more than 1%?',
                 [('8 of 12', 'months'), ('10 of 12', 'months'), ('12 of 12', 'every month')],
                 'Months in which the average gross profit per trade is above 1%. A month with no trades does not count. A level must hold in every year tested.')
-    + goal_card('GM', 'Monthly profit', 'In how many months of the year do the month\u2019s trades add up to 5% or more, with no losing month?',
+    + goal_card('GM', 'Monthly profit', 'In how many months of the year do the month\u2019s trades add up to 5% or more, with almost no losing month?',
                 [('8 of 12', 'months'), ('10 of 12', 'months'), ('12 of 12', 'every month')],
-                'Months whose trades together make 5% or more, which is $50 or more at $1,000 per trade. A year counts only if none of its months ends below zero (rule added November 24, 2026). Trades opened at exactly the same time count once. A level must hold in every year tested.'))
+                'Months whose trades together make 5% or more, which is $50 or more at $1,000 per trade. A year counts only if at most one of its months ends below zero, and that month loses no more than 2% (rule set November 24, 2026). Trades opened at exactly the same time count once. A level must hold in every year tested.'))
 
 # ------------------------------------------------------------------ top 5
 def top_row(c):
@@ -210,7 +212,7 @@ def by_year_simple(c, kind):
         elif kind == 'S':
             txt = f"{v['months_above_1pct']} of {v['months']}"
         else:
-            txt = f"{v['months_total_5pct']} of {v['months']}" + (f"<i class=\"lose\">{v['months_negative']} losing</i>" if v['months_negative'] else '<i class="clean">clean</i>')
+            txt = f"{v['months_total_5pct']} of {v['months']}" + ('<i class="clean">clean</i>' if not v['months_negative'] else (f"<i class=\"clean\">1 small loss</i>" if v['gm_year_counts'] else f"<i class=\"lose\">{v['months_negative']} losing</i>"))
         items += f'<span>{y}</span><b class="{"none" if txt == "no trades" else ""}">{txt}</b>'
         if kind == 'GM':                                    # the year's total gross %: all its trades added up
             tot = v['gross_pct_year']
@@ -348,7 +350,7 @@ if SHOW_STOP_SECTION and os.path.exists(_sf):
         <tbody>{''.join(_tr(st) for st in _stops)}</tbody>
       </table></div>
     </div>
-    <p class="fine" style="margin-top:10px">Same rule on every line, only the stop changes: one trade a month, sell at +5.5%, or after 60 trading days. Level 1 needs {_need[0]} / {_need[1]} / {_need[2]} months (2023 has 10 usable months). Green marks a figure that reaches the month count for level 1. This study was made before the no-losing-month rule was added to goal 4 on November 24, 2026.</p>
+    <p class="fine" style="margin-top:10px">Same rule on every line, only the stop changes: one trade a month, sell at +5.5%, or after 60 trading days. Level 1 needs {_need[0]} / {_need[1]} / {_need[2]} months (2023 has 10 usable months). Green marks a figure that reaches the month count for level 1. This study was made before the losing-month rule was added to goal 4 on November 24, 2026.</p>
     <div class="note2">
       <h3>What the stop study shows</h3>
       <ul>
@@ -404,7 +406,7 @@ if os.path.exists(_i14) and os.path.exists(_m14):
         <tbody>{''.join(_mr(k, v) for k, v in _rows)}</tbody>
       </table></div>
     </div>
-    <p class="fine" style="margin-top:10px">Level 1 needs {_need[0]} / {_need[1]} / {_need[2]} months in these training years (2021 starts in March, when the forecast has enough history). To be run on the test years a setting must pass five checks: one spare month in every year, more profit than buying after every day, the same result on the five peer stocks, the same result with the buys moved to other times, and more profit than the same campaign timed by the old forecast. The four closest settings are shown. These checks counted months of 5% or more; the no-losing-month rule added to goal 4 later on November 24 is stricter and will apply to the next models.</p>
+    <p class="fine" style="margin-top:10px">Level 1 needs {_need[0]} / {_need[1]} / {_need[2]} months in these training years (2021 starts in March, when the forecast has enough history). To be run on the test years a setting must pass five checks: one spare month in every year, more profit than buying after every day, the same result on the five peer stocks, the same result with the buys moved to other times, and more profit than the same campaign timed by the old forecast. The four closest settings are shown. These checks counted months of 5% or more; the losing-month rule added to goal 4 later on November 24 is stricter and will apply to the next models.</p>
     <div class="note2">
       <h3>What this shows</h3>
       <ul>
@@ -461,7 +463,7 @@ THREE_NOTES = {
  'R13_two_buys_stop15': [
   'What it is. Model M’s signal and exit with two $1,000 buys on the day after the signal, at 10:00 and at 1:00 pm.',
   'What it reaches. S 9 / 10 / 8 of 11, a 78.6% win rate, and the most months of 5% or more of any model: 8 / 10 / 8 of 11.',
-  'Why it is not GM1. Since November 24, 2026 a year counts for goal 4 only if it has no losing month. O has 3, 2 and 3 losing months, most of them months in which both buys were stopped (−30%).',
+  'Why it is not GM1. Since November 24, 2026 a year counts for goal 4 only if it has at most one losing month, and that month loses no more than 2%. O has 3, 2 and 3 losing months, most of them months in which both buys were stopped (−30%).',
   'What else it misses. Its average trade made +0.23%; G1 needs 1%. 13 of its 70 trades were stopped at 15%, and the likely range of the average runs from about −1.6% to +1.9%.',
   'What it shows about model M. O buys a few hours after M on the same signals. In 7 of 35 months M’s trade reached +4% while at least one of O’s did not. In three of them (January 2025, February 2025, June 2026) M won on an overnight jump, and both of O’s buys, made after the jump, were stopped. M’s 88.6% win rate depends on its exact entry price.',
   'How it was run. It reached level 1 on the training years with no spare month, which did not pass the stricter training test; it was run once at the owner’s standing instruction to test each trained model. This was run 22 on the test years.',
@@ -491,7 +493,7 @@ if os.path.exists(_cf):
         <tbody>{''.join(_crow(k, v) for k, v in _c.items())}</tbody>
       </table></div>
       <ul style="margin-top:12px">
-        <li><strong>Under goal 4 as it now stands, none passes.</strong> Every arrangement has two or more losing months in each year except M alone in 2025, and a year with a losing month does not count.</li>
+        <li><strong>Under goal 4 as it now stands, none passes.</strong> Every arrangement has two or more losing months in each year except M alone in 2025, and a year counts only with at most one losing month of no more than 2%.</li>
         <li><strong>Before the no-losing-month rule, one did.</strong> M&rsquo;s buy at the close plus a second buy at 10:00 the next day showed +1.05%, 82.9%, S 9 / 10 / 8 and 8 / 10 / 8 months of 5% or more. It was not counted then either: it was picked with the answers in view, the training years chose a different arrangement (model O), and it had no room to spare.</li>
         <li><strong>Forward test.</strong> M, O, L and that arrangement were frozen on November 23, 2026 for trades opened after that date. Only new trades can confirm any of them.</li>
       </ul></div>"""
@@ -499,16 +501,16 @@ sbest = max(d['methods'], key=lambda c: (s_worst(c), c['progress']['S']))
 gbm_best = max(OKM, key=lambda c: (gm_worst(c), c['progress']['GM']))
 same_best = max((c['best_month_avg_pct_per_trade'] for c in d['methods'] if KIND[c['id']] == 'Same-day'))
 any_s = [c for c in d['methods'] if c['S_level'] > 0]
-GM_LEAD = (f"GM1 needs 8 such months and no losing month in every year. It is reached by" if gbm_best['GM_level'] else "No model reaches GM1, which needs 8 such months and no losing month in every year. The most months of 5% or more inside the loss limits:")
+GM_LEAD = (f"GM1 needs 8 such months in every year, with at most one losing month of no more than 2%. It is reached by" if gbm_best['GM_level'] else "No model reaches GM1, which needs 8 such months in every year, with at most one losing month of no more than 2%. The most months of 5% or more inside the loss limits:")
 GM_TAIL = '' if gbm_best['GM_level'] else (" It has " + ' / '.join(str(v['months_negative']) for v in gbm_best['by_year'].values()) + " losing months, so none of its years counts.")
-_clean = [c for c in OKM if c['years_without_negative_month']]
-GM_TAIL += (" Only " + ', '.join(f"{E(c['name'])} ({c['years_without_negative_month']} of 3 years)" for c in _clean) + " has a year with no losing month." if _clean else " No ranked model has a year without a losing month.")
+_clean = [c for c in OKM if c['years_that_count_for_gm']]
+GM_TAIL += (" Only " + ', '.join(f"{E(c['name'])} ({c['years_that_count_for_gm']} of 3 years)" for c in _clean) + " has a year that keeps the losing-month rule." if _clean else " No ranked model has a year that keeps the losing-month rule.")
 S_NOTE = ((f"{E(any_s[0]['name'])} reaches level S{any_s[0]['S_level']}. " if any_s else "No model reaches level S1. ")
           + f"The closest is {E(sbest['name'])}, with {s_text(sbest)} months above 1% per trade. "
           + f"The same-day models never have such a month: their best month averages {same_best:.2f}% per trade. "
           + "The multi-day models trade a few times a year, so many of their months are empty. "
           + f"The monthly-profit goal (GM) looks at each month\u2019s total instead: the closest is {E(gbm_best['name'])}, with "
-          + ' \u00b7 '.join(f"{y}: {v['months_total_5pct']} of {v['months']}" for y, v in gbm_best['by_year'].items()) + " months of 5% or more. " + (f"It reaches GM{gbm_best['GM_level']}." if gbm_best['GM_level'] else "No model reaches GM1, which also needs a year with no losing month."))
+          + ' \u00b7 '.join(f"{y}: {v['months_total_5pct']} of {v['months']}" for y, v in gbm_best['by_year'].items()) + " months of 5% or more. " + (f"It reaches GM{gbm_best['GM_level']}." if gbm_best['GM_level'] else "No model reaches GM1, which also needs a year with at most one small losing month."))
 
 multi_top = [c for c in TOP5 if KIND[c['id']] == 'Multi-day']
 FEW_NOTE = (f"{', '.join(E(c['name']) for c in multi_top)} made {', '.join(str(c['trades']) for c in multi_top)} trades in almost three years. "
@@ -567,7 +569,7 @@ html = f'''<!doctype html>
 
   <section id="top5">
     <h2>Top 5 models</h2>
-    <p class="sub">Ranked by overall progress: how far a model is toward the top level of each goal (3% per trade, 75% win rate, and 12 of 12 months on each of the two month goals), averaged over the four. For goal 4 a year with a losing month counts as zero. Only models inside the 15% loss limit are ranked; the table shows which also keep 5%. The marks on each bar are levels 1, 2 and 3.</p>
+    <p class="sub">Ranked by overall progress: how far a model is toward the top level of each goal (3% per trade, 75% win rate, and 12 of 12 months on each of the two month goals), averaged over the four. For goal 4 a year counts as zero unless it has at most one losing month of no more than 2%. Only models inside the 15% loss limit are ranked; the table shows which also keep 5%. The marks on each bar are levels 1, 2 and 3.</p>
     <ol class="top5">{top_html}</ol>
     <div class="note2">
       <h3>Four things to know before relying on this ranking</h3>
@@ -590,7 +592,7 @@ html = f'''<!doctype html>
         <tbody>{table_html}</tbody>
       </table></div>
     </div>
-    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. Under each profit-per-trade bar are two figures for 2024, 2025 and 2026: the average gross % per trade in that year, and what $1,000 would stand at by the end of that year when $1,000 goes into every trade and profits are not reinvested ($1,098 means $98 of profit; each year starts again from $1,000; before costs). The win rate, steady months and monthly profit columns show each year's own figure in the same way. A GM level needs a year with no losing month, so each year also shows how many of its months ended below zero (&ldquo;clean&rdquo; means none). In the monthly profit column the last figure on each line is the year's total gross %: every trade of that year added up (the average per trade times the number of trades). The headline steady-months and monthly-profit figures are the worst of the three years on a 12-month basis, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
+    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. Under each profit-per-trade bar are two figures for 2024, 2025 and 2026: the average gross % per trade in that year, and what $1,000 would stand at by the end of that year when $1,000 goes into every trade and profits are not reinvested ($1,098 means $98 of profit; each year starts again from $1,000; before costs). The win rate, steady months and monthly profit columns show each year's own figure in the same way. A GM level needs a year with at most one losing month, of no more than 2%, so each year also shows how many of its months ended below zero (&ldquo;clean&rdquo; means none). In the monthly profit column the last figure on each line is the year's total gross %: every trade of that year added up (the average per trade times the number of trades). The headline steady-months and monthly-profit figures are the worst of the three years on a 12-month basis, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
   </section>
 
   <section id="months">
@@ -606,9 +608,9 @@ html = f'''<!doctype html>
 
   <section id="gm-months">
     <h2>Monthly profit, month by month</h2>
-    <p class="sub">Each square is one month. A month counts toward the GM goal when all the trades opened in it, winners and losers together, add up to 5% or more. That is $50 or more at $1,000 per trade. Since November 24, 2026 a year counts only if it has no losing month, so one red square rules out its whole year.</p>
+    <p class="sub">Each square is one month. A month counts toward the GM goal when all the trades opened in it, winners and losers together, add up to 5% or more. That is $50 or more at $1,000 per trade. Since November 24, 2026 a year counts only if it has at most one losing month, and that month loses no more than 2%. Two red squares in a year, or one large one, rule that year out.</p>
     <div class="card">
-      <div class="hm-legend"><span><i class="hm-c hit"></i>Total of 5% or more</span><span><i class="hm-c pos"></i>Profit under 5%</span><span><i class="hm-c neg">{MIN}</i>Loss for the month (rules out the year)</span><span><i class="hm-c nt"></i>No trades</span></div>
+      <div class="hm-legend"><span><i class="hm-c hit"></i>Total of 5% or more</span><span><i class="hm-c pos"></i>Profit under 5%</span><span><i class="hm-c neg">{MIN}</i>Loss for the month</span><span><i class="hm-c nt"></i>No trades</span></div>
       <p class="swipe">Swipe sideways to see all 35 months.</p><div class="hm-scroll"><div class="hm">{years}{head_gm}{hm_rows_gm}</div></div>
       <div class="tipbox" role="status" aria-live="polite">Point at a square to see that month.</div>
     </div>
