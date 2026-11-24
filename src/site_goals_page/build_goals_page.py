@@ -316,8 +316,9 @@ n_models = len(d['methods'])
 gbest = max(d['methods'], key=lambda c: c['gross_pct_per_trade'])
 # ---- stop-size study on the training years (round 12 search); the section is left out if the file is absent
 STOP_SECTION = ''
+SHOW_STOP_SECTION = False        # owner, 2026-11-24: taken off the scoreboard; the study stays in docs/12 (Section 13) and the research record
 _sf = f'{SRC}/stage13_round12_stop_range_search.json'
-if os.path.exists(_sf):
+if SHOW_STOP_SECTION and os.path.exists(_sf):
     _r = json.load(open(_sf)); _S = _r['settings']
     def _row(st, T=5.5, H=60):
         return _S[json.dumps(dict(second='none', target=T, stop=float(st), hold=H), sort_keys=True)]
@@ -483,7 +484,7 @@ if os.path.exists(_cf):
                 f'<td class="num">{" / ".join(map(str, v["GM"]))}</td><td class="num {"neg" if sum(v["negative_months"]) else "pos"}">{" / ".join(map(str, v["negative_months"]))}</td>'
                 f'<td>{"Yes" if v["level1_all_four"] else ("No (yes before the new rule)" if was else "No")}</td></tr>')
     _any = any(v['level1_all_four'] for v in _c.values())
-    ALL3_CARD += f"""<div class="note2" id="afterfact"><h3>Combining M&rsquo;s and O&rsquo;s buys: {'one arrangement shows level 1 on all four goals, and why it is not counted' if _any else 'no arrangement reaches level 1 on all four goals'}</h3>
+    ALL3_CARD += '' if not _any else f"""<div class="note2" id="afterfact"><h3>Combining M&rsquo;s and O&rsquo;s buys: {'one arrangement shows level 1 on all four goals, and why it is not counted' if _any else 'no arrangement reaches level 1 on all four goals'}</h3>
       <p style="margin:0 0 10px;font-size:14.5px">Models M and O use the same signals and the same exit; they differ only in when they buy. Their tested trades can be put together afterwards in several ways. No new run was made for this table.</p>
       <div class="table-scroll" style="background:var(--surface);border-radius:10px"><table>
         <thead><tr><th>Buys</th><th class="num">Trades</th><th class="num">Profit per trade</th><th class="num">Win rate</th><th class="num">S months</th><th class="num">Months of 5% or more</th><th class="num">Losing months</th><th>Level 1 on all four</th></tr></thead>
@@ -652,7 +653,7 @@ html = f'''<!doctype html>
         <li>Level 1 on all four goals. After model N a new model must pass its training-years test with a margin of one month on S and on GM, and the same rule must hold on the five peer stocks. 1,620 settings were tried on 2021 to 2023 with the test years removed, with stops from 1% to 15%. None passed, so nothing new was run on the test years.</li>
         <li>Trades opened at the same time. By the owner's rule, trades opened at exactly the same time count as one trade; trades opened at different times count separately, even on the same day. No score on this page changed when the rule was applied.</li>
         <li>Model P, run once and not level 1. P passed a stricter training-years test by a wide margin (95.6% of its trades won there) and was then run once on the test years, the twenty-first such run. There 80% won, which is below the 83% it needs to break even with a +3% target and a 15% stop. Waiting for a dip added nothing on the test years.</li>
-        <li>Forward test. Models M, O and L, and the combination described near the top of this page, were frozen on November 23, 2026. They will be scored on trades opened after that date when new price data is added. Nothing about them may be changed in the meantime.</li>
+        <li>Forward test. Models M, O and L, and one arrangement that puts M&rsquo;s and O&rsquo;s buys together, were frozen on November 23, 2026. They will be scored on trades opened after that date when new price data is added. Nothing about them may be changed in the meantime.</li>
         <li>Model R, not run. A campaign timed by a month-ahead forecast that uses the new data did better on the training years than the same campaign with the old forecast, but no setting passed all five checks, so it was not run on the test years.</li>
         <li>Model Q, not run. A version that sells short when the trend is down was tested on the training years. None of its 24 settings passed, and most did worse than always buying, so it was not run on the test years.</li>
         <li>2026 has 11 months of data. Its months are judged on the same fractions (8/12, 10/12, 12/12).</li>
