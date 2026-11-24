@@ -1,9 +1,21 @@
 {
+ "rule": "at most 2 losing months a year, each no worse than -3.0%",
+ "earlier_rule": {
+  "n_settings": 8627,
+  "level1_all_four": 0,
+  "settings_with_years_keeping_goal4": {
+   "1": 44,
+   "2": 0,
+   "3": 0
+  },
+  "fewest_losing_months_in_worst_year": 1,
+  "rule": "at most one losing month, no worse than -2%"
+ },
  "cutoff": "2023-12-29",
  "n_settings": 8627,
  "level1_all_four": 0,
  "settings_with_years_keeping_goal4": {
-  "1": 44,
+  "1": 55,
   "2": 0,
   "3": 0
  },
@@ -271,6 +283,86 @@
   },
   {
    "src": "H20 NEW",
+   "q": 0.5,
+   "T": 2.0,
+   "stop": 15.0,
+   "hold": 20,
+   "K": 5,
+   "month_end": false,
+   "budget": false,
+   "n": 306,
+   "G": 1.31,
+   "WR": 93.1,
+   "S": [
+    8,
+    9,
+    8
+   ],
+   "GM5": [
+    8,
+    10,
+    10
+   ],
+   "neg": [
+    1,
+    1,
+    1
+   ],
+   "worst": [
+    -24.47,
+    -66.62,
+    -2.63
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.5,
+   "T": 2.0,
+   "stop": 15.0,
+   "hold": 10,
+   "K": 5,
+   "month_end": false,
+   "budget": false,
+   "n": 323,
+   "G": 1.074,
+   "WR": 88.5,
+   "S": [
+    6,
+    9,
+    8
+   ],
+   "GM5": [
+    7,
+    9,
+    9
+   ],
+   "neg": [
+    1,
+    1,
+    1
+   ],
+   "worst": [
+    -26.79,
+    -66.62,
+    -2.99
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
    "q": 0.7,
    "T": 2.0,
    "stop": 15.0,
@@ -420,86 +512,6 @@
     -15.0,
     -16.72,
     2.0
-   ],
-   "need": [
-    7,
-    8,
-    8
-   ],
-   "years_gm_ok": 1,
-   "level1_all_four": false
-  },
-  {
-   "src": "H20 NEW",
-   "q": 0.7,
-   "T": 1.0,
-   "stop": 15.0,
-   "hold": 20,
-   "K": 5,
-   "month_end": false,
-   "budget": true,
-   "n": 185,
-   "G": 0.864,
-   "WR": 97.3,
-   "S": [
-    6,
-    5,
-    10
-   ],
-   "GM5": [
-    5,
-    2,
-    8
-   ],
-   "neg": [
-    0,
-    2,
-    0
-   ],
-   "worst": [
-    1.0,
-    -16.72,
-    1.0
-   ],
-   "need": [
-    7,
-    8,
-    8
-   ],
-   "years_gm_ok": 1,
-   "level1_all_four": false
-  },
-  {
-   "src": "H20 NEW",
-   "q": 0.7,
-   "T": 1.0,
-   "stop": 15.0,
-   "hold": 20,
-   "K": 3,
-   "month_end": false,
-   "budget": true,
-   "n": 170,
-   "G": 0.842,
-   "WR": 97.1,
-   "S": [
-    6,
-    5,
-    10
-   ],
-   "GM5": [
-    5,
-    2,
-    8
-   ],
-   "neg": [
-    0,
-    2,
-    0
-   ],
-   "worst": [
-    1.0,
-    -16.72,
-    1.0
    ],
    "need": [
     7,
