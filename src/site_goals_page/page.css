@@ -194,3 +194,13 @@ table.score{min-width:1228px}
 /* Stage 14 section */
 #stage14 table{min-width:720px;width:100%}
 #stage14 th{white-space:normal;vertical-align:bottom}
+/* goal 4 rule of 2026-11-24: losing months */
+.negtag{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--bad-soft);color:var(--bad);white-space:nowrap;vertical-align:middle}
+.negtag.ok{background:var(--good-soft);color:var(--good)}
+.m-note{margin-top:6px}
+.score .yr i{font-style:normal;font-weight:600;font-size:11px;margin-left:6px;white-space:nowrap}
+.score .yr i.lose{color:var(--bad)}.score .yr i.clean{color:var(--good)}
+.hm-tot small{display:block;font-size:11px;font-weight:600}.hm-tot small.lose{color:var(--bad)}.hm-tot small.clean{color:var(--good)}
+table.score th:nth-child(6){width:226px}
+table.score{min-width:1276px}
+#afterfact td.neg{color:var(--bad);font-weight:700}

@@ -380,6 +380,13 @@ per-stage section at the end.)*
   The first says the new information matters; the second says the timing is
   not yet reliable. Without both questions the near-miss would have looked
   like a pass or like nothing.
+- **(Goal scoring) A count of good months says nothing about the bad ones.**
+  Model O reached "8 of 12 months of 5% or more" with a year total of +2.9%:
+  eight months of +8% and two of -30%. The owner saw the mismatch in the
+  table and tightened goal 4 so that a year with a negative month does not
+  count. When a goal counts successes, show the size of the failures beside
+  it (the year total, the losing months) from the first report, and check
+  whether the goal can be met while the money result is poor.
 
 ## 4. Evaluation and metrics lessons
 

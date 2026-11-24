@@ -25,12 +25,13 @@
    ]
   },
   "GM": {
-   "name": "Months per year whose trades add up to 5% or more (the month's total gross %)",
+   "name": "Months per year whose trades add up to 5% or more (the month's total gross %), in a year with no negative month",
    "levels": [
     "8 of 12",
     "10 of 12",
     "12 of 12"
-   ]
+   ],
+   "no_negative_month_rule": "a year counts only if no month of it ends below 0%; a month with no trades is not negative"
   }
  },
  "basis": {
@@ -44,18 +45,18 @@
   "ranking": "overall progress = average of four fractions: gross % per trade / 3%, win rate / 75%, share of months whose average trade is above 1%, share of months whose total is 5% or more (each capped at 1); methods with fewer than 15 blind trades are not ranked"
  },
  "top5": [
+  "R9_one_a_month_stop15",
   "R13_two_buys_stop15",
   "R14_dip_campaign",
-  "R9_one_a_month_stop15",
   "R10_monthly_campaign_four_goals",
   "R1_peer_fusion_gbm"
  ],
  "top5_if_scratch_is_not_a_win": [
+  "R9_one_a_month_stop15",
   "R13_two_buys_stop15",
   "R14_dip_campaign",
-  "R9_one_a_month_stop15",
   "R10_monthly_campaign_four_goals",
-  "R1_peer_fusion_gbm"
+  "R7_one_a_month_stop5"
  ],
  "level1_on_all_four": [],
  "level1_on_all_three": [
@@ -85,7 +86,7 @@
  },
  "leaders": {
   "G": "R6_one_a_month",
-  "GM": "R13_two_buys_stop15",
+  "GM": "R6_one_a_month",
   "S_worst_year": "R6_one_a_month",
   "WR": "R9_one_a_month_stop15",
   "S": "R6_one_a_month"
@@ -133,6 +134,10 @@
    "avg_month_sum_gross_pct": 0.746,
    "months_total_5pct_all": 1,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 14,
+   "months_negative_worst_year": 6,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 5.59,
    "by_year": {
     "2024": {
@@ -144,6 +149,8 @@
      "months_total_5pct": 0,
      "months_positive": 9,
      "months_no_trades": 0,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0828,
      "gross_pct_year": 10.25,
      "dollars_year": 102.53
@@ -157,6 +164,8 @@
      "months_total_5pct": 1,
      "months_positive": 6,
      "months_no_trades": 0,
+     "months_negative": 6,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.1075,
      "gross_pct_year": 6.74,
      "dollars_year": 67.43
@@ -170,6 +179,8 @@
      "months_total_5pct": 0,
      "months_positive": 6,
      "months_no_trades": 0,
+     "months_negative": 5,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.095,
      "gross_pct_year": 9.1,
      "dollars_year": 91.04
@@ -184,9 +195,9 @@
     "G": 0.005,
     "WR": 0.507,
     "S": 0.0,
-    "GM": 0.028,
-    "overall": 0.135,
-    "overall_if_scratch_is_not_a_win": 0.06308
+    "GM": 0.0,
+    "overall": 0.128,
+    "overall_if_scratch_is_not_a_win": 0.05613
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": true,
@@ -236,6 +247,10 @@
    "avg_month_sum_gross_pct": 0.659,
    "months_total_5pct_all": 0,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 14,
+   "months_negative_worst_year": 6,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 4.57,
    "by_year": {
     "2024": {
@@ -247,6 +262,8 @@
      "months_total_5pct": 0,
      "months_positive": 9,
      "months_no_trades": 0,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0682,
      "gross_pct_year": 10.84,
      "dollars_year": 108.38
@@ -260,6 +277,8 @@
      "months_total_5pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "months_negative": 5,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0772,
      "gross_pct_year": 9.18,
      "dollars_year": 91.79
@@ -273,6 +292,8 @@
      "months_total_5pct": 0,
      "months_positive": 5,
      "months_no_trades": 0,
+     "months_negative": 6,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0878,
      "gross_pct_year": 3.05,
      "dollars_year": 30.47
@@ -339,6 +360,10 @@
    "avg_month_sum_gross_pct": 0.969,
    "months_total_5pct_all": 2,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 12,
+   "months_negative_worst_year": 5,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 6.3,
    "by_year": {
     "2024": {
@@ -350,6 +375,8 @@
      "months_total_5pct": 0,
      "months_positive": 9,
      "months_no_trades": 0,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0596,
      "gross_pct_year": 12.29,
      "dollars_year": 122.89
@@ -363,6 +390,8 @@
      "months_total_5pct": 1,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0788,
      "gross_pct_year": 12.48,
      "dollars_year": 124.78
@@ -376,6 +405,8 @@
      "months_total_5pct": 1,
      "months_positive": 6,
      "months_no_trades": 0,
+     "months_negative": 5,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0999,
      "gross_pct_year": 9.16,
      "dollars_year": 91.6
@@ -390,9 +421,9 @@
     "G": 0.004,
     "WR": 0.657,
     "S": 0.0,
-    "GM": 0.058,
-    "overall": 0.18,
-    "overall_if_scratch_is_not_a_win": 0.12391
+    "GM": 0.0,
+    "overall": 0.165,
+    "overall_if_scratch_is_not_a_win": 0.10939
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": true,
@@ -442,6 +473,10 @@
    "avg_month_sum_gross_pct": 0.798,
    "months_total_5pct_all": 2,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 14,
+   "months_negative_worst_year": 6,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 6.15,
    "by_year": {
     "2024": {
@@ -453,6 +488,8 @@
      "months_total_5pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0593,
      "gross_pct_year": 9.79,
      "dollars_year": 97.88
@@ -466,6 +503,8 @@
      "months_total_5pct": 1,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.1103,
      "gross_pct_year": 12.84,
      "dollars_year": 128.37
@@ -479,6 +518,8 @@
      "months_total_5pct": 1,
      "months_positive": 5,
      "months_no_trades": 0,
+     "months_negative": 6,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.1043,
      "gross_pct_year": 5.32,
      "dollars_year": 53.16
@@ -493,9 +534,9 @@
     "G": 0.004,
     "WR": 0.657,
     "S": 0.0,
-    "GM": 0.058,
-    "overall": 0.18,
-    "overall_if_scratch_is_not_a_win": 0.12405
+    "GM": 0.0,
+    "overall": 0.165,
+    "overall_if_scratch_is_not_a_win": 0.10953
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": true,
@@ -545,6 +586,10 @@
    "avg_month_sum_gross_pct": 0.665,
    "months_total_5pct_all": 1,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 12,
+   "months_negative_worst_year": 4,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 6.23,
    "by_year": {
     "2024": {
@@ -556,6 +601,8 @@
      "months_total_5pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0361,
      "gross_pct_year": 8.89,
      "dollars_year": 88.9
@@ -569,6 +616,8 @@
      "months_total_5pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0803,
      "gross_pct_year": 6.2,
      "dollars_year": 62.04
@@ -582,6 +631,8 @@
      "months_total_5pct": 1,
      "months_positive": 7,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.1039,
      "gross_pct_year": 8.18,
      "dollars_year": 81.8
@@ -596,9 +647,9 @@
     "G": 0.003,
     "WR": 0.734,
     "S": 0.0,
-    "GM": 0.03,
-    "overall": 0.192,
-    "overall_if_scratch_is_not_a_win": 0.14532
+    "GM": 0.0,
+    "overall": 0.184,
+    "overall_if_scratch_is_not_a_win": 0.13774
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": true,
@@ -648,6 +699,10 @@
    "avg_month_sum_gross_pct": 0.804,
    "months_total_5pct_all": 0,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 12,
+   "months_negative_worst_year": 5,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 3.81,
    "by_year": {
     "2024": {
@@ -659,6 +714,8 @@
      "months_total_5pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "months_negative": 5,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0587,
      "gross_pct_year": 10.8,
      "dollars_year": 107.98
@@ -672,6 +729,8 @@
      "months_total_5pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0747,
      "gross_pct_year": 9.19,
      "dollars_year": 91.93
@@ -685,6 +744,8 @@
      "months_total_5pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0828,
      "gross_pct_year": 8.13,
      "dollars_year": 81.33
@@ -707,7 +768,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 20
+   "rank": 18
   },
   {
    "id": "V7_wf",
@@ -751,6 +812,10 @@
    "avg_month_sum_gross_pct": 0.988,
    "months_total_5pct_all": 0,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 10,
+   "months_negative_worst_year": 4,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 4.62,
    "by_year": {
     "2024": {
@@ -762,6 +827,8 @@
      "months_total_5pct": 0,
      "months_positive": 9,
      "months_no_trades": 0,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0545,
      "gross_pct_year": 12.14,
      "dollars_year": 121.36
@@ -775,6 +842,8 @@
      "months_total_5pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0538,
      "gross_pct_year": 10.94,
      "dollars_year": 109.41
@@ -788,6 +857,8 @@
      "months_total_5pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.1069,
      "gross_pct_year": 11.5,
      "dollars_year": 115.01
@@ -810,7 +881,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 16
+   "rank": 15
   },
   {
    "id": "V7.1_wf",
@@ -854,6 +925,10 @@
    "avg_month_sum_gross_pct": 0.93,
    "months_total_5pct_all": 0,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 12,
+   "months_negative_worst_year": 4,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 4.9,
    "by_year": {
     "2024": {
@@ -865,6 +940,8 @@
      "months_total_5pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0618,
      "gross_pct_year": 9.49,
      "dollars_year": 94.92
@@ -878,6 +955,8 @@
      "months_total_5pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0662,
      "gross_pct_year": 11.59,
      "dollars_year": 115.88
@@ -891,6 +970,8 @@
      "months_total_5pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.1069,
      "gross_pct_year": 11.48,
      "dollars_year": 114.75
@@ -957,6 +1038,10 @@
    "avg_month_sum_gross_pct": 1.975,
    "months_total_5pct_all": 5,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 5,
+   "months_negative_worst_year": 2,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 8.53,
    "by_year": {
     "2024": {
@@ -968,6 +1053,8 @@
      "months_total_5pct": 0,
      "months_positive": 10,
      "months_no_trades": 0,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0554,
      "gross_pct_year": 17.07,
      "dollars_year": 170.72
@@ -981,6 +1068,8 @@
      "months_total_5pct": 1,
      "months_positive": 10,
      "months_no_trades": 0,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0613,
      "gross_pct_year": 19.43,
      "dollars_year": 194.29
@@ -994,6 +1083,8 @@
      "months_total_5pct": 4,
      "months_positive": 10,
      "months_no_trades": 0,
+     "months_negative": 1,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0836,
      "gross_pct_year": 32.61,
      "dollars_year": 326.07
@@ -1008,15 +1099,15 @@
     "G": 0.006,
     "WR": 0.799,
     "S": 0.0,
-    "GM": 0.149,
-    "overall": 0.238,
-    "overall_if_scratch_is_not_a_win": 0.19211
+    "GM": 0.0,
+    "overall": 0.201,
+    "overall_if_scratch_is_not_a_win": 0.15487
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 15
+   "rank": 16
   },
   {
    "id": "V7.1_pct",
@@ -1060,6 +1151,10 @@
    "avg_month_sum_gross_pct": 0.826,
    "months_total_5pct_all": 1,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 13,
+   "months_negative_worst_year": 5,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 6.4,
    "by_year": {
     "2024": {
@@ -1071,6 +1166,8 @@
      "months_total_5pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "months_negative": 5,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.0663,
      "gross_pct_year": 3.97,
      "dollars_year": 39.67
@@ -1084,6 +1181,8 @@
      "months_total_5pct": 1,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.102,
      "gross_pct_year": 14.39,
      "dollars_year": 143.89
@@ -1097,6 +1196,8 @@
      "months_total_5pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 0.1269,
      "gross_pct_year": 10.56,
      "dollars_year": 105.56
@@ -1111,9 +1212,9 @@
     "G": 0.007,
     "WR": 0.936,
     "S": 0.0,
-    "GM": 0.028,
-    "overall": 0.243,
-    "overall_if_scratch_is_not_a_win": 0.16292
+    "GM": 0.0,
+    "overall": 0.236,
+    "overall_if_scratch_is_not_a_win": 0.15597
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": true,
@@ -1163,6 +1264,10 @@
    "avg_month_sum_gross_pct": -0.012,
    "months_total_5pct_all": 2,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 7,
+   "months_negative_worst_year": 4,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 19.43,
    "by_year": {
     "2024": {
@@ -1174,6 +1279,8 @@
      "months_total_5pct": 1,
      "months_positive": 1,
      "months_no_trades": 10,
+     "months_negative": 1,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 7.551,
      "gross_pct_year": 2.76,
      "dollars_year": 27.57
@@ -1187,6 +1294,8 @@
      "months_total_5pct": 0,
      "months_positive": 0,
      "months_no_trades": 8,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": -3.588,
      "gross_pct_year": -16.43,
      "dollars_year": -164.27
@@ -1200,6 +1309,8 @@
      "months_total_5pct": 1,
      "months_positive": 1,
      "months_no_trades": 8,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 19.4275,
      "gross_pct_year": 13.24,
      "dollars_year": 132.42
@@ -1214,9 +1325,9 @@
     "G": 0.0,
     "WR": 0.296,
     "S": 0.058,
-    "GM": 0.058,
-    "overall": 0.103,
-    "overall_if_scratch_is_not_a_win": 0.10311
+    "GM": 0.0,
+    "overall": 0.089,
+    "overall_if_scratch_is_not_a_win": 0.08859
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": true,
@@ -1265,6 +1376,10 @@
    "avg_month_sum_gross_pct": -0.771,
    "months_total_5pct_all": 1,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 12,
+   "months_negative_worst_year": 6,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 19.43,
    "by_year": {
     "2024": {
@@ -1276,6 +1391,8 @@
      "months_total_5pct": 0,
      "months_positive": 2,
      "months_no_trades": 7,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 3.5177,
      "gross_pct_year": -5.71,
      "dollars_year": -57.12
@@ -1289,6 +1406,8 @@
      "months_total_5pct": 0,
      "months_positive": 0,
      "months_no_trades": 6,
+     "months_negative": 6,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": -3.588,
      "gross_pct_year": -27.81,
      "dollars_year": -278.11
@@ -1302,6 +1421,8 @@
      "months_total_5pct": 1,
      "months_positive": 1,
      "months_no_trades": 6,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 19.4275,
      "gross_pct_year": 6.54,
      "dollars_year": 65.38
@@ -1316,9 +1437,9 @@
     "G": 0.0,
     "WR": 0.25,
     "S": 0.086,
-    "GM": 0.03,
-    "overall": 0.092,
-    "overall_if_scratch_is_not_a_win": 0.08786
+    "GM": 0.0,
+    "overall": 0.084,
+    "overall_if_scratch_is_not_a_win": 0.08029
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
@@ -1368,6 +1489,10 @@
    "avg_month_sum_gross_pct": -0.423,
    "months_total_5pct_all": 2,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 9,
+   "months_negative_worst_year": 5,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 8.31,
    "by_year": {
     "2024": {
@@ -1379,6 +1504,8 @@
      "months_total_5pct": 1,
      "months_positive": 4,
      "months_no_trades": 6,
+     "months_negative": 1,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 7.653,
      "gross_pct_year": 12.0,
      "dollars_year": 119.96
@@ -1392,6 +1519,8 @@
      "months_total_5pct": 0,
      "months_positive": 1,
      "months_no_trades": 8,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 3.0862,
      "gross_pct_year": -9.07,
      "dollars_year": -90.67
@@ -1405,6 +1534,8 @@
      "months_total_5pct": 1,
      "months_positive": 2,
      "months_no_trades": 4,
+     "months_negative": 5,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 8.3069,
      "gross_pct_year": -17.73,
      "dollars_year": -177.26
@@ -1419,15 +1550,15 @@
     "G": 0.0,
     "WR": 0.533,
     "S": 0.199,
-    "GM": 0.058,
-    "overall": 0.198,
-    "overall_if_scratch_is_not_a_win": 0.19138
+    "GM": 0.0,
+    "overall": 0.183,
+    "overall_if_scratch_is_not_a_win": 0.17686
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 18
+   "rank": 20
   },
   {
    "id": "B_field_fusion_gbm",
@@ -1471,6 +1602,10 @@
    "avg_month_sum_gross_pct": 0.71,
    "months_total_5pct_all": 2,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 7,
+   "months_negative_worst_year": 3,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 13.14,
    "by_year": {
     "2024": {
@@ -1482,6 +1617,8 @@
      "months_total_5pct": 1,
      "months_positive": 5,
      "months_no_trades": 6,
+     "months_negative": 1,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 6.0447,
      "gross_pct_year": 14.73,
      "dollars_year": 147.33
@@ -1495,6 +1632,8 @@
      "months_total_5pct": 0,
      "months_positive": 2,
      "months_no_trades": 7,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 4.4412,
      "gross_pct_year": -0.88,
      "dollars_year": -8.77
@@ -1508,6 +1647,8 @@
      "months_total_5pct": 1,
      "months_positive": 3,
      "months_no_trades": 5,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 13.1373,
      "gross_pct_year": 11.01,
      "dollars_year": 110.11
@@ -1522,9 +1663,9 @@
     "G": 0.332,
     "WR": 0.64,
     "S": 0.199,
-    "GM": 0.058,
-    "overall": 0.307,
-    "overall_if_scratch_is_not_a_win": 0.30728
+    "GM": 0.0,
+    "overall": 0.293,
+    "overall_if_scratch_is_not_a_win": 0.29276
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
@@ -1574,6 +1715,10 @@
    "avg_month_sum_gross_pct": 0.928,
    "months_total_5pct_all": 7,
    "months_total_5pct_worst_year_per_12": 1.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 12,
+   "months_negative_worst_year": 5,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 15.47,
    "by_year": {
     "2024": {
@@ -1585,6 +1730,8 @@
      "months_total_5pct": 1,
      "months_positive": 4,
      "months_no_trades": 3,
+     "months_negative": 5,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 8.2108,
      "gross_pct_year": 3.58,
      "dollars_year": 35.81
@@ -1598,6 +1745,8 @@
      "months_total_5pct": 2,
      "months_positive": 6,
      "months_no_trades": 2,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 5.2396,
      "gross_pct_year": 9.16,
      "dollars_year": 91.59
@@ -1611,6 +1760,8 @@
      "months_total_5pct": 4,
      "months_positive": 7,
      "months_no_trades": 1,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 5.2713,
      "gross_pct_year": 19.73,
      "dollars_year": 197.34
@@ -1625,15 +1776,15 @@
     "G": 0.212,
     "WR": 0.68,
     "S": 0.318,
-    "GM": 0.205,
-    "overall": 0.354,
-    "overall_if_scratch_is_not_a_win": 0.35368
+    "GM": 0.0,
+    "overall": 0.303,
+    "overall_if_scratch_is_not_a_win": 0.30254
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 9
+   "rank": 10
   },
   {
    "id": "D_fusion_gate",
@@ -1677,6 +1828,10 @@
    "avg_month_sum_gross_pct": 0.28,
    "months_total_5pct_all": 2,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 6,
+   "months_negative_worst_year": 3,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 8.31,
    "by_year": {
     "2024": {
@@ -1688,6 +1843,8 @@
      "months_total_5pct": 1,
      "months_positive": 4,
      "months_no_trades": 6,
+     "months_negative": 1,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 7.653,
      "gross_pct_year": 12.0,
      "dollars_year": 119.96
@@ -1701,6 +1858,8 @@
      "months_total_5pct": 0,
      "months_positive": 2,
      "months_no_trades": 8,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 3.4504,
      "gross_pct_year": -2.31,
      "dollars_year": -23.13
@@ -1714,6 +1873,8 @@
      "months_total_5pct": 1,
      "months_positive": 3,
      "months_no_trades": 5,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 8.3069,
      "gross_pct_year": 0.11,
      "dollars_year": 1.1
@@ -1728,9 +1889,9 @@
     "G": 0.172,
     "WR": 0.741,
     "S": 0.227,
-    "GM": 0.058,
-    "overall": 0.299,
-    "overall_if_scratch_is_not_a_win": 0.28973
+    "GM": 0.0,
+    "overall": 0.285,
+    "overall_if_scratch_is_not_a_win": 0.27521
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
@@ -1780,6 +1941,10 @@
    "avg_month_sum_gross_pct": 1.566,
    "months_total_5pct_all": 7,
    "months_total_5pct_worst_year_per_12": 2.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 9,
+   "months_negative_worst_year": 4,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 16.37,
    "by_year": {
     "2024": {
@@ -1791,6 +1956,8 @@
      "months_total_5pct": 3,
      "months_positive": 6,
      "months_no_trades": 2,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 8.0882,
      "gross_pct_year": 21.68,
      "dollars_year": 216.8
@@ -1804,6 +1971,8 @@
      "months_total_5pct": 2,
      "months_positive": 4,
      "months_no_trades": 5,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 12.2321,
      "gross_pct_year": 17.07,
      "dollars_year": 170.67
@@ -1817,6 +1986,8 @@
      "months_total_5pct": 2,
      "months_positive": 5,
      "months_no_trades": 4,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 5.4582,
      "gross_pct_year": 16.08,
      "dollars_year": 160.8
@@ -1831,9 +2002,9 @@
     "G": 0.469,
     "WR": 0.807,
     "S": 0.399,
-    "GM": 0.199,
-    "overall": 0.469,
-    "overall_if_scratch_is_not_a_win": 0.46335
+    "GM": 0.0,
+    "overall": 0.419,
+    "overall_if_scratch_is_not_a_win": 0.41348
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
@@ -1883,6 +2054,10 @@
    "avg_month_sum_gross_pct": 0.692,
    "months_total_5pct_all": 7,
    "months_total_5pct_worst_year_per_12": 1.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 15,
+   "months_negative_worst_year": 7,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 11.42,
    "by_year": {
     "2024": {
@@ -1894,6 +2069,8 @@
      "months_total_5pct": 1,
      "months_positive": 4,
      "months_no_trades": 1,
+     "months_negative": 7,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 3.8643,
      "gross_pct_year": -4.61,
      "dollars_year": -46.12
@@ -1907,6 +2084,8 @@
      "months_total_5pct": 3,
      "months_positive": 7,
      "months_no_trades": 1,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 5.7079,
      "gross_pct_year": 24.38,
      "dollars_year": 243.83
@@ -1920,6 +2099,8 @@
      "months_total_5pct": 3,
      "months_positive": 4,
      "months_no_trades": 3,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 7.4158,
      "gross_pct_year": 4.44,
      "dollars_year": 44.41
@@ -1934,9 +2115,9 @@
     "G": 0.144,
     "WR": 0.679,
     "S": 0.371,
-    "GM": 0.202,
-    "overall": 0.349,
-    "overall_if_scratch_is_not_a_win": 0.34601
+    "GM": 0.0,
+    "overall": 0.299,
+    "overall_if_scratch_is_not_a_win": 0.2955
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
@@ -1986,6 +2167,10 @@
    "avg_month_sum_gross_pct": 0.883,
    "months_total_5pct_all": 6,
    "months_total_5pct_worst_year_per_12": 1.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 8,
+   "months_negative_worst_year": 3,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 10.08,
    "by_year": {
     "2024": {
@@ -1997,6 +2182,8 @@
      "months_total_5pct": 1,
      "months_positive": 4,
      "months_no_trades": 5,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 5.0376,
      "gross_pct_year": -1.97,
      "dollars_year": -19.71
@@ -2010,6 +2197,8 @@
      "months_total_5pct": 3,
      "months_positive": 5,
      "months_no_trades": 5,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 6.684,
      "gross_pct_year": 21.38,
      "dollars_year": 213.81
@@ -2023,6 +2212,8 @@
      "months_total_5pct": 2,
      "months_positive": 4,
      "months_no_trades": 4,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 7.3425,
      "gross_pct_year": 11.49,
      "dollars_year": 114.87
@@ -2037,15 +2228,15 @@
     "G": 0.271,
     "WR": 0.757,
     "S": 0.202,
-    "GM": 0.172,
-    "overall": 0.35,
-    "overall_if_scratch_is_not_a_win": 0.3454
+    "GM": 0.0,
+    "overall": 0.307,
+    "overall_if_scratch_is_not_a_win": 0.30247
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 10
+   "rank": 9
   },
   {
    "id": "R4_goal_shaped_exits",
@@ -2089,6 +2280,10 @@
    "avg_month_sum_gross_pct": 0.925,
    "months_total_5pct_all": 7,
    "months_total_5pct_worst_year_per_12": 1.1,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 8,
+   "months_negative_worst_year": 3,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 15.49,
    "by_year": {
     "2024": {
@@ -2100,6 +2295,8 @@
      "months_total_5pct": 3,
      "months_positive": 7,
      "months_no_trades": 2,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 5.0,
      "gross_pct_year": 17.74,
      "dollars_year": 177.41
@@ -2113,6 +2310,8 @@
      "months_total_5pct": 3,
      "months_positive": 3,
      "months_no_trades": 6,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 5.0,
      "gross_pct_year": 4.1,
      "dollars_year": 40.95
@@ -2126,6 +2325,8 @@
      "months_total_5pct": 1,
      "months_positive": 3,
      "months_no_trades": 5,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 5.1633,
      "gross_pct_year": 10.53,
      "dollars_year": 105.3
@@ -2140,9 +2341,9 @@
     "G": 0.284,
     "WR": 0.737,
     "S": 0.311,
-    "GM": 0.197,
-    "overall": 0.382,
-    "overall_if_scratch_is_not_a_win": 0.38209
+    "GM": 0.0,
+    "overall": 0.333,
+    "overall_if_scratch_is_not_a_win": 0.33284
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": true,
@@ -2192,6 +2393,10 @@
    "avg_month_sum_gross_pct": 1.319,
    "months_total_5pct_all": 8,
    "months_total_5pct_worst_year_per_12": 1.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 7,
+   "months_negative_worst_year": 3,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 10.4,
    "by_year": {
     "2024": {
@@ -2203,6 +2408,8 @@
      "months_total_5pct": 3,
      "months_positive": 8,
      "months_no_trades": 1,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 2.1205,
      "gross_pct_year": 10.75,
      "dollars_year": 107.52
@@ -2216,6 +2423,8 @@
      "months_total_5pct": 1,
      "months_positive": 9,
      "months_no_trades": 1,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 2.0,
      "gross_pct_year": 17.69,
      "dollars_year": 176.94
@@ -2229,6 +2438,8 @@
      "months_total_5pct": 4,
      "months_positive": 9,
      "months_no_trades": 0,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 2.2376,
      "gross_pct_year": 17.7,
      "dollars_year": 177.04
@@ -2243,9 +2454,9 @@
     "G": 0.197,
     "WR": 1.0,
     "S": 0.634,
-    "GM": 0.232,
-    "overall": 0.516,
-    "overall_if_scratch_is_not_a_win": 0.51585
+    "GM": 0.0,
+    "overall": 0.458,
+    "overall_if_scratch_is_not_a_win": 0.45777
    },
    "keeps_loss_limit": false,
    "keeps_strict_loss_limit": false,
@@ -2294,6 +2505,10 @@
    "avg_month_sum_gross_pct": 2.242,
    "months_total_5pct_all": 1,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 4,
+   "months_negative_worst_year": 2,
+   "years_without_negative_month": 1,
    "best_month_total_pct": 5.54,
    "by_year": {
     "2024": {
@@ -2305,6 +2520,8 @@
      "months_total_5pct": 0,
      "months_positive": 10,
      "months_no_trades": 0,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 4.0237,
      "gross_pct_year": 10.61,
      "dollars_year": 106.06
@@ -2318,6 +2535,8 @@
      "months_total_5pct": 1,
      "months_positive": 12,
      "months_no_trades": 0,
+     "months_negative": 0,
+     "gm_year_counts": true,
      "best_month_avg_pct_per_trade": 5.5432,
      "gross_pct_year": 49.55,
      "dollars_year": 495.46
@@ -2331,6 +2550,8 @@
      "months_total_5pct": 0,
      "months_positive": 9,
      "months_no_trades": 0,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 4.0,
      "gross_pct_year": 18.32,
      "dollars_year": 183.23
@@ -2396,6 +2617,10 @@
    "avg_month_sum_gross_pct": 0.017,
    "months_total_5pct_all": 0,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 10,
+   "months_negative_worst_year": 4,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 2.64,
    "by_year": {
     "2024": {
@@ -2407,6 +2632,8 @@
      "months_total_5pct": 0,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 2.3577,
      "gross_pct_year": -3.93,
      "dollars_year": -39.28
@@ -2420,6 +2647,8 @@
      "months_total_5pct": 0,
      "months_positive": 10,
      "months_no_trades": 0,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 2.0906,
      "gross_pct_year": 10.09,
      "dollars_year": 100.91
@@ -2433,6 +2662,8 @@
      "months_total_5pct": 0,
      "months_positive": 7,
      "months_no_trades": 0,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 2.641,
      "gross_pct_year": -5.58,
      "dollars_year": -55.77
@@ -2455,7 +2686,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 7
+   "rank": 6
   },
   {
    "id": "R8_peer_fusion_stop5",
@@ -2499,6 +2730,10 @@
    "avg_month_sum_gross_pct": 1.166,
    "months_total_5pct_all": 7,
    "months_total_5pct_worst_year_per_12": 1.1,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 10,
+   "months_negative_worst_year": 4,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 16.37,
    "by_year": {
     "2024": {
@@ -2510,6 +2745,8 @@
      "months_total_5pct": 3,
      "months_positive": 6,
      "months_no_trades": 2,
+     "months_negative": 4,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 8.0882,
      "gross_pct_year": 17.81,
      "dollars_year": 178.1
@@ -2523,6 +2760,8 @@
      "months_total_5pct": 3,
      "months_positive": 4,
      "months_no_trades": 5,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 12.2321,
      "gross_pct_year": 14.65,
      "dollars_year": 146.54
@@ -2536,6 +2775,8 @@
      "months_total_5pct": 1,
      "months_positive": 3,
      "months_no_trades": 5,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 5.4582,
      "gross_pct_year": 8.35,
      "dollars_year": 83.47
@@ -2550,15 +2791,15 @@
     "G": 0.349,
     "WR": 0.807,
     "S": 0.369,
-    "GM": 0.197,
-    "overall": 0.43,
-    "overall_if_scratch_is_not_a_win": 0.4252
+    "GM": 0.0,
+    "overall": 0.381,
+    "overall_if_scratch_is_not_a_win": 0.37595
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 6
+   "rank": 7
   },
   {
    "id": "R9_one_a_month_stop15",
@@ -2602,6 +2843,10 @@
    "avg_month_sum_gross_pct": 1.846,
    "months_total_5pct_all": 1,
    "months_total_5pct_worst_year_per_12": 0.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 4,
+   "months_negative_worst_year": 2,
+   "years_without_negative_month": 1,
    "best_month_total_pct": 5.54,
    "by_year": {
     "2024": {
@@ -2613,6 +2858,8 @@
      "months_total_5pct": 0,
      "months_positive": 10,
      "months_no_trades": 0,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 4.0237,
      "gross_pct_year": 9.8,
      "dollars_year": 98.02
@@ -2626,6 +2873,8 @@
      "months_total_5pct": 1,
      "months_positive": 12,
      "months_no_trades": 0,
+     "months_negative": 0,
+     "gm_year_counts": true,
      "best_month_avg_pct_per_trade": 5.5432,
      "gross_pct_year": 49.55,
      "dollars_year": 495.46
@@ -2639,6 +2888,8 @@
      "months_total_5pct": 0,
      "months_positive": 9,
      "months_no_trades": 0,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 4.0,
      "gross_pct_year": 5.28,
      "dollars_year": 52.77
@@ -2661,7 +2912,7 @@
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 3,
    "enough_trades_to_rank": true,
-   "rank": 3
+   "rank": 1
   },
   {
    "id": "R10_monthly_campaign_four_goals",
@@ -2705,6 +2956,10 @@
    "avg_month_sum_gross_pct": 1.435,
    "months_total_5pct_all": 19,
    "months_total_5pct_worst_year_per_12": 5.5,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 14,
+   "months_negative_worst_year": 6,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 12.59,
    "by_year": {
     "2024": {
@@ -2716,6 +2971,8 @@
      "months_total_5pct": 6,
      "months_positive": 7,
      "months_no_trades": 0,
+     "months_negative": 5,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 6.2943,
      "gross_pct_year": 14.9,
      "dollars_year": 149.02
@@ -2729,6 +2986,8 @@
      "months_total_5pct": 8,
      "months_positive": 9,
      "months_no_trades": 0,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 6.0,
      "gross_pct_year": 55.36,
      "dollars_year": 553.63
@@ -2742,6 +3001,8 @@
      "months_total_5pct": 5,
      "months_positive": 5,
      "months_no_trades": 0,
+     "months_negative": 6,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 6.2169,
      "gross_pct_year": -20.05,
      "dollars_year": -200.46
@@ -2756,9 +3017,9 @@
     "G": 0.246,
     "WR": 0.941,
     "S": 0.54,
-    "GM": 0.54,
-    "overall": 0.567,
-    "overall_if_scratch_is_not_a_win": 0.56704
+    "GM": 0.0,
+    "overall": 0.432,
+    "overall_if_scratch_is_not_a_win": 0.43194
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
@@ -2808,6 +3069,10 @@
    "avg_month_sum_gross_pct": 0.451,
    "months_total_5pct_all": 26,
    "months_total_5pct_worst_year_per_12": 8.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 8,
+   "months_negative_worst_year": 3,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 9.83,
    "by_year": {
     "2024": {
@@ -2819,6 +3084,8 @@
      "months_total_5pct": 8,
      "months_positive": 9,
      "months_no_trades": 0,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 4.3031,
      "gross_pct_year": 2.87,
      "dollars_year": 28.68
@@ -2832,6 +3099,8 @@
      "months_total_5pct": 10,
      "months_positive": 10,
      "months_no_trades": 0,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 4.0327,
      "gross_pct_year": 17.87,
      "dollars_year": 178.72
@@ -2845,6 +3114,8 @@
      "months_total_5pct": 8,
      "months_positive": 8,
      "months_no_trades": 0,
+     "months_negative": 3,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 4.9127,
      "gross_pct_year": -4.97,
      "dollars_year": -49.7
@@ -2853,21 +3124,21 @@
    "G_level": 0,
    "WR_level": 3,
    "S_level": 1,
-   "GM_level": 1,
-   "levels_total": 5,
+   "GM_level": 0,
+   "levels_total": 4,
    "progress": {
     "G": 0.075,
     "WR": 1.0,
     "S": 0.77,
-    "GM": 0.742,
-    "overall": 0.647,
-    "overall_if_scratch_is_not_a_win": 0.64693
+    "GM": 0.0,
+    "overall": 0.461,
+    "overall_if_scratch_is_not_a_win": 0.46132
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 10,
    "enough_trades_to_rank": true,
-   "rank": 1
+   "rank": 2
   },
   {
    "id": "R14_dip_campaign",
@@ -2911,6 +3182,10 @@
    "avg_month_sum_gross_pct": -0.412,
    "months_total_5pct_all": 27,
    "months_total_5pct_worst_year_per_12": 7.0,
+   "gm_months_counted_worst_year_per_12": 0.0,
+   "months_negative_all": 8,
+   "months_negative_worst_year": 5,
+   "years_without_negative_month": 0,
    "best_month_total_pct": 7.81,
    "by_year": {
     "2024": {
@@ -2922,6 +3197,8 @@
      "months_total_5pct": 7,
      "months_positive": 7,
      "months_no_trades": 0,
+     "months_negative": 5,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 3.0,
      "gross_pct_year": -73.61,
      "dollars_year": -736.1
@@ -2935,6 +3212,8 @@
      "months_total_5pct": 10,
      "months_positive": 10,
      "months_no_trades": 0,
+     "months_negative": 2,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 3.1044,
      "gross_pct_year": 18.21,
      "dollars_year": 182.09
@@ -2948,6 +3227,8 @@
      "months_total_5pct": 10,
      "months_positive": 10,
      "months_no_trades": 0,
+     "months_negative": 1,
+     "gm_year_counts": false,
      "best_month_avg_pct_per_trade": 3.9032,
      "gross_pct_year": 40.99,
      "dollars_year": 409.91
@@ -2962,15 +3243,15 @@
     "G": 0.0,
     "WR": 1.0,
     "S": 0.775,
-    "GM": 0.775,
-    "overall": 0.638,
-    "overall_if_scratch_is_not_a_win": 0.63763
+    "GM": 0.0,
+    "overall": 0.444,
+    "overall_if_scratch_is_not_a_win": 0.44381
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": false,
    "trades_beyond_loss_limit": 8,
    "enough_trades_to_rank": true,
-   "rank": 2
+   "rank": 3
   }
  ]
 }
