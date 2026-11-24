@@ -55,9 +55,11 @@ Definitions
   to 5% or more (the month's total, confirmed by the owner with a worked
   example: +4%, +4% and -2% make +6% and count). That is $50 or more on
   $1,000 per trade. GM is counted per year like S.
-  Owner's rule of 2026-11-24: a year counts toward a GM level only if NO month
-  of that year ends below 0% (a month with no trades is not negative). A year
-  with a negative month counts as zero months, for the level and for progress.
+  Owner's rule of 2026-11-24 (second form, same day): a year counts toward a
+  GM level only if it has at most ONE negative month and that month is no
+  worse than -2% (a month with no trades is not negative). A year that breaks
+  the rule counts as zero months, for the level and for progress. The first
+  form, a few hours earlier, allowed no negative month at all.
 * Steadiness is counted per calendar year. 2026 runs to 18 November, so it has
   11 months; its count is compared with the same fractions (8/12, 10/12, 12/12).
   A level counts as reached only if it is reached in every blind year.
@@ -88,6 +90,10 @@ WR_LEVELS = (50.0, 65.0, 75.0)
 S_LEVELS = (8 / 12, 10 / 12, 12 / 12)
 GM_LEVELS = (8 / 12, 10 / 12, 12 / 12)
 GM_MONTH_TOTAL_PCT = 5.0
+# owner's rule of 2026-11-24 (second form): a year counts toward GM only if it has at most ONE negative month
+# and that month is no worse than -2%
+GM_MAX_NEGATIVE_MONTHS = 1
+GM_WORST_NEGATIVE_MONTH_PCT = -2.0
 MONTHS_IN_YEAR = {2024: 12, 2025: 12, 2026: 11}      # data ends 2026-11-18
 MIN_TRADES_FOR_RANK = 15
 # owner's risk rule (2026-11-23): two levels for the worst trade, 5% (strict) and 15% (wide)
@@ -282,11 +288,13 @@ def score(paths, stage11, stage12, outdir):
                               win_rate=round(100 * wy / max(1, wy + ly), 1) if (wy + ly) else None,
                               months=int(len(ms)), months_above_1pct=int(mh.sum()), months_total_5pct=int((ms >= GM_MONTH_TOTAL_PCT).sum()),
                               months_positive=int((ma > 0).sum()), months_no_trades=int((mcnt[ms.index] == 0).sum()),
-                              months_negative=int(mneg[ms.index].sum()), gm_year_counts=bool(mneg[ms.index].sum() == 0),
+                              months_negative=int(mneg[ms.index].sum()), worst_month_total_pct=round(float(ms.min()), 2),
+                              gm_year_counts=bool(mneg[ms.index].sum() <= GM_MAX_NEGATIVE_MONTHS and round(float(ms.min()), 2) >= GM_WORST_NEGATIVE_MONTH_PCT),
                               best_month_avg_pct_per_trade=round(float(ma.max()), 4) if ma.notna().any() else None,
                               gross_pct_year=round(float(ms.sum()), 2), dollars_year=round(float(ms.sum()) * STAKE / 100, 2))
-        # GM (owner's rule of 2026-11-24): a year counts only if NO month of it ends below 0%; then the share of
-        # months totalling 5% or more decides the level. A year with a negative month counts as zero.
+        # GM (owner's rule of 2026-11-24, second form): a year counts only if it has at most one negative month and
+        # that month is no worse than -2%; then the share of months totalling 5% or more decides the level. A year
+        # that breaks the rule counts as zero.
         gfrac_raw = {y: by_year[y]['months_total_5pct'] / by_year[y]['months'] for y in by_year}
         gfrac = {y: (gfrac_raw[y] if by_year[y]['gm_year_counts'] else 0.0) for y in by_year}
         gm_raw_min = min(gfrac_raw.values())
@@ -318,7 +326,8 @@ def score(paths, stage11, stage12, outdir):
             months_total_5pct_all=int(mgm.sum()), months_total_5pct_worst_year_per_12=round(12 * gm_raw_min, 1),
             gm_months_counted_worst_year_per_12=round(12 * gm_min, 1), months_negative_all=int(mneg.sum()),
             months_negative_worst_year=max(by_year[y]['months_negative'] for y in by_year),
-            years_without_negative_month=int(sum(by_year[y]['gm_year_counts'] for y in by_year)),
+            years_without_negative_month=int(sum(by_year[y]['months_negative'] == 0 for y in by_year)),
+            years_that_count_for_gm=int(sum(by_year[y]['gm_year_counts'] for y in by_year)),
             best_month_total_pct=round(float(msum.max()), 2),
             by_year=by_year, G_level=g_lv, WR_level=wr_lv, S_level=s_lv, GM_level=gm_lv, levels_total=g_lv + wr_lv + s_lv + gm_lv,
             progress=dict(G=round(prog_g, 3), WR=round(prog_wr, 3), S=round(prog_s, 3), GM=round(gm_avg, 3),
@@ -338,8 +347,9 @@ def score(paths, stage11, stage12, outdir):
         goals=dict(G=dict(name='Average gross % per trade', levels=['>= 1%', '>= 2%', '> 3%']),
                    WR=dict(name='Win rate', levels=['>= 50%', '>= 65%', '> 75%']),
                    S=dict(name='Months per year in which the average gross % per trade is above 1%', levels=['8 of 12', '10 of 12', '12 of 12']),
-                   GM=dict(name="Months per year whose trades add up to 5% or more (the month's total gross %), in a year with no negative month",
-                           levels=['8 of 12', '10 of 12', '12 of 12'], no_negative_month_rule='a year counts only if no month of it ends below 0%; a month with no trades is not negative')),
+                   GM=dict(name="Months per year whose trades add up to 5% or more (the month's total gross %), in a year with at most one negative month, no worse than -2%",
+                           levels=['8 of 12', '10 of 12', '12 of 12'], negative_month_rule='a year counts only if at most one of its months ends below 0% and that month is no worse than -2%; a month with no trades is not negative',
+                           max_negative_months=GM_MAX_NEGATIVE_MONTHS, worst_negative_month_pct=GM_WORST_NEGATIVE_MONTH_PCT)),
         basis=dict(period='blind 2024-01-02 to 2026-11-18', stake_per_trade=STAKE, months_counted=MONTHS_IN_YEAR,
                    ranking='overall progress = average of four fractions: gross % per trade / 3%, win rate / 75%, '
                            'share of months whose average trade is above 1%, share of months whose total is 5% or more '
@@ -356,7 +366,7 @@ def score(paths, stage11, stage12, outdir):
         risk_rule=dict(max_loss_pct_per_trade=MAX_LOSS_PCT, strict_max_loss_pct_per_trade=STRICT_LOSS_PCT, methods_with_stop_at_limit=sorted(STOP_AT_LIMIT),
                        note='levels count, and a method is ranked, only if its worst trade is within the limit'),
         leaders=dict(G=max(cards, key=lambda c: c['gross_pct_per_trade'])['id'],
-                     GM=max(cards, key=lambda c: (c['GM_level'], c['progress']['GM'], c['years_without_negative_month'], c['months_total_5pct_worst_year_per_12']))['id'],
+                     GM=max(cards, key=lambda c: (c['GM_level'], c['progress']['GM'], c['years_that_count_for_gm'], c['months_total_5pct_worst_year_per_12']))['id'],
                      S_worst_year=max(cards, key=lambda c: (c['months_above_1pct_worst_year_per_12'], c['progress']['S']))['id'],
                      WR=max([c for c in cards if c['enough_trades_to_rank']], key=lambda c: c['win_rate'])['id'],
                      S=max(cards, key=lambda c: c['progress']['S'])['id']),
