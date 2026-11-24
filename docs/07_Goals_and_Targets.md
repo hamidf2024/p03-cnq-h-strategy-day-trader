@@ -40,14 +40,15 @@ recorded in `00_Project_Charter.docx` ("Performance Goals") and scored by
   gross % of the trades opened in it add up to 5% or more, $50 or more at
   $1,000 per trade. The owner confirmed the reading with an example: +4%,
   +4% and -2% make +6% and the month counts. Counted per year like S.
-- Losing months (owner, 2026-11-24, second form): a year counts toward a GM
-  level only if it has at most ONE negative month and that month is no worse
-  than -2% (a month with no trades is not negative). Examples confirmed by
-  the owner: 8 months at +8%, 3 months at +2% and 1 month at -1.5% make GM1;
-  the same year with the losing month at -6% does not; a year with two losing
-  months of -1% each does not. A year that breaks the rule counts as zero
-  months, for the level and for the overall-progress ranking. The first form
-  of the rule, a few hours earlier, allowed no negative month at all; it was
+- Losing months (owner, 2026-11-24, third form): a year counts toward a GM
+  level only if it has at most TWO negative months and each of them is no
+  worse than -3% (a month with no trades is not negative; -3.0% itself is
+  allowed). Examples confirmed by the owner: 8 months at +8%, 2 at +1%, 1 at
+  -2% and 1 at -2.9% make GM1; the same year with one losing month at -3.5%
+  does not; a year with three losing months of -0.5% does not. A year that
+  breaks the rule counts as zero months, for the level and for the
+  overall-progress ranking. Earlier forms the same day allowed no negative
+  month, then one of no more than -2%. The first form was it was
   asked for after the owner saw that model O's 8 and 10 qualifying months
   came with year totals of only +2.9% and +17.9%, because two months of -30%
   cancel almost eight months of +8%.
@@ -70,7 +71,7 @@ and losses of up to 17%.
 
 Months are listed as 2024 / 2025 / 2026 (2026 has 11 months).
 
-| Rank | Model | Trades | G: avg gross %/trade | WR | S: months averaging above 1% per trade | GM: months totalling 5% or more | Negative months (a GM level allows one, no worse than -2%) | Levels | Worst trade and limit kept | $ per trade after 1 cent |
+| Rank | Model | Trades | G: avg gross %/trade | WR | S: months averaging above 1% per trade | GM: months totalling 5% or more | Negative months (a GM level allows two, each no worse than -3%) | Levels | Worst trade and limit kept | $ per trade after 1 cent |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | M. One-a-month, 15% stop | 35 | +1.85% | 88.6% | 10 / 12 / 9 | 0 / 1 / 0 | 2 / 0 / 2 | G1 WR3 S1 GM0 | -15.7%, within 15% | +$18.18 |
 | 2 | O. One-a-month, two buys | 70 | +0.23% | 78.6% | 9 / 10 / 8 | 8 / 10 / 8 | 3 / 2 / 3 | G0 WR3 S1 GM0 | -15.1%, within 15% | +$1.97 |
@@ -211,13 +212,16 @@ against +0.85%). No setting passes all five parts of the gate: the closest
 fails one part. Nothing was run on 2024-2026; the count stays at 22 runs.
 `docs/13_Stage14_New_Information.md`.
 
-**Goal 4 in its current form, feasibility on the training years
-(2026-11-24).** 8,627 settings of many-trades-a-month CNQ campaigns (forecast
+**Goal 4, feasibility on the training years (2026-11-24).** 8,627 settings of many-trades-a-month CNQ campaigns (forecast
 filters, 1-5 trades open, targets 1-4%, stops 1-15%, month-end exits, a
 monthly loss budget) were scored on 2021-2023 with the test years removed,
-picking and scoring on the same years (an upper bound). None reaches level 1
-on all four goals; only 44 keep goal 4 in one year and none in two. Holding
-CNQ had three months below -2% in each of those years. No model was run on
+picking and scoring on the same years (an upper bound). Under the rule of one
+losing month of no more than -2%, none reaches level 1 on all four goals;
+44 keep goal 4 in one year and none in two. Re-run under the current rule
+(two losing months, each no worse than -3%): still none reaches all four;
+55 keep goal 4 in one year and none in two. The losing months of these
+designs run far beyond -3% (a stopped trade loses up to 15% at once).
+Holding CNQ had three months below -2% in each of those years. No model was run on
 2024-2026. `docs/13`, Section 6.
 
 **The fourth goal, GM, with the losing-month rule.** No model reaches GM1.
@@ -225,9 +229,10 @@ Model O has the most months of 5% or more (8 / 10 / 8 of 11) but 3, 2 and 3
 negative months, the worst about -30%, so none of its years counts. Only M
 (and J, outside the loss limits) has a year that keeps the rule, 2025, with
 no negative month at all, and in that year M has one month of 5% or more.
-Allowing one small negative month changed no score: no model has a year with
-exactly one negative month of 2% or less. With a 15% stop, one stopped trade
-in a month with one or two trades loses far more than 2%. The ranking counts
+Allowing one, then two, small negative months changed no score: no model has
+a year whose losing months are all within -3%; their losing months run from
+about -4% to -30%. With a 15% stop, one stopped trade in a month with one or
+two trades loses far more than 3%. The ranking counts
 a year that breaks the rule as zero for goal 4; the order is in the table
 above (M, O, P, N, E).
 

@@ -176,7 +176,10 @@ scored on the same years they were picked on, so this is an upper bound: a
 design that cannot pass here cannot pass honestly.
 
 **Result: none of the 8,627 reaches level 1 on all four goals in every
-training year. Only 44 keep goal 4 in even one year, and none in two.** Every
+training year. Only 44 keep goal 4 in even one year, and none in two.**
+The search was then repeated under the owner's next form of goal 4 (at
+most two losing months a year, each no worse than -3%): still none of the
+8,627 reaches level 1 on all four; 55 keep goal 4 in one year, none in two. Every
 setting has at least one losing month in its worst year, and almost always a
 month far below -2%: a stopped trade loses 1-15% at once, and several trades
 opened in the same month on the same stock go down together.
