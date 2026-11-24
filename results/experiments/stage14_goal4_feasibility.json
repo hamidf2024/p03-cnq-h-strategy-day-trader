@@ -1,0 +1,513 @@
+{
+ "cutoff": "2023-12-29",
+ "n_settings": 8627,
+ "level1_all_four": 0,
+ "settings_with_years_keeping_goal4": {
+  "1": 44,
+  "2": 0,
+  "3": 0
+ },
+ "fewest_losing_months_in_worst_year": 1,
+ "cnq_buy_and_hold_months": {
+  "2021": {
+   "up_months": 8,
+   "down_months": 4,
+   "months_below_minus2": 3,
+   "months_above_5": 5
+  },
+  "2022": {
+   "up_months": 6,
+   "down_months": 6,
+   "months_below_minus2": 3,
+   "months_above_5": 5
+  },
+  "2023": {
+   "up_months": 6,
+   "down_months": 5,
+   "months_below_minus2": 3,
+   "months_above_5": 5
+  }
+ },
+ "best": [
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 1.0,
+   "stop": 15.0,
+   "hold": 20,
+   "K": 3,
+   "month_end": false,
+   "budget": false,
+   "n": 197,
+   "G": 0.782,
+   "WR": 96.4,
+   "S": [
+    6,
+    5,
+    10
+   ],
+   "GM5": [
+    5,
+    3,
+    8
+   ],
+   "neg": [
+    0,
+    1,
+    0
+   ],
+   "worst": [
+    1.0,
+    -27.52,
+    1.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 1.0,
+   "stop": 15.0,
+   "hold": 10,
+   "K": 3,
+   "month_end": false,
+   "budget": false,
+   "n": 203,
+   "G": 0.744,
+   "WR": 93.6,
+   "S": [
+    5,
+    4,
+    10
+   ],
+   "GM5": [
+    4,
+    3,
+    8
+   ],
+   "neg": [
+    0,
+    1,
+    0
+   ],
+   "worst": [
+    1.0,
+    -27.52,
+    1.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 1.0,
+   "stop": 15.0,
+   "hold": 20,
+   "K": 5,
+   "month_end": false,
+   "budget": false,
+   "n": 217,
+   "G": 0.74,
+   "WR": 96.3,
+   "S": [
+    6,
+    5,
+    10
+   ],
+   "GM5": [
+    5,
+    3,
+    8
+   ],
+   "neg": [
+    0,
+    1,
+    0
+   ],
+   "worst": [
+    1.0,
+    -39.77,
+    1.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 1.0,
+   "stop": 15.0,
+   "hold": 10,
+   "K": 5,
+   "month_end": false,
+   "budget": false,
+   "n": 220,
+   "G": 0.698,
+   "WR": 93.6,
+   "S": [
+    5,
+    4,
+    10
+   ],
+   "GM5": [
+    4,
+    3,
+    8
+   ],
+   "neg": [
+    0,
+    1,
+    0
+   ],
+   "worst": [
+    1.0,
+    -39.77,
+    1.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 2.0,
+   "stop": 15.0,
+   "hold": 20,
+   "K": 3,
+   "month_end": false,
+   "budget": false,
+   "n": 152,
+   "G": 1.199,
+   "WR": 92.1,
+   "S": [
+    6,
+    5,
+    10
+   ],
+   "GM5": [
+    4,
+    4,
+    9
+   ],
+   "neg": [
+    1,
+    1,
+    0
+   ],
+   "worst": [
+    -4.82,
+    -43.94,
+    2.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 2.0,
+   "stop": 15.0,
+   "hold": 10,
+   "K": 3,
+   "month_end": false,
+   "budget": false,
+   "n": 167,
+   "G": 1.082,
+   "WR": 88.6,
+   "S": [
+    5,
+    6,
+    11
+   ],
+   "GM5": [
+    4,
+    5,
+    9
+   ],
+   "neg": [
+    1,
+    1,
+    0
+   ],
+   "worst": [
+    -3.14,
+    -43.94,
+    2.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 2.0,
+   "stop": 15.0,
+   "hold": 20,
+   "K": 5,
+   "month_end": false,
+   "budget": false,
+   "n": 201,
+   "G": 1.141,
+   "WR": 92.0,
+   "S": [
+    6,
+    7,
+    10
+   ],
+   "GM5": [
+    4,
+    5,
+    9
+   ],
+   "neg": [
+    1,
+    1,
+    0
+   ],
+   "worst": [
+    -21.35,
+    -67.69,
+    2.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 2.0,
+   "stop": 15.0,
+   "hold": 10,
+   "K": 5,
+   "month_end": false,
+   "budget": false,
+   "n": 211,
+   "G": 0.982,
+   "WR": 88.2,
+   "S": [
+    5,
+    6,
+    11
+   ],
+   "GM5": [
+    3,
+    5,
+    9
+   ],
+   "neg": [
+    1,
+    1,
+    0
+   ],
+   "worst": [
+    -21.05,
+    -67.69,
+    2.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 2.0,
+   "stop": 15.0,
+   "hold": 20,
+   "K": 5,
+   "month_end": false,
+   "budget": true,
+   "n": 157,
+   "G": 1.626,
+   "WR": 95.5,
+   "S": [
+    6,
+    6,
+    10
+   ],
+   "GM5": [
+    4,
+    4,
+    9
+   ],
+   "neg": [
+    1,
+    2,
+    0
+   ],
+   "worst": [
+    -15.0,
+    -16.72,
+    2.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 2.0,
+   "stop": 15.0,
+   "hold": 20,
+   "K": 3,
+   "month_end": false,
+   "budget": true,
+   "n": 127,
+   "G": 1.482,
+   "WR": 94.5,
+   "S": [
+    6,
+    5,
+    10
+   ],
+   "GM5": [
+    4,
+    4,
+    9
+   ],
+   "neg": [
+    1,
+    2,
+    0
+   ],
+   "worst": [
+    -15.0,
+    -16.72,
+    2.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 1.0,
+   "stop": 15.0,
+   "hold": 20,
+   "K": 5,
+   "month_end": false,
+   "budget": true,
+   "n": 185,
+   "G": 0.864,
+   "WR": 97.3,
+   "S": [
+    6,
+    5,
+    10
+   ],
+   "GM5": [
+    5,
+    2,
+    8
+   ],
+   "neg": [
+    0,
+    2,
+    0
+   ],
+   "worst": [
+    1.0,
+    -16.72,
+    1.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  },
+  {
+   "src": "H20 NEW",
+   "q": 0.7,
+   "T": 1.0,
+   "stop": 15.0,
+   "hold": 20,
+   "K": 3,
+   "month_end": false,
+   "budget": true,
+   "n": 170,
+   "G": 0.842,
+   "WR": 97.1,
+   "S": [
+    6,
+    5,
+    10
+   ],
+   "GM5": [
+    5,
+    2,
+    8
+   ],
+   "neg": [
+    0,
+    2,
+    0
+   ],
+   "worst": [
+    1.0,
+    -16.72,
+    1.0
+   ],
+   "need": [
+    7,
+    8,
+    8
+   ],
+   "years_gm_ok": 1,
+   "level1_all_four": false
+  }
+ ]
+}
