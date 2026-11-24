@@ -157,11 +157,46 @@ it means the later results are less independent than the first ones, which
 is why the count of runs (22) is published and why the forward test on
 trades after 2026-11-20 is the confirmation that counts.
 
+## 6. Can goal 4 in its current form be reached at all? (2026-11-24)
+
+Goal 4 now asks, in every year, for 8 months whose trades total 5% or more
+and at most one losing month, no worse than -2%. Before building another
+model, `src/s14_goal4_feasibility.py` (results in
+`results/experiments/stage14_goal4_feasibility.json`) asked whether any design
+in a wide family could meet it together with G1, WR1 and S1 on the training
+years, with the test years removed from the data.
+
+The family: enter at the close of every day the forecast (5- or 20-session,
+old or old + new features, out of fold) is in the top half, 30% or 15%;
+$1,000 per entry; up to 1, 3 or 5 open at once; target 1-4%; stop 1, 2, 3,
+5 or 15%; 5, 10 or 20 sessions; with and without closing every trade by the
+end of its month; with and without a monthly loss budget that stops new
+entries once a month's trades have lost 1.5%. **8,627 settings.** They were
+scored on the same years they were picked on, so this is an upper bound: a
+design that cannot pass here cannot pass honestly.
+
+**Result: none of the 8,627 reaches level 1 on all four goals in every
+training year. Only 44 keep goal 4 in even one year, and none in two.** Every
+setting has at least one losing month in its worst year, and almost always a
+month far below -2%: a stopped trade loses 1-15% at once, and several trades
+opened in the same month on the same stock go down together.
+
+For comparison, simply holding CNQ had 4 to 6 losing months a year in
+2021-2023, three of them below -2% in every year.
+
+What it means: a year with at most one small losing month and eight months
+of +5% is the profile of a strategy whose monthly result almost never dips.
+Trades in one stock over a few days or weeks move together and lose in the
+same slides, so adding more of them in a month raises the gains and the
+losses together. On the training years no design in this family comes close,
+so no new model was run on 2024-2026 (still 22 runs). The forward test of the
+frozen models continues.
+
 ## Code and results
 
 `src/stage14_lib.py`, `src/stage14_information_test.py`,
-`src/stage14_macro_fusion.py`, `src/stage14_leak_check.py`;
-`results/experiments/stage14_data_checks.json`, `stage14_leak_check.json`,
+`src/stage14_macro_fusion.py`, `src/stage14_leak_check.py`, `src/s14_goal4_feasibility.py`;
+`results/experiments/stage14_data_checks.json`, `stage14_leak_check.json`, `stage14_goal4_feasibility.json`,
 `stage14_information_test.json`, `stage14_macro_fusion_selection.json`. The
 out-of-fold forecasts (`stage14_oof_predictions_LOCAL_ONLY.pkl`) hold forward
 returns and stay in the local folder.

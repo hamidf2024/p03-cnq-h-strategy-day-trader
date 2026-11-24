@@ -387,6 +387,12 @@ per-stage section at the end.)*
   count. When a goal counts successes, show the size of the failures beside
   it (the year total, the losing months) from the first report, and check
   whether the goal can be met while the money result is poor.
+- **(Goal scoring) Price a goal before building models for it.** After goal 4
+  was changed to allow only one small losing month a year, an upper-bound
+  search (8,627 settings picked and scored on the same training years) found
+  none that meets it together with the other three goals, and none that keeps
+  it for two years. Checking first cost minutes and saved a test-year run.
+  When a goal changes, run the upper bound before designing to it.
 
 ## 4. Evaluation and metrics lessons
 

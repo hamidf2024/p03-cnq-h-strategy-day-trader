@@ -211,6 +211,15 @@ against +0.85%). No setting passes all five parts of the gate: the closest
 fails one part. Nothing was run on 2024-2026; the count stays at 22 runs.
 `docs/13_Stage14_New_Information.md`.
 
+**Goal 4 in its current form, feasibility on the training years
+(2026-11-24).** 8,627 settings of many-trades-a-month CNQ campaigns (forecast
+filters, 1-5 trades open, targets 1-4%, stops 1-15%, month-end exits, a
+monthly loss budget) were scored on 2021-2023 with the test years removed,
+picking and scoring on the same years (an upper bound). None reaches level 1
+on all four goals; only 44 keep goal 4 in one year and none in two. Holding
+CNQ had three months below -2% in each of those years. No model was run on
+2024-2026. `docs/13`, Section 6.
+
 **The fourth goal, GM, with the losing-month rule.** No model reaches GM1.
 Model O has the most months of 5% or more (8 / 10 / 8 of 11) but 3, 2 and 3
 negative months, the worst about -30%, so none of its years counts. Only M
