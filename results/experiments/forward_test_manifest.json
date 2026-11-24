@@ -3,7 +3,7 @@
  "frozen_on": "2026-11-23",
  "data_end": "2026-11-20",
  "first_forward_session": "2026-11-23",
- "judged_on": "the four goal ladders (G, WR, S, GM) with the owner's same-time rule and the 5% / 15% loss limits; interim figures may be reported, a level counts after 12 full months",
+ "judged_on": "the four goal ladders (G, WR, S, GM) with the owner's same-time rule, the no-negative-month rule for GM (2026-11-24) and the 5% / 15% loss limits; interim figures may be reported, a level counts after 12 full months",
  "candidates": [
   {
    "name": "M. One-a-month, 15% stop",
@@ -17,14 +17,14 @@
    "id": "R13_two_buys_stop15",
    "artefact": "stage13_frozen_R13.pkl",
    "sha256": "eefbb02587a4b6381e38d019969350bce375a748f1e674360cbbd9f514eda291",
-   "status": "tested on 2024-2026 (WR3 S1 GM1, not G1)"
+   "status": "tested on 2024-2026 (WR3 S1; 8/10/8 months of 5% or more but 3/2/3 negative months, so not GM1 under the 2026-11-24 rule; not G1)"
   },
   {
    "name": "M's buy plus a second buy at 10:00 the next day",
    "id": "R13F_close_next1000",
    "artefact": "stage13_frozen_FORWARD_close_next1000.pkl",
    "sha256": "42fcc83c2b995e1760075360be43e4ffc59c149d9bc469c9af4d3ee59e2d4eed",
-   "status": "NOT a test result: picked after seeing 2024-2026, where it shows G +1.05%, WR 82.9%, S 9/10/8, GM 8/10/8; forward test only"
+   "status": "NOT a test result: picked after seeing 2024-2026, where it shows G +1.05%, WR 82.9%, S 9/10/8 and 8/10/8 months of 5% or more; under the owner's goal-4 rule of 2026-11-24 (no negative month) it does NOT reach GM1 (3 / 2 / 3 negative months); forward test only"
   },
   {
    "name": "L. Peer-Fusion GBM, 5% stop",

@@ -17,7 +17,13 @@
     1,
     0
    ],
+   "negative_months": [
+    2,
+    0,
+    2
+   ],
    "stops": 4,
+   "level1_all_four_before_2026_11_24_rule": false,
    "level1_all_four": false
   },
   "Buy at 10:00 next day only": {
@@ -34,7 +40,13 @@
     0,
     0
    ],
+   "negative_months": [
+    4,
+    2,
+    2
+   ],
    "stops": 6,
+   "level1_all_four_before_2026_11_24_rule": false,
    "level1_all_four": false
   },
   "Buy at 1:00 pm next day only": {
@@ -51,7 +63,13 @@
     0,
     1
    ],
+   "negative_months": [
+    2,
+    2,
+    3
+   ],
    "stops": 7,
+   "level1_all_four_before_2026_11_24_rule": false,
    "level1_all_four": false
   },
   "O as tested: 10:00 and 1:00 pm next day": {
@@ -68,7 +86,13 @@
     10,
     8
    ],
+   "negative_months": [
+    3,
+    2,
+    3
+   ],
    "stops": 13,
+   "level1_all_four_before_2026_11_24_rule": false,
    "level1_all_four": false
   },
   "Close and 10:00 next day": {
@@ -85,8 +109,14 @@
     10,
     8
    ],
+   "negative_months": [
+    3,
+    2,
+    3
+   ],
    "stops": 10,
-   "level1_all_four": true
+   "level1_all_four_before_2026_11_24_rule": true,
+   "level1_all_four": false
   },
   "Close and 1:00 pm next day": {
    "trades": 70,
@@ -102,7 +132,13 @@
     10,
     7
    ],
+   "negative_months": [
+    2,
+    2,
+    4
+   ],
    "stops": 11,
+   "level1_all_four_before_2026_11_24_rule": false,
    "level1_all_four": false
   },
   "All three buys": {
@@ -119,9 +155,17 @@
     10,
     7
    ],
+   "negative_months": [
+    3,
+    2,
+    4
+   ],
    "stops": 17,
+   "level1_all_four_before_2026_11_24_rule": false,
    "level1_all_four": false
   }
  },
- "training_years_order": "On 2021-2023 the fixed order put \"10:00 and 1:00 pm next day\" first (17 of 18 peer stock-years); \"close and 10:00 next day\" had 15 of 18."
+ "training_years_order": "On 2021-2023 the fixed order put \"10:00 and 1:00 pm next day\" first (17 of 18 peer stock-years); \"close and 10:00 next day\" had 15 of 18.",
+ "rescored_on": "2026-11-24",
+ "goal_4_rule": "Owner, 2026-11-24: a year counts toward GM only if no month of it ends below 0%. Under this rule no arrangement reaches level 1 on all four goals."
 }
