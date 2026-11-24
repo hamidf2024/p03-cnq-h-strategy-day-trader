@@ -197,16 +197,30 @@ been frozen, with M, O and L, for a forward test on trades opened after
 2026-11-20 (`results/experiments/forward_test_manifest.json`; `docs/12`,
 Section 18).
 
-**The fourth goal, GM.** No model reaches GM1. The closest inside the loss
-limits is E. Peer-Fusion GBM with 3 / 2 / 2 months of 5% or more.
-Model M is far from it by design: one trade a month sold at +4% makes a
-month's total of about 4% (it reached 5% once in 35 months). GM needs several winning trades in the same month,
-which pulls against the one-trade-a-month design that reaches S. The ranking
-now averages progress on all four goals: M. One-a-month, 15% stop, E. Peer-Fusion GBM, L. Peer-Fusion GBM, 5% stop, K. One-a-month, 5% stop, H. Peer-Fusion, target and stop.
+**Stage 14, new information (2026-11-24): better forecast, gate not passed,
+no test run.** Eighteen more symbols (oil curve, Brent, natural gas,
+refiners, currency, market, volatility, credit) were added. On 2021-2023 with
+the test years removed, the month-ahead forecast improves (rank correlation
+for CNQ 0.114 to 0.166) and a campaign timed by it (model R) makes more than
+the same campaign timed by the old forecast in all eight settings (+1.58%
+against +0.85%). No setting passes all five parts of the gate: the closest
+fails one part. Nothing was run on 2024-2026; the count stays at 22 runs.
+`docs/13_Stage14_New_Information.md`.
+
+**The fourth goal, GM.** Model O reaches GM1 (8 / 10 / 8 of 11 months of 5%
+or more) by buying twice at different times with a +4% target, so a month in
+which both buys reach the target totals 8%. Model M does not: one trade a
+month sold at +4% makes a month's total of about 4% (it reached 5% once in 35
+months). The ranking averages progress on all four goals; the current order
+is in the table above.
 
 **Where the project stands.**
 
-- **Inside the 15% limit, model M reaches level 1 on all three goals:**
+- **No model reaches level 1 on all four goals.** M has G, WR and S; O has
+  WR, S and GM (and misses G at +0.23%); see the sections above for O, P, Q
+  and Stage 14.
+- **Inside the 15% limit, model M reaches level 1 on G, WR and S** (its
+  result is fragile to the entry time; see model O above):
   one trade a month, +4% target, 15% stop, 60-day limit. 35 trades, +1.85%
   per trade (G1), 88.6% win rate (WR3), 10 / 12 / 9-of-11 qualifying months
   (S1). 31 trades hit the target; four were stopped at about 15%. Its 95%

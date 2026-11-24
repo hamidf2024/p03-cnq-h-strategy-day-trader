@@ -191,3 +191,6 @@ table.score{min-width:1228px}
 #afterfact th{white-space:normal;vertical-align:bottom}
 #afterfact tr.stop-best td{background:var(--accent-soft)}
 #afterfact td:first-child{font-weight:600}
+/* Stage 14 section */
+#stage14 table{min-width:720px;width:100%}
+#stage14 th{white-space:normal;vertical-align:bottom}
