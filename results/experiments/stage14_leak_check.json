@@ -1,0 +1,43 @@
+{
+ "checked_on": "2026-11-24",
+ "n_features": 108,
+ "comparisons": {
+  "training years (data cut at 2023-12-29)": {
+   "rows": 5184,
+   "features": 108,
+   "cells": 559872,
+   "max_abs_difference": 0.0,
+   "cells_missing_in_one_only": 0,
+   "features_that_differ": []
+  },
+  "inside the test years (data cut at 2025-06-30)": {
+   "rows": 7428,
+   "features": 108,
+   "cells": 802224,
+   "max_abs_difference": 0.0,
+   "cells_missing_in_one_only": 0,
+   "features_that_differ": []
+  }
+ },
+ "signals": {
+  "model P signal days up to a month before 2023-12-29": {
+   "n": 40,
+   "identical": true
+  },
+  "model P signal days up to a month before 2025-06-30": {
+   "n": 58,
+   "identical": true
+  }
+ },
+ "frozen_models": {
+  "Peer-Fusion model, 5-session label": {
+   "last_training_day": "2023-12-21",
+   "last_day_its_labels_reach": "2023-12-29",
+   "before_2024": true
+  },
+  "out-of-fold forecasts": {
+   "first": "2021-01-04",
+   "last": "2023-12-29"
+  }
+ }
+}
