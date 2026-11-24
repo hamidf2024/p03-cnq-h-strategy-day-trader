@@ -55,11 +55,11 @@ Definitions
   to 5% or more (the month's total, confirmed by the owner with a worked
   example: +4%, +4% and -2% make +6% and count). That is $50 or more on
   $1,000 per trade. GM is counted per year like S.
-  Owner's rule of 2026-11-24 (second form, same day): a year counts toward a
-  GM level only if it has at most ONE negative month and that month is no
-  worse than -2% (a month with no trades is not negative). A year that breaks
-  the rule counts as zero months, for the level and for progress. The first
-  form, a few hours earlier, allowed no negative month at all.
+  Owner's rule of 2026-11-24 (third form, same day): a year counts toward a
+  GM level only if it has at most TWO negative months and each of them is no
+  worse than -3% (a month with no trades is not negative). A year that breaks
+  the rule counts as zero months, for the level and for progress. Earlier forms the same day allowed
+  no negative month, then one of no more than -2%.
 * Steadiness is counted per calendar year. 2026 runs to 18 November, so it has
   11 months; its count is compared with the same fractions (8/12, 10/12, 12/12).
   A level counts as reached only if it is reached in every blind year.
@@ -90,10 +90,10 @@ WR_LEVELS = (50.0, 65.0, 75.0)
 S_LEVELS = (8 / 12, 10 / 12, 12 / 12)
 GM_LEVELS = (8 / 12, 10 / 12, 12 / 12)
 GM_MONTH_TOTAL_PCT = 5.0
-# owner's rule of 2026-11-24 (second form): a year counts toward GM only if it has at most ONE negative month
-# and that month is no worse than -2%
-GM_MAX_NEGATIVE_MONTHS = 1
-GM_WORST_NEGATIVE_MONTH_PCT = -2.0
+# owner's rule of 2026-11-24 (third form): a year counts toward GM only if it has at most TWO negative months
+# and each of them is no worse than -3%
+GM_MAX_NEGATIVE_MONTHS = 2
+GM_WORST_NEGATIVE_MONTH_PCT = -3.0
 MONTHS_IN_YEAR = {2024: 12, 2025: 12, 2026: 11}      # data ends 2026-11-18
 MIN_TRADES_FOR_RANK = 15
 # owner's risk rule (2026-11-23): two levels for the worst trade, 5% (strict) and 15% (wide)
@@ -292,8 +292,8 @@ def score(paths, stage11, stage12, outdir):
                               gm_year_counts=bool(mneg[ms.index].sum() <= GM_MAX_NEGATIVE_MONTHS and round(float(ms.min()), 2) >= GM_WORST_NEGATIVE_MONTH_PCT),
                               best_month_avg_pct_per_trade=round(float(ma.max()), 4) if ma.notna().any() else None,
                               gross_pct_year=round(float(ms.sum()), 2), dollars_year=round(float(ms.sum()) * STAKE / 100, 2))
-        # GM (owner's rule of 2026-11-24, second form): a year counts only if it has at most one negative month and
-        # that month is no worse than -2%; then the share of months totalling 5% or more decides the level. A year
+        # GM (owner's rule of 2026-11-24, third form): a year counts only if it has at most two negative months and
+        # each is no worse than -3%; then the share of months totalling 5% or more decides the level. A year
         # that breaks the rule counts as zero.
         gfrac_raw = {y: by_year[y]['months_total_5pct'] / by_year[y]['months'] for y in by_year}
         gfrac = {y: (gfrac_raw[y] if by_year[y]['gm_year_counts'] else 0.0) for y in by_year}
@@ -347,8 +347,8 @@ def score(paths, stage11, stage12, outdir):
         goals=dict(G=dict(name='Average gross % per trade', levels=['>= 1%', '>= 2%', '> 3%']),
                    WR=dict(name='Win rate', levels=['>= 50%', '>= 65%', '> 75%']),
                    S=dict(name='Months per year in which the average gross % per trade is above 1%', levels=['8 of 12', '10 of 12', '12 of 12']),
-                   GM=dict(name="Months per year whose trades add up to 5% or more (the month's total gross %), in a year with at most one negative month, no worse than -2%",
-                           levels=['8 of 12', '10 of 12', '12 of 12'], negative_month_rule='a year counts only if at most one of its months ends below 0% and that month is no worse than -2%; a month with no trades is not negative',
+                   GM=dict(name="Months per year whose trades add up to 5% or more (the month's total gross %), in a year with at most two negative months, each no worse than -3%",
+                           levels=['8 of 12', '10 of 12', '12 of 12'], negative_month_rule='a year counts only if at most two of its months end below 0% and each of them is no worse than -3%; a month with no trades is not negative',
                            max_negative_months=GM_MAX_NEGATIVE_MONTHS, worst_negative_month_pct=GM_WORST_NEGATIVE_MONTH_PCT)),
         basis=dict(period='blind 2024-01-02 to 2026-11-18', stake_per_trade=STAKE, months_counted=MONTHS_IN_YEAR,
                    ranking='overall progress = average of four fractions: gross % per trade / 3%, win rate / 75%, '

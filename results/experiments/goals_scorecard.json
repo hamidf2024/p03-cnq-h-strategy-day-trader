@@ -25,15 +25,15 @@
    ]
   },
   "GM": {
-   "name": "Months per year whose trades add up to 5% or more (the month's total gross %), in a year with at most one negative month, no worse than -2%",
+   "name": "Months per year whose trades add up to 5% or more (the month's total gross %), in a year with at most two negative months, each no worse than -3%",
    "levels": [
     "8 of 12",
     "10 of 12",
     "12 of 12"
    ],
-   "negative_month_rule": "a year counts only if at most one of its months ends below 0% and that month is no worse than -2%; a month with no trades is not negative",
-   "max_negative_months": 1,
-   "worst_negative_month_pct": -2.0
+   "negative_month_rule": "a year counts only if at most two of its months end below 0% and each of them is no worse than -3%; a month with no trades is not negative",
+   "max_negative_months": 2,
+   "worst_negative_month_pct": -3.0
   }
  },
  "basis": {
@@ -88,7 +88,7 @@
  },
  "leaders": {
   "G": "R6_one_a_month",
-  "GM": "R6_one_a_month",
+  "GM": "RuleOrModel",
   "S_worst_year": "R6_one_a_month",
   "WR": "R9_one_a_month_stop15",
   "S": "R6_one_a_month"
@@ -911,7 +911,7 @@
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 15
+   "rank": 16
   },
   {
    "id": "V7.1_wf",
@@ -1076,7 +1076,7 @@
    "months_negative_all": 5,
    "months_negative_worst_year": 2,
    "years_without_negative_month": 0,
-   "years_that_count_for_gm": 0,
+   "years_that_count_for_gm": 1,
    "best_month_total_pct": 8.53,
    "by_year": {
     "2024": {
@@ -1122,7 +1122,7 @@
      "months_no_trades": 0,
      "months_negative": 1,
      "worst_month_total_pct": -2.2,
-     "gm_year_counts": false,
+     "gm_year_counts": true,
      "best_month_avg_pct_per_trade": 0.0836,
      "gross_pct_year": 32.61,
      "dollars_year": 326.07
@@ -1137,15 +1137,15 @@
     "G": 0.006,
     "WR": 0.799,
     "S": 0.0,
-    "GM": 0.0,
-    "overall": 0.201,
-    "overall_if_scratch_is_not_a_win": 0.15487
+    "GM": 0.121,
+    "overall": 0.231,
+    "overall_if_scratch_is_not_a_win": 0.18517
    },
    "keeps_loss_limit": true,
    "keeps_strict_loss_limit": true,
    "trades_beyond_loss_limit": 0,
    "enough_trades_to_rank": true,
-   "rank": 16
+   "rank": 15
   },
   {
    "id": "V7.1_pct",

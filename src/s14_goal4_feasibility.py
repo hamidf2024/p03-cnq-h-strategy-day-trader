@@ -1,7 +1,7 @@
 """
 Stage 14, goal-4 feasibility (training years only, test years removed): can ANY design in a wide family of
 many-trades-per-month CNQ campaigns reach level 1 on all four goals, with goal 4 in its 2026-11-24 form
-(8 months a year whose trades total 5% or more, and at most one losing month, no worse than -2%)?
+(8 months a year whose trades total 5% or more, with at most MAX_NEG losing months, each no worse than WORST)?
 
 The settings are chosen on the same years they are scored on, so this is an upper bound: if nothing passes
 here, nothing would pass honestly. Entries use the out-of-fold Stage 14 forecasts (each day forecast by a
@@ -19,6 +19,9 @@ import s13_lib as L
 from stage13_two_buys import Tape
 
 RES = os.environ.get('S13_OUT', 'results/experiments')
+# goal 4 negative-month rule: owner's third form of 2026-11-24 (at most two losing months a year, each no worse than -3%).
+# The first run of this script used the second form (one month, -2%); its result is kept in the JSON under 'earlier_rule'.
+MAX_NEG, WORST = int(os.environ.get('GM_MAX_NEG', 2)), float(os.environ.get('GM_WORST', -3.0))
 YEARS = [2021, 2022, 2023]
 
 
@@ -84,7 +87,7 @@ def main():
                                         g = t[t.y == y].groupby('m').ret; tot = g.sum(); need = int(np.ceil(8 / 12 * avail[y]))
                                         neg = int((tot.round(2) < 0).sum()); worst = float(tot.min()) if len(tot) else 0.0
                                         per[y] = dict(n=int((t.y == y).sum()), S=int((g.mean() > 1).sum()), GM5=int((tot >= 5).sum()), neg=neg, worst=round(worst, 2),
-                                                      need=need, gm_ok=bool(int((tot >= 5).sum()) >= need and neg <= 1 and round(worst, 2) >= -2.0))
+                                                      need=need, gm_ok=bool(int((tot >= 5).sum()) >= need and neg <= MAX_NEG and round(worst, 2) >= WORST))
                                     G = float(t.ret.mean()); WR = float((t.ret > 0).mean() * 100)
                                     l1 = G >= 1 and WR >= 50 and all(p['S'] >= p['need'] and p['gm_ok'] for p in per.values())
                                     res.append(dict(src=f'H{H} {name}', q=q, T=T, stop=s, hold=hold, K=K, month_end=month_end, budget=budget, n=int(len(t)),
@@ -107,7 +110,9 @@ def main():
     hold_stats = {int(y): dict(up_months=int((g > 0).sum()), down_months=int((g < 0).sum()), months_below_minus2=int((g < -2).sum()), months_above_5=int((g >= 5).sum()))
                   for y, g in mret.groupby(mret.index.year)}
     print('\nholding CNQ, by year:', hold_stats)
-    out = dict(cutoff=cut, n_settings=int(len(r)), level1_all_four=int(r.level1_all_four.sum()),
+    prev = json.load(open(f'{RES}/stage14_goal4_feasibility.json')) if os.path.exists(f'{RES}/stage14_goal4_feasibility.json') else {}
+    earlier = prev.get('earlier_rule') or ({k: prev[k] for k in ('n_settings', 'level1_all_four', 'settings_with_years_keeping_goal4', 'fewest_losing_months_in_worst_year')} | {'rule': 'at most one losing month, no worse than -2%'} if prev else None)
+    out = dict(rule=f'at most {MAX_NEG} losing months a year, each no worse than {WORST}%', earlier_rule=earlier, cutoff=cut, n_settings=int(len(r)), level1_all_four=int(r.level1_all_four.sum()),
                settings_with_years_keeping_goal4={k: int((r.years_gm_ok >= k).sum()) for k in (1, 2, 3)},
                fewest_losing_months_in_worst_year=int(r.min_neg.min()), cnq_buy_and_hold_months=hold_stats,
                best=best.drop(columns=['min_neg', 'worst_month']).to_dict('records'))
