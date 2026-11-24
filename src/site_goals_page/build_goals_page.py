@@ -109,7 +109,7 @@ def neg_by_year(c):
 
 
 def neg_tag(c, long=False):
-    """Goal 4 rule (owner, 2026-11-24): a year counts only with at most one losing month, no worse than -2%."""
+    """Goal 4 rule (owner, 2026-11-24): a year counts only with at most two losing months, each no worse than -3%."""
     ys = list(c['by_year'].values()); n = [v['months_negative'] for v in ys]; ok = [v['gm_year_counts'] for v in ys]
     if sum(n) == 0:
         return '<span class="negtag ok">no losing month</span>'
@@ -171,7 +171,7 @@ goals_html = (
                 'Months in which the average gross profit per trade is above 1%. A month with no trades does not count. A level must hold in every year tested.')
     + goal_card('GM', 'Monthly profit', 'In how many months of the year do the month\u2019s trades add up to 5% or more, with almost no losing month?',
                 [('8 of 12', 'months'), ('10 of 12', 'months'), ('12 of 12', 'every month')],
-                'Months whose trades together make 5% or more, which is $50 or more at $1,000 per trade. A year counts only if at most one of its months ends below zero, and that month loses no more than 2% (rule set November 24, 2026). Trades opened at exactly the same time count once. A level must hold in every year tested.'))
+                'Months whose trades together make 5% or more, which is $50 or more at $1,000 per trade. A year counts only if at most two of its months end below zero, and neither loses more than 3% (rule set November 24, 2026). Trades opened at exactly the same time count once. A level must hold in every year tested.'))
 
 # ------------------------------------------------------------------ top 5
 def top_row(c):
@@ -463,7 +463,7 @@ THREE_NOTES = {
  'R13_two_buys_stop15': [
   'What it is. Model M’s signal and exit with two $1,000 buys on the day after the signal, at 10:00 and at 1:00 pm.',
   'What it reaches. S 9 / 10 / 8 of 11, a 78.6% win rate, and the most months of 5% or more of any model: 8 / 10 / 8 of 11.',
-  'Why it is not GM1. Since November 24, 2026 a year counts for goal 4 only if it has at most one losing month, and that month loses no more than 2%. O has 3, 2 and 3 losing months, most of them months in which both buys were stopped (−30%).',
+  'Why it is not GM1. Since November 24, 2026 a year counts for goal 4 only if it has at most two losing months, and neither loses more than 3%. O has 3, 2 and 3 losing months, most of them months in which both buys were stopped (−30%).',
   'What else it misses. Its average trade made +0.23%; G1 needs 1%. 13 of its 70 trades were stopped at 15%, and the likely range of the average runs from about −1.6% to +1.9%.',
   'What it shows about model M. O buys a few hours after M on the same signals. In 7 of 35 months M’s trade reached +4% while at least one of O’s did not. In three of them (January 2025, February 2025, June 2026) M won on an overnight jump, and both of O’s buys, made after the jump, were stopped. M’s 88.6% win rate depends on its exact entry price.',
   'How it was run. It reached level 1 on the training years with no spare month, which did not pass the stricter training test; it was run once at the owner’s standing instruction to test each trained model. This was run 22 on the test years.',
@@ -493,7 +493,7 @@ if os.path.exists(_cf):
         <tbody>{''.join(_crow(k, v) for k, v in _c.items())}</tbody>
       </table></div>
       <ul style="margin-top:12px">
-        <li><strong>Under goal 4 as it now stands, none passes.</strong> Every arrangement has two or more losing months in each year except M alone in 2025, and a year counts only with at most one losing month of no more than 2%.</li>
+        <li><strong>Under goal 4 as it now stands, none passes.</strong> Every arrangement has two or more losing months in each year except M alone in 2025, and a year counts only with at most two losing months of no more than 3% each.</li>
         <li><strong>Before the no-losing-month rule, one did.</strong> M&rsquo;s buy at the close plus a second buy at 10:00 the next day showed +1.05%, 82.9%, S 9 / 10 / 8 and 8 / 10 / 8 months of 5% or more. It was not counted then either: it was picked with the answers in view, the training years chose a different arrangement (model O), and it had no room to spare.</li>
         <li><strong>Forward test.</strong> M, O, L and that arrangement were frozen on November 23, 2026 for trades opened after that date. Only new trades can confirm any of them.</li>
       </ul></div>"""
@@ -501,7 +501,7 @@ sbest = max(d['methods'], key=lambda c: (s_worst(c), c['progress']['S']))
 gbm_best = max(OKM, key=lambda c: (gm_worst(c), c['progress']['GM']))
 same_best = max((c['best_month_avg_pct_per_trade'] for c in d['methods'] if KIND[c['id']] == 'Same-day'))
 any_s = [c for c in d['methods'] if c['S_level'] > 0]
-GM_LEAD = (f"GM1 needs 8 such months in every year, with at most one losing month of no more than 2%. It is reached by" if gbm_best['GM_level'] else "No model reaches GM1, which needs 8 such months in every year, with at most one losing month of no more than 2%. The most months of 5% or more inside the loss limits:")
+GM_LEAD = (f"GM1 needs 8 such months in every year, with at most two losing months of no more than 3% each. It is reached by" if gbm_best['GM_level'] else "No model reaches GM1, which needs 8 such months in every year, with at most two losing months of no more than 3% each. The most months of 5% or more inside the loss limits:")
 GM_TAIL = '' if gbm_best['GM_level'] else (" It has " + ' / '.join(str(v['months_negative']) for v in gbm_best['by_year'].values()) + " losing months, so none of its years counts.")
 _clean = [c for c in OKM if c['years_that_count_for_gm']]
 GM_TAIL += (" Only " + ', '.join(f"{E(c['name'])} ({c['years_that_count_for_gm']} of 3 years)" for c in _clean) + " has a year that keeps the losing-month rule." if _clean else " No ranked model has a year that keeps the losing-month rule.")
@@ -569,7 +569,7 @@ html = f'''<!doctype html>
 
   <section id="top5">
     <h2>Top 5 models</h2>
-    <p class="sub">Ranked by overall progress: how far a model is toward the top level of each goal (3% per trade, 75% win rate, and 12 of 12 months on each of the two month goals), averaged over the four. For goal 4 a year counts as zero unless it has at most one losing month of no more than 2%. Only models inside the 15% loss limit are ranked; the table shows which also keep 5%. The marks on each bar are levels 1, 2 and 3.</p>
+    <p class="sub">Ranked by overall progress: how far a model is toward the top level of each goal (3% per trade, 75% win rate, and 12 of 12 months on each of the two month goals), averaged over the four. For goal 4 a year counts as zero unless it has at most two losing months of no more than 3% each. Only models inside the 15% loss limit are ranked; the table shows which also keep 5%. The marks on each bar are levels 1, 2 and 3.</p>
     <ol class="top5">{top_html}</ol>
     <div class="note2">
       <h3>Four things to know before relying on this ranking</h3>
@@ -592,7 +592,7 @@ html = f'''<!doctype html>
         <tbody>{table_html}</tbody>
       </table></div>
     </div>
-    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. Under each profit-per-trade bar are two figures for 2024, 2025 and 2026: the average gross % per trade in that year, and what $1,000 would stand at by the end of that year when $1,000 goes into every trade and profits are not reinvested ($1,098 means $98 of profit; each year starts again from $1,000; before costs). The win rate, steady months and monthly profit columns show each year's own figure in the same way. A GM level needs a year with at most one losing month, of no more than 2%, so each year also shows how many of its months ended below zero (&ldquo;clean&rdquo; means none). In the monthly profit column the last figure on each line is the year's total gross %: every trade of that year added up (the average per trade times the number of trades). The headline steady-months and monthly-profit figures are the worst of the three years on a 12-month basis, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
+    <p class="fine" style="margin-top:10px">Same-day models buy and sell within one trading day on 5-minute bars. Multi-day models hold for about 5 days or longer. Under each profit-per-trade bar are two figures for 2024, 2025 and 2026: the average gross % per trade in that year, and what $1,000 would stand at by the end of that year when $1,000 goes into every trade and profits are not reinvested ($1,098 means $98 of profit; each year starts again from $1,000; before costs). The win rate, steady months and monthly profit columns show each year's own figure in the same way. A GM level needs a year with at most two losing months, of no more than 3% each, so each year also shows how many of its months ended below zero (&ldquo;clean&rdquo; means none). In the monthly profit column the last figure on each line is the year's total gross %: every trade of that year added up (the average per trade times the number of trades). The headline steady-months and monthly-profit figures are the worst of the three years on a 12-month basis, counting months whose average trade made more than 1%. The small figure beside each win rate counts wins as a share of all trades, break-even ones included. Models with fewer than 15 trades, or that break the 15% loss limit, are scored but not ranked. V1 to V6 use rules set by hand on six weeks of mid-2026, which fall inside the test period, so their scores are flattering.</p>
   </section>
 
   <section id="months">
@@ -608,7 +608,7 @@ html = f'''<!doctype html>
 
   <section id="gm-months">
     <h2>Monthly profit, month by month</h2>
-    <p class="sub">Each square is one month. A month counts toward the GM goal when all the trades opened in it, winners and losers together, add up to 5% or more. That is $50 or more at $1,000 per trade. Since November 24, 2026 a year counts only if it has at most one losing month, and that month loses no more than 2%. Two red squares in a year, or one large one, rule that year out.</p>
+    <p class="sub">Each square is one month. A month counts toward the GM goal when all the trades opened in it, winners and losers together, add up to 5% or more. That is $50 or more at $1,000 per trade. Since November 24, 2026 a year counts only if it has at most two losing months, and neither loses more than 3%. Three red squares in a year, or one large one, rule that year out.</p>
     <div class="card">
       <div class="hm-legend"><span><i class="hm-c hit"></i>Total of 5% or more</span><span><i class="hm-c pos"></i>Profit under 5%</span><span><i class="hm-c neg">{MIN}</i>Loss for the month</span><span><i class="hm-c nt"></i>No trades</span></div>
       <p class="swipe">Swipe sideways to see all 35 months.</p><div class="hm-scroll"><div class="hm">{years}{head_gm}{hm_rows_gm}</div></div>
@@ -656,7 +656,7 @@ html = f'''<!doctype html>
         <li>Trades opened at the same time. By the owner's rule, trades opened at exactly the same time count as one trade; trades opened at different times count separately, even on the same day. No score on this page changed when the rule was applied.</li>
         <li>Model P, run once and not level 1. P passed a stricter training-years test by a wide margin (95.6% of its trades won there) and was then run once on the test years, the twenty-first such run. There 80% won, which is below the 83% it needs to break even with a +3% target and a 15% stop. Waiting for a dip added nothing on the test years.</li>
         <li>Forward test. Models M, O and L, and one arrangement that puts M&rsquo;s and O&rsquo;s buys together, were frozen on November 23, 2026. They will be scored on trades opened after that date when new price data is added. Nothing about them may be changed in the meantime.</li>
-        <li>Goal 4 as it now stands. Before building another model, 8,627 designs with many trades a month were tried on the 2021 to 2023 training years, choosing and scoring on the same years (the most favourable test). None reached level 1 on all four goals, and none kept goal 4 for two years: each had months that lost more than 2%. Holding CNQ had three months below &minus;2% in each of those years. No model was run on the test years.</li>
+        <li>Goal 4 as it now stands. Before building another model, 8,627 designs with many trades a month were tried on the 2021 to 2023 training years, choosing and scoring on the same years (the most favourable test). None reached level 1 on all four goals, and none kept goal 4 for two years, either under the earlier rule (one losing month of no more than 2%) or under the current one (two losing months of no more than 3% each): their losing months were far larger, often a whole stopped trade. Holding CNQ had three months below &minus;2% in each of those years. No model was run on the test years.</li>
         <li>Model R, not run. A campaign timed by a month-ahead forecast that uses the new data did better on the training years than the same campaign with the old forecast, but no setting passed all five checks, so it was not run on the test years.</li>
         <li>Model Q, not run. A version that sells short when the trend is down was tested on the training years. None of its 24 settings passed, and most did worse than always buying, so it was not run on the test years.</li>
         <li>2026 has 11 months of data. Its months are judged on the same fractions (8/12, 10/12, 12/12).</li>
