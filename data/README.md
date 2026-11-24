@@ -22,6 +22,16 @@ How the sources were chosen, their limits and licence terms:
 `src/stage13_check_peer_data.py`, summary in
 `results/experiments/stage13_data_checks.json` (no prices).
 
+## Stage 14 symbols (downloaded 2026-11-23/24, local only)
+
+`data/raw/peers/<SYM>_5min_sip_20200727_to_20261123.csv` for USL, BNO, UNG,
+VLO, MPC, PSX, XOP, OIH, ENB, TRP, FXC, UUP, EWC, SPY, VIXY, TLT, HYG, GLD,
+from `python3 src/stage13_download_peer_oil_data.py extra` (or `all`, which
+also refreshes the eight Stage 13 files). Same source, feed and layout as the
+Stage 13 files; not committed. Checks: `results/experiments/stage14_data_checks.json`.
+USL and FXC trade thinly and are used as daily prices only. What each symbol
+is for: `docs/13_Stage14_New_Information.md`, Section 1.
+
 ## Notes that still apply to the CNQ IEX file
 
 - **Data-vendor sensitivity.** The IEX feed is a small part of the market
