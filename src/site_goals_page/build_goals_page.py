@@ -349,6 +349,61 @@ if os.path.exists(_sf):
 """
 
 LOOKS = int(sys.argv[4]) if len(sys.argv) > 4 else 8
+# ---- Stage 14: new information (training years only); left out if the files are absent
+S14_SECTION = ''
+_i14 = f'{SRC}/stage14_information_test.json'; _m14 = f'{SRC}/stage14_macro_fusion_selection.json'
+if os.path.exists(_i14) and os.path.exists(_m14):
+    _i = json.load(open(_i14))['summary']; _m = json.load(open(_m14))
+    def _ir(lbl, key):
+        o, n = _i[key]['OLD'], _i[key]['NEW']; dlt = n['all'] - o['all']; up = dlt >= 0.03
+        return (f'<tr><td>{lbl}</td><td class="num">{o["all"]:.3f}</td><td class="num {"pos" if up else ""}">{n["all"]:.3f}</td>'
+                f'<td class="num">{pct(o["top_minus_bottom_pct"], 2, True)}</td><td class="num {"pos" if up else ""}">{pct(n["top_minus_bottom_pct"], 2, True)}</td><td>{"Better" if up else ("Worse" if dlt <= -0.02 else "Little change")}</td></tr>')
+    _BUY = {'next1000+next1300': '10:00 and 1:00 pm next day', 'close+next1000': 'Close and 10:00 next day'}
+    _PART = {'A': 'spare month', 'B': 'beats buying every day', 'C': 'peer stocks', 'D': 'entry shifted', 'E': 'beats old forecast'}
+    def _mr(k, v):
+        c = json.loads(k); miss = [_PART[x] for x, ok in v['gate'].items() if not ok]
+        return (f'<tr><td>{c["q"]}</td><td class="num">{c["target"]:.0f}%</td><td>{_BUY[c["buys"]]}</td><td class="num pos">{pct(v["G"], 2, True)}</td>'
+                f'<td class="num">{pct(v["old_information"]["G"], 2, True)}</td><td class="num">{v["WR"]:.1f}%</td><td class="num">{" / ".join(map(str, v["S"]))}</td>'
+                f'<td class="num">{" / ".join(map(str, v["GM"]))}</td><td>{", ".join(miss) if miss else "passes"}</td></tr>')
+    _rows = sorted(_m['settings'].items(), key=lambda kv: (-sum(kv[1]['gate'].values()), -kv[1]['G']))[:4]
+    _need = _rows[0][1]['need']
+    S14_SECTION = f"""
+  <section id="stage14">
+    <h2>New data: does it help?</h2>
+    <p class="sub">Eighteen more symbols were added on November 24, 2026: the slope of the oil futures curve, the Brent&ndash;WTI gap, natural gas, refiners, pipelines, the Canadian dollar, the stock market and its volatility, bonds and gold. Everything below uses the training years only (2021 to 2023); the test years were removed from the data first.</p>
+    <div class="statstrip" style="margin-bottom:16px">
+      <div class="primary"><div class="k">Month-ahead forecast, CNQ</div><div class="v">{_i['H20 CNQ']['OLD']['all']:.2f} &rarr; {_i['H20 CNQ']['NEW']['all']:.2f}</div><div class="s">match between forecast and result (0 = none, 1 = perfect)</div></div>
+      <div><div class="k">Campaign timed by it</div><div class="v">{pct(_rows[0][1]['old_information']['G'], 2, True)} &rarr; {pct(_rows[0][1]['G'], 2, True)}</div><div class="s">profit per trade, old forecast &rarr; new</div></div>
+      <div><div class="k">Settings that pass the test</div><div class="v">{len(_m['passers'])} of {_m['n_settings']}</div><div class="s">so nothing was run on 2024&ndash;2026</div></div>
+      <div><div class="k">Runs on the test years</div><div class="v">{LOOKS}</div><div class="s">unchanged</div></div>
+    </div>
+    <div class="card" style="padding:6px 0 0">
+      <h3 style="padding:14px 16px 0;margin:0">1. Is the forecast better with the new data?</h3>
+      <p class="swipe" style="padding:10px 16px 0">Swipe sideways to see every column.</p><div class="table-scroll"><table>
+        <thead><tr><th>Forecast</th><th class="num">Match, old data</th><th class="num">Match, old + new</th><th class="num">Best fifth minus worst fifth, old</th><th class="num">Old + new</th><th>Verdict</th></tr></thead>
+        <tbody>{_ir('One week ahead, CNQ', 'H5 CNQ')}{_ir('One week ahead, six stocks', 'H5 all six')}{_ir('One month ahead, CNQ', 'H20 CNQ')}{_ir('One month ahead, six stocks', 'H20 all six')}</tbody>
+      </table></div>
+    </div>
+    <div class="card" style="padding:6px 0 0;margin-top:16px">
+      <h3 style="padding:14px 16px 0;margin:0">2. Model R: a monthly campaign timed by the month-ahead forecast</h3>
+      <p class="swipe" style="padding:10px 16px 0">Swipe sideways to see every column.</p><div class="table-scroll"><table>
+        <thead><tr><th>Entry bar</th><th class="num">Target</th><th>Buys</th><th class="num">Profit per trade</th><th class="num">Same, old forecast</th><th class="num">Win rate</th><th class="num">S months</th><th class="num">GM months</th><th>What it fails</th></tr></thead>
+        <tbody>{''.join(_mr(k, v) for k, v in _rows)}</tbody>
+      </table></div>
+    </div>
+    <p class="fine" style="margin-top:10px">Level 1 needs {_need[0]} / {_need[1]} / {_need[2]} months in these training years (2021 starts in March, when the forecast has enough history). To be run on the test years a setting must pass five checks: one spare month in every year, more profit than buying after every day, the same result on the five peer stocks, the same result with the buys moved to other times, and more profit than the same campaign timed by the old forecast. The four closest settings are shown.</p>
+    <div class="note2">
+      <h3>What this shows</h3>
+      <ul>
+        <li><strong>The new data helps where the goals need it.</strong> It makes little or no difference to a one-week forecast and clearly improves the one-month forecast, for CNQ and for the six stocks together.</li>
+        <li><strong>The gain carries into trading.</strong> In all {_m['n_settings']} settings the campaign makes more when timed by the new forecast than by the old one.</li>
+        <li><strong>It is not yet enough.</strong> No setting passes all five checks; the closest fails one and the next two fail two. Nothing was run on the test years.</li>
+        <li><strong>Caution.</strong> Three training years hold about 37 separate one-month periods, and they were rising years. The size of the gain is uncertain.</li>
+      </ul>
+    </div>
+  </section>
+"""
+
 # a model can lead the ranking and still lose money: say so when it happens
 _losers = [c for c in TOP5 if c['gross_pct_per_trade'] < 0]
 RANK_NOTE = ('<li><strong>Rank is not profit.</strong> ' + ' '.join(
@@ -475,7 +530,7 @@ html = f'''<!doctype html>
     <h1>{n_models} trading models, scored against four goals</h1>
     <p class="lede">Every model and method built in this project for trading Canadian Natural Resources (CNQ) is scored here on the same four goals. Scores use January 2024 to November 2026, years the models were not trained on. Dollar figures assume $1,000 invested in each trade.</p>
     <p style="margin-top:14px">{HERO_TAG} <span class="tag muted">Research only, hypothetical backtests</span> <span class="tag muted">Updated Nov 23, 2026</span></p>
-    <nav class="toc" aria-label="On this page"><a href="#goals">The goals</a><a href="#top5">Top 5</a><a href="#all">All {n_models} models</a><a href="#months">Steady months</a><a href="#gm-months">Monthly profit</a>{'<a href="#stops">Stop size</a>' if STOP_SECTION else ''}<a href="#money">$1,000 per trade</a><a href="#measure">How it is measured</a><a href="project-03-research.html">Research record</a></nav>
+    <nav class="toc" aria-label="On this page"><a href="#goals">The goals</a><a href="#top5">Top 5</a><a href="#all">All {n_models} models</a><a href="#months">Steady months</a><a href="#gm-months">Monthly profit</a>{'<a href="#stops">Stop size</a>' if STOP_SECTION else ''}{'<a href="#stage14">New data</a>' if S14_SECTION else ''}<a href="#money">$1,000 per trade</a><a href="#measure">How it is measured</a><a href="project-03-research.html">Research record</a></nav>
   </section>
 
   <section id="goals">
@@ -543,6 +598,7 @@ html = f'''<!doctype html>
   </section>
 
 {STOP_SECTION}
+{S14_SECTION}
   <section id="money">
     <h2>What $1,000 per trade would have made</h2>
     <p class="sub">Each trade buys $1,000 of CNQ. When it is sold, the same $1,000 is used for the next trade; profits are not reinvested. Totals cover January 2024 to November 18, 2026.</p>
@@ -580,6 +636,7 @@ html = f'''<!doctype html>
         <li>Trades opened at the same time. By the owner's rule, trades opened at exactly the same time count as one trade; trades opened at different times count separately, even on the same day. No score on this page changed when the rule was applied.</li>
         <li>Model P, run once and not level 1. P passed a stricter training-years test by a wide margin (95.6% of its trades won there) and was then run once on the test years, the twenty-first such run. There 80% won, which is below the 83% it needs to break even with a +3% target and a 15% stop. Waiting for a dip added nothing on the test years.</li>
         <li>Forward test. Models M, O and L, and the combination described near the top of this page, were frozen on November 23, 2026. They will be scored on trades opened after that date when new price data is added. Nothing about them may be changed in the meantime.</li>
+        <li>Model R, not run. A campaign timed by a month-ahead forecast that uses the new data did better on the training years than the same campaign with the old forecast, but no setting passed all five checks, so it was not run on the test years.</li>
         <li>Model Q, not run. A version that sells short when the trend is down was tested on the training years. None of its 24 settings passed, and most did worse than always buying, so it was not run on the test years.</li>
         <li>2026 has 11 months of data. Its months are judged on the same fractions (8/12, 10/12, 12/12).</li>
       </ul>
